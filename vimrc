@@ -181,6 +181,7 @@ set wildignore+=*/coverage/*
 " not available for python3 yet
 " remember to run RopeOpenProject which will creat a .ropeproject folder in
 " which you would find a config file you can specify the paths
+let g:pymode_lint_ignore = "E501"
 map <Leader>g :call RopeGotoDefinition()<CR>
 let ropevim_enable_shortcuts = 1
 let g:pymode_rope_goto_def_newwin = "vnew"
@@ -191,7 +192,7 @@ let g:pymode_syntax = 1
 let g:pymode_syntax_builtin_objs = 0
 let g:pymode_syntax_builtin_funcs = 0
 let g:pymode_rope_guess_project = 0
-let g:pymode_lint_ignore = "E501"
+let g:pymode_lint_mccabe_complexity = 12
 map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 
