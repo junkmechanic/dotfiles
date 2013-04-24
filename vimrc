@@ -14,7 +14,7 @@ nnoremap ; :
 
 
 " Execute file being edited with <Shift> + e:
-map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
+map <buffer> <S-e> :w<CR>:!/usr/bin/env python3.3 % <CR>
 
 
 " to wrap over to the next or previous line
@@ -181,7 +181,7 @@ set wildignore+=*/coverage/*
 " not available for python3 yet
 " remember to run RopeOpenProject which will creat a .ropeproject folder in
 " which you would find a config file you can specify the paths
-let g:pymode_lint_ignore = "E501"
+let g:pymode_lint_ignore = "E501,E302"
 map <Leader>g :call RopeGotoDefinition()<CR>
 let ropevim_enable_shortcuts = 1
 let g:pymode_rope_goto_def_newwin = "vnew"
