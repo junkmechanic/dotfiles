@@ -159,12 +159,13 @@ call pathogen#helptags()
 " cd ~/.vim/bundle
 " git clone git://github.com/lokaltog/vim-powerline.git
 " will be deprecated soon. so check for powerline as below.
-set laststatus=2
-set nocompatible
+" set laststatus=2
+" set nocompatible
 
 " Using powerline instead of vim-powerline
 " pip install --user git+git://github.com/Lokaltog/powerline
-" set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+" as soon as its compatible with python3
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 " Settings for ctrlp
 " cd ~/.vim/bundle
