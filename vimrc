@@ -165,6 +165,7 @@ call pathogen#helptags()
 " Using powerline instead of vim-powerline
 " pip install --user git+git://github.com/Lokaltog/powerline
 " as soon as its compatible with python3
+set laststatus=2
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 " Settings for ctrlp
