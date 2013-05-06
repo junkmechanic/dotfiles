@@ -115,7 +115,7 @@ set history=700
 set undolevels=700
 
 
-" Real programmers don't use TABs but spaces
+" tabs and space formatting
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -135,6 +135,16 @@ set smartcase
 set nobackup
 set nowritebackup
 set noswapfile
+
+
+" Displaying line wrap
+set showbreak=↪
+
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+" Save a file that has been openned without root permission and requires it
+" using :w!!
+cmap w!! w !sudo tee > /dev/null %
 
 
 " Code folding

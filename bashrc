@@ -128,3 +128,10 @@ function path(){
 
 # adding powerline
 . /home/ankur/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+
+# quickly run apt-get updates
+function apt-update(){
+    sudo apt-get update
+    sudo apt-get dist-upgrade
+    sudo apt-get upgrade
+}
