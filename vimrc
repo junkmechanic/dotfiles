@@ -141,6 +141,13 @@ set noswapfile
 set showbreak=↪
 
 
+" from ~/.vim/plugin/InsertChar.vim
+" http://www.vim.org/scripts/script.php?script_id=2810
+" use Space and any character to insert that character at the position of the
+" cursor
+nnoremap <SPACE> :<C-U>call InsertChar#insert(v:count1)<CR>
+
+
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 " Save a file that has been openned without root permission and requires it
 " using :w!!

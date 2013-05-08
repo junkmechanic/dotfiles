@@ -22,3 +22,9 @@
 [submodule "bundle/fugitive.vim"]
 	path = bundle/fugitive.vim
 	url = https://github.com/tpope/vim-fugitive.git
+[submodule "bundle/unimpaired.vim"]
+	path = bundle/unimpaired.vim
+	url = https://github.com/tpope/vim-unimpaired.git
+[submodule "bundle/repeat.vim"]
+	path = bundle/repeat.vim
+	url = https://github.com/tpope/vim-repeat.git
