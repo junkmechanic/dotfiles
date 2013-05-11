@@ -14,7 +14,7 @@ nnoremap ; :
 
 
 " Execute file being edited with <Shift> + e:
-map <buffer> <S-e> :w<CR>:!/usr/bin/env python3.3 % <CR>
+map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
 
 
 " to wrap over to the next or previous line
@@ -179,11 +179,13 @@ call pathogen#helptags()
 " set laststatus=2
 " set nocompatible
 
+
 " Using powerline instead of vim-powerline
 " pip install --user git+git://github.com/Lokaltog/powerline
 " as soon as its compatible with python3
 set laststatus=2
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
 
 " Settings for ctrlp
 " cd ~/.vim/bundle
@@ -238,6 +240,12 @@ inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 " wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
 set nofoldenable
 
+
 " SuperTab options
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
+
+
+" ConqueShell options
+let g:ConqueTerm_FastMode = 0
+let g:ConqueTerm_Color = 1
