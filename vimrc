@@ -250,7 +250,7 @@ let g:SuperTabDefaultCompletionType = "context"
 let g:ConqueTerm_FastMode = 0
 let g:ConqueTerm_Color = 1
 " mapping Shift + F5 to run the program in an ipython conque shell
-nmap <S-F5> :execute 'ConqueTermVSplit ipython '.expand('%:p')<CR>
+nmap <S-F5> :w<CR>:execute 'ConqueTermVSplit ipython '.expand('%:p')<CR>
 " mapping Shift + F6 to open a vertical split ipython conque shell
 nmap <S-F6> :ConqueTermVSplit ipython<CR>
 " mapping Shift + F7 to open a horizontal split ipython conque shell
