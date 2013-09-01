@@ -256,4 +256,4 @@ nmap <S-F6> :ConqueTermVSplit ipython<CR>
 " mapping Shift + F7 to open a horizontal split ipython conque shell
 nmap <S-F7> :ConqueTermSplit ipython<CR>
 " mapping Shift + F4 to open a vertical split bash conque shell
-nmap <S-F4> :ConqueTermVSplit bash<CR>
+nmap <S-F8> :ConqueTermVSplit bash<CR>
