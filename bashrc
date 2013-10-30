@@ -135,3 +135,6 @@ function apt-update(){
     sudo apt-get dist-upgrade
     sudo apt-get upgrade
 }
+
+# changing the time zone
+#export TZ="/usr/share/zoneinfo/Asia/Singapore"
