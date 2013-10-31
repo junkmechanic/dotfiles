@@ -138,3 +138,8 @@ function apt-update(){
 
 # changing the time zone
 #export TZ="/usr/share/zoneinfo/Asia/Singapore"
+
+# changing the default editor
+# VISUAL takes precedence over EDITOR
+#export EDITOR=vim
+#export VISUAL=vim
