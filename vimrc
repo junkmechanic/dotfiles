@@ -12,6 +12,10 @@ set clipboard=unnamedplus
 " to change : to ; to make life easier
 nnoremap ; :
 
+" This beauty remembers where you were the last time you edited the file, and
+" returns to the same position.
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+
 
 " Execute file being edited with <Shift> + e:
 map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
@@ -208,7 +212,6 @@ let ropevim_enable_shortcuts = 1
 let g:pymode_rope_goto_def_newwin = "vnew"
 let g:pymode_rope_extended_complete = 1
 let g:pymode_breakpoint = 0
-let g:pymode_doc_key = 'N'
 let g:pymode_syntax = 1
 let g:pymode_syntax_builtin_objs = 0
 let g:pymode_syntax_builtin_funcs = 0
@@ -251,9 +254,9 @@ let g:ConqueTerm_FastMode = 0
 let g:ConqueTerm_Color = 1
 " mapping Shift + F5 to run the program in an ipython conque shell
 nmap <S-F5> :w<CR>:execute 'ConqueTermVSplit ipython '.expand('%:p')<CR>
-" mapping Shift + F6 to open a vertical split ipython conque shell
-nmap <S-F6> :ConqueTermVSplit ipython<CR>
-" mapping Shift + F7 to open a horizontal split ipython conque shell
-nmap <S-F7> :ConqueTermSplit ipython<CR>
-" mapping Shift + F4 to open a vertical split bash conque shell
+" mapping Shift + F6 to run the program and then land in a vertical split ipython conque shell along with the namespace of the program
+nmap <S-F6> :w<CR>:execute 'ConqueTermVSplit ipython -i '.expand('%:p')<CR>
+" mapping Shift + F7 to open a vertical split ipython conque shell
+nmap <S-F7> :ConqueTermVSplit ipython<CR>
+" mapping Shift + F8 to open a vertical split bash conque shell
 nmap <S-F8> :ConqueTermVSplit bash<CR>
