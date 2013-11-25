@@ -186,7 +186,10 @@ call pathogen#helptags()
 
 " Using powerline instead of vim-powerline
 " pip install --user git+git://github.com/Lokaltog/powerline
-" as soon as its compatible with python3
+" note: make this change after installing powerline using pip in home dir.
+" python from powerline.vim import setup as powerline_setup
+" python powerline_setup()
+" python del powerline_setup
 set laststatus=2
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
