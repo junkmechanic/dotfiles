@@ -136,10 +136,18 @@ function apt-update(){
     sudo apt-get upgrade
 }
 
-# changing the time zone
+## changing the time zone
 #export TZ="/usr/share/zoneinfo/Asia/Singapore"
 
-# changing the default editor
-# VISUAL takes precedence over EDITOR
+## changing the default editor
+## VISUAL takes precedence over EDITOR
 #export EDITOR=vim
 #export VISUAL=vim
+
+## for perl INC
+#export PERL5LIB=/home/ankur/perl5/lib/perl5:/home/ankur/perl5/lib/perl5/i486-linux-gnu-thread-multi-64int
+
+## virtualenvwrapper settings
+#export WORKON_HOME=$HOME/.virtualenvs
+#export PROJECT_HOME=$HOME/devbench
+#source /home/ankur/.local/bin/virtualenvwrapper.sh
