@@ -187,11 +187,11 @@ call pathogen#helptags()
 " Using powerline instead of vim-powerline
 " pip install --user git+git://github.com/Lokaltog/powerline
 " note: make this change after installing powerline using pip in home dir.
-" python from powerline.vim import setup as powerline_setup
-" python powerline_setup()
-" python del powerline_setup
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
 set laststatus=2
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+" set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 
 " Settings for ctrlp
@@ -263,3 +263,7 @@ nmap <S-F6> :w<CR>:execute 'ConqueTermVSplit ipython -i '.expand('%:p')<CR>
 nmap <S-F7> :ConqueTermVSplit ipython<CR>
 " mapping Shift + F8 to open a vertical split bash conque shell
 nmap <S-F8> :ConqueTermVSplit bash<CR>
+
+" top open an xml file after passing it though xmllint from the GNU xmllib2
+" library to reformat and align the document along tags
+au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
