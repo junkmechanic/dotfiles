@@ -507,6 +507,15 @@
         <command>cput</command>
       </action>
     </keybind>
+    <keybind key="W-l">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>keylockinfo</name>
+        </startupnotify>
+        <command>capsnum</command>
+      </action>
+    </keybind>
   </keyboard>
   <mouse>
     <dragThreshold>8</dragThreshold>

@@ -78,9 +78,13 @@ ${upspeedgraph eth0}
 
 Alt+F2$alignr Run Dialog
 Alt+F3$alignr Alt Menu
+Ctrl+Alt+t$alignr Terminal
 Super+space$alignr Main Menu
 Super+e$alignr Editor
 Super+w$alignr Web Browser
 Super+g$alignr Graphics Editor
 Super+v$alignr Volume Control
 Super+x$alignr Logout
+Super+d$alignr Toggle Show Desktop
+Super+Tab$alignr Show All Windows Menu
+Super+l$alignr Indicate Caps/Num Lock

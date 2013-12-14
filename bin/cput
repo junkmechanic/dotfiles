@@ -1,0 +1,2 @@
+#!/bin/bash
+notify-send -t 3000 -u low -i /home/ankur/images/ksim_cpu2.png "Core Temp" "$(sensors -u | grep -Po 'temp1_input:\s+\K.*') °C"
