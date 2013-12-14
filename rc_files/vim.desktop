@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Vim (Console)
+Comment=Edit text files in a console using Vim
+Exec=vim %u
+Terminal=true
+Type=Application
+Icon=/home/ankur/opt/vim/share/vim/vim74/vim-editor_logo.png
+Categories=Application;Utility;TextEditor;
+StartupNotify=true
+MimeType=text/plain;
+NoDisplay=true
