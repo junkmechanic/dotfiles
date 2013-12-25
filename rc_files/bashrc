@@ -154,3 +154,6 @@ function apt-update(){
 
 # adding history to bash
 source acd_func.sh
+
+# this is to cycle through folders with tab completion
+[[ $- = *i* ]] && bind TAB:menu-complete

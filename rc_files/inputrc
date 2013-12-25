@@ -1,0 +1,7 @@
+$include /etc/inputrc
+
+# This is to cycle through history for partially entered commands
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\e[C": forward-char
+"\e[D": backward-char
