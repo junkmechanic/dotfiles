@@ -91,6 +91,10 @@ fi
 alias ll='ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
+alias gs='git status'
+alias gc='git commit'
+alias ga='git add'
+alias gd='git diff'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -156,4 +160,11 @@ function apt-update(){
 source acd_func.sh
 
 # this is to cycle through folders with tab completion
-[[ $- = *i* ]] && bind TAB:menu-complete
+#[[ $- = *i* ]] && bind TAB:menu-complete
+# this is to include shift-tab functionality as well
+# type ctrl+shift+v and then shift+tab, to reveal the escape sequence that the
+# terminal sends for shift+tab. You ll get ^[[Z where the first part is ' ^[ '
+# which is the escape character itself (bash in linux) and ' [Z ' is for
+# shift+tab. So thats what is to be mentioned here
+#bind "\e[Z":complete
+# Well as it turns out, it is better done in the inputrc

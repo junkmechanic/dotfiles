@@ -5,3 +5,8 @@ $include /etc/inputrc
 "\e[B": history-search-forward
 "\e[C": forward-char
 "\e[D": backward-char
+
+# Tab completion to cycle through the folders
+TAB: menu-complete
+# Tab completion to map shift+tab to cycle backwards
+"\e[Z": menu-complete-backward
