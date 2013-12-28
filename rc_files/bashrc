@@ -91,10 +91,10 @@ fi
 alias ll='ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
-alias gs='git status'
-alias gc='git commit'
-alias ga='git add'
-alias gd='git diff'
+alias gits='git status'
+alias gitc='git commit'
+alias gita='git add'
+alias gitd='git diff'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -134,9 +134,8 @@ function path(){
 . /home/ankur/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 
 # quickly run apt-get updates
-function apt-update(){
+function apt-upd(){
     sudo apt-get update
-    sudo apt-get dist-upgrade
     sudo apt-get upgrade
 }
 

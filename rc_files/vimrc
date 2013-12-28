@@ -51,6 +51,10 @@ vnoremap <C-Z> <C-C>:update<CR>
 inoremap <C-Z> <C-O>:update<CR>
 
 
+" Delete the selected text, paste and retain text from the default register
+vnoremap <leader>p "_dP
+
+
 " Quick quit command
 noremap <Leader>e :quit<CR>  " Quit current window
 noremap <Leader>E :qa!<CR>   " Quit all windows
