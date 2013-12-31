@@ -55,6 +55,11 @@ inoremap <C-Z> <C-O>:update<CR>
 vnoremap <leader>p "_dP
 
 
+" Delete to buffer 'a' instead of the default buffer
+nnoremap <expr> dw (v:register == '+') ? '"adw' : '"'.v:register.'dw'
+nnoremap <expr> dd (v:register == '+') ? '"add' : '"'.v:register.'dd'
+vnoremap <expr> d (v:register == '+') ? '"ad' : '"'.v:register.'d'
+
 " Quick quit command
 noremap <Leader>e :quit<CR>  " Quit current window
 noremap <Leader>E :qa!<CR>   " Quit all windows
