@@ -1,0 +1,4 @@
+Move PowerlineSymbols.otf to ~/.fonts/ (or another X font directory).
+Run fc-cache -vf ~/.fonts to update your font cache.
+Move 10-powerline-symbols.conf to either ~/.fonts.conf.d/ or ~/.config/fontconfig/conf.d/, depending on your fontconfig version.
+
