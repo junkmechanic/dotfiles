@@ -25,8 +25,8 @@ own_window_type normal
 own_window_transparent yes
 own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 double_buffer yes
-minimum_size 200 5
-maximum_width 220
+minimum_size 230 25
+maximum_width 250
 draw_shades no
 draw_outline no
 draw_borders no
@@ -71,10 +71,10 @@ ${top name 4} $alignr ${top pid 4}  ${top cpu 4}  ${top_mem mem 4}
 ${top name 5} $alignr ${top pid 5}  ${top cpu 5}  ${top_mem mem 5}
 ${top name 6} $alignr ${top pid 6}  ${top cpu 6}  ${top_mem mem 6}
 
-Inbound $alignr ${downspeed eth0} kb/s
-${downspeedgraph eth0}
-Outbound $alignr ${upspeed eth0} kb/s
-${upspeedgraph eth0}
+Inbound $alignr ${downspeed wlan0} kb/s
+${downspeedgraph wlan0}
+Outbound $alignr ${upspeed wlan0} kb/s
+${upspeedgraph wlan0}
 
 Alt+F2$alignr Run Dialog
 Alt+F3$alignr Alt Menu
@@ -87,4 +87,3 @@ Super+v$alignr Volume Control
 Super+x$alignr Logout
 Super+d$alignr Toggle Show Desktop
 Super+Tab$alignr Show All Windows Menu
-Super+l$alignr Indicate Caps/Num Lock
