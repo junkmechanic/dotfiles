@@ -151,10 +151,10 @@ function apt-upd(){
 ## for perl INC
 #export PERL5LIB=/home/ankur/perl5/lib/perl5:/home/ankur/perl5/lib/perl5/i486-linux-gnu-thread-multi-64int
 
-## virtualenvwrapper settings
-#export WORKON_HOME=$HOME/.virtualenvs
-#export PROJECT_HOME=$HOME/devbench
-#source /home/ankur/.local/bin/virtualenvwrapper.sh
+# virtualenvwrapper settings
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/devbench
+source /home/ankur/.local/bin/virtualenvwrapper.sh
 
 # adding history to bash
 source acd_func.sh
