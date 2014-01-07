@@ -40,7 +40,7 @@
                     'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>waldorf</name>
+    <name>Dyne</name>
     <titleLayout>DSLIMC</titleLayout>
     <!--
       avaible characters are NDSLIMC, each can occur at most once.
@@ -275,6 +275,27 @@
     <!-- Keybinding for minimizing windows -->
     <keybind key="A-S-w">
       <action name="Iconify"/>
+    </keybind>
+    <!-- Keybinding for pause/play and other for ncmpcpp -->
+    <keybind key="XF86AudioNext">
+      <action name="Execute">
+        <command>ncmpcpp next</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioPrev">
+      <action name="Execute">
+        <command>ncmpcpp prev</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioPlay">
+      <action name="Execute">
+        <command>ncmpcpp toggle</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioStop">
+      <action name="Execute">
+        <command>ncmpcpp stop</command>
+      </action>
     </keybind>
     <!-- Keybindings for window switching -->
     <keybind key="A-Tab">

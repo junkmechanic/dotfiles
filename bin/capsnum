@@ -1,2 +1,2 @@
 #!/bin/bash
-notify-send -t 3000 -u low -i /usr/share/images/desktop-base/keyboard.png " " "Caps Lock :  $(xset -q | grep Caps | awk '{ print toupper($4) }')\nNum Lock  :  $(xset -q | grep Caps | awk '{ print toupper($8) }')"
+notify-send -t 3000 -u low -i /usr/share/pixmaps/keyboard.svg " " "Caps Lock :  $(xset -q | grep Caps | awk '{ print toupper($4) }')\nNum Lock  :  $(xset -q | grep Caps | awk '{ print toupper($8) }')"
