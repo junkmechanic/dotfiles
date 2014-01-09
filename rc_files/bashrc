@@ -148,8 +148,8 @@ function apt-upd(){
 #export EDITOR=vim
 #export VISUAL=vim
 
-## for perl INC
-#export PERL5LIB=/home/ankur/perl5/lib/perl5:/home/ankur/perl5/lib/perl5/i486-linux-gnu-thread-multi-64int
+# for perl INC
+export PERL5LIB=/home/ankur/perl5/lib/perl5:/home/ankur/perl5/lib/perl5/x86_64-linux-gnu-thread-multi
 
 # virtualenvwrapper settings
 export WORKON_HOME=$HOME/.virtualenvs
