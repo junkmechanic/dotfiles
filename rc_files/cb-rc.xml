@@ -398,9 +398,18 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Web Browser</name>
+          <name>Web Browser (Chrome)</name>
         </startupnotify>
         <command>x-www-browser</command>
+      </action>
+    </keybind>
+    <keybind key="W-S-w">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Alt Web Browser (Firefox)</name>
+        </startupnotify>
+        <command>firefox</command>
       </action>
     </keybind>
     <keybind key="W-l">
