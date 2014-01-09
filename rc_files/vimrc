@@ -62,7 +62,9 @@ vnoremap <expr> d (v:register == '+') ? '"ad' : '"'.v:register.'d'
 
 " Quick quit command
 noremap <Leader>e :quit<CR>  " Quit current window
-noremap <Leader>E :qa!<CR>   " Quit all windows
+noremap <Leader>E :q!<CR>    " Quit current window without saving
+noremap <Leader>q :qa<CR>    " Quit all windows
+noremap <Leader>Q :qa!<CR>   " Quit all windows window saving
 
 
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
