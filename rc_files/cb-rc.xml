@@ -412,6 +412,24 @@
         <command>firefox</command>
       </action>
     </keybind>
+    <keybind key="W-n">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>wavemon</name>
+        </startupnotify>
+        <command>terminator --command="ncmpcpp"</command>
+      </action>
+    </keybind>
+    <keybind key="W-C-w">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>wavemon</name>
+        </startupnotify>
+        <command>terminator --command="wavemon"</command>
+      </action>
+    </keybind>
     <keybind key="W-l">
       <action name="Execute">
         <startupnotify>

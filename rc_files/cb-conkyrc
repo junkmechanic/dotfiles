@@ -79,6 +79,10 @@ ${downspeedgraph wlan0}
 Outbound $alignr ${upspeed wlan0} kb/s
 ${upspeedgraph wlan0}
 
+Wifi ESSID $alignr ${wireless_essid wlan0}
+Wifi AP $alignr ${wireless_ap wlan0}
+Wifi bitrate $alignr ${wireless_bitrate wlan0}
+${wireless_link_bar wlan0}
 ## Shortcuts - not on display
 #Alt+F2$alignr Run Dialog
 #Alt+F3$alignr Alt Menu
