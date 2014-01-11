@@ -43,10 +43,13 @@ cpu_avg_samples 2
 override_utf8_locale no
 
 TEXT
-CPU $alignr ${cpu cpu0}%
+CPU1 $alignr ${cpu cpu0}%
 ${cpugraph cpu0}
+CPU2 $alignr ${cpu cpu1}%
+${cpugraph cpu1}
 
 MEM $alignc $mem / $memmax $alignr $memperc%
+$memgraph
 $membar
 
 swap $alignc $swap / $swapmax $alignr $swapperc%
@@ -76,15 +79,15 @@ ${downspeedgraph eth0}
 Outbound $alignr ${upspeed eth0} kb/s
 ${upspeedgraph eth0}
 
-Alt+F2$alignr Run Dialog
-Alt+F3$alignr Alt Menu
-Ctrl+Alt+t$alignr Terminal
-Super+space$alignr Main Menu
-Super+e$alignr Editor
-Super+w$alignr Web Browser
-Super+g$alignr Graphics Editor
-Super+v$alignr Volume Control
-Super+x$alignr Logout
-Super+d$alignr Toggle Show Desktop
-Super+Tab$alignr Show All Windows Menu
-Ctrl+Alt+l$alignr Indicate Caps/Num Lock
+#Alt+F2$alignr Run Dialog
+#Alt+F3$alignr Alt Menu
+#Ctrl+Alt+t$alignr Terminal
+#Super+space$alignr Main Menu
+#Super+e$alignr Editor
+#Super+w$alignr Web Browser
+#Super+g$alignr Graphics Editor
+#Super+v$alignr Volume Control
+#Super+x$alignr Logout
+#Super+d$alignr Toggle Show Desktop
+#Super+Tab$alignr Show All Windows Menu
+#Ctrl+Alt+l$alignr Indicate Caps/Num Lock
