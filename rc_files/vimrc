@@ -58,6 +58,8 @@ vnoremap <leader>p "_dP
 " Delete to buffer 'a' instead of the default buffer
 nnoremap <expr> dw (v:register == '+') ? '"adw' : '"'.v:register.'dw'
 nnoremap <expr> dd (v:register == '+') ? '"add' : '"'.v:register.'dd'
+nnoremap <expr> dl (v:register == '+') ? '"adl' : '"'.v:register.'dl'
+nnoremap <expr> dh (v:register == '+') ? '"adh' : '"'.v:register.'dh'
 vnoremap <expr> d (v:register == '+') ? '"ad' : '"'.v:register.'d'
 
 " Quick quit command

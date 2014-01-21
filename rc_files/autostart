@@ -83,5 +83,8 @@ conky -q &
 ## Mapping media keys
 xmodmap /home/ankur/.Xmodmap &
 
+## Starting Sonata
+sonata &
+
 ## for auto login through ssh to remote server
 ssh-add ~/.ssh/altid
