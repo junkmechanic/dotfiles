@@ -412,6 +412,15 @@
         <command>google-chrome</command>
       </action>
     </keybind>
+    <keybind key="W-n">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>ncmpcpp</name>
+        </startupnotify>
+        <command>terminator --command="ncmpcpp"</command>
+      </action>
+    </keybind>
     <keybind key="W-l">
       <action name="Execute">
         <startupnotify>
