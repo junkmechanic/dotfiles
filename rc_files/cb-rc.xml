@@ -564,6 +564,15 @@
         <command>capsnum</command>
       </action>
     </keybind>
+    <keybind key="C-A-s">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>current_song</name>
+        </startupnotify>
+        <command>current_song</command>
+      </action>
+    </keybind>
   </keyboard>
   <mouse>
     <dragThreshold>8</dragThreshold>
