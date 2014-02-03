@@ -416,7 +416,7 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>wavemon</name>
+          <name>ncmpcpp</name>
         </startupnotify>
         <command>terminator --command="ncmpcpp"</command>
       </action>
