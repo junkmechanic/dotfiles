@@ -86,5 +86,8 @@ xmodmap /home/ankur/.Xmodmap &
 ## Starting Sonata
 sonata &
 
+## Guake
+(sleep 20s && guake) &
+
 ## for auto login through ssh to remote server
 ssh-add ~/.ssh/altid

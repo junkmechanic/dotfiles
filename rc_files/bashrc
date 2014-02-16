@@ -98,6 +98,8 @@ alias gitd='git diff'
 alias cd..='cd ..'
 alias vimp='vim -p'
 alias gitrso='git remote show origin'
+alias cat='cat -n'
+alias tmux='tmux -2'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

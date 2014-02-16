@@ -573,6 +573,15 @@
         <command>current_song</command>
       </action>
     </keybind>
+    <keybind key="C-A-m">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>open_scisum</name>
+        </startupnotify>
+        <command>terminator --working-directory=/home/ankur/devbench/scientific/scisumm</command>
+      </action>
+    </keybind>
   </keyboard>
   <mouse>
     <dragThreshold>8</dragThreshold>
