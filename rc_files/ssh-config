@@ -1,0 +1,16 @@
+Host wing.nus
+    Hostname cte.comp.nus.edu.sg
+    User ankur
+
+Host daxwugpid.r
+    Hostname 162.243.37.203
+    User root
+    IdentityFile ~/.ssh/altid
+
+Host daxwugpid
+    Hostname 162.243.37.203
+    User ankur
+    IdentityFile ~/.ssh/altid
+
+Host daxwugpid
+    ServerAliveInterval 180
