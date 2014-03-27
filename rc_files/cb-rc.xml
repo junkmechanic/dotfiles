@@ -422,6 +422,15 @@
         <command>firefox</command>
       </action>
     </keybind>
+    <keybind key="C-A-n">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>sonata</name>
+        </startupnotify>
+        <command>sonata</command>
+      </action>
+    </keybind>
     <keybind key="W-n">
       <action name="Execute">
         <startupnotify>

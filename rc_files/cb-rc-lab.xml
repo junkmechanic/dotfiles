@@ -177,16 +177,16 @@
   <keyboard>
     <chainQuitKey>C-g</chainQuitKey>
     <!-- Keybindings for desktop switching -->
-    <keybind key="W-Left">
+    <keybind key="C-A-h">
       <action name="GoToDesktop">
         <to>left</to>
-        <wrap>no</wrap>
+        <wrap>yes</wrap>
       </action>
     </keybind>
-    <keybind key="W-Right">
+    <keybind key="C-A-l">
       <action name="GoToDesktop">
         <to>right</to>
-        <wrap>no</wrap>
+        <wrap>yes</wrap>
       </action>
     </keybind>
     <keybind key="W-Up">
@@ -201,13 +201,13 @@
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="S-A-Left">
+    <keybind key="S-A-h">
       <action name="SendToDesktop">
         <to>left</to>
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="S-A-Right">
+    <keybind key="S-A-l">
       <action name="SendToDesktop">
         <to>right</to>
         <wrap>no</wrap>
@@ -325,6 +325,16 @@
           <action name="Raise"/>
           <action name="Unshade"/>
         </finalactions>
+      </action>
+    </keybind>
+    <keybind key="W-Tab">
+      <action name="NextWindow">
+        <allDesktops>yes</allDesktops>
+      </action>
+    </keybind>
+    <keybind key="W-S-Tab">
+      <action name="PreviousWindow">
+        <allDesktops>yes</allDesktops>
       </action>
     </keybind>
     <!-- Keybindings for window switching with the arrow keys -->
@@ -484,7 +494,7 @@
         <command>cb-exit</command>
       </action>
     </keybind>
-    <keybind key="W-Tab">
+    <keybind key="W-C-Tab">
       <action name="ShowMenu">
         <menu>client-list-combined-menu</menu>
       </action>
@@ -555,7 +565,7 @@
         <command>cput</command>
       </action>
     </keybind>
-    <keybind key="C-A-l">
+    <keybind key="C-A-c">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
