@@ -91,6 +91,7 @@ fi
 alias ll='ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
+alias sl='ls'
 alias gits='git status'
 alias gitc='git commit'
 alias gita='git add'

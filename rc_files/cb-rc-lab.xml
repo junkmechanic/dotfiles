@@ -204,13 +204,13 @@
     <keybind key="S-A-h">
       <action name="SendToDesktop">
         <to>left</to>
-        <wrap>no</wrap>
+        <wrap>yes</wrap>
       </action>
     </keybind>
     <keybind key="S-A-l">
       <action name="SendToDesktop">
         <to>right</to>
-        <wrap>no</wrap>
+        <wrap>yes</wrap>
       </action>
     </keybind>
     <keybind key="S-A-Up">
@@ -522,13 +522,13 @@
     <keybind key="C-A-Up">
       <action name="GrowToEdgeNorth"/>
     </keybind>
-    <keybind key="W-C-Right">
+    <keybind key="W-C-l">
       <action name="MoveRelative">
         <x>5</x>
         <y>0</y>
       </action>
     </keybind>
-    <keybind key="W-C-Left">
+    <keybind key="W-C-h">
       <action name="MoveRelative">
         <x>-5</x>
         <y>0</y>
@@ -546,12 +546,12 @@
         <y>5</y>
       </action>
     </keybind>
-    <keybind key="W-A-Left">
+    <keybind key="W-A-h">
       <action name="Execute">
         <command>cb-aerosnap --left</command>
       </action>
     </keybind>
-    <keybind key="W-A-Right">
+    <keybind key="W-A-l">
       <action name="Execute">
         <command>cb-aerosnap --right</command>
       </action>

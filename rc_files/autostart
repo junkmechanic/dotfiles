@@ -89,5 +89,6 @@ sonata &
 ## Guake
 (sleep 20s && guake) &
 
-## for auto login through ssh to remote server
+## for ssh-agent to recognize automatically
 ssh-add ~/.ssh/altid &
+ssh-add &
