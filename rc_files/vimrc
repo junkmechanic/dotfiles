@@ -42,7 +42,7 @@ let mapleader = ","
 " ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
 noremap <C-n> :nohl<CR>
 vnoremap <C-n> :nohl<CR>
-inoremap <C-n> :nohl<CR>
+"inoremap <C-n> :nohl<CR>
 
 
 " Quicksave command
@@ -171,6 +171,10 @@ nnoremap <SPACE> :<C-U>call InsertChar#insert(v:count1)<CR>
 cmap w!! w !sudo tee > /dev/null %
 
 
+" to wrap text, use ' :set Wrap '
+command! -nargs=* Wrap set wrap linebreak nolist
+
+
 " Code folding
 " set foldmethod=indent
 " set foldlevel=99
@@ -231,19 +235,19 @@ map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 " Better navigating through omnicomplete option list
 " See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
 set completeopt=longest,menuone
-function! OmniPopup(action)
-    if pumvisible()
-         if a:action == 'j'
-            return "\<C-N>"
-        elseif a:action == 'k'
-            return "\<C-P>"
-        endif
-    endif
-    return a:action
-endfunction
-
-inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
-inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
+"function! OmniPopup(action)
+"    if pumvisible()
+"         if a:action == 'j'
+"            return "\<C-N>"
+"        elseif a:action == 'k'
+"            return "\<C-P>"
+"        endif
+"    endif
+"    return a:action
+"endfunction
+"
+"inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
+"inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 
 
 " Python folding
