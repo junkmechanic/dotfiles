@@ -80,6 +80,8 @@ map <c-h> <c-w>h
 " easier moving between tabs
 map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
+map <Leader><Leader>n <esc>:tabfirst<CR>
+map <Leader><Leader>m <esc>:tablast<CR>
 
 
 " map sort function to a key
@@ -171,7 +173,7 @@ nnoremap <SPACE> :<C-U>call InsertChar#insert(v:count1)<CR>
 cmap w!! w !sudo tee > /dev/null %
 
 
-" to wrap text, use ' :set Wrap '
+" to wrap text, use ' :Wrap '
 command! -nargs=* Wrap set wrap linebreak nolist
 
 
@@ -351,4 +353,4 @@ set sw=2
 " if you write your \label's as \label{fig:something}, then if you
 " type in \ref{fig: and press <C-n> you will automatically cycle through
 " all the figure labels. Very useful!
-set iskeyword+=:
+"set iskeyword+=:
