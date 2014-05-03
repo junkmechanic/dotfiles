@@ -89,6 +89,9 @@ sonata &
 ## Guake
 (sleep 20s && guake) &
 
+# To disable touchpad while typing
+syndaemon -i 1 -t -d &
+
 ## for ssh-agent to recognize automatically
 ssh-add ~/.ssh/altid &
 #ssh-add &
