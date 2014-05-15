@@ -31,3 +31,6 @@
 [submodule "bundle/vim-latex"]
 	path = bundle/vim-latex
 	url = git://git.code.sf.net/p/vim-latex/vim-latex
+[submodule "bundle/vim-multiple-vursors"]
+	path = bundle/vim-multiple-vursors
+	url = https://github.com/terryma/vim-multiple-cursors.git
