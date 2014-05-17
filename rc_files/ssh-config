@@ -1,16 +1,8 @@
-Host wing.nus
-    Hostname cte.comp.nus.edu.sg
-    User ankur
+Host [host nickname]
+    Hostname [address]
+    User [username on the host]
+    IdentityFile ~/.ssh/[RSA/DSA private key]
 
-Host daxwugpid.r
-    Hostname 162.243.37.203
-    User root
-    IdentityFile ~/.ssh/altid
-
-Host daxwugpid
-    Hostname 162.243.37.203
-    User ankur
-    IdentityFile ~/.ssh/altid
-
-Host daxwugpid
-    ServerAliveInterval 180
+Host [host nickname]
+    ServerAliveInterval 180[or whatever you think is sufficient enough interval
+for it to ping at to maintain the connection]

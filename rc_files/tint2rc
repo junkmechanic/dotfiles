@@ -157,7 +157,7 @@ tooltip_font = Liberation Sans normal 9.0
 
 # Mouse
 mouse_middle = close
-mouse_right = toggle_iconify
+mouse_right = maximize_restore
 mouse_scroll_up = prev_task
 mouse_scroll_down = next_task
 
