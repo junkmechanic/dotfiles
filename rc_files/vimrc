@@ -71,10 +71,10 @@ noremap <Leader>Q :qa!<CR>   " Quit all windows window saving
 
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
 " Every unnecessary keystroke that can be saved is good for your health :)
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+nnoremap <c-h> <c-w>h
 
 
 " easier moving between tabs
@@ -189,6 +189,17 @@ command! -nargs=* Wrap set wrap linebreak nolist
 call pathogen#infect()
 call pathogen#helptags()
 
+
+" Multiple cursors setup
+" For more info goto https://github.com/terryma/vim-multiple-cursors
+let g:multi_cursor_use_default_mapping=0
+" Default mapping
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+" Map start key separately from next key
+let g:multi_cursor_start_key='<F6>'
 
 " ============================================================================
 " Python IDE Setup
@@ -354,3 +365,7 @@ set sw=2
 " type in \ref{fig: and press <C-n> you will automatically cycle through
 " all the figure labels. Very useful!
 "set iskeyword+=:
+
+" This is to fix the <c-j> mapping that is being overwritten by imaps.vim in
+" plugins dir of vim-latex
+nnoremap <SID><c-q> <Plug>IMAP_JumpForward
