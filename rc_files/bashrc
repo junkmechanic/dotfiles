@@ -165,6 +165,17 @@ source /home/ankur/.local/bin/virtualenvwrapper.sh
 # adding history to bash
 source acd_func.sh
 
+# This will create the directory passed and then change into it as well.
+function mkcd {
+  if [ ! -n "$1" ]; then
+    echo "Enter a directory name"
+  elif [ -d $1 ]; then
+    echo "$1 already exists"
+  else
+    mkdir -p $1 && cd $1
+  fi
+}
+
 # this is to cycle through folders with tab completion
 #[[ $- = *i* ]] && bind TAB:menu-complete
 # this is to include shift-tab functionality as well
