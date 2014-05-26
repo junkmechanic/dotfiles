@@ -162,9 +162,6 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/devbench
 source /home/ankur/.local/bin/virtualenvwrapper.sh
 
-# adding history to bash
-source acd_func.sh
-
 # This will create the directory passed and then change into it as well.
 function mkcd {
   if [ ! -n "$1" ]; then
@@ -185,3 +182,10 @@ function mkcd {
 # shift+tab. So thats what is to be mentioned here
 #bind "\e[Z":complete
 # Well as it turns out, it is better done in the inputrc
+
+# Shift to /etc/environment
+#export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
+
+# adding history to bash
+# PLEASE MAKE SURE THIS IS THE LAST LINE IN THIS FILE
+source ~/bin/acd_func.sh

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+com=$1
+command=${com#"'"}
+$command | curl -F 'sprunge=<-' http://sprunge.us

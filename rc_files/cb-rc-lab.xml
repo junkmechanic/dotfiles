@@ -534,13 +534,13 @@
         <y>0</y>
       </action>
     </keybind>
-    <keybind key="W-C-Up">
+    <keybind key="W-C-k">
       <action name="MoveRelative">
         <x>0</x>
         <y>-5</y>
       </action>
     </keybind>
-    <keybind key="W-C-Down">
+    <keybind key="W-C-j">
       <action name="MoveRelative">
         <x>0</x>
         <y>5</y>
