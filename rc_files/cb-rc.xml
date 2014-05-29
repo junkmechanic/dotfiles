@@ -933,6 +933,9 @@
         <action name="Focus"/>
         <action name="Raise"/>
       </mousebind>
+      <mousebind action="DoubleClick" button="Left">
+        <action name="ToggleShowDesktop"/>
+      </mousebind>
     </context>
     <context name="Root">
       <!-- Menus -->
@@ -1078,14 +1081,7 @@
   </application>
 
   # end of the example
--->
-    <application name="gmessage"><decor>no</decor><shade>no</shade><skip_pager>yes</skip_pager><skip_taskbar>yes</skip_taskbar><fullscreen>no</fullscreen><maximized>no</maximized></application>
-    <application class="Gimp" name="gimp" role="gimp-toolbox" type="utility"><maximized>vertical</maximized></application>
-    <application class="Gimp" name="gimp" role="gimp-dock" type="utility"><maximized>vertical</maximized></application>
-    <application class="Gimp" name="gimp" role="gimp-image-window" type="normal"><position force="no"><x>center</x><y>center</y></position></application>
-    <application class="Gimp" name="gimp-2.8" role="gimp-toolbox" type="utility"><maximized>vertical</maximized></application>
-    <application class="Gimp" name="gimp-2.8" role="gimp-dock" type="utility"><maximized>vertical</maximized></application>
-    <application class="Gimp" name="gimp-2.8" role="gimp-image-window" type="normal"><position force="no"><x>center</x><y>center</y></position></application>
+--><application name="gmessage"><decor>no</decor><shade>no</shade><skip_pager>yes</skip_pager><skip_taskbar>yes</skip_taskbar><fullscreen>no</fullscreen><maximized>no</maximized></application><application class="Gimp" name="gimp" role="gimp-toolbox" type="utility"><maximized>vertical</maximized></application><application class="Gimp" name="gimp" role="gimp-dock" type="utility"><maximized>vertical</maximized></application><application class="Gimp" name="gimp" role="gimp-image-window" type="normal"><position force="no"><x>center</x><y>center</y></position></application><application class="Gimp" name="gimp-2.8" role="gimp-toolbox" type="utility"><maximized>vertical</maximized></application><application class="Gimp" name="gimp-2.8" role="gimp-dock" type="utility"><maximized>vertical</maximized></application><application class="Gimp" name="gimp-2.8" role="gimp-image-window" type="normal"><position force="no"><x>center</x><y>center</y></position></application>
     # This is to remove decorations from all windows [system wide]
     <application name="*"><decor>no</decor></application>
   </applications>
