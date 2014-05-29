@@ -915,6 +915,9 @@
         <action name="Focus"/>
         <action name="Raise"/>
       </mousebind>
+      <mousebind action="DoubleClick" button="Left">
+        <action name="ToggleShowDesktop"/>
+      </mousebind>
     </context>
     <context name="Root">
       <!-- Menus -->
