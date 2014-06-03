@@ -189,3 +189,5 @@ function mkcd {
 # adding history to bash
 # PLEASE MAKE SURE THIS IS THE LAST LINE IN THIS FILE
 source ~/bin/acd_func.sh
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
