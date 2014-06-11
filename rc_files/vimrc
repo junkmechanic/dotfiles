@@ -280,9 +280,9 @@ let g:ConqueTerm_Color = 1
 " mapping Shift + F5 to run the program in an ipython conque shell
 nmap <S-F5> :w<CR>:execute 'ConqueTermVSplit ipython '.expand('%:p')<CR>
 " mapping Shift + F6 to run the program and then land in a vertical split ipython conque shell along with the namespace of the program
-nmap <S-F6> :w<CR>:execute 'ConqueTermVSplit ipython -i '.expand('%:p')<CR>
+nmap <S-F6> :w<CR>:execute 'ConqueTermVSplit ipython --profile=forvim -i '.expand('%:p')<CR>
 " mapping Shift + F7 to open a vertical split ipython conque shell
-nmap <S-F7> :ConqueTermVSplit ipython<CR>
+nmap <S-F7> :ConqueTermVSplit ipython --profile=forvim<CR>
 " mapping Shift + F8 to open a vertical split bash conque shell
 nmap <S-F8> :ConqueTermVSplit bash<CR>
 

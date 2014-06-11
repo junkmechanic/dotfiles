@@ -1,7 +1,9 @@
 [user]
+	name = junkmechanic
 	email = ankurcool.unforgiven@gmail.com
-	name = ankur.junkmechanic
+[core]
+	editor = vim
 [color]
-	ui = auto
+	ui = true
 [push]
 	default = matching

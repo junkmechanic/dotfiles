@@ -40,7 +40,7 @@
                     'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>Dyne</name>
+    <name>Just Black 3</name>
     <titleLayout>DSLIMC</titleLayout>
     <!--
       avaible characters are NDSLIMC, each can occur at most once.
@@ -55,16 +55,16 @@
     <keepBorder>yes</keepBorder>
     <animateIconify>no</animateIconify>
     <font place="ActiveWindow">
-      <name>Liberation Sans</name>
+      <name>DejaVu Sans</name>
       <size>10</size>
       <!-- font size in points -->
-      <weight>Bold</weight>
+      <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
       <slant>Normal</slant>
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="InactiveWindow">
-      <name>Liberation Sans</name>
+      <name>DejaVu Sans Ultra-Light</name>
       <size>10</size>
       <!-- font size in points -->
       <weight>Normal</weight>
@@ -73,7 +73,7 @@
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="MenuHeader">
-      <name>Liberation Sans</name>
+      <name>DejaVu Sans Bold Semi-Condensed</name>
       <size>10</size>
       <!-- font size in points -->
       <weight>Normal</weight>
@@ -82,7 +82,7 @@
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="MenuItem">
-      <name>Liberation Sans</name>
+      <name>DejaVu Sans</name>
       <size>10</size>
       <!-- font size in points -->
       <weight>Normal</weight>
@@ -91,21 +91,21 @@
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="ActiveOnScreenDisplay">
-      <name>Liberation Sans</name>
+      <name>DejaVu Sans</name>
       <size>10</size>
       <!-- font size in points -->
       <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
-      <slant>normal</slant>
+      <slant>Normal</slant>
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="InactiveOnScreenDisplay">
-      <name>Liberation Sans</name>
+      <name>DejaVu Sans Ultra-Light</name>
       <size>10</size>
       <!-- font size in points -->
       <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
-      <slant>normal</slant>
+      <slant>Normal</slant>
       <!-- 'italic' or 'normal' -->
     </font>
   </theme>
@@ -374,7 +374,8 @@
           <enabled>true</enabled>
           <name>dmenu-bind</name>
         </startupnotify>
-        <command>~/.config/dmenu/dmenu-bind.sh</command>
+        <command>dmenu_run -b</command>
+        <!--<command>~/.config/dmenu/dmenu-bind.sh</command> -->
       </action>
     </keybind>
     <keybind key="C-A-e">
@@ -417,9 +418,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Alt Web Browser (Firefox)</name>
+          <name>Alt Web Browser (Iceweasel)</name>
         </startupnotify>
-        <command>firefox</command>
+        <command>iceweasel</command>
       </action>
     </keybind>
     <keybind key="C-A-n">
@@ -592,15 +593,16 @@
         <command>current_song</command>
       </action>
     </keybind>
-    <keybind key="C-A-m">
+    <!--<keybind key="C-A-m">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
           <name>open_scisum</name>
         </startupnotify>
-        <command>terminator --working-directory=/home/ankur/devbench/scientific/scisumm</command>
+        <command>terminator -->
+    <!--working-directory=/home/ankur/devbench/scientific/scisumm</command>
       </action>
-    </keybind>
+    </keybind> -->
   </keyboard>
   <mouse>
     <dragThreshold>8</dragThreshold>
@@ -1082,7 +1084,7 @@
 
   # end of the example
 --><application name="gmessage"><decor>no</decor><shade>no</shade><skip_pager>yes</skip_pager><skip_taskbar>yes</skip_taskbar><fullscreen>no</fullscreen><maximized>no</maximized></application><application class="Gimp" name="gimp" role="gimp-toolbox" type="utility"><maximized>vertical</maximized></application><application class="Gimp" name="gimp" role="gimp-dock" type="utility"><maximized>vertical</maximized></application><application class="Gimp" name="gimp" role="gimp-image-window" type="normal"><position force="no"><x>center</x><y>center</y></position></application><application class="Gimp" name="gimp-2.8" role="gimp-toolbox" type="utility"><maximized>vertical</maximized></application><application class="Gimp" name="gimp-2.8" role="gimp-dock" type="utility"><maximized>vertical</maximized></application><application class="Gimp" name="gimp-2.8" role="gimp-image-window" type="normal"><position force="no"><x>center</x><y>center</y></position></application>
-    # This is to remove decorations from all windows [system wide]
-    <application name="*"><decor>no</decor></application>
+<!--# This is to remove decorations from all windows [system wide]
+    # <application name="*"><decor>no</decor></application> -->
   </applications>
 </openbox_config>
