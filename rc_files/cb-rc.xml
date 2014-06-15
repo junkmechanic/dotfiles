@@ -1003,7 +1003,8 @@
     <manageDesktops>yes</manageDesktops>
     <!-- show the manage desktops section in the client-list-(combined-)menu -->
   </menu>
-  <applications><!--
+  <applications>
+    <!--
   # this is an example with comments through out. use these to make your
   # own rules, but without the comments of course.
   # you may use one or more of the name/class/role/title/type rules to specify
@@ -1083,8 +1084,40 @@
   </application>
 
   # end of the example
---><application name="gmessage"><decor>no</decor><shade>no</shade><skip_pager>yes</skip_pager><skip_taskbar>yes</skip_taskbar><fullscreen>no</fullscreen><maximized>no</maximized></application><application class="Gimp" name="gimp" role="gimp-toolbox" type="utility"><maximized>vertical</maximized></application><application class="Gimp" name="gimp" role="gimp-dock" type="utility"><maximized>vertical</maximized></application><application class="Gimp" name="gimp" role="gimp-image-window" type="normal"><position force="no"><x>center</x><y>center</y></position></application><application class="Gimp" name="gimp-2.8" role="gimp-toolbox" type="utility"><maximized>vertical</maximized></application><application class="Gimp" name="gimp-2.8" role="gimp-dock" type="utility"><maximized>vertical</maximized></application><application class="Gimp" name="gimp-2.8" role="gimp-image-window" type="normal"><position force="no"><x>center</x><y>center</y></position></application>
-<!--# This is to remove decorations from all windows [system wide]
+-->
+    <application name="gmessage">
+      <decor>no</decor>
+      <shade>no</shade>
+      <skip_pager>yes</skip_pager>
+      <skip_taskbar>yes</skip_taskbar>
+      <fullscreen>no</fullscreen>
+      <maximized>no</maximized>
+    </application>
+    <application class="Gimp" name="gimp" role="gimp-toolbox" type="utility">
+      <maximized>vertical</maximized>
+    </application>
+    <application class="Gimp" name="gimp" role="gimp-dock" type="utility">
+      <maximized>vertical</maximized>
+    </application>
+    <application class="Gimp" name="gimp" role="gimp-image-window" type="normal">
+      <position force="no">
+        <x>center</x>
+        <y>center</y>
+      </position>
+    </application>
+    <application class="Gimp" name="gimp-2.8" role="gimp-toolbox" type="utility">
+      <maximized>vertical</maximized>
+    </application>
+    <application class="Gimp" name="gimp-2.8" role="gimp-dock" type="utility">
+      <maximized>vertical</maximized>
+    </application>
+    <application class="Gimp" name="gimp-2.8" role="gimp-image-window" type="normal">
+      <position force="no">
+        <x>center</x>
+        <y>center</y>
+      </position>
+    </application>
+    <!--# This is to remove decorations from all windows [system wide]
     # <application name="*"><decor>no</decor></application> -->
   </applications>
 </openbox_config>

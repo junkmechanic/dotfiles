@@ -2,5 +2,5 @@
 #song_artist="\n$(mpc current |  awk '{ split($0, vals, " - "); print " Title : " vals[2] "\nArtist : " vals[1] }')"
 stat="\n$(mpc status | egrep 'playing|paused' | awk '{ print $3 "   " $4  "  " $1 }')"
 vol="\n\nVolume : $(mpc status | grep volume | awk '{ print $2 }')"
-all_in_one="\n$(mpc -f "Title\t: %title%\nArtist\t: %artist%\nAlbum\t: %album%" | head -n3)"
+all_in_one="\n$(mpc -f "Title\t\t: %title%\nArtist\t: %artist%\nAlbum\t: %album%" | head -n3)"
 notify-send -t 5000 -u low -i /usr/share/pixmaps/sonata.png "Current Song" "$all_in_one$stat$vol"

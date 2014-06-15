@@ -78,7 +78,7 @@ cb-cowpowers &
 #(sleep 120s && cb-fortune) &
 
 ## Run the conky
-conky -q &
+(sleep 10s && conky -q) &
 
 ## Mapping media keys
 xmodmap /home/ankur/.Xmodmap &

@@ -9,7 +9,7 @@ import os
 class StatusIcon:
     def __init__(self):
         self.statusicon = gtk.StatusIcon()
-        self.statusicon.set_from_file("/usr/share/icons/gnome/22x22/apps/preferences-desktop-remote-desktop.png")
+        self.statusicon.set_from_file("/usr/share/pixmaps/monitor.svg")
         self.statusicon.set_tooltip("Show Desktop")
 
         self.statusicon.connect("activate", self.left_click_event)
