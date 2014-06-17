@@ -1,4 +1,2 @@
-This repository contains my .vim configuration.
-This also contains my bashrc file due to lack of better organization.
-
---Major redo required. Its time to change to a dotfiles rather than a dotvim.--
+This repository contains my config files for most of the softwares I use on a
+daily basis.

@@ -97,8 +97,10 @@ vnoremap > >gv  " better indentation
 
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=white guibg=white
-au InsertLeave * match ExtraWhitespace /\s\+$/
+" Not using this anymore. Instead using the plugin trailing-whitespace which
+" has the command "  :FixWhitespace  "
+"autocmd ColorScheme * highlight ExtraWhitespace ctermbg=white guibg=white
+"au InsertLeave * match ExtraWhitespace /\s\+$/
 
 
 " Color scheme
