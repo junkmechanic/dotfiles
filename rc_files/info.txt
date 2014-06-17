@@ -1,1 +1,3 @@
-/home/ankur/.local/share/applications/vim.desktop -> /home/ankur/.vim/rc_files/vim.desktop
+autostart, menu.xml and rc.xml go into ~/.config/openbox/
+tint2rc goes into ~/.config/tint2/
+vimrc, bashrc, inputrc and tmux.conf go into the home dir as dotfiles.

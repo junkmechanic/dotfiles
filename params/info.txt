@@ -1,4 +1,5 @@
 Move PowerlineSymbols.otf to ~/.fonts/ (or another X font directory).
 Run fc-cache -vf ~/.fonts to update your font cache.
 Move 10-powerline-symbols.conf to either ~/.fonts.conf.d/ or ~/.config/fontconfig/conf.d/, depending on your fontconfig version.
-
+/home/ankur/.local/share/applications/vim.desktop -> /home/ankur/.vim/rc_files/vim.desktop
+Xmodmap will go in the home dir as a dot-file.
