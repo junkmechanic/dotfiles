@@ -191,3 +191,8 @@ function mkcd {
 source ~/bin/acd_func.sh
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# Activate Vi Mode
+# Not set here. It is better to set it in inputrc so that any program that uses
+# readline can have vi mode bindings.
+#set editing-mode vi
