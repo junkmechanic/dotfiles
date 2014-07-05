@@ -89,8 +89,15 @@ sonata &
 ## Guake
 (sleep 20s && guake) &
 
-# To disable touchpad while typing
+# Touchpad settings
+# To disable touchpad for 1 sec while typing
 syndaemon -i 1 -t -d &
+# To enable middle-click with a two-finger tap
+synclient TapButton2=2 &
+# Right click with a three-finger tap
+synclient TapButton3=3 &
+# Horizontal scroll with two fingers
+synclient HorizTwoFingerScroll=1
 
 ## Script for showdesktop
 ~/bin/showdesktop.sh &

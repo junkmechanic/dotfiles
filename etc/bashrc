@@ -186,13 +186,11 @@ function mkcd {
 # Shift to /etc/environment
 #export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 
-# adding history to bash
-# PLEASE MAKE SURE THIS IS THE LAST LINE IN THIS FILE
-source ~/bin/acd_func.sh
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
 # Activate Vi Mode
 # Not set here. It is better to set it in inputrc so that any program that uses
 # readline can have vi mode bindings.
 #set editing-mode vi
+
+# convenient cd -- function
+# PLEASE MAKE SURE THIS IS THE LAST LINE IN THIS FILE
+source ~/bin/acd_func.sh

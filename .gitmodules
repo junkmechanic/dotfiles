@@ -49,3 +49,8 @@
 [submodule "vim/bundle/trailing-whitespace"]
 	path = vim/bundle/trailing-whitespace
 	url = git@github.com:bronson/vim-trailing-whitespace.git
+    ignore = dirty
+[submodule "vim/bundle/auto-pairs"]
+	path = vim/bundle/auto-pairs
+	url = git@github.com:jiangmiao/auto-pairs.git
+    ignore = dirty

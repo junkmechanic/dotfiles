@@ -501,7 +501,8 @@
           <enabled>true</enabled>
           <name>Logout</name>
         </startupnotify>
-        <command>cb-exit</command>
+        <!--<command>cb-exit</command>-->
+        <command>oblogout</command>
       </action>
     </keybind>
     <keybind key="W-C-Tab">
