@@ -5,8 +5,6 @@ echoerr() { echo "$@" 1>&2; }
 # Fix SSH auth socket location so agent forwarding works with screen.
 if [ -e "$SSH_AUTH_SOCK" ] ; then
     ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
-else
-    echoerr "ssh-agent has not been initiated.\nRun\n  $~> eval \$\(ssh-agent\)\n  $~> ssh-add\nThen either start tmux or attach to a session and source your tmux conf\nif tmux is already running."
 fi
 
 # Need to run xauth since this file exists. Check sshd(8) manpage for details.
