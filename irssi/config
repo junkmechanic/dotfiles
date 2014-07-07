@@ -114,7 +114,7 @@ statusbar = {
     # the "default statusbar" to be displayed at the bottom of the window.
     # contains all the normal items.
     window = {
-      disabled = "no";
+      disabled = "yes";
 
       # window, root
       type = "window";
@@ -207,8 +207,12 @@ settings = {
     autolog = "yes";
     theme = "xchat";
   };
-  "perl/core/scripts" = { awl_shared_sbar = "OFF"; awl_viewer = "no"; };
+  "perl/core/scripts" = {
+    awl_shared_sbar = "OFF";
+    awl_viewer = "no";
+    awl_block = "-16";
+  };
 };
 hilights = ( { text = "junkmechanic"; nick = "yes"; word = "yes"; } );
 logs = { };
-ignores = ( { level = "JOINS PARTS QUITS"; } );
+ignores = ( { level = "JOINS PARTS QUITS NICKS"; } );
