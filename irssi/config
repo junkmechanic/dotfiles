@@ -21,7 +21,9 @@ chatnets = {
 
 channels = (
   { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
-  { name = "#crunchbang"; chatnet = "freenode"; autojoin = "yes"; }
+  { name = "#crunchbang"; chatnet = "Freenode"; autojoin = "yes"; }
+  { name = "#vim"; chatnet = "Freenode"; autojoin = "yes"; },
+  { name = "#bash"; chatnet = "Freenode"; autojoin = "yes"; }
 );
 
 aliases = {

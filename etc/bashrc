@@ -191,6 +191,19 @@ function mkcd {
 # readline can have vi mode bindings.
 #set editing-mode vi
 
+# Use this function to set the title of the tab (in terminator, and maybe the
+# window in other emulators like gnome terminal).
+set_title() { printf '\e]2;%s\a' "$*"; }
+
+# Another hack to change the title of the tab is to run this command in bash
+# echo -en '\e]0;TITLE\a'
+
+# The following will start Tmux on starting the terminal
+#if which tmux 2>&1 >/dev/null; then
+#    #if not inside a tmux session, and if no session is started, start a new session
+#    test -z "$TMUX" && (tmux attach || tmux new-session)
+#fi
+
 # convenient cd -- function
 # PLEASE MAKE SURE THIS IS THE LAST LINE IN THIS FILE
 source ~/bin/acd_func.sh

@@ -76,6 +76,13 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
 
+" now you can use Ctrl+w then h/j/k/l for shifting splits around which
+" previously had to be used with shift.
+nnoremap <c-w>j <c-w>J
+nnoremap <c-w>k <c-w>K
+nnoremap <c-w>l <c-w>L
+nnoremap <c-w>h <c-w>H
+
 
 " easier moving between tabs
 map <Leader>n <esc>:tabprevious<CR>
@@ -98,7 +105,7 @@ vnoremap > >gv  " better indentation
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command
 " Not using this anymore. Instead using the plugin trailing-whitespace which
-" has the command "  :FixWhitespace  "
+" has the command  :FixWhitespace
 "autocmd ColorScheme * highlight ExtraWhitespace ctermbg=white guibg=white
 "au InsertLeave * match ExtraWhitespace /\s\+$/
 
