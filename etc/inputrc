@@ -17,6 +17,10 @@ $if mode=vi
   #"\e[B": history-search-forward
 $endif
 
+# You would also want to have an indicator for the mode with the prompt.
+# This is available since bash 4.3
+set show-mode-in-prompt on
+
 # This is to cycle through history for partially entered commands
 "\e[A": history-search-backward
 "\e[B": history-search-forward

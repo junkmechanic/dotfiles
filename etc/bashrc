@@ -204,6 +204,10 @@ set_title() { printf '\e]2;%s\a' "$*"; }
 #    test -z "$TMUX" && (tmux attach || tmux new-session)
 #fi
 
+# Simply writing a directory name will cd into it. Misspelling dir would be
+# auto-corrected.
+shopt -s autocd cdspell
+
 # convenient cd -- function
 # PLEASE MAKE SURE THIS IS THE LAST LINE IN THIS FILE
 source ~/bin/acd_func.sh
