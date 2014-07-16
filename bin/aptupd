@@ -1,0 +1,20 @@
+#!/bin/bash
+###| updater script: can be placed in /usr/bin/aptupd |################
+echo -e "\e[1;96m|[\e[97m commencing system update\e[96m ]|\e[0m" &&
+echo -e "\e[1;96m(1) --> updating source repos\e[0m"&&
+apt-get update &&
+echo -e "\e[1;96m(2) --> updating package cache\e[0m"&&
+apt-get check &&
+echo -e "\e[1;96m(3) --> installing new packages\e[0m"&&
+apt-get upgrade -f &&
+echo -e "\e[1;96m(4) --> resolving new dependencies\e[0m"&&
+apt-get dist-upgrade -f &&
+echo -e "\e[1;96m(5) --> running post-install scripts\e[0m"&&
+dpkg --configure -a &&
+echo -e "\e[1;96m(6) --> clearing retrieved packages\e[0m"      &&
+apt-get autoclean                               &&
+echo -e "\e[1;96m(7) --> removing unneeded packages\e[0m"&&
+apt-get autoremove -f &&
+echo -e "\e[1;96m(8) --> purging configuration files\e[0m"&&
+aptitude purge '~c'&&
+echo -e "\e[1;96m|[\e[97m system upgrade complete\e[96m ]|\e[0m"
