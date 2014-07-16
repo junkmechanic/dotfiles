@@ -24,8 +24,12 @@ set show-mode-in-prompt on
 # This is to cycle through history for partially entered commands
 "\e[A": history-search-backward
 "\e[B": history-search-forward
+
+# Cursor Navigation
 "\e[C": forward-char
 "\e[D": backward-char
+"\e[1;5D": backward-word
+"\e[1;5C": forward-word
 
 # Tab completion to cycle through the folders
 TAB: menu-complete

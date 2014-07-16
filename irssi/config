@@ -7,6 +7,14 @@ servers = (
     use_ssl = "no";
     ssl_verify = "no";
     autoconnect = "yes";
+  },
+  {
+    address = "irc.debian.org";
+    chatnet = "OFTC";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "yes";
   }
 );
 
@@ -16,7 +24,11 @@ chatnets = {
     nick = "junkmechanic";
     autosendcmd = "/msg nickserv identify oyepaappe ;wait 2000";
   };
-  OFTC = { type = "IRC"; };
+  OFTC = {
+    type = "IRC";
+    nick = "junkmechanic";
+    autosendcmd = "/msg nickserv identify oyepaappe ;wait 2000";
+  };
 };
 
 channels = (
