@@ -162,7 +162,7 @@ mouse_scroll_up = prev_task
 mouse_scroll_down = next_task
 
 # Battery
-battery = 1
+battery = 0
 battery_low_status = 20
 battery_low_cmd = notify-send "battery low"
 battery_hide = 96

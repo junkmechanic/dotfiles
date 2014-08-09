@@ -103,6 +103,7 @@ alias gitrso='git remote show origin'
 alias cat='cat -n'
 alias tmux='tmux -2'
 alias dmesg='dmesg -T'
+alias rsync="rsync --partial --progress --rsh=ssh"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

@@ -97,10 +97,13 @@ synclient TapButton2=2 &
 # Right click with a three-finger tap
 synclient TapButton3=3 &
 # Horizontal scroll with two fingers
-synclient HorizTwoFingerScroll=1
+synclient HorizTwoFingerScroll=1 &
 
 ## Script for showdesktop
 ~/bin/showdesktop.sh &
+
+## Start the virtual keyboard
+florence &
 
 ## for ssh-agent to recognize automatically
 ssh-add ~/.ssh/altid &
