@@ -1,0 +1,52 @@
+$include /etc/inputrc
+
+# Vi Mode Activation should be placed before other keybindings otherwise the
+# keybindings declared before Vi mode activation will be wiped on activation
+# and the ones defined in vi mode will remain.
+
+# Check `man readline' for function-name that you want to a key or sequence of
+# keys to.
+
+# Activate Vi Mode
+#set editing-mode vi
+## Clear screen with Control+l even in insert mode
+#$if mode=vi
+#  set keymap vi-insert
+#  Control-l: clear-screen
+#  #"\e[A": history-search-backward
+#  #"\e[B": history-search-forward
+#$endif
+
+# You would also want to have an indicator for the mode with the prompt.
+# This is available since bash 4.3
+#set show-mode-in-prompt on
+
+# This is to cycle through history for partially entered commands
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Cursor Navigation
+"\e[C": forward-char
+"\e[D": backward-char
+"\e[1;5D": backward-word
+"\e[1;5C": forward-word
+
+# Tab completion to cycle through the folders
+TAB: menu-complete
+# Tab completion to map shift+tab to cycle backwards
+"\e[Z": menu-complete-backward
+
+# The following is useful if you regularly use commands that need enclosing
+# brackets/quotes.
+# If the files start with an escapable character (in this case brackets/quotes)
+# then, in conjuction with autocompletion, there will be an unwanted (in most
+# cases) closing charater at the end of the completion. Hence the bindings
+# include a space charater as well.
+# So now one needs to press the char followed by 'space' character in order to
+# have the complement appear.
+"\C-b": backward-char
+"( ": "\C-v()\C-b"
+"[ ": "\C-v[]\C-b"
+"{ ": "\C-v{}\C-b"
+"\" ": "\C-v\"\C-v\"\C-b"
+"\047 ": "\C-v\047\C-v\047\C-b"

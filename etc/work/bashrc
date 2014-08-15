@@ -104,6 +104,8 @@ alias cat='cat -n'
 alias tmux='tmux -2'
 alias dmesg='dmesg -T'
 alias rsync="rsync --partial --progress --rsh=ssh"
+alias psgrep="ps aux | grep"
+alias mopidy="mopidy --save-debug-log"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -142,28 +144,6 @@ function path(){
 # adding powerline
 . /home/ankur/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 
-# quickly run apt-get updates
-function apt-upd(){
-    sudo apt-get update
-    sudo apt-get dist-upgrade
-}
-
-## changing the time zone
-#export TZ="/usr/share/zoneinfo/Asia/Singapore"
-
-## changing the default editor
-## VISUAL takes precedence over EDITOR
-#export EDITOR=vim
-#export VISUAL=vim
-
-# for perl INC
-export PERL5LIB=/home/ankur/perl5/lib/perl5:/home/ankur/perl5/lib/perl5/x86_64-linux-gnu-thread-multi
-
-# virtualenvwrapper settings
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/devbench
-source /home/ankur/.local/bin/virtualenvwrapper.sh
-
 # This will create the directory passed and then change into it as well.
 function mkcd {
   if [ ! -n "$1" ]; then
@@ -175,41 +155,6 @@ function mkcd {
   fi
 }
 
-# this is to cycle through folders with tab completion
-#[[ $- = *i* ]] && bind TAB:menu-complete
-# this is to include shift-tab functionality as well
-# type ctrl+shift+v and then shift+tab, to reveal the escape sequence that the
-# terminal sends for shift+tab. You ll get ^[[Z where the first part is ' ^[ '
-# which is the escape character itself (bash in linux) and ' [Z ' is for
-# shift+tab. So thats what is to be mentioned here
-#bind "\e[Z":complete
-# Well as it turns out, it is better done in the inputrc
-
-# Shift to /etc/environment
-#export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
-
-# Activate Vi Mode
-# Not set here. It is better to set it in inputrc so that any program that uses
-# readline can have vi mode bindings.
-#set editing-mode vi
-
-# Use this function to set the title of the tab (in terminator, and maybe the
-# window in other emulators like gnome terminal).
 set_title() { printf '\e]2;%s\a' "$*"; }
-
-# Another hack to change the title of the tab is to run this command in bash
-# echo -en '\e]0;TITLE\a'
-
-# The following will start Tmux on starting the terminal
-#if which tmux 2>&1 >/dev/null; then
-#    #if not inside a tmux session, and if no session is started, start a new session
-#    test -z "$TMUX" && (tmux attach || tmux new-session)
-#fi
-
-# Simply writing a directory name will cd into it. Misspelling dir would be
-# auto-corrected.
 shopt -s autocd cdspell
-
-# convenient cd -- function
-# PLEASE MAKE SURE THIS IS THE LAST LINE IN THIS FILE
 source ~/bin/acd_func.sh

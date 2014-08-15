@@ -1,0 +1,9 @@
+[user]
+	name = ankur
+	email = khanna-a@i2r.a-star.edu.sg
+[core]
+	editor = vim
+[color]
+	ui = true
+[push]
+	default = matching

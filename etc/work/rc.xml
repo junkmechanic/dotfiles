@@ -374,17 +374,16 @@
           <enabled>true</enabled>
           <name>dmenu-bind</name>
         </startupnotify>
-        <command>dmenu_run -b</command>
-        <!--<command>~/.config/dmenu/dmenu-bind.sh</command> -->
+        <command>~/.config/dmenu/dmenu-bind.sh</command>
       </action>
     </keybind>
     <keybind key="C-A-e">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>thunar</name>
+          <name>pcmanfm</name>
         </startupnotify>
-        <command>thunar</command>
+        <command>pcmanfm</command>
       </action>
     </keybind>
     <keybind key="C-A-t">
@@ -393,7 +392,7 @@
           <enabled>true</enabled>
           <name>Terminal</name>
         </startupnotify>
-        <command>terminator</command>
+        <command>terminator -m</command>
       </action>
     </keybind>
     <keybind key="C-A-i">
@@ -409,7 +408,7 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Web Browser (Chrome)</name>
+          <name>Web Browser</name>
         </startupnotify>
         <command>x-www-browser</command>
       </action>
@@ -418,9 +417,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Alt Web Browser (Iceweasel)</name>
+          <name>Alt Web Browser (Chrome)</name>
         </startupnotify>
-        <command>iceweasel</command>
+        <command>google-chrome</command>
       </action>
     </keybind>
     <keybind key="C-A-n">
@@ -439,15 +438,6 @@
           <name>ncmpcpp</name>
         </startupnotify>
         <command>terminator --command="ncmpcpp"</command>
-      </action>
-    </keybind>
-    <keybind key="W-C-w">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>wavemon</name>
-        </startupnotify>
-        <command>terminator --command="wavemon"</command>
       </action>
     </keybind>
     <keybind key="W-l">
@@ -501,8 +491,7 @@
           <enabled>true</enabled>
           <name>Logout</name>
         </startupnotify>
-        <!--<command>cb-exit</command>-->
-        <command>oblogout</command>
+        <command>cb-exit</command>
       </action>
     </keybind>
     <keybind key="W-C-Tab">
@@ -594,16 +583,6 @@
         <command>current_song</command>
       </action>
     </keybind>
-    <!--<keybind key="C-A-m">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>open_scisum</name>
-        </startupnotify>
-        <command>terminator -->
-    <!--working-directory=/home/ankur/devbench/scientific/scisumm</command>
-      </action>
-    </keybind> -->
   </keyboard>
   <mouse>
     <dragThreshold>8</dragThreshold>
@@ -1118,7 +1097,5 @@
         <y>center</y>
       </position>
     </application>
-    <!--# This is to remove decorations from all windows [system wide]
-    # <application name="*"><decor>no</decor></application> -->
   </applications>
 </openbox_config>
