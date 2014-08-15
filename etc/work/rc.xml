@@ -297,6 +297,11 @@
         <command>ncmpcpp stop</command>
       </action>
     </keybind>
+    <keybind key="C-A-p">
+      <action name="Execute">
+        <command>ncmpcpp toggle</command>
+      </action>
+    </keybind>
     <!-- Keybindings for window switching -->
     <keybind key="A-Tab">
       <action name="NextWindow">
