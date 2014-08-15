@@ -47,6 +47,10 @@ CPU1 $alignr ${cpu cpu0}%
 ${cpugraph cpu0}
 CPU2 $alignr ${cpu cpu1}%
 ${cpugraph cpu1}
+CPU3 $alignr ${cpu cpu0}%
+${cpugraph cpu0}
+CPU4 $alignr ${cpu cpu1}%
+${cpugraph cpu1}
 
 MEM $alignc $mem / $memmax $alignr $memperc%
 $memgraph
@@ -61,8 +65,8 @@ ${fs_bar /}
 /home $alignc ${fs_used /home} / ${fs_size /home} $alignr ${fs_free_perc /home}%
 ${fs_bar /home}
 
-/boot $alignc ${fs_used /boot} / ${fs_size /boot} $alignr ${fs_free_perc /boot}%
-${fs_bar /boot}
+#/boot $alignc ${fs_used /boot} / ${fs_size /boot} $alignr ${fs_free_perc /boot}%
+#${fs_bar /boot}
 
 $processes processes ($running_processes running)
 
