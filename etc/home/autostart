@@ -78,7 +78,8 @@ cb-cowpowers &
 #(sleep 120s && cb-fortune) &
 
 ## Run the conky
-(sleep 10s && conky -q) &
+(sleep 10s && conky -q -c ~/.conky/conkyrc-stats) &
+(sleep 10s && conky -q -c ~/.conky/conkyrc-clock) &
 
 ## Mapping media keys
 xmodmap /home/ankur/.Xmodmap &
@@ -104,6 +105,9 @@ synclient HorizTwoFingerScroll=1 &
 
 ## Start the virtual keyboard
 florence &
+
+## Battery icon
+cbatticon -u 60 -i standard -c "systemctl poweroff" -l 15 -r 3 &
 
 ## for ssh-agent to recognize automatically
 ssh-add ~/.ssh/altid &
