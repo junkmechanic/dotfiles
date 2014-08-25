@@ -4,3 +4,13 @@ set clipboard=unnamed
 noremap <C-Z> :update<CR>
 
 noremap ,e :q<CR>
+
+" Unbind C-N fron New..
+set contentassistmode
+
+" Space followed by the char to insert
+nmap <Space> i_<Esc>r
+
+" For shifting till the end of the line upwards/downwards
+nnoremap ,o Do<C-R>"<Esc>
+nnoremap ,O DO<C-R>"<Esc>
