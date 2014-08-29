@@ -54,3 +54,6 @@
 	path = vim/bundle/auto-pairs
 	url = git@github.com:jiangmiao/auto-pairs.git
     ignore = dirty
+[submodule "vim/bundle/linediff"]
+	path = vim/bundle/linediff
+	url = git@github.com:AndrewRadev/linediff.vim.git
