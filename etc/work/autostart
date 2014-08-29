@@ -78,10 +78,11 @@ cb-cowpowers &
 #(sleep 120s && cb-fortune) &
 
 ## Run the conky
-conky -q &
+(sleep 5s && conky -q -c ~/.conky/conkyrc-stats) &
+(sleep 5s && conky -q -c ~/.conky/conkyrc-clock) &
 
 ## Guake
-(sleep 20s && guake) &
+(sleep 25s && guake) &
 
 ## Script for showdesktop
 ~/bin/showdesktop.sh &
