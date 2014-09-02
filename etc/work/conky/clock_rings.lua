@@ -143,7 +143,7 @@ function draw_clock_hands(cr,xc,yc)
 
 	secs=os.date("%S")
 	mins=os.date("%M")
-	hours=os.date("%I") + 4
+	hours=os.date("%I")
 
 	secs_arc=(2*math.pi/60)*secs
 	mins_arc=(2*math.pi/60)*mins+secs_arc/60

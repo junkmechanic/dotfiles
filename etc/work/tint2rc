@@ -145,7 +145,7 @@ clock_padding = 12 4
 clock_background_id = 0
 clock_lclick_command = gsimplecal
 clock_rclick_command = gsimplecal
-time1_timezone = :/usr/share/zoneinfo/UTC
+#time1_timezone = :/usr/share/zoneinfo/UTC
 
 # Tooltips
 tooltip = 1

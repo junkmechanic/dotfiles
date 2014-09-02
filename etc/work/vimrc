@@ -11,6 +11,7 @@ set clipboard=unnamedplus
 
 " to change : to ; to make life easier
 nnoremap ; :
+vnoremap ; :
 
 " This beauty remembers where you were the last time you edited the file, and
 " returns to the same position.
@@ -89,6 +90,11 @@ map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
 map <Leader><Leader>n <esc>:tabfirst<CR>
 map <Leader><Leader>m <esc>:tablast<CR>
+
+
+" Shift the rest of the line up or down
+nnoremap <Leader>o Do<C-R>"<Esc>
+nnoremap <Leader>O DO<C-R>"<Esc>
 
 
 " map sort function to a key

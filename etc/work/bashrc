@@ -145,6 +145,11 @@ function path(){
 # adding powerline
 . /home/ankur/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 
+# virtualenvwrapper settings
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/devbench
+source /home/ankur/.local/bin/virtualenvwrapper.sh
+
 # This will create the directory passed and then change into it as well.
 function mkcd {
   if [ ! -n "$1" ]; then
@@ -153,6 +158,18 @@ function mkcd {
     echo "$1 already exists"
   else
     mkdir -p $1 && cd $1
+  fi
+}
+
+# This is to swap the names of two files
+function swap()
+{
+  if [ ! -z "$2" ] && [ -e "$1" ] && [ -e "$2" ] && ! [ "$1" -ef "$2" ] && (([ -f "$1" ] && [ -f "$2" ]) || ([ -d "$1" ] && [ -d "$2" ])) ; then
+    tmp=$(mktemp -d $(dirname "$1")/XXXXXX)
+    mv "$1" "$tmp" && mv "$2" "$1" &&  mv "$tmp"/"$1" "$2"
+    rmdir "$tmp"
+  else
+    echo "Usage: swap file1 file2 or swap dir1 dir2"
   fi
 }
 

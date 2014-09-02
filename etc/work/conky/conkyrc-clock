@@ -51,8 +51,8 @@ default_color FFFFFF
 # -- Lua Load -- #
 lua_load ~/.conky/clock_rings.lua
 lua_draw_hook_pre clock_rings
-lua_load ~/.conky/marks.lua
-lua_draw_hook_post main
+#lua_load ~/.conky/marks.lua
+#lua_draw_hook_post main
 
 TEXT
 
