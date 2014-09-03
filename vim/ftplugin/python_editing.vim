@@ -5,14 +5,14 @@ endif
 let b:did_ftplugin = 1
 
 map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
-map <buffer> gd /def <C-R><C-W><CR> 
+map <buffer> gd /def <C-R><C-W><CR>
 
 set foldmethod=expr
 set foldexpr=PythonFoldExpr(v:lnum)
 set foldtext=PythonFoldText()
 
-map <buffer> f za
-map <buffer> F :call ToggleFold()<CR>
+map <buffer> F za
+map <buffer> <C-F> :call ToggleFold()<CR>
 let b:folded = 1
 
 function! ToggleFold()
@@ -37,7 +37,7 @@ function! PythonFoldText()
     if size < 1000
         let size = " " . size
     endif
-    
+
     if match(getline(v:foldstart), '"""') >= 0
         let text = substitute(getline(v:foldstart), '"""', '', 'g' ) . ' '
     elseif match(getline(v:foldstart), "'''") >= 0
@@ -45,7 +45,7 @@ function! PythonFoldText()
     else
         let text = getline(v:foldstart)
     endif
-    
+
     return size . ' lines:'. text . ' '
 
 endfunction
@@ -55,15 +55,15 @@ function! PythonFoldExpr(lnum)
     if indent( nextnonblank(a:lnum) ) == 0
         return 0
     endif
-    
+
     if getline(a:lnum-1) =~ '^\(class\|def\)\s'
         return 1
     endif
-        
+
     if getline(a:lnum) =~ '^\s*$'
         return "="
     endif
-    
+
     if indent(a:lnum) == 0
         return 0
     endif
@@ -80,6 +80,6 @@ function! ReFold()
     set foldmethod=expr
     set foldexpr=PythonFoldExpr(v:lnum)
     set foldtext=PythonFoldText()
-    echo 
+    echo
 endfunction
 
