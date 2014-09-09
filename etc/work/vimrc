@@ -101,6 +101,17 @@ nnoremap <Leader>O DO<C-R>"<Esc>
 vnoremap <Leader>s :sort<CR>
 
 
+" jump to the next occurance of the character under the cursor
+nnoremap <Leader>f yl:normal f<C-r>"<CR>
+
+
+" a saner approach to horizontal scrolling
+" <C-l> is also used for refershing the screen. So might have to add that later
+" if you run into screnios where refereshing the screen is necessary
+nnoremap <C-l> zl
+nnoremap <C-h> zh<C-h>
+
+
 " easier moving of code blocks
 " Try to go into visual mode (v), thenselect several lines of code here and
 " then press ``>`` several times.
