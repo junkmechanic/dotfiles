@@ -5,7 +5,6 @@
 [keybindings]
   paste = <Control>v
   copy = <Control>c
-  hide_window = <Shift><Control>a
   search =
 [profiles]
   [[default]]
