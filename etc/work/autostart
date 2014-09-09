@@ -82,7 +82,7 @@ cb-cowpowers &
 (sleep 5s && conky -q -c ~/.conky/conkyrc-clock) &
 
 ## Guake
-(sleep 25s && guake) &
+(sleep 40s && guake) &
 
 ## Script for showdesktop
 ~/bin/showdesktop.sh &

@@ -225,6 +225,16 @@
         <wrap>no</wrap>
       </action>
     </keybind>
+    <keybind key="W-S-h">
+      <action name="MoveResizeTo">
+        <monitor>next</monitor>
+      </action>
+    </keybind>
+    <keybind key="W-S-l">
+      <action name="MoveResizeTo">
+        <monitor>next</monitor>
+      </action>
+    </keybind>
     <keybind key="W-F1">
       <action name="GoToDesktop">
         <to>1</to>

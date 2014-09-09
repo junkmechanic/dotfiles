@@ -246,7 +246,7 @@ set wildignore+=*/coverage/*
 " not available for python3 yet
 " remember to run RopeOpenProject which will creat a .ropeproject folder in
 " which you would find a config file you can specify the paths
-let g:pymode_lint_ignore = "E501,E302"
+let g:pymode_lint_ignore = "E501,E302,E265"
 map <Leader>g :call RopeGotoDefinition()<CR>
 let ropevim_enable_shortcuts = 1
 let g:pymode_rope_goto_def_newwin = "vnew"
