@@ -105,11 +105,21 @@ vnoremap <Leader>s :sort<CR>
 nnoremap <Leader>f yl:normal f<C-r>"<CR>
 
 
+" Meta/Alt key combinations
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+set ttimeout ttimeoutlen=50
+
+
 " a saner approach to horizontal scrolling
 " <C-l> is also used for refershing the screen. So might have to add that later
 " if you run into screnios where refereshing the screen is necessary
-nnoremap <C-l> zl
-nnoremap <C-h> zh<C-h>
+nnoremap <A-l> zl
+nnoremap <A-h> zh<c-h>
 
 
 " easier moving of code blocks
@@ -227,10 +237,6 @@ let g:multi_cursor_quit_key='<Esc>'
 " Map start key separately from next key
 let g:multi_cursor_start_key='<F6>'
 
-" ============================================================================
-" Python IDE Setup
-" ============================================================================
-
 
 " Using powerline instead of vim-powerline
 " pip install --user git+git://github.com/Lokaltog/powerline
@@ -250,6 +256,10 @@ set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
 
+
+" ============================================================================
+" Python IDE Setup
+" ============================================================================
 
 " Settings for python-mode
 " cd ~/.vim/bundle
@@ -294,6 +304,7 @@ set completeopt=longest,menuone
 " wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
 set nofoldenable
 
+"-----------------------------------------------------------------------------
 
 " SuperTab options
 au FileType python set omnifunc=pythoncomplete#Complete
@@ -317,7 +328,6 @@ nmap <S-F8> :ConqueTermVSplit bash<CR>
 au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 
 " -----------------------------------------------------------------------------
-" The following has not owrked for me. Have to check on my laptop though.
 " Jump to the next or previous line that has the same level or a lower
 " level of indentation than the current line.
 "
@@ -365,6 +375,16 @@ onoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
 onoremap <silent> <leader>K :call NextIndent(1, 0, 1, 1)<CR>
 onoremap <silent> <leader>J :call NextIndent(1, 1, 1, 1)<CR>
 " -----------------------------------------------------------------------------
+
+" For autopairs flymode activation
+let g:AutoPairsFlyMode = 1
+" The shortcuts for autopairs
+" <CR>  : Insert new indented line after return if cursor in blank brackets or quotes.
+" <BS>  : Delete brackets in pair
+" <M-p> : Toggle Autopairs (g:AutoPairsShortcutToggle)
+" <M-e> : Fast Wrap (g:AutoPairsShortcutFastWrap)
+" <M-n> : Jump to next closed pair (g:AutoPairsShortcutJump)
+" <M-b> : BackInsert (g:AutoPairsShortcutBackInsert)
 
 "" ============================================================================
 "" LaTex Setup
