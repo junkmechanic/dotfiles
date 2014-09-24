@@ -98,6 +98,11 @@ ${downspeedgraph eth1}
 Outbound $alignr ${upspeed eth1}
 ${upspeedgraph eth1}
 
+$if_mpd_playing
+$mpd_smart
+$mpd_bar
+$mpd_status
+$endif
 #Alt+F2$alignr Run Dialog
 #Alt+F3$alignr Alt Menu
 #Ctrl+Alt+t$alignr Terminal
