@@ -247,10 +247,6 @@ let g:multi_cursor_quit_key='<Esc>'
 " Map start key separately from next key
 let g:multi_cursor_start_key='<F6>'
 
-" ============================================================================
-" Python IDE Setup
-" ============================================================================
-
 
 " Using powerline instead of vim-powerline
 " pip install --user git+git://github.com/Lokaltog/powerline
@@ -313,6 +309,11 @@ set completeopt=longest,menuone
 " mkdir -p ~/.vim/ftplugin
 " wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
 set nofoldenable
+
+" The following is an example of how to map to a spacific mode among the visual
+" modes. Here I have mapped only to the Visual-Block mode using the ternary
+" expr1.
+"xnoremap <expr> <leader>c mode() ==# "\<C-V>" ? ":s/^/#\<CR>:nohl<CR>" : ""
 
 "-----------------------------------------------------------------------------
 
