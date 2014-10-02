@@ -293,7 +293,7 @@
         <item label="Edit .conkyrc">
           <action name="Execute">
             <command>
-							terminator --command="vim ~/.conkyrc"
+                            terminator --command="vim ~/.conky/conkyrc-stats"
 						</command>
           </action>
         </item>

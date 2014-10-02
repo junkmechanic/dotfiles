@@ -5,7 +5,6 @@
 [keybindings]
   paste = <Control>v
   copy = <Control>c
-  hide_window = <Shift><Control>a
   search =
 [profiles]
   [[default]]
@@ -19,7 +18,7 @@
     scroll_on_output = False
     show_titlebar = False
     color_scheme = custom
-    font = DejaVu Sans Mono for Powerline 10
+    font = DejaVu Sans Mono for Powerline Oblique 10
     background_color = "#2e3436"
     scrollback_infinite = True
 [layouts]

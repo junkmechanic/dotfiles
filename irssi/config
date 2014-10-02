@@ -22,18 +22,18 @@ chatnets = {
   Freenode = {
     type = "IRC";
     nick = "junkmechanic";
-    autosendcmd = "/msg nickserv identify oyepaappe ;wait 2000";
+    autosendcmd = "/msg nickserv identify <password> ;wait 2000";
   };
   OFTC = {
     type = "IRC";
     nick = "junkmechanic";
-    autosendcmd = "/msg nickserv identify oyepaappe ;wait 2000";
+    autosendcmd = "/msg nickserv identify <password> ;wait 2000";
   };
 };
 
 channels = (
-  { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
-  { name = "#crunchbang"; chatnet = "Freenode"; autojoin = "yes"; }
+  { name = "#debian"; chatnet = "OFTC"; autojoin = "yes"; },
+  { name = "#crunchbang"; chatnet = "Freenode"; autojoin = "yes"; },
   { name = "#vim"; chatnet = "Freenode"; autojoin = "yes"; },
   { name = "#bash"; chatnet = "Freenode"; autojoin = "yes"; }
 );

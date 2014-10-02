@@ -8,6 +8,8 @@ autocmd! bufwritepost .vimrc source %
 set pastetoggle=<F2>
 set clipboard=unnamedplus
 
+" A logical mapping for 'Y'
+nnoremap Y y$
 
 " to change : to ; to make life easier
 nnoremap ; :
@@ -21,6 +23,14 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 " Execute file being edited with <Shift> + e:
 map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
 
+" Quick movements in insert mode
+inoremap II <Esc>I
+inoremap AA <Esc>A
+inoremap OO <Esc>O
+inoremap CC <Esc>C
+inoremap SS <Esc>S
+inoremap DD <Esc>dd
+inoremap UU <Esc>u
 
 " to wrap over to the next or previous line
 " nnoremap j gj
@@ -101,11 +111,32 @@ nnoremap <Leader>O DO<C-R>"<Esc>
 vnoremap <Leader>s :sort<CR>
 
 
+" jump to the next occurance of the character under the cursor
+nnoremap <Leader>f yl:normal f<C-r>"<CR>
+
+
+" Meta/Alt key combinations
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+set ttimeout ttimeoutlen=50
+
+
+" a saner approach to horizontal scrolling
+" <C-l> is also used for refershing the screen. So might have to add that later
+" if you run into screnios where refereshing the screen is necessary
+nnoremap <A-l> zl
+nnoremap <A-h> zh<c-h>
+
+
 " easier moving of code blocks
 " Try to go into visual mode (v), thenselect several lines of code here and
 " then press ``>`` several times.
-vnoremap < <gv  " better indentation
-vnoremap > >gv  " better indentation
+vnoremap < <gv
+vnoremap > >gv
 
 
 " Show whitespace
@@ -216,10 +247,6 @@ let g:multi_cursor_quit_key='<Esc>'
 " Map start key separately from next key
 let g:multi_cursor_start_key='<F6>'
 
-" ============================================================================
-" Python IDE Setup
-" ============================================================================
-
 
 " Using powerline instead of vim-powerline
 " pip install --user git+git://github.com/Lokaltog/powerline
@@ -246,7 +273,7 @@ set wildignore+=*/coverage/*
 " not available for python3 yet
 " remember to run RopeOpenProject which will creat a .ropeproject folder in
 " which you would find a config file you can specify the paths
-let g:pymode_lint_ignore = "E501,E302"
+let g:pymode_lint_ignore = "E501,E302,E265"
 map <Leader>g :call RopeGotoDefinition()<CR>
 let ropevim_enable_shortcuts = 1
 let g:pymode_rope_goto_def_newwin = "vnew"
@@ -283,6 +310,12 @@ set completeopt=longest,menuone
 " wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
 set nofoldenable
 
+" The following is an example of how to map to a spacific mode among the visual
+" modes. Here I have mapped only to the Visual-Block mode using the ternary
+" expr1.
+"xnoremap <expr> <leader>c mode() ==# "\<C-V>" ? ":s/^/#\<CR>:nohl<CR>" : ""
+
+"-----------------------------------------------------------------------------
 
 " SuperTab options
 au FileType python set omnifunc=pythoncomplete#Complete
@@ -306,7 +339,6 @@ nmap <S-F8> :ConqueTermVSplit bash<CR>
 au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 
 " -----------------------------------------------------------------------------
-" The following has not owrked for me. Have to check on my laptop though.
 " Jump to the next or previous line that has the same level or a lower
 " level of indentation than the current line.
 "
@@ -354,6 +386,21 @@ onoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
 onoremap <silent> <leader>K :call NextIndent(1, 0, 1, 1)<CR>
 onoremap <silent> <leader>J :call NextIndent(1, 1, 1, 1)<CR>
 " -----------------------------------------------------------------------------
+
+" For autopairs flymode activation
+let g:AutoPairsFlyMode = 1
+" The shortcuts for autopairs
+" <CR>  : Insert new indented line after return if cursor in blank brackets or quotes.
+" <BS>  : Delete brackets in pair
+" <M-p> : Toggle Autopairs (g:AutoPairsShortcutToggle)
+" <M-e> : Fast Wrap (g:AutoPairsShortcutFastWrap)
+" <M-n> : Jump to next closed pair (g:AutoPairsShortcutJump)
+" <M-b> : BackInsert (g:AutoPairsShortcutBackInsert)
+
+" for unimpariedMoveUp/Down in visual mode
+" Not Working
+"vmap [e [egv
+"vmap ]e ]egv
 
 "" ============================================================================
 "" LaTex Setup

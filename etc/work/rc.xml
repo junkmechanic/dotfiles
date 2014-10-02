@@ -225,6 +225,16 @@
         <wrap>no</wrap>
       </action>
     </keybind>
+    <keybind key="W-S-h">
+      <action name="MoveResizeTo">
+        <monitor>next</monitor>
+      </action>
+    </keybind>
+    <keybind key="W-S-l">
+      <action name="MoveResizeTo">
+        <monitor>next</monitor>
+      </action>
+    </keybind>
     <keybind key="W-F1">
       <action name="GoToDesktop">
         <to>1</to>
@@ -305,6 +315,7 @@
     <!-- Keybindings for window switching -->
     <keybind key="A-Tab">
       <action name="NextWindow">
+        <raise>yes</raise>
         <finalactions>
           <action name="Focus"/>
           <action name="Raise"/>
@@ -314,6 +325,7 @@
     </keybind>
     <keybind key="A-S-Tab">
       <action name="PreviousWindow">
+        <raise>yes</raise>
         <finalactions>
           <action name="Focus"/>
           <action name="Raise"/>

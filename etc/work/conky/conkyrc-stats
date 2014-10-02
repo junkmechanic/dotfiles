@@ -25,7 +25,7 @@ own_window_type desktop
 own_window_transparent yes
 own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 double_buffer yes
-minimum_size 200 25
+minimum_size 230 25
 maximum_width 250
 draw_shades no
 draw_outline no
@@ -72,7 +72,7 @@ Running Threads $alignr $running_threads
 $hr
 
 $alignc CPU
-NAME $alignr PID    CPU   MEM
+NAME $alignr PID     CPU    MEM
 ${top name 1} $alignr ${top pid 1}  ${top cpu 1}  ${top mem 1}
 ${top name 2} $alignr ${top pid 2}  ${top cpu 2}  ${top mem 2}
 ${top name 3} $alignr ${top pid 3}  ${top cpu 3}  ${top mem 3}
@@ -82,7 +82,7 @@ ${top name 6} $alignr ${top pid 6}  ${top cpu 6}  ${top mem 6}
 $hr
 
 $alignc MEM
-NAME $alignr PID    CPU   MEM
+NAME $alignr PID     CPU    MEM
 ${top_mem name 1} $alignr ${top_mem pid 1}  ${top_mem cpu 1}  ${top_mem mem 1}
 ${top_mem name 2} $alignr ${top_mem pid 2}  ${top_mem cpu 2}  ${top_mem mem 2}
 ${top_mem name 3} $alignr ${top_mem pid 3}  ${top_mem cpu 3}  ${top_mem mem 3}
@@ -93,11 +93,16 @@ $hr
 
 Total Uptime $alignr $uptime
 
-Inbound $alignr ${downspeed eth0}
-${downspeedgraph eth0}
-Outbound $alignr ${upspeed eth0}
-${upspeedgraph eth0}
+Inbound $alignr ${downspeed eth1}
+${downspeedgraph eth1}
+Outbound $alignr ${upspeed eth1}
+${upspeedgraph eth1}
 
+$if_mpd_playing
+$mpd_smart
+$mpd_bar
+$mpd_status
+$endif
 #Alt+F2$alignr Run Dialog
 #Alt+F3$alignr Alt Menu
 #Ctrl+Alt+t$alignr Terminal
