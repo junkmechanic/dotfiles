@@ -104,7 +104,7 @@ synclient HorizTwoFingerScroll=1 &
 ~/bin/showdesktop.sh &
 
 ## Start the virtual keyboard
-florence &
+(sleep 22s && florence) &
 
 ## Battery icon
 cbatticon -u 60 -i standard -c "systemctl poweroff" -l 15 -r 3 &
