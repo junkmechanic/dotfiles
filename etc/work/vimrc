@@ -10,6 +10,9 @@ set clipboard=unnamedplus
 
 " A logical mapping for 'Y'
 nnoremap Y y$
+" why not have the opposite too. Keep in mind, the text before the cursor
+" (excluding the character under the cursor) is copied to the register
+nnoremap <C-Y> y0
 
 " to change : to ; to make life easier
 nnoremap ; :
@@ -23,7 +26,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 " Execute file being edited with <Shift> + e:
 map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
 
-" Quick movements in insert mode
+" Quick movements in insert mode <Potentially dangerous>
 inoremap II <Esc>I
 inoremap AA <Esc>A
 inoremap OO <Esc>O
@@ -64,6 +67,9 @@ inoremap <C-Z> <C-O>:update<CR>
 
 " Delete the selected text, paste and retain text from the default register
 vnoremap <leader>p "_dP
+" Paste the selected text after the last line of the selected text
+" This is useful in the visual line mode
+vnoremap <leader>P y'>p
 
 
 " Delete to buffer 'a' instead of the default buffer

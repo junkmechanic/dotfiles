@@ -183,6 +183,10 @@ latest() {
     printf '%s\n' "$latest";
 }
 
+# Number of files in a directory (only an estimate. subtract 3 for closer
+# estimate. also hidden files and directories are included)
+count (){ ll | wc -l;  }
+
 set_title() { printf '\e]2;%s\a' "$*"; }
 shopt -s autocd cdspell
 source ~/bin/acd_func.sh
