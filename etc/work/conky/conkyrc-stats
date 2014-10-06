@@ -97,6 +97,7 @@ Inbound $alignr ${downspeed eth1}
 ${downspeedgraph eth1}
 Outbound $alignr ${upspeed eth1}
 ${upspeedgraph eth1}
+IP Address $alignr ${addr eth1}
 
 $if_mpd_playing
 #$mpd_smart

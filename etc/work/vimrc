@@ -10,9 +10,6 @@ set clipboard=unnamedplus
 
 " A logical mapping for 'Y'
 nnoremap Y y$
-" why not have the opposite too. Keep in mind, the text before the cursor
-" (excluding the character under the cursor) is copied to the register
-nnoremap <C-Y> y0
 
 " to change : to ; to make life easier
 nnoremap ; :

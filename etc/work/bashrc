@@ -190,3 +190,11 @@ count (){ ll | wc -l;  }
 set_title() { printf '\e]2;%s\a' "$*"; }
 shopt -s autocd cdspell
 source ~/bin/acd_func.sh
+
+# Launch tmux automatically and attach to the 'general' session
+# Using 'exec' replaces the shell with the given command. This was detaching
+# from tmux will exit the terminal session automatically.
+if [[ -z $TMUX ]] && [[ $- = *i* ]]; then
+    #tmux attach-session -t general || tmux attach || tmux; exit;
+    exec tmux -2 attach-session -t general || exec tmux -2 attach || exec tmux -2
+fi
