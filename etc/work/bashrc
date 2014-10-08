@@ -108,6 +108,7 @@ alias rsync="rsync --partial --progress --rsh=ssh"
 alias psgrep="ps aux | grep"
 alias mopidy="mopidy --save-debug-log"
 alias xclip="xclip -selection clipboard"
+alias lgrep='ll | grep'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -192,9 +193,13 @@ shopt -s autocd cdspell
 source ~/bin/acd_func.sh
 
 # Launch tmux automatically and attach to the 'general' session
-# Using 'exec' replaces the shell with the given command. This was detaching
-# from tmux will exit the terminal session automatically.
-if [[ -z $TMUX ]] && [[ $- = *i* ]]; then
-    #tmux attach-session -t general || tmux attach || tmux; exit;
-    exec tmux -2 attach-session -t general || exec tmux -2 attach || exec tmux -2
-fi
+# Using 'exec' replaces the shell with the given command. This is done so that
+# detaching from tmux will exit the terminal session automatically.
+# But this will make going back to bash (normal non-tmux terminal) impossible,
+# that I have found to be quite problematic, specially for ssh-ing to external
+# hosts. So this has been removed from this core rc and will be invoked
+# separately from a different terminator profile.
+#if [[ -z $TMUX ]] && [[ $- = *i* ]]; then
+#    #tmux attach-session -t general || tmux attach || tmux; exit;
+#    exec tmux -2 attach-session -t general || exec tmux -2 attach || exec tmux -2
+#fi

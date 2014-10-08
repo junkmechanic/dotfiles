@@ -3,9 +3,9 @@
   handle_size = 0
   title_inactive_bg_color = "#000000"
 [keybindings]
-  paste = <Control>v
+  search = ""
   copy = <Control>c
-  search =
+  paste = <Control>v
 [profiles]
   [[default]]
     palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
@@ -21,12 +21,22 @@
     font = DejaVu Sans Mono for Powerline Oblique 10
     background_color = "#2e3436"
     scrollback_infinite = True
+  [[tmuxified]]
+    use_system_font = False
+    background_darkness = 0.52
+    background_type = transparent
+    cursor_color = "#bdbdbd"
+    use_custom_command = True
+    scroll_on_output = False
+    show_titlebar = False
+    custom_command = /bin/bash --rcfile ~/.files/etc/work/bashrc-tmux
+    font = DejaVu Sans Mono for Powerline Oblique 10
+    scrollback_infinite = True
 [layouts]
   [[default]]
     [[[child1]]]
       type = Terminal
       parent = window0
-      profile = default
     [[[window0]]]
       type = Window
       parent = ""
