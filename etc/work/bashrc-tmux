@@ -1,0 +1,12 @@
+# This will be called from a separate terminal profile, so that tmux is
+# automatically attached to, using the bash option --rcfile.
+
+# But first source the regular files
+. /etc/bash.bashrc
+. ~/.bashrc
+
+# Now attach to tmux.
+if [[ -z $TMUX ]] && [[ $- = *i* ]]; then
+    #tmux attach-session -t general || tmux attach || tmux; exit;
+    exec tmux -2 attach-session -t general || exec tmux -2 attach || exec tmux -2
+fi
