@@ -427,9 +427,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>sonata</name>
+          <name>qmpdclient</name>
         </startupnotify>
-        <command>sonata</command>
+        <command>qmpdclient</command>
       </action>
     </keybind>
     <keybind key="W-n">
@@ -840,10 +840,10 @@
         <action name="Unshade"/>
       </mousebind>
       <mousebind button="Left" action="Click">
-          <action name="ToggleAlwaysOnTop"/>
-          <!-- If you want to have both the functionalities then you can
+        <action name="ToggleAlwaysOnTop"/>
+        <!-- If you want to have both the functionalities then you can
                uncomment the following line -->
-          <!-- <action name="ToggleOmnipresent"/> -->
+        <!-- <action name="ToggleOmnipresent"/> -->
       </mousebind>
     </context>
     <context name="Shade">
