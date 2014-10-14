@@ -84,8 +84,8 @@ cb-cowpowers &
 ## Mapping media keys
 xmodmap /home/ankur/.Xmodmap &
 
-## Starting Sonata
-sonata &
+## Starting QMPDClient
+qmpdclient &
 
 ## Guake
 (sleep 20s && guake) &
@@ -93,18 +93,25 @@ sonata &
 # Touchpad settings
 # To disable touchpad for 1 sec while typing
 syndaemon -i 1 -t -d &
+# The next three options have been enabled by copying
+# /usr/share/X11/xorg.conf.d/50-synaptics.conf to /etc/X11/xorg.conf.d/
+# and then adding the options under the InputClass Identifier
+# "touchpad catchall" as below :
+#        Option "TapButton2" "2"
+#        Option "TapButton3" "3"
+#        Option "HorizTwoFingerScroll" "1"
 # To enable middle-click with a two-finger tap
-synclient TapButton2=2 &
+#synclient TapButton2=2 &
 # Right click with a three-finger tap
-synclient TapButton3=3 &
+#synclient TapButton3=3 &
 # Horizontal scroll with two fingers
-synclient HorizTwoFingerScroll=1 &
+#synclient HorizTwoFingerScroll=1 &
 
 ## Script for showdesktop
 ~/bin/showdesktop.sh &
 
 ## Start the virtual keyboard
-florence &
+(sleep 22s && florence) &
 
 ## Battery icon
 cbatticon -u 60 -i standard -c "systemctl poweroff" -l 15 -r 3 &

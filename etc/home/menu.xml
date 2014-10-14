@@ -27,6 +27,16 @@
           <command>iceweasel</command>
         </action>
       </item>
+      <item label="Chrome Incognito">
+        <action name="Execute">
+          <command>google-chrome --incognito</command>
+        </action>
+      </item>
+      <item label="Iceweasel Private">
+        <action name="Execute">
+          <command>iceweasel --private</command>
+        </action>
+      </item>
     </menu>
     <item label="File Manager">
       <action name="Execute">
