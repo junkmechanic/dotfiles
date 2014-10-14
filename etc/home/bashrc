@@ -107,6 +107,8 @@ alias dmesg='dmesg -T'
 alias rsync="rsync --partial --progress --rsh=ssh"
 alias psgrep="ps aux | grep"
 alias mopidy="mopidy --save-debug-log"
+alias xclip="xclip -selection clipboard"
+alias lgrep='ll | grep'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -186,6 +188,19 @@ function swap()
     echo "Usage: swap file1 file2 or swap dir1 dir2"
   fi
 }
+
+# To find the latest modified file in a dir
+# Usage: latest [dir]
+latest() {
+    local file latest;
+    for file in "${1:-.}"/*;
+    do [[ $file -nt $latest  ]] && latest=$file; done;
+    printf '%s\n' "$latest";
+}
+
+# Number of files in a directory (only an estimate. subtract 3 for closer
+# estimate. also hidden files and directories are included)
+count (){ ll | wc -l;  }
 
 # this is to cycle through folders with tab completion
 #[[ $- = *i* ]] && bind TAB:menu-complete
