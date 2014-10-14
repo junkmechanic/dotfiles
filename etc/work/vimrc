@@ -1,6 +1,9 @@
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
 
+" Setup Pathogen to manage your plugins
+call pathogen#infect()
+call pathogen#helptags()
 
 " Better copy & paste
 " When you want to paste large blocks of code into vim, press F2 before you
@@ -11,19 +14,22 @@ set clipboard=unnamedplus
 " A logical mapping for 'Y'
 nnoremap Y y$
 
+" Rebind <Leader> key
+let mapleader = ","
+
 " to change : to ; to make life easier
 nnoremap ; :
 vnoremap ; :
+
+" and the reverse because that is used for repeating the last 'f' search
+nnoremap : ;
+vnoremap : ;
 
 " This beauty remembers where you were the last time you edited the file, and
 " returns to the same position.
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
-
-" Execute file being edited with <Shift> + e:
-map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
-
-" Quick movements in insert mode
+" Quick movements in insert mode <Potentially dangerous>
 inoremap II <Esc>I
 inoremap AA <Esc>A
 inoremap OO <Esc>O
@@ -36,17 +42,9 @@ inoremap UU <Esc>u
 " nnoremap j gj
 " nnoremap k gk
 
-
 " Mouse and backspace
 set mouse=a  " on OSX press ALT and click
 set bs=2     " make backspace behave like normal again
-
-
-" Rebind <Leader> key
-" I like to have it here becuase it is easier to reach than the default and
-" it is next to ``m`` and ``n`` which I use for navigating between tabs.
-let mapleader = ","
-
 
 " Bind nohl
 " Removes highlight of your last search
@@ -55,16 +53,17 @@ noremap <C-n> :nohl<CR>
 vnoremap <C-n> :nohl<CR>
 "inoremap <C-n> :nohl<CR>
 
-
 " Quicksave command
 noremap <C-Z> :update<CR>
 vnoremap <C-Z> <C-C>:update<CR>
 inoremap <C-Z> <C-O>:update<CR>
 
-
 " Delete the selected text, paste and retain text from the default register
 vnoremap <leader>p "_dP
 
+" Paste the selected text after the last line of the selected text
+" This is useful in the visual line mode
+vnoremap <leader>P y'>p
 
 " Delete to buffer 'a' instead of the default buffer
 nnoremap <expr> dw (v:register == '+') ? '"adw' : '"'.v:register.'dw'
@@ -78,7 +77,6 @@ noremap <Leader>e :quit<CR>  " Quit current window
 noremap <Leader>E :q!<CR>    " Quit current window without saving
 noremap <Leader>q :qa<CR>    " Quit all windows
 noremap <Leader>Q :qa!<CR>   " Quit all windows window saving
-
 
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
 " Every unnecessary keystroke that can be saved is good for your health :)
@@ -94,26 +92,21 @@ nnoremap <c-w>k <c-w>K
 nnoremap <c-w>l <c-w>L
 nnoremap <c-w>h <c-w>H
 
-
 " easier moving between tabs
-map <Leader>n <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
-map <Leader><Leader>n <esc>:tabfirst<CR>
-map <Leader><Leader>m <esc>:tablast<CR>
-
+nnoremap <Leader>n <esc>:tabprevious<CR>
+nnoremap <Leader>m <esc>:tabnext<CR>
+nnoremap <Leader><Leader>n <esc>:tabfirst<CR>
+nnoremap <Leader><Leader>m <esc>:tablast<CR>
 
 " Shift the rest of the line up or down
 nnoremap <Leader>o Do<C-R>"<Esc>
 nnoremap <Leader>O DO<C-R>"<Esc>
 
-
 " map sort function to a key
 vnoremap <Leader>s :sort<CR>
 
-
 " jump to the next occurance of the character under the cursor
 nnoremap <Leader>f yl:normal f<C-r>"<CR>
-
 
 " Meta/Alt key combinations
 let c='a'
@@ -124,13 +117,11 @@ while c <= 'z'
 endw
 set ttimeout ttimeoutlen=50
 
-
 " a saner approach to horizontal scrolling
 " <C-l> is also used for refershing the screen. So might have to add that later
 " if you run into screnios where refereshing the screen is necessary
 nnoremap <A-l> zl
 nnoremap <A-h> zh<c-h>
-
 
 " easier moving of code blocks
 " Try to go into visual mode (v), thenselect several lines of code here and
@@ -138,47 +129,19 @@ nnoremap <A-h> zh<c-h>
 vnoremap < <gv
 vnoremap > >gv
 
-
-" Show whitespace
-" MUST be inserted BEFORE the colorscheme command
-" Not using this anymore. Instead using the plugin trailing-whitespace which
-" has the command  :FixWhitespace
-"autocmd ColorScheme * highlight ExtraWhitespace ctermbg=white guibg=white
-"au InsertLeave * match ExtraWhitespace /\s\+$/
-
-
-" Color scheme
-" mkdir -p ~/.vim/colors && cd ~/.vim/colors
-" wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
-set t_Co=256
-color wombat256mod
-
-
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
 filetype off
 filetype plugin indent on
 syntax on
 
-
-" Showing line numbers and length
-set number  " show line numbers
-set tw=79   " width of document (used by gd)
-set nowrap  " don't automatically wrap on load
-set fo-=t   " don't automatically wrap text when typing
-set colorcolumn=80
-highlight ColorColumn ctermbg=233
-
-
 " easier formatting of paragraphs
 vmap Q gq
 nmap Q gqap
 
-
 " Useful settings
 set history=700
 set undolevels=700
-
 
 " tabs and space formatting
 set tabstop=4
@@ -187,13 +150,11 @@ set shiftwidth=4
 set shiftround
 set expandtab
 
-
 " Make search case insensitive
 set hlsearch
 set incsearch
 set ignorecase
 set smartcase
-
 
 " Disable stupid backup and swap files - they trigger too many events
 " for file system watchers
@@ -201,40 +162,36 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-
 " Displaying line wrap
 set showbreak=↪
 
-
-" from ~/.vim/plugin/InsertChar.vim
-" http://www.vim.org/scripts/script.php?script_id=2810
 " use Space and any character to insert that character at the position of the
-" cursor
+" cursor. Enter a number before spcae to include that many characters.
 nnoremap <SPACE> :<C-U>call InsertChar#insert(v:count1)<CR>
-
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 " Save a file that has been openned without root permission and requires it
 " using :w!!
 cmap w!! w !sudo tee > /dev/null %
 
-
 " to wrap text, use ' :Wrap '
 command! -nargs=* Wrap set wrap linebreak nolist
-
 
 " Code folding
 " set foldmethod=indent
 " set foldlevel=99
 
+" Color scheme
+set t_Co=256
+color wombat256mod
 
-" Setup Pathogen to manage your plugins
-" mkdir -p ~/.vim/autoload ~/.vim/bundle
-" curl -so ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
-" Now you can install any plugin into a .vim/bundle/plugin-name/ folder
-call pathogen#infect()
-call pathogen#helptags()
-
+" Showing line numbers and length
+set number  " show line numbers
+set tw=79   " width of document
+set nowrap  " don't automatically wrap on load
+set fo-=t   " don't automatically wrap text when typing
+set colorcolumn=80
+highlight ColorColumn ctermbg=233
 
 " Multiple cursors setup
 " For more info goto https://github.com/terryma/vim-multiple-cursors
@@ -247,7 +204,6 @@ let g:multi_cursor_quit_key='<Esc>'
 " Map start key separately from next key
 let g:multi_cursor_start_key='<F6>'
 
-
 " Using powerline instead of vim-powerline
 " pip install --user git+git://github.com/Lokaltog/powerline
 " note: make this change after installing powerline using pip in home dir.
@@ -257,7 +213,6 @@ python del powerline_setup
 set laststatus=2
 " set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
-
 " Settings for ctrlp
 " cd ~/.vim/bundle
 " git clone https://github.com/kien/ctrlp.vim.git
@@ -265,7 +220,6 @@ let g:ctrlp_max_height = 15
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
-
 
 " Settings for python-mode
 " cd ~/.vim/bundle
@@ -286,7 +240,6 @@ let g:pymode_rope_guess_project = 0
 let g:pymode_lint_mccabe_complexity = 12
 map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
-
 " Better navigating through omnicomplete option list
 " See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
 set completeopt=longest,menuone
@@ -304,7 +257,6 @@ set completeopt=longest,menuone
 "inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
 "inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 
-
 " Python folding
 " mkdir -p ~/.vim/ftplugin
 " wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
@@ -320,7 +272,6 @@ set nofoldenable
 " SuperTab options
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
-
 
 " ConqueShell options
 let g:ConqueTerm_FastMode = 0
