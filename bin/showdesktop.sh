@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 # Show desktop system tray launcher for use with Openbox & tint2 (or other panels)
-# Ankur : Seems to be unstable. At least was in on my lab desktop
 
 import gtk
 import os
@@ -9,7 +8,7 @@ import os
 class StatusIcon:
     def __init__(self):
         self.statusicon = gtk.StatusIcon()
-        self.statusicon.set_from_file("/usr/share/pixmaps/monitor.svg")
+        self.statusicon.set_from_file("/usr/share/pixmaps/simple-monitor-th.png")
         self.statusicon.set_tooltip("Show Desktop")
 
         self.statusicon.connect("activate", self.left_click_event)

@@ -1,0 +1,11 @@
+! Map Audio keys
+keycode 171 = XF86AudioNext
+keycode 172 = XF86AudioPlay
+keycode 173 = XF86AudioPrev
+keycode 174 = XF86AudioStop
+
+! Remove Caps Lock and map the key to Ctrl
+remove Lock = Caps_Lock
+remove Control = Control_L
+keysym Caps_Lock = Control_L
+add Control = Control_L

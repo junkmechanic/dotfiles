@@ -197,8 +197,9 @@ source ~/bin/acd_func.sh
 # detaching from tmux will exit the terminal session automatically.
 # But this will make going back to bash (normal non-tmux terminal) impossible,
 # that I have found to be quite problematic, specially for ssh-ing to external
-# hosts. So this has been removed from this core rc and will be invoked
-# separately from a different terminator profile.
+# hosts or when trying to open terminal in a particular dir from file manager.
+# So this has been removed from this core rc and will be invoked separately
+# from a different terminator profile.
 #if [[ -z $TMUX ]] && [[ $- = *i* ]]; then
 #    #tmux attach-session -t general || tmux attach || tmux; exit;
 #    exec tmux -2 attach-session -t general || exec tmux -2 attach || exec tmux -2
