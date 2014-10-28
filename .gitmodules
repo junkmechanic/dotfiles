@@ -70,3 +70,7 @@
 	path = vim/bundle/insert-char
 	url = https://github.com/vim-scripts/InsertChar.git
     ignore = dirty
+[submodule "vim/bundle/commentary"]
+	path = vim/bundle/commentary
+	url = git@github.com:tpope/vim-commentary.git
+    ignore = dirty
