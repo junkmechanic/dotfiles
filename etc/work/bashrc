@@ -109,6 +109,7 @@ alias psgrep="ps aux | grep"
 alias mopidy="mopidy --save-debug-log"
 alias xclip="xclip -selection clipboard"
 alias lgrep='ll | grep'
+alias gt='cd $(git rev-parse --show-toplevel 2>/dev/null || (echo "."; echo "Not within a git repository" >&2))'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
