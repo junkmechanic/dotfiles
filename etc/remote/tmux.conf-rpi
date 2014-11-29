@@ -1,4 +1,4 @@
-source '/home/ankur/.local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf'
+#source '/home/ankur/.local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf'
 
 # Remove Control-b as the PREFIX key and set it to be Control-a
 unbind C-b
@@ -53,8 +53,6 @@ bind r source-file ~/.tmux.conf
 
 # Switch between current and previous windows
 bind-key C-a last-window
-# Switch between current and previous panes on the same window
-bind-key C-q last-pane
 
 # Swap ';' and ':' so that command prompt is easily reachable
 unbind-key :
@@ -62,6 +60,7 @@ bind : last-pane
 unbind-key \;
 bind \; command-prompt
 
+set -g status-right "#(bash -c /home/ankur/bin/cpu-load.sh) #h #(date)"
 # Set the environment variable to allow tmux to use ssh-agent using
 # set-environemnt. This is being set globally for tmux
 setenv SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock

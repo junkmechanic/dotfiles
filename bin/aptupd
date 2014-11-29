@@ -5,7 +5,7 @@ echo -e "\e[1;96m(1) --> updating source repos\e[0m"&&
 apt-get update &&
 echo -e "\e[1;96m(2) --> updating package cache\e[0m"&&
 apt-get check &&
-echo -e "\e[1;96m(3) --> installing new packages\e[0m"&&
+echo -e "\e[1;96m(3) --> updating existing packages\e[0m"&&
 apt-get upgrade -f &&
 echo -e "\e[1;96m(4) --> resolving new dependencies\e[0m"&&
 apt-get dist-upgrade -f &&

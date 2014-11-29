@@ -43,4 +43,4 @@ TEXT
 ${voffset 10}${font Open Sans Light:size=50}${time %A}${font}${voffset -10}
 ${voffset 10}${font Open Sans Light:size=50}${time %B} ${time %e}${font}${voffset -10}
 ${voffset 10}${font Open Sans Light:size=100}${time %I:%M %p}${font}${voffset -10}
-${voffset 30}${font Open Sans Light}CPU Usage: $cpu% | RAM Usage: $mem ($memperc%)${font}${voffset -30}
+${voffset 30}${font Open Sans Light}CPU Usage: $cpu% | RAM Usage: $mem ($memperc%) | Uptime: $uptime_short${font}${voffset -30}
