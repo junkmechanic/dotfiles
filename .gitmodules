@@ -74,3 +74,6 @@
 	path = vim/bundle/commentary
 	url = git@github.com:tpope/vim-commentary.git
     ignore = dirty
+[submodule "vim/bundle/dragvisuals.vim"]
+	path = vim/bundle/dragvisuals.vim
+	url = https://github.com/shinokada/dragvisuals.vim.git
