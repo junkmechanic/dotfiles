@@ -349,10 +349,17 @@ let g:AutoPairsFlyMode = 1
 " <M-n> : Jump to next closed pair (g:AutoPairsShortcutJump)
 " <M-b> : BackInsert (g:AutoPairsShortcutBackInsert)
 
-" for unimpariedMoveUp/Down in visual mode
-" Not Working
-"vmap [e [egv
-"vmap ]e ]egv
+" YankRing settings
+nnoremap <F11> :YRShow<CR>
+    let g:yankring_manual_clipboard_check = 1
+    let g:yankring_replace_n_pkey = ',['
+    let g:yankring_replace_n_nkey = ',]'
+    let g:yankring_ignore_operator = 'g~ gu gU ! = gq g? > < zf g@ o O'
+    let g:yankring_n_keys = 'D x X'
+function! YRRunAfterMaps()
+    nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
+endfunction
+
 
 "" ============================================================================
 "" LaTex Setup
