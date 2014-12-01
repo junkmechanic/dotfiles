@@ -1,5 +1,4 @@
 {
-	"default_module": "powerline.segments.common",
 	"segments": {
         "above": [
             {
@@ -8,24 +7,24 @@
                         "function": "powerline.segments.shell.mode"
                     },
                     {
-                        "function": "hostname",
+                        "function": "powerline.segments.common.net.hostname",
                         "priority": 10
                     },
                     {
-                        "function": "virtualenv",
+                        "function": "powerline.segments.common.env.virtualenv",
                         "priority": 50
-                    },
-                    {
-                        "function": "powerline.segments.shell.cwd",
-                        "priority": 10
                     },
                     {
                         "function": "powerline.segments.shell.jobnum",
                         "priority": 20
                     },
                     {
+                        "function": "powerline.segments.shell.cwd",
+                        "priority": 10
+                    },
+                    {
                         "type": "string",
-                        "highlight_group": "cwd",
+                        "highlight_group": ["cwd"],
                         "draw_soft_divider": false,
                         "draw_hard_divider": false,
                         "width": "auto"
@@ -37,11 +36,11 @@
                         "priority": 10
                     },
                     {
-                        "function": "branch",
+                        "function": "powerline.segments.common.vcs.branch",
                         "priority": 10
                     },
                     {
-                        "function": "date",
+                        "function": "powerline.segments.common.time.date",
                         "args": {
                             "format": "%d-%m %H:%M"
                         }
@@ -51,7 +50,7 @@
         ],
 		"left": [
             {
-                "function": "user",
+                "function": "powerline.segments.common.env.user",
                 "priority": 30
             }
 		],
