@@ -1,0 +1,14 @@
+#!/bin/bash
+# menu=$(mpc playlist --format '%artist% - %album%' | sort | uniq | dmenu -b -l 5 -p "Choose Album > ")
+# menu=$(mpc playlist --format '%artist% - %album%' | sort | uniq | rofi -dmenu -p "Choose Album > ")
+menu=$(mpc playlist --format '%artist% - %album%' | uniq | rofi -dmenu -p "Choose Album > ")
+if [[ -z $menu  ]];
+then
+    exit
+fi
+menu2=$(mpc playlist --format '%position% %artist% - %album%' | grep "$menu" | head -1 | awk '{ print $1  }')
+while true; do
+    mpc idle player
+    mpc play "$menu2"
+    break
+done

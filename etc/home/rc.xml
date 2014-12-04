@@ -378,6 +378,25 @@
         <!--<command>~/.config/dmenu/dmenu-bind.sh</command> -->
       </action>
     </keybind>
+    <!-- Keybindings for running applications -->
+    <keybind key="A-F12">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Skippy</name>
+        </startupnotify>
+        <command>skippy-xd</command>
+      </action>
+    </keybind>
+    <keybind key="A-F11">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>MPD Album change</name>
+        </startupnotify>
+        <command>albumchange</command>
+      </action>
+    </keybind>
     <keybind key="C-A-e">
       <action name="Execute">
         <startupnotify>
