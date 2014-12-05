@@ -1,14 +1,33 @@
 #!/bin/bash
+
 # menu=$(mpc playlist --format '%artist% - %album%' | sort | uniq | dmenu -b -l 5 -p "Choose Album > ")
 # menu=$(mpc playlist --format '%artist% - %album%' | sort | uniq | rofi -dmenu -p "Choose Album > ")
-menu=$(mpc playlist --format '%artist% - %album%' | uniq | rofi -dmenu -p "Choose Album > ")
+menu=$(mpc playlist --format '%artist% - %album%' | uniq | rofi -lines 15 -dmenu -p "Choose Album > ")
 if [[ -z $menu  ]];
 then
     exit
 fi
-menu2=$(mpc playlist --format '%position% %artist% - %album%' | grep "$menu" | head -1 | awk '{ print $1  }')
+
+selection=$(mpc playlist --format '%position% %artist% - %album%' | grep "$menu" | head -1 | awk '{ print $1  }')
+
 while true; do
-    mpc idle player
-    mpc play "$menu2"
-    break
+
+    current=$(mpc current)
+    playback=$(mpc status | sed -n '2p' | cut -d ' ' -f1)
+
+    mpc idle player > /dev/null
+
+    new_current=$(mpc current)
+    new_playback=$(mpc status | sed -n '2p' | cut -d ' ' -f1)
+
+    if [[ ${current} != ${new_current} ]]; then
+        echo "Playing queued album"
+        mpc play "$selection"
+        break
+    elif [[ ${playback} != ${new_playback} ]]; then
+        echo "Status changed from ${playback} to ${new_playback}."
+        echo "Will wait till the song ends before changing to the queued album"
+    else
+        :
+    fi
 done
