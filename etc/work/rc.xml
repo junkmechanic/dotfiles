@@ -359,6 +359,13 @@
         <command>skippy-xd --activate-window-picker</command>
       </action>
     </keybind>
+    <keybind key="A-F10">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Rofi ssh menu</name>
+        <command>rofi -snow</command>
+      </action>
+    </keybind>
     <keybind key="A-F1">
       <action name="Execute">
         <command>rofi -rnow</command>
