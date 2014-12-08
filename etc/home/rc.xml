@@ -378,6 +378,35 @@
         <!--<command>~/.config/dmenu/dmenu-bind.sh</command> -->
       </action>
     </keybind>
+    <!-- Keybindings for running applications -->
+    <keybind key="A-F12">
+      <action name="Execute">
+          <enabled>true</enabled>
+          <name>Skippy</name>
+        <command>skippy-xd</command>
+      </action>
+    </keybind>
+    <keybind key="A-F11">
+      <action name="Execute">
+          <enabled>true</enabled>
+          <name>MPD Album change</name>
+        <command>albumchange</command>
+      </action>
+    </keybind>
+    <keybind key="A-F10">
+      <action name="Execute">
+          <enabled>true</enabled>
+          <name>Rofi ssh menu</name>
+        <command>rofi -snow</command>
+      </action>
+    </keybind>
+    <keybind key="A-F1">
+      <action name="Execute">
+          <enabled>true</enabled>
+          <name>Rofi run menu</name>
+        <command>rofi -rnow</command>
+      </action>
+    </keybind>
     <keybind key="C-A-e">
       <action name="Execute">
         <startupnotify>
