@@ -354,9 +354,14 @@
         <allDesktops>yes</allDesktops>
       </action>
     </keybind>
-    <keybind key="A-F9">
+    <keybind key="A-F12">
       <action name="Execute">
         <command>skippy-xd --activate-window-picker</command>
+      </action>
+    </keybind>
+    <keybind key="A-F1">
+      <action name="Execute">
+        <command>rofi -rnow</command>
       </action>
     </keybind>
     <!-- Keybindings for window switching with the arrow keys -->
