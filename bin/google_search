@@ -1,0 +1,27 @@
+#!/bin/bash
+
+dir=~/.rofi
+if [[ ! -d $dir ]]; then
+    mkdir $dir
+fi
+
+histfile=~/.rofi/gshist
+if [[ ! -f $histfile ]]; then
+    touch $histfile
+fi
+
+DMENU='rofi -dmenu -p Search :'
+GS="$(tac $histfile | $DMENU)"
+
+if [[ -z $GS  ]]; then
+    echo 'nothing entered'
+    exit 0
+fi
+
+if ! grep -q "^$GS$" $histfile ; then
+    echo "$GS" >> $histfile
+fi
+
+query=${GS//' '/'+'}
+
+iceweasel -new-tab "https://www.google.com.sg/search?q=${query}"
