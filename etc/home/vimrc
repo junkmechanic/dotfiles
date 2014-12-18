@@ -37,7 +37,7 @@ inoremap Oo <Esc>o
 inoremap CC <Esc>C
 inoremap SS <Esc>S
 inoremap DD <Esc>dd
-inoremap UU <Esc>u
+inoremap Uu <Esc>u
 
 " to wrap over to the next or previous line
 " nnoremap j gj

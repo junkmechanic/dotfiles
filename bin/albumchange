@@ -2,7 +2,10 @@
 
 # menu=$(mpc playlist --format '%artist% - %album%' | sort | uniq | dmenu -b -l 5 -p "Choose Album > ")
 # menu=$(mpc playlist --format '%artist% - %album%' | sort | uniq | rofi -dmenu -p "Choose Album > ")
-menu=$(mpc playlist --format '%artist% - %album%' | uniq | rofi -lines 15 -dmenu -p "Choose Album > ")
+cur_album=$(mpc current -f %album%)
+q_album=$(calc $(mpc playlist --format '%artist% - %album%' | uniq | grep -n "$cur_album" | awk -F ":" '{ print $1 }') - 1)
+echo $q_album
+menu=$(mpc playlist --format '%artist% - %album%' | uniq | rofi -lines 15 -dmenu -p "Choose Album > " -l $q_album)
 if [[ -z $menu  ]];
 then
     exit
