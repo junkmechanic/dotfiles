@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# The other options apart from PlayPause are Next, Previous and Stop
+dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause

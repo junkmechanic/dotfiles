@@ -1,0 +1,9 @@
+! Microsoft Sculpt Ergonomic Desktop Mouse Windows Button mapped to media
+! playback
+keycode 134 = XF86AudioPlay
+
+! Remove Caps Lock and map the key to Ctrl
+remove Lock = Caps_Lock
+remove Control = Control_L
+keysym Caps_Lock = Control_L
+add Control = Control_L

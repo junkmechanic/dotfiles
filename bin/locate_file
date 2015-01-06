@@ -1,0 +1,26 @@
+#!/bin/bash
+
+dir=~/.rofi
+if [[ ! -d $dir ]]; then
+    mkdir $dir
+fi
+
+histfile=~/.rofi/lhist
+if [[ ! -f $histfile ]]; then
+    touch $histfile
+fi
+
+DMENU='rofi -dmenu -p Search :'
+query="$(tac $histfile | $DMENU)"
+
+if [[ -z $query ]]; then
+    echo 'nothing entered'
+    exit 0
+fi
+
+if ! grep -q "^$query$" $histfile ; then
+    echo "$query" >> $histfile
+fi
+
+result="$(locate -e -r "$query" | rofi -dmenu -p 'Search Results :')"
+xdg-open $result

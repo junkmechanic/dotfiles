@@ -1,0 +1,398 @@
+" Automatic reloading of .vimrc
+autocmd! bufwritepost .vimrc source %
+
+" Setup Pathogen to manage your plugins
+call pathogen#infect()
+call pathogen#helptags()
+
+" Better copy & paste
+" When you want to paste large blocks of code into vim, press F2 before you
+" paste. At the bottom you should see ``-- INSERT (paste) --``.
+set pastetoggle=<F2>
+set clipboard=unnamedplus
+
+" A logical mapping for 'Y'
+nnoremap Y y$
+
+" Rebind <Leader> key
+let mapleader = ","
+
+" to change : to ; to make life easier
+nnoremap ; :
+vnoremap ; :
+
+" and the reverse because that is used for repeating the last 'f' search
+nnoremap : ;
+vnoremap : ;
+
+" This beauty remembers where you were the last time you edited the file, and
+" returns to the same position.
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+
+" Quick movements in insert mode <Potentially dangerous>
+inoremap II <Esc>I
+inoremap AA <Esc>A
+inoremap OO <Esc>O
+inoremap Oo <Esc>o
+inoremap CC <Esc>C
+inoremap SS <Esc>S
+inoremap DD <Esc>dd
+inoremap Uu <Esc>u
+
+" to wrap over to the next or previous line
+" nnoremap j gj
+" nnoremap k gk
+
+" Mouse and backspace
+set mouse=a  " on OSX press ALT and click
+set bs=2     " make backspace behave like normal again
+
+" Bind nohl
+" Removes highlight of your last search
+" ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
+noremap <C-n> :nohl<CR>
+vnoremap <C-n> :nohl<CR>
+"inoremap <C-n> :nohl<CR>
+
+" Quicksave command
+noremap <C-Z> :update<CR>
+vnoremap <C-Z> <C-C>:update<CR>
+inoremap <C-Z> <C-O>:update<CR>
+
+" Delete the selected text, paste and retain text from the default register
+vnoremap <leader>p "_dP
+
+" Paste the selected text after the last line of the selected text
+" This is useful in the visual line mode
+vnoremap <leader>P y'>p
+
+" Delete to buffer 'a' instead of the default buffer
+nnoremap <expr> dw (v:register == '+') ? '"adw' : '"'.v:register.'dw'
+nnoremap <expr> dd (v:register == '+') ? '"add' : '"'.v:register.'dd'
+nnoremap <expr> dl (v:register == '+') ? '"adl' : '"'.v:register.'dl'
+nnoremap <expr> dh (v:register == '+') ? '"adh' : '"'.v:register.'dh'
+vnoremap <expr> d (v:register == '+') ? '"ad' : '"'.v:register.'d'
+
+" Quick quit command
+noremap <Leader>e :quit<CR>  " Quit current window
+noremap <Leader>E :q!<CR>    " Quit current window without saving
+noremap <Leader>q :qa<CR>    " Quit all windows
+noremap <Leader>Q :qa!<CR>   " Quit all windows window saving
+
+" bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
+" Every unnecessary keystroke that can be saved is good for your health :)
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+nnoremap <c-h> <c-w>h
+
+" now you can use Ctrl+w then h/j/k/l for shifting splits around which
+" previously had to be used with shift.
+nnoremap <c-w>j <c-w>J
+nnoremap <c-w>k <c-w>K
+nnoremap <c-w>l <c-w>L
+nnoremap <c-w>h <c-w>H
+
+" easier moving between tabs
+nnoremap <Leader>n <esc>:tabprevious<CR>
+nnoremap <Leader>m <esc>:tabnext<CR>
+nnoremap <Leader><Leader>n <esc>:tabfirst<CR>
+nnoremap <Leader><Leader>m <esc>:tablast<CR>
+
+" Shift the rest of the line up or down
+nnoremap <Leader>o Do<C-R>"<Esc>
+nnoremap <Leader>O DO<C-R>"<Esc>
+
+" map sort function to a key
+vnoremap <Leader>s :sort<CR>
+
+" jump to the next occurance of the character under the cursor
+nnoremap <Leader>f yl:normal f<C-r>"<CR>
+
+" Meta/Alt key combinations
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+set ttimeout ttimeoutlen=50
+
+" a saner approach to horizontal scrolling
+" <C-l> is also used for refershing the screen. So might have to add that later
+" if you run into screnios where refereshing the screen is necessary
+nnoremap <A-l> zl
+nnoremap <A-h> zh<c-h>
+
+" easier moving of code blocks
+" Try to go into visual mode (v), then select several lines of code here and
+" then press ``>`` several times.
+vnoremap < <gv
+vnoremap > >gv
+
+" Enable syntax highlighting
+" You need to reload this file for the change to apply
+filetype off
+filetype plugin indent on
+syntax on
+
+" easier formatting of paragraphs
+vmap Q gq
+nmap Q gqap
+
+" Useful settings
+set history=700
+set undolevels=700
+
+" tabs and space formatting
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set shiftround
+set expandtab
+
+" Make search case insensitive
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" Disable stupid backup and swap files - they trigger too many events
+" for file system watchers
+set nobackup
+set nowritebackup
+set noswapfile
+
+" Displaying line wrap
+set showbreak=↪
+
+" use Space and any character to insert that character at the position of the
+" cursor. Enter a number before spcae to include that many characters.
+nnoremap <SPACE> :<C-U>call InsertChar#insert(v:count1)<CR>
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+" Save a file that has been openned without root permission and requires it
+" using :w!!
+cmap w!! w !sudo tee > /dev/null %
+
+" to wrap text, use ' :Wrap '
+command! -nargs=* Wrap set wrap linebreak nolist
+
+" Code folding
+" set foldmethod=indent
+" set foldlevel=99
+
+" Color scheme
+set t_Co=256
+color wombat256mod
+
+" Showing line numbers and length
+set number  " show line numbers
+set tw=79   " width of document
+set nowrap  " don't automatically wrap on load
+set fo-=t   " don't automatically wrap text when typing
+set colorcolumn=80
+highlight ColorColumn ctermbg=233
+
+" Multiple cursors setup
+" For more info goto https://github.com/terryma/vim-multiple-cursors
+let g:multi_cursor_use_default_mapping=0
+" Default mapping
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+" Map start key separately from next key
+let g:multi_cursor_start_key='<F6>'
+
+" Using powerline instead of vim-powerline
+" pip install --user git+git://github.com/Lokaltog/powerline
+" note: make this change after installing powerline using pip in home dir.
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+set laststatus=2
+" set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
+" Settings for ctrlp
+" cd ~/.vim/bundle
+" git clone https://github.com/kien/ctrlp.vim.git
+let g:ctrlp_max_height = 15
+set wildignore+=*.pyc
+set wildignore+=*_build/*
+set wildignore+=*/coverage/*
+
+" Settings for python-mode
+" cd ~/.vim/bundle
+" git clone https://github.com/klen/python-mode
+" not available for python3 yet
+" remember to run RopeOpenProject which will creat a .ropeproject folder in
+" which you would find a config file you can specify the paths
+let g:pymode_lint_ignore = "E501,E302"
+noremap <Leader>g :call RopeGotoDefinition()<CR>
+let ropevim_enable_shortcuts = 1
+let g:pymode_rope_goto_def_newwin = "vnew"
+let g:pymode_rope_extended_complete = 1
+let g:pymode_breakpoint = 0
+let g:pymode_syntax = 1
+let g:pymode_syntax_builtin_objs = 0
+let g:pymode_syntax_builtin_funcs = 0
+let g:pymode_rope_guess_project = 0
+let g:pymode_lint_mccabe_complexity = 12
+noremap <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+
+" Better navigating through omnicomplete option list
+" See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
+set completeopt=longest,menuone
+"function! OmniPopup(action)
+"    if pumvisible()
+"         if a:action == 'j'
+"            return "\<C-N>"
+"        elseif a:action == 'k'
+"            return "\<C-P>"
+"        endif
+"    endif
+"    return a:action
+"endfunction
+"
+"inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
+"inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
+
+" Python folding
+" mkdir -p ~/.vim/ftplugin
+" wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
+set nofoldenable
+
+" The following is an example of how to map to a spacific mode among the visual
+" modes. Here I have mapped only to the Visual-Block mode using the ternary
+" expr1.
+"xnoremap <expr> <leader>c mode() ==# "\<C-V>" ? ":s/^/#\<CR>:nohl<CR>" : ""
+
+"-----------------------------------------------------------------------------
+
+" SuperTab options
+au FileType python set omnifunc=pythoncomplete#Complete
+let g:SuperTabDefaultCompletionType = "context"
+
+" ConqueShell options
+let g:ConqueTerm_FastMode = 0
+let g:ConqueTerm_Color = 1
+" mapping Shift + F5 to run the program in an ipython conque shell
+nnoremap <S-F5> :w<CR>:execute 'ConqueTermVSplit ipython '.expand('%:p')<CR>
+" mapping Shift + F6 to run the program and then land in a vertical split ipython conque shell along with the namespace of the program
+nnoremap <S-F6> :w<CR>:execute 'ConqueTermVSplit ipython --profile=forvim -i '.expand('%:p')<CR>
+" mapping Shift + F7 to open a vertical split ipython conque shell
+nnoremap <S-F7> :ConqueTermVSplit ipython --profile=forvim<CR>
+" mapping Shift + F8 to open a vertical split bash conque shell
+nnoremap <S-F8> :ConqueTermVSplit bash<CR>
+
+" top open an xml file after passing it though xmllint from the GNU xmllib2
+" library to reformat and align the document along tags
+au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
+
+" -----------------------------------------------------------------------------
+" Jump to the next or previous line that has the same level or a lower
+" level of indentation than the current line.
+"
+" exclusive (bool): true: Motion is exclusive
+" false: Motion is inclusive
+" fwd (bool): true: Go to next line
+" false: Go to previous line
+" lowerlevel (bool): true: Go to line with lower indentation level
+" false: Go to line with the same indentation level
+" skipblanks (bool): true: Skip blank lines
+" false: Don't skip blank lines
+function! NextIndent(exclusive, fwd, lowerlevel, skipblanks)
+  let line = line('.')
+  let column = col('.')
+  let lastline = line('$')
+  let indent = indent(line)
+  let stepvalue = a:fwd ? 1 : -1
+  while (line > 0 && line <= lastline)
+    let line = line + stepvalue
+    if ( ! a:lowerlevel && indent(line) == indent ||
+          \ a:lowerlevel && indent(line) < indent)
+      if (! a:skipblanks || strlen(getline(line)) > 0)
+        if (a:exclusive)
+          let line = line - stepvalue
+        endif
+        exe line
+        exe "normal " column . "|"
+        return
+      endif
+    endif
+  endwhile
+endfunction
+
+" Moving back and forth between lines of same or lower indentation.
+nnoremap <silent> <leader>k :call NextIndent(0, 0, 0, 1)<CR>
+nnoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
+nnoremap <silent> <leader>K :call NextIndent(0, 0, 1, 1)<CR>
+nnoremap <silent> <leader>J :call NextIndent(0, 1, 1, 1)<CR>
+vnoremap <silent> <leader>k <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
+vnoremap <silent> <leader>j <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
+vnoremap <silent> <leader>K <Esc>:call NextIndent(0, 0, 1, 1)<CR>m'gv''
+vnoremap <silent> <leader>J <Esc>:call NextIndent(0, 1, 1, 1)<CR>m'gv''
+onoremap <silent> <leader>k :call NextIndent(0, 0, 0, 1)<CR>
+onoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
+onoremap <silent> <leader>K :call NextIndent(1, 0, 1, 1)<CR>
+onoremap <silent> <leader>J :call NextIndent(1, 1, 1, 1)<CR>
+" -----------------------------------------------------------------------------
+
+" For autopairs flymode activation
+let g:AutoPairsFlyMode = 1
+" The shortcuts for autopairs
+" <CR>  : Insert new indented line after return if cursor in blank brackets or quotes.
+" <BS>  : Delete brackets in pair
+" <M-p> : Toggle Autopairs (g:AutoPairsShortcutToggle)
+" <M-e> : Fast Wrap (g:AutoPairsShortcutFastWrap)
+" <M-n> : Jump to next closed pair (g:AutoPairsShortcutJump)
+" <M-b> : BackInsert (g:AutoPairsShortcutBackInsert)
+
+" YankRing settings
+nnoremap <F11> :YRShow<CR>
+    let g:yankring_manual_clipboard_check = 1
+    let g:yankring_replace_n_pkey = ',['
+    let g:yankring_replace_n_nkey = ',]'
+    let g:yankring_ignore_operator = 'g~ gu gU ! = gq g? > < zf g@ o O'
+    let g:yankring_n_keys = 'D x X'
+function! YRRunAfterMaps()
+    nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
+endfunction
+
+" dragvisuals
+vmap  <expr>  <LEFT>   DVB_Drag('left')
+vmap  <expr>  <RIGHT>  DVB_Drag('right')
+vmap  <expr>  <DOWN>   DVB_Drag('down')
+vmap  <expr>  <UP>     DVB_Drag('up')
+vmap  <expr>  D        DVB_Duplicate()
+
+"" ============================================================================
+"" LaTex Setup
+"" ============================================================================
+"
+"" using vim-latex
+"" git submodule add git://git.code.sf.net/p/vim-latex/vim-latex bundle/vim-latex
+"
+"" grep will sometimes skip displaying the file name if you
+"" search in a singe file. This will confuse Latex-Suite. Set your grep
+"" program to always generate a file-name.
+"set grepprg=grep\ -nH\ $*
+"
+"" Starting with Vim 7, the filetype of empty .tex files defaults to
+"" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+"" The following changes the default filetype back to 'tex':
+"let g:tex_flavor='latex'
+"
+"" this is mostly a matter of taste. but LaTeX looks good with just a bit
+"" of indentation.
+"set sw=2
+"
+"" if you write your \label's as \label{fig:something}, then if you
+"" type in \ref{fig: and press <C-n> you will automatically cycle through
+"" all the figure labels. Very useful!
+""set iskeyword+=:
+"
+"" This is to fix the <c-j> mapping that is being overwritten by imaps.vim in
+"" plugins dir of vim-latex
+"nnoremap <SID><c-q> <Plug>IMAP_JumpForward

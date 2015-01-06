@@ -54,3 +54,31 @@
 	path = vim/bundle/auto-pairs
 	url = git@github.com:jiangmiao/auto-pairs.git
     ignore = dirty
+[submodule "vim/bundle/linediff"]
+	path = vim/bundle/linediff
+	url = git@github.com:AndrewRadev/linediff.vim.git
+    ignore = dirty
+[submodule "vim/bundle/wombat256mod"]
+	path = vim/bundle/wombat256mod
+	url = https://github.com/vim-scripts/wombat256.vim
+    ignore = dirty
+[submodule "vim/bundle/indexed-search"]
+	path = vim/bundle/indexed-search
+	url = https://github.com/vim-scripts/IndexedSearch.git
+    ignore = dirty
+[submodule "vim/bundle/insert-char"]
+	path = vim/bundle/insert-char
+	url = https://github.com/vim-scripts/InsertChar.git
+    ignore = dirty
+[submodule "vim/bundle/commentary"]
+	path = vim/bundle/commentary
+	url = git@github.com:tpope/vim-commentary.git
+    ignore = dirty
+[submodule "vim/bundle/dragvisuals.vim"]
+	path = vim/bundle/dragvisuals.vim
+	url = https://github.com/shinokada/dragvisuals.vim.git
+    ignore = dirty
+[submodule "vim/bundle/yankring"]
+	path = vim/bundle/yankring
+	url = https://github.com/vim-scripts/YankRing.vim.git
+    ignore = dirty
