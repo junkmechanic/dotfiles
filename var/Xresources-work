@@ -49,6 +49,7 @@ xscreensaver.passwd.thermometer.width:       8
 /* rofi.borderwidth: 2 */
 
 /* blue theme */
+rofi.opacity: 75
 rofi.background: #070719
 rofi.foreground: #585858
 rofi.highlightbg: #0B3861
@@ -58,3 +59,4 @@ rofi.font: dejavu 10
 rofi.padding: 3
 rofi.lines: 15
 rofi.borderwidth: 2
+rofi.ssh-command: {terminal} -e '{ssh-client} {host}'
