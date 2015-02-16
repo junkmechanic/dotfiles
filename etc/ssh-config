@@ -3,6 +3,8 @@ Host [host nickname]
     User [username on the host]
     IdentityFile ~/.ssh/[RSA/DSA private key]
 
+-----Optional-----
+
 Host [host nickname]
-    ServerAliveInterval 180[or whatever you think is sufficient enough interval
-for it to ping at to maintain the connection]
+    ForwardAgent yes [to forward ssh agent]
+    ServerAliveInterval 180 [to preserve the connection]

@@ -98,11 +98,11 @@ ${downspeedgraph eth1}
 Outbound $alignr ${upspeed eth1}
 ${upspeedgraph eth1}
 IP Address $alignr ${addr eth1}
-
 $if_mpd_playing
 #$mpd_smart
 $mpd_artist
 $mpd_title
+$mpd_album
 $mpd_bar
 $mpd_status$alignr$mpd_elapsed/$mpd_length
 $endif
