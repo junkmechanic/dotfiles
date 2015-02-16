@@ -85,3 +85,6 @@
 [submodule "vim/bundle/easymotion"]
 	path = vim/bundle/easymotion
 	url = git@github.com:Lokaltog/vim-easymotion.git
+[submodule "vim/bundle/targets.vim"]
+	path = vim/bundle/targets.vim
+	url = git@github.com:wellle/targets.vim.git
