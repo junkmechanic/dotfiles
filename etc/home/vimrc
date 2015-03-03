@@ -39,6 +39,9 @@ inoremap SS <Esc>S
 inoremap DD <Esc>dd
 inoremap Uu <Esc>u
 
+" another way to get to the new line. Same as 'Oo' in insert mode
+inoremap <C-J> <Esc>o
+
 " to wrap over to the next or previous line
 " nnoremap j gj
 " nnoremap k gk
@@ -116,13 +119,17 @@ while c <= 'z'
   exec "imap \e".c." <A-".c.">"
   let c = nr2char(1+char2nr(c))
 endw
-set ttimeout ttimeoutlen=50
+set ttimeout ttimeoutlen=20
 
 " a saner approach to horizontal scrolling
 " <C-l> is also used for refershing the screen. So might have to add that later
 " if you run into screnios where refereshing the screen is necessary
 nnoremap <A-l> zl
 nnoremap <A-h> zh<c-h>
+
+" lets go wild
+set wildmenu
+set wildmode=full
 
 " easier moving of code blocks
 " Try to go into visual mode (v), then select several lines of code here and

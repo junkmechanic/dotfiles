@@ -2,11 +2,24 @@
 
 # all_in_one="\n$(mpc -f "Title\t\t: %title%\nArtist\t: %artist%\nAlbum\t: %album%" | head -n3)"
 
+# MPD
 song_artist="\n$(mpc -f "%title% - %artist% - %album% - %track%" current |  awk '{ split($0, vals, " - ");
                          print "Title : " vals[1] "\nArtist : " vals[2] "\nAlbum : " vals[3] "\nTrack : " vals[4]}')"
 stat="\n$(mpc status | egrep 'playing|paused' | awk '{ print $3 "   " $4  "  " $1 }')"
-vol="\n\nVolume : $(mpc status | grep volume | awk '{ print $2 }')"
-notify-send -t 5000 -u low -i /usr/share/pixmaps/notify_song.png "Current Song" "${song_artist}${stat}${vol}"
+vol="\nVolume : $(mpc status | grep volume | awk '{ print $2 }')"
+
+# Spotify
+# For this, you need to have the following script
+# https://gist.github.com/wandernauta/6800547
+sp_current=$(sp current)
+
+if [[ $? -ne 0 ]]; then
+    todisplay="${song_artist}${stat}${vol}"
+else
+    todisplay="\nMPD:${song_artist}${stat}${vol}\n\nSpotify:\n$sp_current"
+fi
+
+notify-send -t 5000 -u low -i /usr/share/pixmaps/notify_song.png "Current Song" "$todisplay"
 
 # ncmpcpp_out=$(ncmpcpp --now-playing "{{{%n - %t}{ - (%l)}{\n%a}{\n%b }}|{{%f}{ - (%l)}}}")
 # notify-send -t 5000 -u low -i /usr/share/pixmaps/notify_song.png "Current Song" "${ncmpcpp_out}"

@@ -227,7 +227,7 @@
     </keybind>
     <keybind key="W-S-h">
       <action name="MoveResizeTo">
-        <monitor>next</monitor>
+        <monitor>previous</monitor>
       </action>
     </keybind>
     <keybind key="W-S-l">

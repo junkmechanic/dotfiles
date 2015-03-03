@@ -36,6 +36,9 @@ TAB: menu-complete
 # Tab completion to map shift+tab to cycle backwards
 "\e[Z": menu-complete-backward
 
+# This is to have a '/' at the end of a symlinked dir
+set mark-symlinked-directories on
+
 # The following is useful if you regularly use commands that need enclosing
 # brackets/quotes.
 # If the files start with an escapable character (in this case brackets/quotes)
