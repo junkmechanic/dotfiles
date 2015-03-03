@@ -356,7 +356,7 @@
     </keybind>
     <keybind key="A-F12">
       <action name="Execute">
-        <command>skippy-xd --activate-window-picker</command>
+        <command>skippy-xd</command>
       </action>
     </keybind>
     <keybind key="A-F10">

@@ -8,5 +8,5 @@
 # Now attach to tmux.
 if [[ -z $TMUX ]] && [[ $- = *i* ]]; then
     #tmux attach-session -t general || tmux attach || tmux; exit;
-    exec tmux -2 attach-session -t general || exec tmux -2 attach || exec tmux -2
+    exec tmux -2 attach-session -t general
 fi

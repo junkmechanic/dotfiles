@@ -188,7 +188,7 @@ latest() {
 
 # Number of files in a directory (only an estimate. subtract 3 for closer
 # estimate. also hidden files and directories are included)
-count (){ ll | wc -l;  }
+count (){ TMP_COUNT_LL=$(ll | wc -l); echo $(($TMP_COUNT_LL - 3)); }
 
 set_title() { printf '\e]2;%s\a' "$*"; }
 

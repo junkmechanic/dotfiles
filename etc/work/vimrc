@@ -47,6 +47,15 @@ inoremap Uu <Esc>u
 set mouse=a  " on OSX press ALT and click
 set bs=2     " make backspace behave like normal again
 
+" Open a new line and stay in Normal mode. (Gives a meaning to Enter as well)
+" It has been reported that this might interfere with the command line normal
+" mode. Since I havent faced any problems with it as yet, I dont mind keeping
+" this mapping. In case, that ever needs to be done, possibly the expr should
+" be used (see below for example) along with the modes that need to be
+" excluded (check http://vimdoc.sourceforge.net/htmldoc/eval.html#mode())
+"nnoremap <Leader><CR> O<Esc>
+nnoremap <CR> o<Esc>
+
 " Bind nohl
 " Removes highlight of your last search
 " ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
@@ -267,7 +276,7 @@ set completeopt=longest,menuone
 " wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
 set nofoldenable
 
-" The following is an example of how to map to a spacific mode among the visual
+" The following is an example of how to map to a specific mode among the visual
 " modes. Here I have mapped only to the Visual-Block mode using the ternary
 " expr1.
 "xnoremap <expr> <leader>c mode() ==# "\<C-V>" ? ":s/^/#\<CR>:nohl<CR>" : ""
