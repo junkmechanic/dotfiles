@@ -4,16 +4,16 @@
     <item label="Run Program">
       <action name="Execute">
         <command>
-					gmrun
-				</command>
+          gmrun
+        </command>
       </action>
     </item>
     <separator/>
     <item label="Terminal">
       <action name="Execute">
         <command>
-					terminator
-				</command>
+          terminator
+        </command>
       </action>
     </item>
     <menu id="web-browser" label="Web Browser">
@@ -37,19 +37,24 @@
           <command>iceweasel --private</command>
         </action>
       </item>
+      <item label="Tor Browser">
+        <action name="Execute">
+          <command>/home/ankur/.start_tor_browser</command>
+        </action>
+      </item>
     </menu>
     <item label="File Manager">
       <action name="Execute">
         <command>
-					thunar
-				</command>
+          thunar
+        </command>
       </action>
     </item>
     <item label="Text Editor">
       <action name="Execute">
         <command>
-					terminator --command="vim"
-				</command>
+          terminator --command="vim"
+        </command>
       </action>
     </item>
     <item label="Media Player">
@@ -74,8 +79,8 @@
       <item label="Catfish File Search">
         <action name="Execute">
           <command>
-						catfish
-					</command>
+            catfish
+          </command>
         </action>
       </item>
       <item label="Archive Manager">
@@ -86,8 +91,8 @@
       <item label="Geany Text Editor">
         <action name="Execute">
           <command>
-						geany
-					</command>
+            geany
+          </command>
         </action>
       </item>
       <item label="Task Manager (htop)">
@@ -98,22 +103,22 @@
       <item label="Terminator Terminal">
         <action name="Execute">
           <command>
-						terminator
-					</command>
+            terminator
+          </command>
         </action>
       </item>
       <item label="Thunar File Manager">
         <action name="Execute">
           <command>
-						thunar
-					</command>
+            thunar
+          </command>
         </action>
       </item>
       <item label="Thunar File Manager (root)">
         <action name="Execute">
           <command>
-						gksudo thunar
-					</command>
+            gksudo thunar
+          </command>
         </action>
       </item>
     </menu>
@@ -121,52 +126,52 @@
       <item label="GIMP">
         <action name="Execute">
           <command>
-						gimp
-					</command>
+            gimp
+          </command>
         </action>
       </item>
       <item label="Viewnior Image Viewer">
         <action name="Execute">
           <command>
-						viewnior
-					</command>
+            viewnior
+          </command>
         </action>
       </item>
       <menu id="graphicsScreenshots" label="Take Screenshot">
         <item label="Screenshooter">
           <action name="Execute">
             <command>
-							xfce4-screenshooter
-						</command>
+              xfce4-screenshooter
+            </command>
           </action>
         </item>
         <separator label="scrot"/>
         <item label="Now">
           <action name="Execute">
             <command>
-							scrot '%Y-%m-%d--%s_$wx$h_scrot.png' -e 'mv $f ~/images/ &amp; viewnior ~/images/$f'
-						</command>
+              scrot '%Y-%m-%d--%s_$wx$h_scrot.png' -e 'mv $f ~/images/ &amp; viewnior ~/images/$f'
+            </command>
           </action>
         </item>
         <item label="In 5 Seconds...">
           <action name="Execute">
             <command>
-							scrot -d 5 '%Y-%m-%d--%s_$wx$h_scrot.png' -e 'mv $f ~/images/ &amp; viewnior ~/images/$f'
-						</command>
+              scrot -d 5 '%Y-%m-%d--%s_$wx$h_scrot.png' -e 'mv $f ~/images/ &amp; viewnior ~/images/$f'
+            </command>
           </action>
         </item>
         <item label="In 10 Seconds...">
           <action name="Execute">
             <command>
-							scrot -d 10 '%Y-%m-%d--%s_$wx$h_scrot.png' -e 'mv $f ~/images/ &amp; viewnior ~/images/$f'
-						</command>
+              scrot -d 10 '%Y-%m-%d--%s_$wx$h_scrot.png' -e 'mv $f ~/images/ &amp; viewnior ~/images/$f'
+            </command>
           </action>
         </item>
         <item label="Selected Area... (click &amp; drag mouse)">
           <action name="Execute">
             <command>
-							scrot -s '%Y-%m-%d--%s_$wx$h_scrot.png' -e 'mv $f ~/images/ &amp; viewnior ~/images/$f'
-						</command>
+              scrot -s '%Y-%m-%d--%s_$wx$h_scrot.png' -e 'mv $f ~/images/ &amp; viewnior ~/images/$f'
+            </command>
           </action>
         </item>
       </menu>
@@ -175,8 +180,8 @@
       <item label="VLC Media Player">
         <action name="Execute">
           <command>
-						vlc
-					</command>
+            vlc
+          </command>
         </action>
       </item>
       <item label="Spotify">
@@ -187,15 +192,15 @@
       <item label="Volume Control">
         <action name="Execute">
           <command>
-						pavucontrol
-					</command>
+            pavucontrol
+          </command>
         </action>
       </item>
       <item label="Xfburn">
         <action name="Execute">
           <command>
-						xfburn
-					</command>
+            xfburn
+          </command>
         </action>
       </item>
     </menu>
@@ -204,29 +209,29 @@
       <item label="gFTP Client">
         <action name="Execute">
           <command>
-						gftp
-					</command>
+            gftp
+          </command>
         </action>
       </item>
       <item label="Transmission BitTorrent Client">
         <action name="Execute">
           <command>
-						transmission-gtk
-					</command>
+            transmission-gtk
+          </command>
         </action>
       </item>
       <item label="XChat IRC Client">
         <action name="Execute">
           <command>
-						xchat
-					</command>
+            xchat
+          </command>
         </action>
       </item>
       <item label="Remote Filesystems">
         <action name="Execute">
           <command>
-						gigolo
-					</command>
+            gigolo
+          </command>
         </action>
       </item>
       <menu execute="cb-remote-desktop-pipemenu" id="remotedesktop" label="Remote Desktop"/>
@@ -239,36 +244,36 @@
       <item label="Google Docs">
         <action name="Execute">
           <command>
-						x-www-browser https://drive.google.com/
-					</command>
+            x-www-browser https://drive.google.com/
+          </command>
         </action>
       </item>
       <item label="AbiWord Word Processor">
         <action name="Execute">
           <command>
-						abiword
-					</command>
+            abiword
+          </command>
         </action>
       </item>
       <item label="Gnumeric Spreadsheet">
         <action name="Execute">
           <command>
-						gnumeric
-					</command>
+            gnumeric
+          </command>
         </action>
       </item>
       <item label="Calculator">
         <action name="Execute">
           <command>
-						galculator
-					</command>
+            galculator
+          </command>
         </action>
       </item>
       <item label="Evince PDF Viewer">
         <action name="Execute">
           <command>
-						evince
-					</command>
+            evince
+          </command>
         </action>
       </item>
     </menu>
@@ -303,30 +308,30 @@
         <item label="Edit .conkyrc">
           <action name="Execute">
             <command>
-							terminator --command="vim ~/.conky/conkyrc-stats"
-						</command>
+              terminator --command="vim ~/.conky/conkyrc-stats"
+            </command>
           </action>
         </item>
         <item label="Restart Conky">
           <action name="Execute">
             <command>
-							conkywonky
-						</command>
+              conkywonky
+            </command>
           </action>
         </item>
         <separator label="Help?"/>
         <item label="man page">
           <action name="Execute">
             <command>
-							terminator --command="man conky"
-						</command>
+              terminator --command="man conky"
+            </command>
           </action>
         </item>
         <item label="Wiki Page">
           <action name="Execute">
             <command>
-							x-www-browser http://crunchbanglinux.org/wiki/conky
-						</command>
+              x-www-browser http://crunchbanglinux.org/wiki/conky
+            </command>
           </action>
         </item>
       </menu>
@@ -334,16 +339,16 @@
         <item label="Edit start-up script">
           <action name="Execute">
             <command>
-							terminator --command="vim ~/.config/dmenu/dmenu-bind.sh"
-						</command>
+              terminator --command="vim ~/.config/dmenu/dmenu-bind.sh"
+            </command>
           </action>
         </item>
         <separator label="Help?"/>
         <item label="man page">
           <action name="Execute">
             <command>
-							terminator --command="man dmenu"
-						</command>
+              terminator --command="man dmenu"
+            </command>
           </action>
         </item>
       </menu>
@@ -351,16 +356,16 @@
         <item label="Edit config file">
           <action name="Execute">
             <command>
-							terminator --command="vim ~/.gmrunrc"
-						</command>
+              terminator --command="vim ~/.gmrunrc"
+            </command>
           </action>
         </item>
         <separator label="Help?"/>
         <item label="man page">
           <action name="Execute">
             <command>
-							terminator --command="man gmrun"
-						</command>
+              terminator --command="man gmrun"
+            </command>
           </action>
         </item>
       </menu>
@@ -368,44 +373,44 @@
         <item label="Edit menu.xml">
           <action name="Execute">
             <command>
-							terminator --command="vim ~/.config/openbox/menu.xml"
-						</command>
+              terminator --command="vim ~/.config/openbox/menu.xml"
+            </command>
           </action>
         </item>
         <item label="Edit rc.xml">
           <action name="Execute">
             <command>
-							terminator --command="vim ~/.config/openbox/rc.xml"
-						</command>
+              terminator --command="vim ~/.config/openbox/rc.xml"
+            </command>
           </action>
         </item>
         <item label="Edit autostart">
           <action name="Execute">
             <command>
-							terminator --command="vim ~/.config/openbox/autostart"
-						</command>
+              terminator --command="vim ~/.config/openbox/autostart"
+            </command>
           </action>
         </item>
         <separator/>
         <item label="GUI Menu Editor">
           <action name="Execute">
             <command>
-							obmenu
-						</command>
+              obmenu
+            </command>
           </action>
         </item>
         <item label="GUI Applications Settings Editor">
           <action name="Execute">
             <command>
-							obapps
-						</command>
+              obapps
+            </command>
           </action>
         </item>
         <item label="GUI Config Tool">
           <action name="Execute">
             <command>
-							obconf
-						</command>
+              obconf
+            </command>
           </action>
         </item>
         <separator/>
@@ -420,16 +425,16 @@
         <item label="Edit config file">
           <action name="Execute">
             <command>
-							terminator --command="vim ~/.config/terminator/config"
-						</command>
+              terminator --command="vim ~/.config/terminator/config"
+            </command>
           </action>
         </item>
         <separator label="Help?"/>
         <item label="man page">
           <action name="Execute">
             <command>
-							terminator --command="man terminator_config"
-						</command>
+              terminator --command="man terminator_config"
+            </command>
           </action>
         </item>
       </menu>
@@ -437,30 +442,30 @@
         <item label="Edit config file">
           <action name="Execute">
             <command>
-							terminator --command="vim ~/.config/tint2/tint2rc"
-						</command>
+              terminator --command="vim ~/.config/tint2/tint2rc"
+            </command>
           </action>
         </item>
         <item label="Restart tint2">
           <action name="Execute">
             <command>
-							tint2restart
-						</command>
+              tint2restart
+            </command>
           </action>
         </item>
         <separator label="Help?"/>
         <item label="man page">
           <action name="Execute">
             <command>
-							terminator --command="man tint2"
-						</command>
+              terminator --command="man tint2"
+            </command>
           </action>
         </item>
         <item label="Online Help">
           <action name="Execute">
             <command>
-							x-www-browser http://code.google.com/p/tint2/wiki/Welcome
-						</command>
+              x-www-browser http://code.google.com/p/tint2/wiki/Welcome
+            </command>
           </action>
         </item>
       </menu>
@@ -468,16 +473,16 @@
         <item label="ARandR Screen Layout Editor">
           <action name="Execute">
             <command>
-						    arandr
-					    </command>
+              arandr
+            </command>
           </action>
         </item>
         <separator label="Help?"/>
         <item label="man xrandr">
           <action name="Execute">
             <command>
-						    terminator --command="man xrandr"
-					    </command>
+              terminator --command="man xrandr"
+            </command>
           </action>
         </item>
       </menu>
@@ -508,29 +513,29 @@
       <item label="Edit Default Applications">
         <action name="Execute">
           <command>
-						terminator --command="sudo update-alternatives --all"
-					</command>
+            terminator --command="sudo update-alternatives --all"
+          </command>
         </action>
       </item>
       <item label="Power Management">
         <action name="Execute">
           <command>
-						xfce4-power-manager-settings
-					</command>
+            xfce4-power-manager-settings
+          </command>
         </action>
       </item>
       <item label="Screensaver">
         <action name="Execute">
           <command>
-						xscreensaver-demo
-					</command>
+            xscreensaver-demo
+          </command>
         </action>
       </item>
       <item label="Choose Wallpaper">
         <action name="Execute">
           <command>
-						nitrogen ~/images/wallpapers/
-					</command>
+            nitrogen ~/images/wallpapers/
+          </command>
         </action>
       </item>
     </menu>
@@ -539,22 +544,22 @@
       <item label="GParted">
         <action name="Execute">
           <command>
-						gksudo gparted
-					</command>
+            gksudo gparted
+          </command>
         </action>
       </item>
       <item label="Synaptic Package Manager">
         <action name="Execute">
           <command>
-						gksudo synaptic
-					</command>
+            gksudo synaptic
+          </command>
         </action>
       </item>
       <item label="User Login Settings">
         <action name="Execute">
           <command>
-						gksudo slimconf
-					</command>
+            gksudo slimconf
+          </command>
         </action>
       </item>
     </menu>
@@ -563,16 +568,16 @@
     <item label="Lock Screen">
       <action name="Execute">
         <command>
-					cb-lock
-				</command>
+          cb-lock
+        </command>
       </action>
     </item>
     <item label="Exit">
       <action name="Execute">
         <command>
-                    oblogout
-            <!--cb-exit-->
-				</command>
+          oblogout
+          <!--cb-exit-->
+        </command>
       </action>
     </item>
   </menu>
