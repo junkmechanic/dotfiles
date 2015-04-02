@@ -56,7 +56,7 @@
     <animateIconify>no</animateIconify>
     <font place="ActiveWindow">
       <name>DejaVu Sans</name>
-      <size>10</size>
+      <size>9</size>
       <!-- font size in points -->
       <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
@@ -65,7 +65,7 @@
     </font>
     <font place="InactiveWindow">
       <name>DejaVu Sans Ultra-Light</name>
-      <size>10</size>
+      <size>9</size>
       <!-- font size in points -->
       <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
@@ -74,7 +74,7 @@
     </font>
     <font place="MenuHeader">
       <name>DejaVu Sans Bold Semi-Condensed</name>
-      <size>10</size>
+      <size>9</size>
       <!-- font size in points -->
       <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
@@ -83,7 +83,7 @@
     </font>
     <font place="MenuItem">
       <name>DejaVu Sans</name>
-      <size>10</size>
+      <size>9</size>
       <!-- font size in points -->
       <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
@@ -92,7 +92,7 @@
     </font>
     <font place="ActiveOnScreenDisplay">
       <name>DejaVu Sans</name>
-      <size>10</size>
+      <size>9</size>
       <!-- font size in points -->
       <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
@@ -101,7 +101,7 @@
     </font>
     <font place="InactiveOnScreenDisplay">
       <name>DejaVu Sans Ultra-Light</name>
-      <size>10</size>
+      <size>9</size>
       <!-- font size in points -->
       <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
@@ -223,6 +223,16 @@
       <action name="SendToDesktop">
         <to>down</to>
         <wrap>no</wrap>
+      </action>
+    </keybind>
+    <keybind key="W-S-h">
+      <action name="MoveResizeTo">
+        <monitor>prev</monitor>
+      </action>
+    </keybind>
+    <keybind key="W-S-l">
+      <action name="MoveResizeTo">
+        <monitor>next</monitor>
       </action>
     </keybind>
     <keybind key="W-F1">
@@ -384,6 +394,13 @@
       </action>
     </keybind>
     <!-- Keybindings for running applications -->
+    <!--<keybind key="C-F12">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Xfce4-Terminal Drop Down</name>
+        <command>xfce4-terminal -|-drop-down</command>
+      </action>
+    </keybind>-->
     <keybind key="A-F12">
       <action name="Execute">
         <enabled>true</enabled>
@@ -561,6 +578,21 @@
         <menu>root-menu</menu>
       </action>
     </keybind>
+    <!-- Changing monitor layout on the fly -->
+    <keybind key="XF86Launch7">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Single Monitor Config</name>
+        <command>~/.screenlayout/single_monitor.sh</command>
+      </action>
+    </keybind>
+    <keybind key="XF86WLAN">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Single Monitor Config</name>
+        <command>~/.screenlayout/dual_monitor.sh</command>
+      </action>
+    </keybind>
     <!-- A bit of tiling -->
     <keybind key="C-A-Right">
       <action name="GrowToEdgeEast"/>
@@ -576,26 +608,26 @@
     </keybind>
     <keybind key="W-C-l">
       <action name="MoveRelative">
-        <x>5</x>
+        <x>25</x>
         <y>0</y>
       </action>
     </keybind>
     <keybind key="W-C-h">
       <action name="MoveRelative">
-        <x>-5</x>
+        <x>-25</x>
         <y>0</y>
       </action>
     </keybind>
     <keybind key="W-C-k">
       <action name="MoveRelative">
         <x>0</x>
-        <y>-5</y>
+        <y>-25</y>
       </action>
     </keybind>
     <keybind key="W-C-j">
       <action name="MoveRelative">
         <x>0</x>
-        <y>5</y>
+        <y>25</y>
       </action>
     </keybind>
     <keybind key="W-A-h">
@@ -946,7 +978,7 @@
       </mousebind>
     </context>
     <context name="Desktop">
-      <mousebind button="Up" action="Click">
+      <!--<mousebind button="Up" action="Click">
         <action name="GoToDesktop">
           <to>previous</to>
         </action>
@@ -955,7 +987,7 @@
         <action name="GoToDesktop">
           <to>next</to>
         </action>
-      </mousebind>
+      </mousebind> -->
       <mousebind button="A-Up" action="Click">
         <action name="GoToDesktop">
           <to>previous</to>

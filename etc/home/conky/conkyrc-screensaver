@@ -45,3 +45,5 @@ ${voffset 10}${font Open Sans Light:size=50}${time %B} ${time %e}${font}${voffse
 ${voffset 10}${font Open Sans Light:size=100}${time %I:%M %p}${font}${voffset -10}
 ${voffset 30}${font Open Sans Light}CPU Usage: $cpu% | RAM Usage: $mem ($memperc%)${font}${voffset -30}
 ${voffset 40}$battery $battery_bar${font}${voffset -30}
+${voffset 45}$if_mpd_playing$mpd_title - $mpd_artist - $mpd_album$alignr$mpd_status${endif}${voffset -30}
+${voffset 50}${exec sp current}

@@ -38,12 +38,13 @@ xscreensaver.passwd.thermometer.width:       8
 
 ! rofi config ----------------------------------------------------------------
 /* black theme */
+rofi.opacity: 80
 rofi.background: #000000
 rofi.foreground: #585858
 rofi.highlightbg: #2E2E2E
 rofi.highlightfg: #BDBDBD
 rofi.bordercolor: #151515
-rofi.font: dejavu 10
+rofi.font: dejavu 9
 rofi.padding: 3
 rofi.lines: 10
 rofi.borderwidth: 2

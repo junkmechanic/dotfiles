@@ -1,4 +1,8 @@
 #!/bin/bash
 
+# A comprehensive list of available methods is available from the mpris
+# 'Player' interface specs at :
+# http://specifications.freedesktop.org/mpris-spec/latest/Player_Interface.html
+
 # The other options apart from PlayPause are Next, Previous and Stop
 dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause

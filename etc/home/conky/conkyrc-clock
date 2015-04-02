@@ -29,7 +29,7 @@ border_outer_margin 0
 minimum_size 350 350
 maximum_width 1024
 
-alignment bl
+alignment br
 gap_x 0
 gap_y 0
 
