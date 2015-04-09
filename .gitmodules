@@ -85,6 +85,12 @@
 [submodule "vim/bundle/easymotion"]
 	path = vim/bundle/easymotion
 	url = git@github.com:Lokaltog/vim-easymotion.git
+    ignore = dirty
 [submodule "vim/bundle/targets.vim"]
 	path = vim/bundle/targets.vim
 	url = git@github.com:wellle/targets.vim.git
+    ignore = dirty
+[submodule "vim/bundle/vim-json"]
+	path = vim/bundle/vim-json
+	url = git@github.com:elzr/vim-json.git
+    ignore = dirty
