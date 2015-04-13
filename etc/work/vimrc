@@ -58,6 +58,9 @@ set bs=2     " make backspace behave like normal again
 "nnoremap <Leader><CR> O<Esc>
 nnoremap <CR> o<Esc>
 
+" Search selected text
+vnoremap // y/<C-R>"<CR>
+
 " Bind nohl
 " Removes highlight of your last search
 " ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
