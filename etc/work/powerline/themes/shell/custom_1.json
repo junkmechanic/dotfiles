@@ -24,7 +24,7 @@
                     },
                     {
                         "type": "string",
-                        "highlight_group": ["cwd"],
+                        "highlight_groups": ["cwd"],
                         "draw_soft_divider": false,
                         "draw_hard_divider": false,
                         "width": "auto"
