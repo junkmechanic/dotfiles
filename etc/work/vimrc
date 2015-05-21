@@ -269,6 +269,7 @@ let g:pymode_syntax_builtin_objs = 0
 let g:pymode_syntax_builtin_funcs = 0
 let g:pymode_rope_guess_project = 0
 let g:pymode_lint_mccabe_complexity = 12
+let g:pymode_run_bind = "<S-e>"
 noremap <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " Better navigating through omnicomplete option list
