@@ -40,7 +40,7 @@
                     'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>Just Black 3</name>
+    <name>GAIAPRO</name>
     <titleLayout>DSLIMC</titleLayout>
     <!--
       avaible characters are NDSLIMC, each can occur at most once.
@@ -419,7 +419,7 @@
       <action name="Execute">
         <enabled>true</enabled>
         <name>Rofi ssh menu</name>
-        <command>rofi -snow</command>
+        <command>rofi -show ssh</command>
       </action>
     </keybind>
     <keybind key="A-F9">
@@ -433,7 +433,7 @@
       <action name="Execute">
         <enabled>true</enabled>
         <name>Rofi run menu</name>
-        <command>rofi -rnow</command>
+        <command>rofi -show run</command>
       </action>
     </keybind>
     <keybind key="C-A-e">

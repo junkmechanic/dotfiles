@@ -7,6 +7,9 @@ song_artist="\n$(mpc -f "%title% - %artist% - %album% - %track%" current |  awk 
                          print "Title : " vals[1] "\nArtist : " vals[2] "\nAlbum : " vals[3] "\nTrack : " vals[4]}')"
 stat="\n$(mpc status | egrep 'playing|paused' | awk '{ print $3 "   " $4  "  " $1 }')"
 vol="\nVolume : $(mpc status | grep volume | awk '{ print $2 }')"
+sys_vol=$(amixer get Master | egrep 'Front Left: Playback' | awk '{ print $5 }')
+sys_vol=${sys_vol#[}
+sys_vol=${sys_vol%]}
 
 # Spotify
 # For this, you need to have the following script
@@ -14,9 +17,9 @@ vol="\nVolume : $(mpc status | grep volume | awk '{ print $2 }')"
 sp_current=$(sp current)
 
 if [[ $? -ne 0 ]]; then
-    todisplay="${song_artist}${stat}${vol}"
+    todisplay="${song_artist}${stat}${vol}\n\nSystem Volume: ${sys_vol}"
 else
-    todisplay="\nMPD:${song_artist}${stat}${vol}\n\nSpotify:\n$sp_current"
+    todisplay="\nMPD:${song_artist}${stat}${vol}\n\nSpotify:\n$sp_current\n\nSystem Volume: ${sys_vol}"
 fi
 
 notify-send -t 5000 -u low -i /usr/share/pixmaps/notify_song.png "Current Song" "$todisplay"

@@ -84,7 +84,7 @@ menu='rofi -dmenu'
 defaults
 touch "$config"
 source "$config"
-setmenu
+#setmenu
 [[ "$last_dir" && "$open_last" == 1 ]] && cd "$last_dir"
 
 while [ "$file" ]; do
