@@ -43,13 +43,22 @@
         </action>
       </item>
     </menu>
-    <item label="File Manager">
-      <action name="Execute">
-        <command>
-          thunar
-        </command>
-      </action>
-    </item>
+    <menu id="file-mangers" label="File Manager">
+      <item label="Thunar">
+        <action name="Execute">
+          <command>
+            thunar
+          </command>
+        </action>
+      </item>
+      <item label="SpaceFM">
+        <action name="Execute">
+          <command>
+            spacefm
+          </command>
+        </action>
+      </item>
+    </menu>
     <item label="Text Editor">
       <action name="Execute">
         <command>
@@ -57,23 +66,24 @@
         </command>
       </action>
     </item>
-    <item label="Media Player">
-      <action name="Execute">
-        <command>guayadeque</command>
-      </action>
-    </item>
-    <menu id="onscreen-keyboard" label="Keyboards">
-      <item label="Florence">
+    <separator/>
+    <menu id="favorites" label="Favorites">
+      <item label="Downloads">
         <action name="Execute">
-          <command>florence</command>
+          <command>
+              thunar ~/downloads
+          </command>
         </action>
       </item>
-      <item label="iok">
+      <item label="Spotify">
         <action name="Execute">
-          <command>iok</command>
+          <command>
+              spotify
+          </command>
         </action>
       </item>
     </menu>
+    <menu execute="cb-places-pipemenu" id="pipe-placesmenu" label="Places"/>
     <separator/>
     <menu id="accessories" label="Accessories">
       <item label="Catfish File Search">
@@ -184,11 +194,6 @@
           </command>
         </action>
       </item>
-      <item label="Spotify">
-        <action name="Execute">
-          <command>spotify</command>
-        </action>
-      </item>
       <item label="Volume Control">
         <action name="Execute">
           <command>
@@ -279,9 +284,6 @@
     </menu>
     <separator/>
     <menu id="/Debian"/>
-    <separator/>
-    <menu execute="cb-places-pipemenu" id="pipe-placesmenu" label="Places"/>
-    <menu execute="cb-recent-files-pipemenu" id="pipe-recentfilesmenu" label="Recent Files"/>
     <separator/>
     <menu id="settings" label="Settings">
       <menu id="vim-settings" label="Vim">

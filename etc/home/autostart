@@ -117,7 +117,7 @@ syndaemon -i 1 -t -d &
 #cbatticon -u 60 -i standard -c "systemctl poweroff" -l 15 -r 3 &
 
 ## Alarm Clock
-alarmclock &
+# alarmclock &
 
 ## for ssh-agent to recognize automatically
 ssh-add ~/.ssh/altid &

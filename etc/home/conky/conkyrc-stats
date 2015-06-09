@@ -34,7 +34,7 @@ draw_graph_borders yes
 default_color grey
 default_shade_color red
 default_outline_color green
-alignment top_left
+alignment top_right
 gap_x 10
 gap_y 40
 no_buffers yes
@@ -95,28 +95,14 @@ ${downspeedgraph eth0}
 Outbound $alignr ${upspeed eth0}
 ${upspeedgraph eth0}
 IP Address $alignr ${addr eth0}${else}${endif}${endif}
-$hr
-${if_mpd_playing}
+$hr${if_mpd_playing}
 $mpd_artist
 $mpd_album
 $mpd_title
 $mpd_bar
 $mpd_status$alignr$mpd_elapsed/$mpd_length
-${endif}${if_running spotify}
+${endif}$hr${if_running spotify}
 ${exec sp current | grep -i artist | cut -d':'  -f1 --complement | sed 's/^ *//'}
 ${exec sp current | grep -i album | cut -d':'  -f1 --complement | sed 's/^ *//'}
 ${exec sp current | grep -i title | cut -d':'  -f1 --complement | sed 's/^ *//'}
 ${exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player string:PlaybackStatus | grep variant | cut -d'"' -f2}
-## Shortcuts - not on display
-#Alt+F2$alignr Run Dialog
-#Alt+F3$alignr Alt Menu
-#Ctrl+Alt+t$alignr Terminal
-#Super+space$alignr Main Menu
-#Super+e$alignr Editor
-#Super+w$alignr Web Browser
-#Super+g$alignr Graphics Editor
-#Super+v$alignr Volume Control
-#Super+x$alignr Logout
-#Super+d$alignr Toggle Show Desktop
-#Super+Tab$alignr Show All Windows Menu
-#Ctrl+Alt+l$alignr Indicate Caps/Num Lock
