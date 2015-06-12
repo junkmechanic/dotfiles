@@ -150,10 +150,10 @@ function path(){
 . /home/ankur/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 
 # quickly run apt-get updates
-function apt-upd(){
-    sudo apt-get update
-    sudo apt-get dist-upgrade
-}
+# function apt-upd(){
+#     sudo apt-get update
+#     sudo apt-get dist-upgrade
+# }
 
 ## changing the time zone
 #export TZ="/usr/share/zoneinfo/Asia/Singapore"

@@ -192,9 +192,9 @@ count (){ TMP_COUNT_LL=$(ll | wc -l); echo $(($TMP_COUNT_LL - 3)); }
 
 set_title() { printf '\e]2;%s\a' "$*"; }
 
-shopt -s autocd cdspell
-
 source ~/bin/bd-completion
+
+shopt -s autocd cdspell
 
 source ~/bin/acd_func.sh
 

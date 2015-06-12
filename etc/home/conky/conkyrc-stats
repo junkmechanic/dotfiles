@@ -43,10 +43,10 @@ cpu_avg_samples 2
 override_utf8_locale no
 
 TEXT
-CPU1 $alignr ${cpu cpu0}%
-${cpugraph cpu0}
-CPU2 $alignr ${cpu cpu1}%
-${cpugraph cpu1}
+# CPU1 $alignr ${cpu cpu0}%
+${cpugraph cpu0 22,110}   ${cpugraph cpu1 22,110}
+# CPU2 $alignr ${cpu cpu1}%
+${cpugraph cpu2 22,110}   ${cpugraph cpu3 22,110}
 MEM $alignc $mem / $memmax $alignr $memperc%
 $memgraph
 $membar
@@ -97,8 +97,8 @@ ${upspeedgraph eth0}
 IP Address $alignr ${addr eth0}${else}${endif}${endif}
 $hr${if_mpd_playing}
 $mpd_artist
+$mpd_track - $mpd_title
 $mpd_album
-$mpd_title
 $mpd_bar
 $mpd_status$alignr$mpd_elapsed/$mpd_length
 ${endif}$hr${if_running spotify}
@@ -106,3 +106,4 @@ ${exec sp current | grep -i artist | cut -d':'  -f1 --complement | sed 's/^ *//'
 ${exec sp current | grep -i album | cut -d':'  -f1 --complement | sed 's/^ *//'}
 ${exec sp current | grep -i title | cut -d':'  -f1 --complement | sed 's/^ *//'}
 ${exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player string:PlaybackStatus | grep variant | cut -d'"' -f2}
+$hr
