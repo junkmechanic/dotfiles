@@ -44,9 +44,9 @@ override_utf8_locale no
 
 TEXT
 # CPU1 $alignr ${cpu cpu0}%
-${cpugraph cpu0 22,110}   ${cpugraph cpu1 22,110}
+${cpugraph cpu0 25,110}   ${cpugraph cpu1 25,110}
 # CPU2 $alignr ${cpu cpu1}%
-${cpugraph cpu2 22,110}   ${cpugraph cpu3 22,110}
+${cpugraph cpu2 25,110}   ${cpugraph cpu3 25,110}
 MEM $alignc $mem / $memmax $alignr $memperc%
 $memgraph
 $membar
