@@ -85,7 +85,7 @@ cb-cowpowers &
 xmodmap ~/.Xmodmap &
 
 ## Guake
-(sleep 40s && guake) &
+(sleep 50s && guake) &
 
 ## Script for showdesktop
 ~/bin/showdesktop.sh &

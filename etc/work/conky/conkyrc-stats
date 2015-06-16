@@ -43,14 +43,16 @@ cpu_avg_samples 2
 override_utf8_locale no
 
 TEXT
-CPU1 $alignr ${cpu cpu0}%
-${cpugraph cpu0}
-CPU2 $alignr ${cpu cpu1}%
-${cpugraph cpu1}
-CPU3 $alignr ${cpu cpu0}%
-${cpugraph cpu0}
-CPU4 $alignr ${cpu cpu1}%
-${cpugraph cpu1}
+# CPU1 $alignr ${cpu cpu0}%
+# ${cpugraph cpu0}
+# CPU2 $alignr ${cpu cpu1}%
+# ${cpugraph cpu1}
+# CPU3 $alignr ${cpu cpu2}%
+# ${cpugraph cpu2}
+# CPU4 $alignr ${cpu cpu3}%
+# ${cpugraph cpu3}
+${cpugraph cpu0 27,110}   ${cpugraph cpu1 27,110}
+${cpugraph cpu2 27,110}   ${cpugraph cpu3 27,110}
 
 MEM $alignc $mem / $memmax $alignr $memperc%
 $memgraph
@@ -96,8 +98,8 @@ ${downspeedgraph eth1}
 Outbound $alignr ${upspeed eth1}
 ${upspeedgraph eth1}
 IP Address $alignr ${addr eth1}
+$hr
 $if_mpd_playing
-#$mpd_smart
 $mpd_artist
 $mpd_track - $mpd_title
 $mpd_album
