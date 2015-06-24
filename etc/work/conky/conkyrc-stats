@@ -51,8 +51,8 @@ TEXT
 # ${cpugraph cpu2}
 # CPU4 $alignr ${cpu cpu3}%
 # ${cpugraph cpu3}
-${cpugraph cpu0 27,110}   ${cpugraph cpu1 27,110}
-${cpugraph cpu2 27,110}   ${cpugraph cpu3 27,110}
+${cpugraph cpu0 27,120}  ${cpugraph cpu1 27,120}
+${cpugraph cpu2 27,120}  ${cpugraph cpu3 27,120}
 
 MEM $alignc $mem / $memmax $alignr $memperc%
 $memgraph

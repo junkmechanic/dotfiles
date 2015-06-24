@@ -111,6 +111,7 @@ alias xclip="xclip -selection clipboard"
 alias lgrep='ll | grep'
 alias bd=". bd -s"
 alias gt='cd $(git rev-parse --show-toplevel 2>/dev/null || (echo "."; echo "Not within a git repository" >&2))'
+alias mypubip='curl http://ipecho.net/plain ; echo'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
