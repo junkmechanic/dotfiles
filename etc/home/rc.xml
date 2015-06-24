@@ -589,8 +589,8 @@
     <keybind key="XF86WLAN">
       <action name="Execute">
         <enabled>true</enabled>
-        <name>Single Monitor Config</name>
-        <command>~/.screenlayout/dual_monitor.sh</command>
+        <name>Dual Monitor Config</name>
+        <command>~/.screenlayout/dual_monitor_inverted.sh</command>
       </action>
     </keybind>
     <!-- A bit of tiling -->

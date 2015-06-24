@@ -119,7 +119,7 @@ launcher_background_id = 0
 launcher_icon_size = 24
 # Specify icon theme names with launcher_icon_theme.
 # if you have an XSETTINGS manager running (like xfsettingsd), tint2 will follow your current theme.
-launcher_icon_theme = gnome-colors-statler
+# launcher_icon_theme = gnome-colors-statler
 # Each launcher_item_app must be a full path to a .desktop file
 launcher_item_app = /usr/share/applications/terminator.desktop
 launcher_item_app = /usr/share/applications/xfce4-file-manager.desktop
@@ -135,7 +135,7 @@ systray_icon_size = 24
 systray_icon_asb = 100 0 0
 
 # Clock
-time1_format = %I:%M %p / %a %b %d
+time1_format = %H:%M / %a %b %d
 #time1_font = Museo 8
 time1_font = DejaVu Sans 10
 #time2_format = %A %d %B
@@ -162,10 +162,10 @@ mouse_scroll_up = prev_task
 mouse_scroll_down = next_task
 
 # Battery
-battery = 0
-battery_low_status = 20
-battery_low_cmd = notify-send "battery low"
-#battery_hide = 96
+battery = 1
+battery_low_status = 10
+battery_low_cmd = notify-send "Battery Low"
+battery_hide = never
 bat1_font = DejaVu Sans 8
 bat2_font = DejaVu Sans 8
 battery_font_color = #b5b5b5 100

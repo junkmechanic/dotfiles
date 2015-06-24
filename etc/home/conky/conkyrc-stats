@@ -44,9 +44,9 @@ override_utf8_locale no
 
 TEXT
 # CPU1 $alignr ${cpu cpu0}%
-${cpugraph cpu0 25,110}   ${cpugraph cpu1 25,110}
+${cpugraph cpu0 25,120}  ${cpugraph cpu1 25,120}
 # CPU2 $alignr ${cpu cpu1}%
-${cpugraph cpu2 25,110}   ${cpugraph cpu3 25,110}
+${cpugraph cpu2 25,120}  ${cpugraph cpu3 25,120}
 MEM $alignc $mem / $memmax $alignr $memperc%
 $memgraph
 $membar
@@ -81,7 +81,7 @@ ${top_mem name 3} $alignr ${top_mem pid 3}  ${top_mem cpu 3}  ${top_mem mem 3}
 $hr
 Total Uptime $alignr $uptime
 $hr
-${if_existing /sys/class/net/wlan0/operstate up}Inbound $alignr ${downspeed wlan0}
+${if_existing /sys/class/net/wlan0}Inbound $alignr ${downspeed wlan0}
 ${downspeedgraph wlan0}
 Outbound $alignr ${upspeed wlan0}
 ${upspeedgraph wlan0}
