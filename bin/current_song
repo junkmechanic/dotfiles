@@ -22,7 +22,7 @@ else
     todisplay="\nMPD:${song_artist}${stat}${vol}\n\nSpotify:\n$sp_current\n\nSystem Volume: ${sys_vol}"
 fi
 
-notify-send -t 5000 -u low -i /usr/share/pixmaps/notify_song.png "Current Song" "$todisplay"
+notify-send -t 5000 -u low -i ~/.files/images/notify_song.png "Current Song" "$todisplay"
 
 # ncmpcpp_out=$(ncmpcpp --now-playing "{{{%n - %t}{ - (%l)}{\n%a}{\n%b }}|{{%f}{ - (%l)}}}")
 # notify-send -t 5000 -u low -i /usr/share/pixmaps/notify_song.png "Current Song" "${ncmpcpp_out}"

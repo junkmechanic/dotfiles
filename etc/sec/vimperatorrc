@@ -1,0 +1,13 @@
+source! /home/ankur/.vimperatorrc.local
+
+" vim: set ft=vimperator:
+
+let mapleader=','
+
+nnoremap : ;
+nnoremap ; :
+
+nnoremap <Leader>q :xall<CR>
+nnoremap <leader>e d
+
+set editor=~/bin/run_vim

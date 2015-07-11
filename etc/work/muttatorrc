@@ -12,4 +12,4 @@ mnoremap ; :
 nnoremap <Leader>e :quit<CR>
 mnoremap <Leader>e :quit<CR>
 
-set editor=~/bin/run_vim.sh
+set editor=~/bin/run_vim
