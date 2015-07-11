@@ -78,10 +78,6 @@
 	path = vim/bundle/dragvisuals.vim
 	url = https://github.com/shinokada/dragvisuals.vim.git
     ignore = dirty
-[submodule "vim/bundle/yankring"]
-	path = vim/bundle/yankring
-	url = https://github.com/vim-scripts/YankRing.vim.git
-    ignore = dirty
 [submodule "vim/bundle/easymotion"]
 	path = vim/bundle/easymotion
 	url = git@github.com:Lokaltog/vim-easymotion.git

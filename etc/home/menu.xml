@@ -82,6 +82,13 @@
           </command>
         </action>
       </item>
+      <item label="Muzik">
+        <action name="Execute">
+          <command>
+              thunar /media/MAINFRAME/MUZIK
+          </command>
+        </action>
+      </item>
     </menu>
     <menu execute="cb-places-pipemenu" id="pipe-placesmenu" label="Places"/>
     <separator/>
