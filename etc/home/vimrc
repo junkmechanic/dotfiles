@@ -376,6 +376,7 @@ let g:AutoPairsShortcutToggle = ''
 "     let g:yankring_replace_n_nkey = ',]'
 "     let g:yankring_ignore_operator = 'g~ gu gU ! = gq g? > < zf g@ o O'
 "     let g:yankring_n_keys = 'D x X'
+"     let g:yankring_history_file = '.yankring_history_file'
 " function! YRRunAfterMaps()
 "     nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
 " endfunction

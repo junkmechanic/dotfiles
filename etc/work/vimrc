@@ -5,9 +5,15 @@ autocmd! bufwritepost .vimrc source %
 call pathogen#infect()
 call pathogen#helptags()
 
+" yankstack compatibility with custom yank maps
+call yankstack#setup()
+
 " Better copy & paste
 set pastetoggle=<F2>
 set clipboard=unnamedplus
+
+" automatically change window's cwd to file's dir
+set autochdir
 
 " A logical mapping for 'Y'
 nnoremap Y y$
@@ -58,7 +64,7 @@ set bs=2
 "nnoremap <Leader><CR> O<Esc>
 nnoremap <CR> o<Esc>
 
-" Search selected text
+" search selected text
 vnoremap // y/<C-R>"<CR>
 
 " Bind nohl
@@ -121,6 +127,12 @@ nnoremap <Leader>f yl:normal f<C-r>"<CR>
 " Meta/Alt key combinations
 let c='a'
 while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+let c='A'
+while c <= 'Z'
   exec "set <A-".c.">=\e".c
   exec "imap \e".c." <A-".c.">"
   let c = nr2char(1+char2nr(c))
@@ -249,16 +261,12 @@ set wildignore+=*_build/*
 set wildignore+=*/coverage/*
 
 " Settings for python-mode
-let g:pymode_lint_ignore = "E501,E302,E265"
-noremap <Leader>g :call RopeGotoDefinition()<CR>
-let ropevim_enable_shortcuts = 1
-let g:pymode_rope_goto_def_newwin = "vnew"
-let g:pymode_rope_extended_complete = 1
+let g:pymode_rope = 0
+let g:pymode_lint_ignore = "E501,E302"
 let g:pymode_breakpoint = 0
 let g:pymode_syntax = 1
 let g:pymode_syntax_builtin_objs = 0
 let g:pymode_syntax_builtin_funcs = 0
-let g:pymode_rope_guess_project = 0
 let g:pymode_lint_mccabe_complexity = 12
 let g:pymode_run_bind = "<S-e>"
 noremap <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
@@ -276,8 +284,14 @@ set nofoldenable
 "-----------------------------------------------------------------------------
 
 " SuperTab options
-au FileType python set omnifunc=pythoncomplete#Complete
+" au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
+
+" jedi-vim options
+let g:jedi#use_splits_not_buffers = "right"
+let g:jedi#usages_command = "<leader>u"
+let g:jedi#show_call_signatures = "2"
+set noshowmode
 
 " ConqueShell options
 let g:ConqueTerm_FastMode = 0
@@ -356,16 +370,16 @@ let g:AutoPairsShortcutToggle = ''
 " <M-b> : BackInsert (g:AutoPairsShortcutBackInsert)
 
 " YankRing settings
-nnoremap <F11> :YRShow<CR>
-    let g:yankring_manual_clipboard_check = 1
-    let g:yankring_replace_n_pkey = ',['
-    let g:yankring_replace_n_nkey = ',]'
-    let g:yankring_ignore_operator = 'g~ gu gU ! = gq g? > < zf g@ o O'
-    let g:yankring_n_keys = 'D x X'
-    let g:yankring_history_file = '.yankring_history_file'
-function! YRRunAfterMaps()
-    nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
-endfunction
+" nnoremap <F11> :YRShow<CR>
+"     let g:yankring_manual_clipboard_check = 1
+"     let g:yankring_replace_n_pkey = ',['
+"     let g:yankring_replace_n_nkey = ',]'
+"     let g:yankring_ignore_operator = 'g~ gu gU ! = gq g? > < zf g@ o O'
+"     let g:yankring_n_keys = 'D x X'
+"     let g:yankring_history_file = '.yankring_history_file'
+" function! YRRunAfterMaps()
+"     nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
+" endfunction
 
 " dragvisuals
 vmap  <expr>  <LEFT>   DVB_Drag('left')
