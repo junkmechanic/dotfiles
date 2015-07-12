@@ -26,10 +26,6 @@
 	path = vim/bundle/repeat
 	url = git@github.com:tpope/vim-repeat.git
     ignore = dirty
-[submodule "vim/bundle/snipmate"]
-	path = vim/bundle/snipmate
-	url = git@github.com:msanders/snipmate.vim.git
-    ignore = dirty
 [submodule "vim/bundle/supertab"]
 	path = vim/bundle/supertab
 	url = git@github.com:ervandew/supertab.git
@@ -89,4 +85,16 @@
 [submodule "vim/bundle/vim-json"]
 	path = vim/bundle/vim-json
 	url = git@github.com:elzr/vim-json.git
+    ignore = dirty
+[submodule "vim/bundle/yankstack"]
+	path = vim/bundle/yankstack
+	url = git@github.com:maxbrunsfeld/vim-yankstack.git
+    ignore = dirty
+[submodule "vim/bundle/unite"]
+	path = vim/bundle/unite
+	url = git@github.com:Shougo/unite.vim.git
+    ignore = dirty
+[submodule "vim/bundle/jedi"]
+	path = vim/bundle/jedi
+	url = git@github.com:davidhalter/jedi-vim.git
     ignore = dirty
