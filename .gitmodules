@@ -98,3 +98,6 @@
 	path = vim/bundle/jedi
 	url = git@github.com:davidhalter/jedi-vim.git
     ignore = dirty
+[submodule "vim/bundle/vimproc"]
+	path = vim/bundle/vimproc
+	url = git@github.com:Shougo/vimproc.vim.git

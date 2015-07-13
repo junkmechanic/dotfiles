@@ -121,6 +121,9 @@ nnoremap <Leader>O DO<C-R>"<Esc>
 " map sort function to a key
 vnoremap <Leader>s :sort<CR>
 
+" open all buffers as tabs
+nnoremap <Leader>t :tab all<CR>
+
 " jump to the next occurance of the character under the cursor
 nnoremap <Leader>f yl:normal f<C-r>"<CR>
 
