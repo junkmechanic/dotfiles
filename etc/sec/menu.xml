@@ -59,7 +59,7 @@
       <item label="Task Manager (htop)">
         <action name="Execute">
           <command>
-            xfce4-terminal --command="htop"
+            xfce4-terminal --maximize --command="htop"
           </command>
         </action>
       </item>
@@ -148,19 +148,19 @@
     <separator/>
     <menu id="settings" label="Settings">
       <item label="Edit .vimrc">
-          <action name="Execute">
-          <command>xfce4-terminal --command="vim ~/.vimrc"</command>
-          </action>
+        <action name="Execute">
+          <command>xfce4-terminal --maximize --command="vim ~/.vimrc"</command>
+        </action>
       </item>
       <menu id="bash-settings" label="Bash">
         <item label="Edit .bashrc">
           <action name="Execute">
-            <command>xfce4-terminal --command="vim ~/.bashrc"</command>
+            <command>xfce4-terminal --maximize --command="vim ~/.bashrc"</command>
           </action>
         </item>
         <item label="Edit .inputrc">
           <action name="Execute">
-            <command>xfce4-terminal --command="vim ~/.inputrc"</command>
+            <command>xfce4-terminal --maximize --command="vim ~/.inputrc"</command>
           </action>
         </item>
       </menu>
@@ -168,21 +168,21 @@
         <item label="Edit menu.xml">
           <action name="Execute">
             <command>
-              xfce4-terminal --command="vim ~/.config/openbox/menu.xml"
+              xfce4-terminal --maximize --command="vim ~/.config/openbox/menu.xml"
             </command>
           </action>
         </item>
         <item label="Edit rc.xml">
           <action name="Execute">
             <command>
-              xfce4-terminal --command="vim ~/.config/openbox/rc.xml"
+              xfce4-terminal --maximize --command="vim ~/.config/openbox/rc.xml"
             </command>
           </action>
         </item>
         <item label="Edit autostart">
           <action name="Execute">
             <command>
-              xfce4-terminal --command="vim ~/.config/openbox/autostart"
+              xfce4-terminal --maximize --command="vim ~/.config/openbox/autostart"
             </command>
           </action>
         </item>
@@ -220,7 +220,7 @@
         <item label="Edit config file">
           <action name="Execute">
             <command>
-              xfce4-terminal --command="vim ~/.config/tint2/tint2rc"
+              xfce4-terminal --maximize --command="vim ~/.config/tint2/tint2rc"
             </command>
           </action>
         </item>
@@ -247,7 +247,7 @@
       <item label="Default Applications">
         <action name="Execute">
           <command>
-            xfce4-terminal --command="sudo update-alternatives --all"
+            xfce4-terminal --maximize --command="sudo update-alternatives --all"
           </command>
         </action>
       </item>
