@@ -53,7 +53,7 @@
       D: omnipresent (on all desktops).
   -->
     <keepBorder>yes</keepBorder>
-    <animateIconify>yes</animateIconify>
+    <animateIconify>no</animateIconify>
     <font place="ActiveWindow">
       <name>DejaVu Sans</name>
       <size>8</size>
@@ -452,6 +452,15 @@
           <name>Logout</name>
         </startupnotify>
         <command>cb-exit</command>
+      </action>
+    </keybind>
+    <keybind key="W-l">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Lock</name>
+        </startupnotify>
+        <command>xscreensaver-command -lock</command>
       </action>
     </keybind>
     <keybind key="W-C-Tab">
