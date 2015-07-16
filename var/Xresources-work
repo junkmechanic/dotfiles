@@ -59,4 +59,4 @@ rofi.font: dejavu 10
 rofi.padding: 3
 rofi.lines: 15
 rofi.borderwidth: 2
-rofi.ssh-command: {terminal} -e '{ssh-client} {host}'
+rofi.ssh-command: {terminal} --maximise -e '{ssh-client} {host}'
