@@ -49,6 +49,9 @@ inoremap <Leader><C-J> <Esc>A:<Esc>o
 " nnoremap j gj
 " nnoremap k gk
 
+" open help in a right vertical split
+autocmd FileType help wincmd L
+
 " mouse
 set mouse=a
 
@@ -63,6 +66,10 @@ set bs=2
 " excluded (check http://vimdoc.sourceforge.net/htmldoc/eval.html#mode())
 "nnoremap <Leader><CR> O<Esc>
 nnoremap <CR> o<Esc>
+" Since the quickfix window is not modifiable, this mapping overwrites the
+" default quickfix <CR> behaviour to jump to the specified line/buffer. So the
+" following should help.
+autocmd FileType qf nunmap <CR>
 
 " search selected text
 vnoremap // y/<C-R>"<CR>
@@ -286,13 +293,25 @@ set nofoldenable
 
 "-----------------------------------------------------------------------------
 
+" Unite options
+let g:unite_source_history_yank_enable = 1
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()
+    imap <buffer> jj <Plug>(unite_insert_leave)
+    imap <buffer> qq <Plug>(unite_exit)
+endfunction
+nnoremap <leader>uf :Unite file_rec/async<CR>
+nnoremap <leader>uy :Unite history/yank<CR>
+nnoremap <leader>ul :Unite -start-insert locate<CR>
+nnoremap <leader>/ :Unite -start-insert line<CR>
+
 " SuperTab options
 " au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 
 " jedi-vim options
 let g:jedi#use_splits_not_buffers = "right"
-let g:jedi#usages_command = "<leader>u"
+let g:jedi#usages_command = "<leader><leader>u"
 let g:jedi#show_call_signatures = "2"
 set noshowmode
 

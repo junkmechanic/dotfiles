@@ -350,6 +350,15 @@
       </action>
     </keybind>
     <!-- Keybindings for running applications -->
+    <keybind key="F12">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Drop Down Terminal</name>
+        </startupnotify>
+        <command>xfce4-terminal --drop-down</command>
+      </action>
+    </keybind>
     <keybind key="A-F2">
       <action name="Execute">
         <startupnotify>

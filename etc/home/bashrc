@@ -225,6 +225,9 @@ source ~/bin/bd-completion
 # auto-corrected.
 shopt -s autocd cdspell
 
+# Activating fzf
+source ~/.fzf.bash
+
 # convenient cd -- function
 # PLEASE MAKE SURE THIS IS THE LAST LINE IN THIS FILE
 source ~/bin/acd_func.sh

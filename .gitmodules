@@ -101,3 +101,8 @@
 [submodule "vim/bundle/vimproc"]
 	path = vim/bundle/vimproc
 	url = git@github.com:Shougo/vimproc.vim.git
+    ignore = dirty
+[submodule "vim/bundle/unite-locate"]
+	path = vim/bundle/unite-locate
+	url = git@github.com:ujihisa/unite-locate.git
+    ignore = dirty
