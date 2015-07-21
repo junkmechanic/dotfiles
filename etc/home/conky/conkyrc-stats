@@ -16,7 +16,7 @@
 ##############################################
 background yes
 use_xft yes
-xftfont HandelGotD:size=8
+xftfont DejaVuSans:size=8
 xftalpha 0.5
 update_interval 2.0
 total_run_times 0
@@ -43,10 +43,10 @@ cpu_avg_samples 2
 override_utf8_locale no
 
 TEXT
-CPU1 $alignr ${cpu cpu0}%
-${cpugraph cpu0}
-CPU2 $alignr ${cpu cpu1}%
-${cpugraph cpu1}
+# CPU1 $alignr ${cpu cpu0}%
+${cpugraph cpu0 25,120}  ${cpugraph cpu1 25,120}
+# CPU2 $alignr ${cpu cpu1}%
+${cpugraph cpu2 25,120}  ${cpugraph cpu3 25,120}
 MEM $alignc $mem / $memmax $alignr $memperc%
 $memgraph
 $membar
@@ -58,29 +58,30 @@ ${fs_bar /}
 ${fs_bar /home}
 /boot $alignc ${fs_used /boot} / ${fs_size /boot} $alignr ${fs_free_perc /boot}%
 ${fs_bar /boot}
+# $hr
+# Total Processes $alignr $processes
+# Running Processes $alignr $running_processes
+# Running Threads $alignr $running_threads
 $hr
-Total Processes $alignr $processes
-Running Processes $alignr $running_processes
-Running Threads $alignr $running_threads
-$hr
-#$alignc CPU
-#NAME $alignr PID    CPU   MEM
+# $alignc CPU
+# NAME $alignr PID    CPU   MEM
 ${top name 1} $alignr ${top pid 1}  ${top cpu 1}  ${top mem 1}
 ${top name 2} $alignr ${top pid 2}  ${top cpu 2}  ${top mem 2}
 ${top name 3} $alignr ${top pid 3}  ${top cpu 3}  ${top mem 3}
-${top name 4} $alignr ${top pid 4}  ${top cpu 4}  ${top mem 4}
+# ${top name 4} $alignr ${top pid 4}  ${top cpu 4}  ${top mem 4}
+# ${top name 5} $alignr ${top pid 5}  ${top cpu 5}  ${top mem 5}
 $hr
-#$alignc MEM
-#NAME $alignr PID    CPU   MEM
+# $alignc MEM
+# NAME $alignr PID    CPU   MEM
 ${top_mem name 1} $alignr ${top_mem pid 1}  ${top_mem cpu 1}  ${top_mem mem 1}
 ${top_mem name 2} $alignr ${top_mem pid 2}  ${top_mem cpu 2}  ${top_mem mem 2}
 ${top_mem name 3} $alignr ${top_mem pid 3}  ${top_mem cpu 3}  ${top_mem mem 3}
-${top_mem name 4} $alignr ${top_mem pid 4}  ${top_mem cpu 4}  ${top_mem mem 4}
+# ${top_mem name 4} $alignr ${top_mem pid 4}  ${top_mem cpu 4}  ${top_mem mem 4}
+# ${top_mem name 5} $alignr ${top_mem pid 5}  ${top_mem cpu 5}  ${top_mem mem 5}
 $hr
 Total Uptime $alignr $uptime
 $hr
-${if_existing /sys/class/net/wlan0/operstate up} # if the wlan0 interface is up
-Inbound $alignr ${downspeed wlan0}
+${if_existing /sys/class/net/wlan0}Inbound $alignr ${downspeed wlan0}
 ${downspeedgraph wlan0}
 Outbound $alignr ${upspeed wlan0}
 ${upspeedgraph wlan0}
@@ -93,24 +94,16 @@ Inbound $alignr ${downspeed eth0}
 ${downspeedgraph eth0}
 Outbound $alignr ${upspeed eth0}
 ${upspeedgraph eth0}
-IP Address $alignr ${addr eth0}
-${else} ${endif} ${endif}
-$if_mpd_playing
+IP Address $alignr ${addr eth0}${else}${endif}${endif}
+$hr${if_mpd_playing}
 $mpd_artist
-$mpd_title
+$mpd_track - $mpd_title
+$mpd_album
 $mpd_bar
 $mpd_status$alignr$mpd_elapsed/$mpd_length
-$endif
-## Shortcuts - not on display
-#Alt+F2$alignr Run Dialog
-#Alt+F3$alignr Alt Menu
-#Ctrl+Alt+t$alignr Terminal
-#Super+space$alignr Main Menu
-#Super+e$alignr Editor
-#Super+w$alignr Web Browser
-#Super+g$alignr Graphics Editor
-#Super+v$alignr Volume Control
-#Super+x$alignr Logout
-#Super+d$alignr Toggle Show Desktop
-#Super+Tab$alignr Show All Windows Menu
-#Ctrl+Alt+l$alignr Indicate Caps/Num Lock
+${endif}$hr${if_running spotify}
+${exec sp current | grep -i artist | cut -d':'  -f1 --complement | sed 's/^ *//'}
+${exec sp current | grep -i album | cut -d':'  -f1 --complement | sed 's/^ *//'}
+${exec sp current | grep -i title | cut -d':'  -f1 --complement | sed 's/^ *//'}
+${exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player string:PlaybackStatus | grep variant | cut -d'"' -f2}
+$hr

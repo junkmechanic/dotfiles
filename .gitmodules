@@ -26,10 +26,6 @@
 	path = vim/bundle/repeat
 	url = git@github.com:tpope/vim-repeat.git
     ignore = dirty
-[submodule "vim/bundle/snipmate"]
-	path = vim/bundle/snipmate
-	url = git@github.com:msanders/snipmate.vim.git
-    ignore = dirty
 [submodule "vim/bundle/supertab"]
 	path = vim/bundle/supertab
 	url = git@github.com:ervandew/supertab.git
@@ -78,7 +74,35 @@
 	path = vim/bundle/dragvisuals.vim
 	url = https://github.com/shinokada/dragvisuals.vim.git
     ignore = dirty
-[submodule "vim/bundle/yankring"]
-	path = vim/bundle/yankring
-	url = https://github.com/vim-scripts/YankRing.vim.git
+[submodule "vim/bundle/easymotion"]
+	path = vim/bundle/easymotion
+	url = git@github.com:Lokaltog/vim-easymotion.git
+    ignore = dirty
+[submodule "vim/bundle/targets.vim"]
+	path = vim/bundle/targets.vim
+	url = git@github.com:wellle/targets.vim.git
+    ignore = dirty
+[submodule "vim/bundle/vim-json"]
+	path = vim/bundle/vim-json
+	url = git@github.com:elzr/vim-json.git
+    ignore = dirty
+[submodule "vim/bundle/yankstack"]
+	path = vim/bundle/yankstack
+	url = git@github.com:maxbrunsfeld/vim-yankstack.git
+    ignore = dirty
+[submodule "vim/bundle/unite"]
+	path = vim/bundle/unite
+	url = git@github.com:Shougo/unite.vim.git
+    ignore = dirty
+[submodule "vim/bundle/jedi"]
+	path = vim/bundle/jedi
+	url = git@github.com:davidhalter/jedi-vim.git
+    ignore = dirty
+[submodule "vim/bundle/vimproc"]
+	path = vim/bundle/vimproc
+	url = git@github.com:Shougo/vimproc.vim.git
+    ignore = dirty
+[submodule "vim/bundle/unite-locate"]
+	path = vim/bundle/unite-locate
+	url = git@github.com:ujihisa/unite-locate.git
     ignore = dirty

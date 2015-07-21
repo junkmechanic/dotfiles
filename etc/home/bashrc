@@ -111,6 +111,8 @@ alias xclip="xclip -selection clipboard"
 alias lgrep='ll | grep'
 alias bd=". bd -s"
 alias gt='cd $(git rev-parse --show-toplevel 2>/dev/null || (echo "."; echo "Not within a git repository" >&2))'
+alias mypubip='curl http://ipecho.net/plain ; echo'
+alias dpgrep='dpkg -l | grep'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -150,10 +152,10 @@ function path(){
 . /home/ankur/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 
 # quickly run apt-get updates
-function apt-upd(){
-    sudo apt-get update
-    sudo apt-get dist-upgrade
-}
+# function apt-upd(){
+#     sudo apt-get update
+#     sudo apt-get dist-upgrade
+# }
 
 ## changing the time zone
 #export TZ="/usr/share/zoneinfo/Asia/Singapore"
@@ -202,25 +204,7 @@ latest() {
 
 # Number of files in a directory (only an estimate. subtract 3 for closer
 # estimate. also hidden files and directories are included)
-count (){ ll | wc -l;  }
-
-# this is to cycle through folders with tab completion
-#[[ $- = *i* ]] && bind TAB:menu-complete
-# this is to include shift-tab functionality as well
-# type ctrl+shift+v and then shift+tab, to reveal the escape sequence that the
-# terminal sends for shift+tab. You ll get ^[[Z where the first part is ' ^[ '
-# which is the escape character itself (bash in linux) and ' [Z ' is for
-# shift+tab. So thats what is to be mentioned here
-#bind "\e[Z":complete
-# Well as it turns out, it is better done in the inputrc
-
-# Shift to /etc/environment
-#export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
-
-# Activate Vi Mode
-# Not set here. It is better to set it in inputrc so that any program that uses
-# readline can have vi mode bindings.
-#set editing-mode vi
+count (){ TMP_COUNT_LL=$(ll | wc -l); echo $(($TMP_COUNT_LL - 3)); }
 
 # Use this function to set the title of the tab (in terminator, and maybe the
 # window in other emulators like gnome terminal).
@@ -240,6 +224,9 @@ source ~/bin/bd-completion
 # Simply writing a directory name will cd into it. Misspelling dir would be
 # auto-corrected.
 shopt -s autocd cdspell
+
+# Activating fzf
+source ~/.fzf.bash
 
 # convenient cd -- function
 # PLEASE MAKE SURE THIS IS THE LAST LINE IN THIS FILE

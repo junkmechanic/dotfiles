@@ -5,11 +5,15 @@ autocmd! bufwritepost .vimrc source %
 call pathogen#infect()
 call pathogen#helptags()
 
+" yankstack compatibility with custom yank maps
+call yankstack#setup()
+
 " Better copy & paste
-" When you want to paste large blocks of code into vim, press F2 before you
-" paste. At the bottom you should see ``-- INSERT (paste) --``.
 set pastetoggle=<F2>
 set clipboard=unnamedplus
+
+" automatically change window's cwd to file's dir
+set autochdir
 
 " A logical mapping for 'Y'
 nnoremap Y y$
@@ -25,27 +29,50 @@ vnoremap ; :
 nnoremap : ;
 vnoremap : ;
 
-" This beauty remembers where you were the last time you edited the file, and
-" returns to the same position.
+" remember where you were the last time you edited the file, and return to the
+" same position.
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
 " Quick movements in insert mode <Potentially dangerous>
-inoremap II <Esc>I
-inoremap AA <Esc>A
-inoremap OO <Esc>O
-inoremap Oo <Esc>o
-inoremap CC <Esc>C
-inoremap SS <Esc>S
-inoremap DD <Esc>dd
+inoremap Ii <Esc>I
+inoremap Aa <Esc>A
+inoremap Oo <Esc>O
+inoremap Cc <Esc>C
+inoremap Ss <Esc>S
+inoremap Dd <Esc>dd
 inoremap Uu <Esc>u
+inoremap <C-J> <Esc>o
+" Python specific mapping
+inoremap <Leader><C-J> <Esc>A:<Esc>o
 
 " to wrap over to the next or previous line
 " nnoremap j gj
 " nnoremap k gk
 
-" Mouse and backspace
-set mouse=a  " on OSX press ALT and click
-set bs=2     " make backspace behave like normal again
+" open help in a right vertical split
+autocmd FileType help wincmd L
+
+" mouse
+set mouse=a
+
+" make backspace behave like normal again
+set bs=2
+
+" Open a new line and stay in Normal mode. (Gives a meaning to Enter as well)
+" It has been reported that this might interfere with the command line normal
+" mode. Since I havent faced any problems with it as yet, I dont mind keeping
+" this mapping. In case, that ever needs to be done, possibly the expr should
+" be used (see below for example) along with the modes that need to be
+" excluded (check http://vimdoc.sourceforge.net/htmldoc/eval.html#mode())
+"nnoremap <Leader><CR> O<Esc>
+nnoremap <CR> o<Esc>
+" Since the quickfix window is not modifiable, this mapping overwrites the
+" default quickfix <CR> behaviour to jump to the specified line/buffer. So the
+" following should help.
+autocmd FileType qf nunmap <CR>
+
+" search selected text
+vnoremap // y/<C-R>"<CR>
 
 " Bind nohl
 " Removes highlight of your last search
@@ -59,7 +86,10 @@ noremap <C-Z> :update<CR>
 vnoremap <C-Z> <C-C>:update<CR>
 inoremap <C-Z> <C-O>:update<CR>
 
-" Delete the selected text, paste and retain text from the default register
+" Replace the current 'word' (variable name) with the content of the defualt
+" register and retain that in the default register. You can also select the
+" text that needs to be replaced.
+nnoremap <leader>p viw"_dP
 vnoremap <leader>p "_dP
 
 " Paste the selected text after the last line of the selected text
@@ -79,25 +109,17 @@ noremap <Leader>E :q!<CR>    " Quit current window without saving
 noremap <Leader>q :qa<CR>    " Quit all windows
 noremap <Leader>Q :qa!<CR>   " Quit all windows window saving
 
-" bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
-" Every unnecessary keystroke that can be saved is good for your health :)
+" bind Ctrl+<movement> keys to move around the windows
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
 
-" now you can use Ctrl+w then h/j/k/l for shifting splits around which
-" previously had to be used with shift.
+" now you can use Ctrl+w then h/j/k/l for shifting splits around
 nnoremap <c-w>j <c-w>J
 nnoremap <c-w>k <c-w>K
 nnoremap <c-w>l <c-w>L
 nnoremap <c-w>h <c-w>H
-
-" easier moving between tabs
-nnoremap <Leader>n <esc>:tabprevious<CR>
-nnoremap <Leader>m <esc>:tabnext<CR>
-nnoremap <Leader><Leader>n <esc>:tabfirst<CR>
-nnoremap <Leader><Leader>m <esc>:tablast<CR>
 
 " Shift the rest of the line up or down
 nnoremap <Leader>o Do<C-R>"<Esc>
@@ -105,6 +127,9 @@ nnoremap <Leader>O DO<C-R>"<Esc>
 
 " map sort function to a key
 vnoremap <Leader>s :sort<CR>
+
+" open all buffers as tabs
+nnoremap <Leader>t :tab all<CR>
 
 " jump to the next occurance of the character under the cursor
 nnoremap <Leader>f yl:normal f<C-r>"<CR>
@@ -116,13 +141,42 @@ while c <= 'z'
   exec "imap \e".c." <A-".c.">"
   let c = nr2char(1+char2nr(c))
 endw
-set ttimeout ttimeoutlen=50
+let c='A'
+while c <= 'Z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+let c='0'
+while c <= '9'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+set ttimeout ttimeoutlen=5
 
 " a saner approach to horizontal scrolling
 " <C-l> is also used for refershing the screen. So might have to add that later
 " if you run into screnios where refereshing the screen is necessary
 nnoremap <A-l> zl
 nnoremap <A-h> zh<c-h>
+
+" easier tab navigation
+" moving to adjacent tabs
+nnoremap <Leader>n <esc>:tabprevious<CR>
+nnoremap <Leader>m <esc>:tabnext<CR>
+nnoremap <Leader><Leader>n <esc>:tabfirst<CR>
+nnoremap <Leader><Leader>m <esc>:tablast<CR>
+" jumping tabs by number
+let n = 1
+while n <= 9
+    exec 'nnoremap <A-' . n . '> ' . n . 'gt'
+    let n = n + 1
+endwhile
+
+" lets go wild
+set wildmenu
+set wildmode=full
 
 " easier moving of code blocks
 " Try to go into visual mode (v), then select several lines of code here and
@@ -195,7 +249,6 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=233
 
 " Multiple cursors setup
-" For more info goto https://github.com/terryma/vim-multiple-cursors
 let g:multi_cursor_use_default_mapping=0
 " Default mapping
 let g:multi_cursor_next_key='<C-n>'
@@ -205,74 +258,62 @@ let g:multi_cursor_quit_key='<Esc>'
 " Map start key separately from next key
 let g:multi_cursor_start_key='<F6>'
 
-" Using powerline instead of vim-powerline
-" pip install --user git+git://github.com/Lokaltog/powerline
-" note: make this change after installing powerline using pip in home dir.
+" powerline
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
 set laststatus=2
-" set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 " Settings for ctrlp
-" cd ~/.vim/bundle
-" git clone https://github.com/kien/ctrlp.vim.git
 let g:ctrlp_max_height = 15
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
 
 " Settings for python-mode
-" cd ~/.vim/bundle
-" git clone https://github.com/klen/python-mode
-" not available for python3 yet
-" remember to run RopeOpenProject which will creat a .ropeproject folder in
-" which you would find a config file you can specify the paths
+let g:pymode_rope = 0
 let g:pymode_lint_ignore = "E501,E302"
-noremap <Leader>g :call RopeGotoDefinition()<CR>
-let ropevim_enable_shortcuts = 1
-let g:pymode_rope_goto_def_newwin = "vnew"
-let g:pymode_rope_extended_complete = 1
 let g:pymode_breakpoint = 0
 let g:pymode_syntax = 1
 let g:pymode_syntax_builtin_objs = 0
 let g:pymode_syntax_builtin_funcs = 0
-let g:pymode_rope_guess_project = 0
 let g:pymode_lint_mccabe_complexity = 12
+let g:pymode_run_bind = "<S-e>"
 noremap <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
-" Better navigating through omnicomplete option list
-" See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
 set completeopt=longest,menuone
-"function! OmniPopup(action)
-"    if pumvisible()
-"         if a:action == 'j'
-"            return "\<C-N>"
-"        elseif a:action == 'k'
-"            return "\<C-P>"
-"        endif
-"    endif
-"    return a:action
-"endfunction
-"
-"inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
-"inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 
 " Python folding
-" mkdir -p ~/.vim/ftplugin
-" wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
 set nofoldenable
 
-" The following is an example of how to map to a spacific mode among the visual
+" The following is an example of how to map to a specific mode among the visual
 " modes. Here I have mapped only to the Visual-Block mode using the ternary
 " expr1.
 "xnoremap <expr> <leader>c mode() ==# "\<C-V>" ? ":s/^/#\<CR>:nohl<CR>" : ""
 
 "-----------------------------------------------------------------------------
 
+" Unite options
+let g:unite_source_history_yank_enable = 1
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()
+    imap <buffer> jj <Plug>(unite_insert_leave)
+    imap <buffer> qq <Plug>(unite_exit)
+endfunction
+nnoremap <leader>uf :Unite file_rec/async<CR>
+nnoremap <leader>uy :Unite history/yank<CR>
+nnoremap <leader>ul :Unite -start-insert locate<CR>
+nnoremap <leader>/ :Unite -start-insert line<CR>
+
 " SuperTab options
-au FileType python set omnifunc=pythoncomplete#Complete
+" au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
+
+" jedi-vim options
+let g:jedi#use_splits_not_buffers = "right"
+let g:jedi#usages_command = "<leader><leader>u"
+let g:jedi#show_call_signatures = "2"
+set noshowmode
 
 " ConqueShell options
 let g:ConqueTerm_FastMode = 0
@@ -341,6 +382,7 @@ onoremap <silent> <leader>J :call NextIndent(1, 1, 1, 1)<CR>
 
 " For autopairs flymode activation
 let g:AutoPairsFlyMode = 1
+let g:AutoPairsShortcutToggle = ''
 " The shortcuts for autopairs
 " <CR>  : Insert new indented line after return if cursor in blank brackets or quotes.
 " <BS>  : Delete brackets in pair
@@ -350,15 +392,16 @@ let g:AutoPairsFlyMode = 1
 " <M-b> : BackInsert (g:AutoPairsShortcutBackInsert)
 
 " YankRing settings
-nnoremap <F11> :YRShow<CR>
-    let g:yankring_manual_clipboard_check = 1
-    let g:yankring_replace_n_pkey = ',['
-    let g:yankring_replace_n_nkey = ',]'
-    let g:yankring_ignore_operator = 'g~ gu gU ! = gq g? > < zf g@ o O'
-    let g:yankring_n_keys = 'D x X'
-function! YRRunAfterMaps()
-    nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
-endfunction
+" nnoremap <F11> :YRShow<CR>
+"     let g:yankring_manual_clipboard_check = 1
+"     let g:yankring_replace_n_pkey = ',['
+"     let g:yankring_replace_n_nkey = ',]'
+"     let g:yankring_ignore_operator = 'g~ gu gU ! = gq g? > < zf g@ o O'
+"     let g:yankring_n_keys = 'D x X'
+"     let g:yankring_history_file = '.yankring_history_file'
+" function! YRRunAfterMaps()
+"     nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
+" endfunction
 
 " dragvisuals
 vmap  <expr>  <LEFT>   DVB_Drag('left')

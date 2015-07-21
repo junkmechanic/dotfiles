@@ -79,13 +79,13 @@ cb-cowpowers &
 
 ## Run the conky
 (sleep 10s && conky -q -c ~/.conky/conkyrc-stats) &
-(sleep 10s && conky -q -c ~/.conky/conkyrc-clock) &
+# (sleep 10s && conky -q -c ~/.conky/conkyrc-clock) &
 
 ## Change keyboard maps
 xmodmap ~/.Xmodmap &
 
 ## Guake
-(sleep 40s && guake) &
+(sleep 50s && guake) &
 
 ## Script for showdesktop
 ~/bin/showdesktop.sh &

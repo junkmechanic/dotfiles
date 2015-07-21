@@ -28,22 +28,22 @@
     <center>yes</center>
     <!-- whether to place windows in the center of the free area found or
        the top left corner -->
-    <monitor>Any</monitor>
+    <monitor>Active</monitor>
     <!-- with Smart placement on a multi-monitor system, try to place new windows
-         on: 'Any' - any monitor, 'Mouse' - where the mouse is, 'Active' - where
-         the active window is, 'Primary' - only on the primary monitor -->
-    <primaryMonitor>1</primaryMonitor>
+       on: 'Any' - any monitor, 'Mouse' - where the mouse is, 'Active' - where
+       the active window is, 'Primary' - only on the primary monitor -->
+    <primaryMonitor>Active</primaryMonitor>
     <!-- The monitor where Openbox should place popup dialogs such as the
-         focus cycling popup, or the desktop switch popup.  It can be an index
-         from 1, specifying a particular monitor.  Or it can be one of the
-         following: 'Mouse' - where the mouse is, or
-                    'Active' - where the active window is -->
+       focus cycling popup, or the desktop switch popup.  It can be an index
+       from 1, specifying a particular monitor.  Or it can be one of the
+       following: 'Mouse' - where the mouse is, or
+                  'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>GAIAPRO</name>
-    <titleLayout>DSLIMC</titleLayout>
+    <name>Moka</name>
+    <titleLayout>DNLIMC</titleLayout>
     <!--
-      avaible characters are NDSLIMC, each can occur at most once.
+      available characters are NDSLIMC, each can occur at most once.
       N: window icon
       L: window label (AKA title).
       I: iconify
@@ -56,16 +56,16 @@
     <animateIconify>no</animateIconify>
     <font place="ActiveWindow">
       <name>DejaVu Sans</name>
-      <size>9</size>
+      <size>8</size>
       <!-- font size in points -->
-      <weight>Normal</weight>
+      <weight>Bold</weight>
       <!-- 'bold' or 'normal' -->
       <slant>Normal</slant>
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="InactiveWindow">
-      <name>DejaVu Sans Ultra-Light</name>
-      <size>9</size>
+      <name>DejaVu Sans</name>
+      <size>8</size>
       <!-- font size in points -->
       <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
@@ -73,7 +73,7 @@
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="MenuHeader">
-      <name>DejaVu Sans Bold Semi-Condensed</name>
+      <name>DejaVu Sans</name>
       <size>9</size>
       <!-- font size in points -->
       <weight>Normal</weight>
@@ -94,13 +94,13 @@
       <name>DejaVu Sans</name>
       <size>9</size>
       <!-- font size in points -->
-      <weight>Normal</weight>
+      <weight>Bold</weight>
       <!-- 'bold' or 'normal' -->
       <slant>Normal</slant>
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="InactiveOnScreenDisplay">
-      <name>DejaVu Sans Ultra-Light</name>
+      <name>DejaVu Sans</name>
       <size>9</size>
       <!-- font size in points -->
       <weight>Normal</weight>
@@ -121,37 +121,37 @@
     <number>3</number>
     <firstdesk>1</firstdesk>
     <names>
-      <name>Primary</name>
-      <name>Secondary</name>
-      <name>Tertiary</name>
+      <name>1</name>
+      <name>2</name>
+      <name>3</name>
       <name>4</name>
     </names>
     <popupTime>875</popupTime>
     <!-- The number of milliseconds to show the popup for when switching
-         desktops.  Set this to 0 to disable the popup. -->
+       desktops.  Set this to 0 to disable the popup. -->
   </desktops>
   <resize>
     <drawContents>yes</drawContents>
     <popupShow>Nonpixel</popupShow>
     <!-- 'Always', 'Never', or 'Nonpixel' (xterms and such) -->
     <popupPosition>Center</popupPosition>
-    <!-- 'Center' or 'Top' -->
+    <!-- 'Center', 'Top', or 'Fixed' -->
     <popupFixedPosition>
       <!-- these are used if popupPosition is set to 'Fixed' -->
       <x>10</x>
       <!-- positive number for distance from left edge, negative number for
-           distance from right edge, or 'Center' -->
+         distance from right edge, or 'Center' -->
       <y>10</y>
       <!-- positive number for distance from top edge, negative number for
-           distance from bottom edge, or 'Center' -->
+         distance from bottom edge, or 'Center' -->
     </popupFixedPosition>
   </resize>
   <!-- You can reserve a portion of your screen where windows will not cover when
-       they are maximized, or when they are initially placed.
-       Many programs reserve space automatically, but you can use this in other
-       cases. -->
+     they are maximized, or when they are initially placed.
+     Many programs reserve space automatically, but you can use this in other
+     cases. -->
   <margins>
-    <top>1</top>
+    <top>0</top>
     <bottom>0</bottom>
     <left>0</left>
     <right>0</right>
@@ -286,32 +286,6 @@
     <keybind key="A-S-w">
       <action name="Iconify"/>
     </keybind>
-    <!-- Keybinding for pause/play and other for ncmpcpp -->
-    <keybind key="XF86AudioNext">
-      <action name="Execute">
-        <command>ncmpcpp next</command>
-      </action>
-    </keybind>
-    <keybind key="XF86AudioPrev">
-      <action name="Execute">
-        <command>ncmpcpp prev</command>
-      </action>
-    </keybind>
-    <keybind key="XF86AudioPlay">
-      <action name="Execute">
-        <command>ncmpcpp toggle</command>
-      </action>
-    </keybind>
-    <keybind key="XF86AudioStop">
-      <action name="Execute">
-        <command>ncmpcpp stop</command>
-      </action>
-    </keybind>
-    <keybind key="C-A-p">
-      <action name="Execute">
-        <command>spotify_playback</command>
-      </action>
-    </keybind>
     <!-- Keybindings for window switching -->
     <keybind key="A-Tab">
       <action name="NextWindow">
@@ -376,6 +350,15 @@
       </action>
     </keybind>
     <!-- Keybindings for running applications -->
+    <keybind key="F12">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Drop Down Terminal</name>
+        </startupnotify>
+        <command>xfce4-terminal --drop-down</command>
+      </action>
+    </keybind>
     <keybind key="A-F2">
       <action name="Execute">
         <startupnotify>
@@ -392,29 +375,6 @@
           <name>dmenu-bind</name>
         </startupnotify>
         <command>dmenu_run -b</command>
-        <!--<command>~/.config/dmenu/dmenu-bind.sh</command> -->
-      </action>
-    </keybind>
-    <!-- Keybindings for running applications -->
-    <!--<keybind key="C-F12">
-      <action name="Execute">
-        <enabled>true</enabled>
-        <name>Xfce4-Terminal Drop Down</name>
-        <command>xfce4-terminal -|-drop-down</command>
-      </action>
-    </keybind>-->
-    <keybind key="A-F12">
-      <action name="Execute">
-        <enabled>true</enabled>
-        <name>Skippy</name>
-        <command>skippy-xd</command>
-      </action>
-    </keybind>
-    <keybind key="A-F11">
-      <action name="Execute">
-        <enabled>true</enabled>
-        <name>MPD Album change</name>
-        <command>albumchange</command>
       </action>
     </keybind>
     <keybind key="A-F10">
@@ -422,13 +382,6 @@
         <enabled>true</enabled>
         <name>Rofi ssh menu</name>
         <command>rofi -show ssh</command>
-      </action>
-    </keybind>
-    <keybind key="A-F9">
-      <action name="Execute">
-        <enabled>true</enabled>
-        <name>Clerk</name>
-        <command>clerk</command>
       </action>
     </keybind>
     <keybind key="A-F1">
@@ -451,18 +404,18 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Terminal</name>
+          <name>Terminal (Tmux)</name>
         </startupnotify>
-        <command>terminator -m</command>
+        <command>xfce4-terminal --maximize -e "bash --rcfile ~/.files/etc/work/bashrc-tmux"</command>
       </action>
     </keybind>
-    <keybind key="C-A-i">
+    <keybind key="W-t">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>ipython qtconsole</name>
+          <name>Terminal</name>
         </startupnotify>
-        <command>ipython qtconsole</command>
+        <command>xfce4-terminal --maximize</command>
       </action>
     </keybind>
     <keybind key="W-w">
@@ -474,67 +427,13 @@
         <command>x-www-browser</command>
       </action>
     </keybind>
-    <keybind key="W-S-w">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>Alt Web Browser (Iceweasel)</name>
-        </startupnotify>
-        <command>iceweasel</command>
-      </action>
-    </keybind>
-    <keybind key="C-A-n">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>qmpdclient</name>
-        </startupnotify>
-        <command>qmpdclient</command>
-      </action>
-    </keybind>
-    <keybind key="W-n">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>ncmpcpp</name>
-        </startupnotify>
-        <command>terminator --command="ncmpcpp"</command>
-      </action>
-    </keybind>
-    <keybind key="W-C-w">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>wavemon</name>
-        </startupnotify>
-        <command>terminator --command="wavemon"</command>
-      </action>
-    </keybind>
-    <keybind key="W-l">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>Lock screen</name>
-        </startupnotify>
-        <command>cb-lock</command>
-      </action>
-    </keybind>
     <keybind key="W-e">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Editor</name>
+          <name>spacefm</name>
         </startupnotify>
-        <command>terminator --command="vim"</command>
-      </action>
-    </keybind>
-    <keybind key="W-m">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>Mediaplayer</name>
-        </startupnotify>
-        <command>vlc</command>
+        <command>spacefm</command>
       </action>
     </keybind>
     <keybind key="W-h">
@@ -543,7 +442,7 @@
           <enabled>true</enabled>
           <name>htop</name>
         </startupnotify>
-        <command>terminator --command="htop"</command>
+        <command>xfce4-terminal --command="htop"</command>
       </action>
     </keybind>
     <keybind key="W-v">
@@ -561,8 +460,16 @@
           <enabled>true</enabled>
           <name>Logout</name>
         </startupnotify>
-        <!--<command>cb-exit</command>-->
-        <command>oblogout</command>
+        <command>cb-exit</command>
+      </action>
+    </keybind>
+    <keybind key="W-l">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Lock</name>
+        </startupnotify>
+        <command>xscreensaver-command -lock</command>
       </action>
     </keybind>
     <keybind key="W-C-Tab">
@@ -573,26 +480,6 @@
     <keybind key="W-space">
       <action name="ShowMenu">
         <menu>root-menu</menu>
-      </action>
-    </keybind>
-    <keybind key="A-C-q">
-      <action name="ShowMenu">
-        <menu>root-menu</menu>
-      </action>
-    </keybind>
-    <!-- Changing monitor layout on the fly -->
-    <keybind key="XF86Launch7">
-      <action name="Execute">
-        <enabled>true</enabled>
-        <name>Single Monitor Config</name>
-        <command>~/.screenlayout/single_monitor.sh</command>
-      </action>
-    </keybind>
-    <keybind key="XF86WLAN">
-      <action name="Execute">
-        <enabled>true</enabled>
-        <name>Dual Monitor Config</name>
-        <command>~/.screenlayout/dual_monitor_inverted.sh</command>
       </action>
     </keybind>
     <!-- A bit of tiling -->
@@ -660,6 +547,7 @@
         <command>capsnum</command>
       </action>
     </keybind>
+    <!-- This has to be changed -->
     <keybind key="C-A-s">
       <action name="Execute">
         <startupnotify>
@@ -669,21 +557,11 @@
         <command>current_song</command>
       </action>
     </keybind>
-    <!--<keybind key="C-A-m">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>open_scisum</name>
-        </startupnotify>
-        <command>terminator -->
-    <!--working-directory=/home/ankur/devbench/scientific/scisumm</command>
-      </action>
-    </keybind> -->
   </keyboard>
   <mouse>
-    <dragThreshold>8</dragThreshold>
+    <dragThreshold>3</dragThreshold>
     <!-- number of pixels the mouse must move before a drag begins -->
-    <doubleClickTime>200</doubleClickTime>
+    <doubleClickTime>500</doubleClickTime>
     <!-- in milliseconds (1000 = 1 second) -->
     <screenEdgeWarpTime>400</screenEdgeWarpTime>
     <!-- Time before changing desktops when the pointer touches the edge of the
@@ -748,20 +626,11 @@
       </mousebind>
     </context>
     <context name="Titlebar">
-      <mousebind button="Left" action="Press">
-        <action name="Focus"/>
-        <action name="Raise"/>
-      </mousebind>
       <mousebind button="Left" action="Drag">
         <action name="Move"/>
       </mousebind>
       <mousebind button="Left" action="DoubleClick">
         <action name="ToggleMaximize"/>
-      </mousebind>
-      <mousebind button="Middle" action="Press">
-        <action name="Lower"/>
-        <action name="FocusToBottom"/>
-        <action name="Unfocus"/>
       </mousebind>
       <mousebind button="Up" action="Click">
         <action name="if">
@@ -781,13 +650,6 @@
             <action name="Unshade"/>
             <action name="Raise"/>
           </then>
-        </action>
-      </mousebind>
-      <mousebind button="Right" action="Press">
-        <action name="Focus"/>
-        <action name="Raise"/>
-        <action name="ShowMenu">
-          <menu>client-menu</menu>
         </action>
       </mousebind>
     </context>
@@ -811,11 +673,6 @@
       </mousebind>
     </context>
     <context name="Top">
-      <mousebind button="Left" action="Press">
-        <action name="Focus"/>
-        <action name="Raise"/>
-        <action name="Unshade"/>
-      </mousebind>
       <mousebind button="Left" action="Drag">
         <action name="Resize">
           <edge>top</edge>
@@ -823,10 +680,6 @@
       </mousebind>
     </context>
     <context name="Left">
-      <mousebind button="Left" action="Press">
-        <action name="Focus"/>
-        <action name="Raise"/>
-      </mousebind>
       <mousebind button="Left" action="Drag">
         <action name="Resize">
           <edge>left</edge>
@@ -834,10 +687,6 @@
       </mousebind>
     </context>
     <context name="Right">
-      <mousebind button="Left" action="Press">
-        <action name="Focus"/>
-        <action name="Raise"/>
-      </mousebind>
       <mousebind button="Left" action="Drag">
         <action name="Resize">
           <edge>right</edge>
@@ -845,19 +694,10 @@
       </mousebind>
     </context>
     <context name="Bottom">
-      <mousebind button="Left" action="Press">
-        <action name="Focus"/>
-        <action name="Raise"/>
-      </mousebind>
       <mousebind button="Left" action="Drag">
         <action name="Resize">
           <edge>bottom</edge>
         </action>
-      </mousebind>
-      <mousebind button="Middle" action="Press">
-        <action name="Lower"/>
-        <action name="FocusToBottom"/>
-        <action name="Unfocus"/>
       </mousebind>
       <mousebind button="Right" action="Press">
         <action name="Focus"/>
@@ -1060,7 +900,6 @@
     <!-- default menu file (or custom one in $HOME/.config/openbox/) -->
     <!-- system menu files on Debian systems -->
     <file>/var/lib/openbox/debian-menu.xml</file>
-    <file>debian-menu.xml</file>
     <file>menu.xml</file>
     <hideDelay>200</hideDelay>
     <!-- if a press-release lasts longer than this setting (in milliseconds), the
@@ -1077,7 +916,7 @@
        entry in parent menu
        if this is a negative value, then the delay is infinite and the
        submenu will not be hidden until a different submenu is opened -->
-    <applicationIcons>yes</applicationIcons>
+    <showIcons>yes</showIcons>
     <!-- controls if icons appear in the client-list-(combined-)menu -->
     <manageDesktops>yes</manageDesktops>
     <!-- show the manage desktops section in the client-list-(combined-)menu -->
@@ -1091,6 +930,8 @@
 
   <application name="the window's _OB_APP_NAME property (see obxprop)"
               class="the window's _OB_APP_CLASS property (see obxprop)"
+          groupname="the window's _OB_APP_GROUP_NAME property (see obxprop)"
+         groupclass="the window's _OB_APP_GROUP_CLASS property (see obxprop)"
                role="the window's _OB_APP_ROLE property (see obxprop)"
               title="the window's _OB_APP_TITLE property (see obxprop)"
                type="the window's _OB_APP_TYPE property (see obxprob)..
@@ -1109,7 +950,7 @@
   # order that they appear in this list
 
 
-    # each rule element can be left out or set to 'default' to specify to not
+    # each rule element can be left out or set to 'default' to specify to not 
     # change that attribute of the window
 
     <decor>yes</decor>
@@ -1126,13 +967,24 @@
       # applications who refuse to behave
       <x>center</x>
       # a number like 50, or 'center' to center on screen. use a negative number
-      # to start from the right (or bottom for <y>), ie -50 is 50 pixels from the
-      # right edge (or bottom).
+      # to start from the right (or bottom for <y>), ie -50 is 50 pixels from
+      # the right edge (or bottom). use 'default' to specify using value
+      # provided by the application, or chosen by openbox, instead.
       <y>200</y>
       <monitor>1</monitor>
       # specifies the monitor in a xinerama setup.
       # 1 is the first head, or 'mouse' for wherever the mouse is
     </position>
+
+    <size>
+      # the size to make the window.
+      <width>20</width>
+      # a number like 20, or 'default' to use the size given by the application.
+      # you can use fractions such as 1/2 or percentages such as 75% in which
+      # case the value is relative to the size of the monitor that the window
+      # appears on.
+      <height>30%</height>
+    </size>
 
     <focus>yes</focus>
     # if the window should try be given focus when it appears. if this is set
@@ -1164,14 +1016,6 @@
 
   # end of the example
 -->
-    <application name="gmessage">
-      <decor>no</decor>
-      <shade>no</shade>
-      <skip_pager>yes</skip_pager>
-      <skip_taskbar>yes</skip_taskbar>
-      <fullscreen>no</fullscreen>
-      <maximized>no</maximized>
-    </application>
     <application class="Gimp" name="gimp" role="gimp-toolbox" type="utility">
       <maximized>vertical</maximized>
     </application>
@@ -1184,19 +1028,5 @@
         <y>center</y>
       </position>
     </application>
-    <application class="Gimp" name="gimp-2.8" role="gimp-toolbox" type="utility">
-      <maximized>vertical</maximized>
-    </application>
-    <application class="Gimp" name="gimp-2.8" role="gimp-dock" type="utility">
-      <maximized>vertical</maximized>
-    </application>
-    <application class="Gimp" name="gimp-2.8" role="gimp-image-window" type="normal">
-      <position force="no">
-        <x>center</x>
-        <y>center</y>
-      </position>
-    </application>
-    <!--# This is to remove decorations from all windows [system wide]
-    # <application name="*"><decor>no</decor></application> -->
   </applications>
 </openbox_config>

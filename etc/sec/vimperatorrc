@@ -1,0 +1,28 @@
+source! /home/ankur/.vimperatorrc.local
+
+" vim: set ft=vimperator:
+
+let mapleader=','
+
+nnoremap : ;
+nnoremap ; :
+
+nnoremap <Leader>q :xall<CR>
+nnoremap <leader>e :tabclose<CR>
+nnoremap x :tabclose<CR>
+nnoremap X :undo<CR>
+
+nnoremap <leader>R :restart<CR>
+
+nnoremap d <C-d>
+nnoremap u <C-u>
+
+nnoremap J :tabprevious<CR>
+nnoremap K :tabnext<CR>
+nnoremap <C-n> :nohlsearch<CR>
+
+nnoremap yt :tabduplicate<CR>
+
+colorscheme darkness
+
+set editor=~/bin/run_vim
