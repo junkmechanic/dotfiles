@@ -52,6 +52,9 @@ inoremap <Leader><C-J> <Esc>A:<Esc>o
 " open help in a right vertical split
 autocmd FileType help wincmd L
 
+" open all new splits on the right
+set splitright
+
 " mouse
 set mouse=a
 

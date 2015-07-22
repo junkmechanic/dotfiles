@@ -12,4 +12,6 @@ mnoremap ; :
 nnoremap <Leader>e :quit<CR>
 mnoremap <Leader>e :quit<CR>
 
+colorscheme darkness
+
 set editor=~/bin/run_vim
