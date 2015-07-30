@@ -227,6 +227,9 @@ shopt -s autocd cdspell
 
 # Activating fzf
 source ~/.fzf.bash
+# Changed the behaviour of Alt_c function to the following:
+# In __fzf_cd__ function in ~/.fzf/shell/key-bindings.bash,
+#    dir=$(command \find -L /home/ankur/ -type d -print 2> /dev/null | $(__fzfcmd) +m) && printf 'cd %q' "$dir"
 
 # convenient cd -- function
 # PLEASE MAKE SURE THIS IS THE LAST LINE IN THIS FILE

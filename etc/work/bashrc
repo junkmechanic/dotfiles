@@ -103,6 +103,8 @@ alias vimo='vim -O'
 alias gitrso='git remote show origin'
 alias cat='cat -n'
 alias tmux='tmux -2'
+alias tmxgen='tmux new-session -s general'
+alias tmxnw='tmux new-session -s'
 alias dmesg='dmesg -T'
 alias rsync="rsync --partial --progress --rsh=ssh"
 alias psgrep="ps aux | grep"
@@ -199,6 +201,9 @@ shopt -s autocd cdspell
 source ~/bin/bd-completion
 
 source ~/.fzf.bash
+# Changed the behaviour of Alt_c function to the following:
+# In __fzf_cd__ function in ~/.fzf/shell/key-bindings.bash,
+#    dir=$(command \find -L /home/ankur/ -type d -print 2> /dev/null | $(__fzfcmd) +m) && printf 'cd %q' "$dir"
 
 source ~/bin/acd_func.sh
 
