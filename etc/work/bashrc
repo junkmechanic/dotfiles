@@ -88,33 +88,35 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alhF'
-alias la='ls -A'
-alias l='ls -CF'
-alias sl='ls'
-alias gits='git status'
-alias gitc='git commit'
+alias bd='. bd -s'
+alias cat='cat -n'
+alias cd..='cd ..'
+alias dmesg='dmesg -T'
+alias dpgrep='dpkg -l | grep'
 alias gita='git add'
+alias gitc='git commit'
 alias gitd='git diff'
 alias gitl='git log -1'
-alias cd..='cd ..'
-alias vimp='vim -p'
-alias vimo='vim -O'
 alias gitrso='git remote show origin'
-alias cat='cat -n'
+alias gits='git status'
+alias gitsbup='git submodule update --init --recursive'
+alias gt='cd $(git rev-parse --show-toplevel 2>/dev/null || (echo "."; echo "Not within a git repository" >&2))'
+alias l='ls -CF'
+alias la='ls -A'
+alias lgrep='ll | grep'
+alias ll='ls -alhF'
+alias mopidy='mopidy --save-debug-log'
+alias mypubip='curl http://ipecho.net/plain ; echo'
+alias pipgrep='pip freeze | grep'
+alias psgrep='ps aux | grep'
+alias rsync='rsync --partial --progress --rsh=ssh'
+alias sl='ls'
 alias tmux='tmux -2'
 alias tmxgen='tmux new-session -s general'
 alias tmxnw='tmux new-session -s'
-alias dmesg='dmesg -T'
-alias rsync="rsync --partial --progress --rsh=ssh"
-alias psgrep="ps aux | grep"
-alias mopidy="mopidy --save-debug-log"
-alias xclip="xclip -selection clipboard"
-alias lgrep='ll | grep'
-alias bd=". bd -s"
-alias gt='cd $(git rev-parse --show-toplevel 2>/dev/null || (echo "."; echo "Not within a git repository" >&2))'
-alias mypubip='curl http://ipecho.net/plain ; echo'
-alias dpgrep='dpkg -l | grep'
+alias vimo='vim -O'
+alias vimp='vim -p'
+alias xclip='xclip -selection clipboard'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

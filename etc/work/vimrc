@@ -52,6 +52,9 @@ inoremap <Leader><C-J> <Esc>A:<Esc>o
 " open help in a right vertical split
 autocmd FileType help wincmd L
 
+" open all new splits on the right
+set splitright
+
 " mouse
 set mouse=a
 
@@ -273,11 +276,11 @@ set wildignore+=*/coverage/*
 " Settings for python-mode
 let g:pymode_rope = 0
 let g:pymode_lint_ignore = "E501,E302"
+let g:pymode_lint_checkers = ['pyflakes', 'pep8']
 let g:pymode_breakpoint = 0
 let g:pymode_syntax = 1
 let g:pymode_syntax_builtin_objs = 0
 let g:pymode_syntax_builtin_funcs = 0
-let g:pymode_lint_mccabe_complexity = 12
 let g:pymode_run_bind = "<S-e>"
 noremap <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
