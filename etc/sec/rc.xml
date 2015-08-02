@@ -286,6 +286,12 @@
     <keybind key="A-S-w">
       <action name="Iconify"/>
     </keybind>
+    <!-- Keybinding for pause/play -->
+    <keybind key="XF86AudioPlay">
+      <action name="Execute">
+        <command>spop_playback</command>
+      </action>
+    </keybind>
     <!-- Keybindings for window switching -->
     <keybind key="A-Tab">
       <action name="NextWindow">
