@@ -92,8 +92,22 @@ inoremap <C-Z> <C-O>:update<CR>
 " Replace the current 'word' (variable name) with the content of the defualt
 " register and retain that in the default register. You can also select the
 " text that needs to be replaced.
-nnoremap <leader>p viw"_dP
-vnoremap <leader>p "_dP
+function! PasteWithRetain(mode)
+    if a:mode == 'n'
+        normal! viw"_d
+    elseif a:mode == 'v'
+        normal! gv"_d
+    else
+        echo "Unexpected Mode!!"
+    endif
+    if col(".") == col("$") - 1
+        normal! p
+    else
+        normal! P
+    endif
+endfunction
+nnoremap <leader>p :call PasteWithRetain('n')<CR>
+vnoremap <leader>p :call PasteWithRetain('v')<CR>
 
 " Paste the selected text after the last line of the selected text
 " This is useful in the visual line mode
@@ -305,6 +319,8 @@ function! s:unite_my_settings()
 endfunction
 nnoremap <leader>uf :Unite file_rec/async<CR>
 nnoremap <leader>uy :Unite history/yank<CR>
+nnoremap <leader>ug :Unite grep:.:-iHn:<C-R><C-W><CR>
+nnoremap <leader>uG :Unite grep<CR>
 nnoremap <leader>ul :Unite -start-insert locate<CR>
 nnoremap <leader>/ :Unite -start-insert line<CR>
 

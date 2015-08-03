@@ -106,3 +106,6 @@
 	path = vim/bundle/unite-locate
 	url = git@github.com:ujihisa/unite-locate.git
     ignore = dirty
+[submodule "vim/bundle/nerdtree-git-plugin"]
+	path = vim/bundle/nerdtree-git-plugin
+	url = git@github.com:Xuyuanp/nerdtree-git-plugin.git
