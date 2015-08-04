@@ -112,6 +112,8 @@ alias psgrep='ps aux | grep'
 alias rsync='rsync --partial --progress --rsh=ssh'
 alias sl='ls'
 alias tmux='tmux -2'
+alias tmxgen='tmux new-session -s general'
+alias tmxnw='tmux new-session -s'
 alias vimo='vim -O'
 alias vimp='vim -p'
 alias xclip='xclip -selection clipboard'
@@ -206,7 +208,7 @@ latest() {
 
 # Number of files in a directory (only an estimate. subtract 3 for closer
 # estimate. also hidden files and directories are included)
-count (){ TMP_COUNT_LL=$(ll | wc -l); echo $(($TMP_COUNT_LL - 3)); }
+count (){ TMP_COUNT_LL=$(ll $1 | wc -l); echo $(($TMP_COUNT_LL - 3)); }
 
 # Use this function to set the title of the tab (in terminator, and maybe the
 # window in other emulators like gnome terminal).

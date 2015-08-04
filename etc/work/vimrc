@@ -79,10 +79,8 @@ vnoremap // y/<C-R>"<CR>
 
 " Bind nohl
 " Removes highlight of your last search
-" ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
 noremap <C-n> :nohl<CR>
 vnoremap <C-n> :nohl<CR>
-"inoremap <C-n> :nohl<CR>
 
 " Quicksave command
 noremap <C-Z> :update<CR>
@@ -267,13 +265,11 @@ highlight ColorColumn ctermbg=233
 
 " Multiple cursors setup
 let g:multi_cursor_use_default_mapping=0
-" Default mapping
+let g:multi_cursor_start_key='<F6>'
 let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
-" Map start key separately from next key
-let g:multi_cursor_start_key='<F6>'
 
 " powerline
 python from powerline.vim import setup as powerline_setup
@@ -309,6 +305,13 @@ set nofoldenable
 "xnoremap <expr> <leader>c mode() ==# "\<C-V>" ? ":s/^/#\<CR>:nohl<CR>" : ""
 
 "-----------------------------------------------------------------------------
+
+" Start NerdTree automatically if vim is started without specifying any files
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Toggle NerdTree
+nnoremap <leader><C-n> :NERDTreeToggle<CR>
 
 " Unite options
 let g:unite_source_history_yank_enable = 1
