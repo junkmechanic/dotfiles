@@ -69,7 +69,7 @@ set bs=2
 " excluded (check http://vimdoc.sourceforge.net/htmldoc/eval.html#mode())
 "nnoremap <Leader><CR> O<Esc>
 nnoremap <CR> o<Esc>
-" Since the quickfix window is not modifiable, this mapping overwrites the
+" Since the quickfix window is not modifiable, the above mapping overwrites the
 " default quickfix <CR> behaviour to jump to the specified line/buffer. So the
 " following should help.
 autocmd FileType qf nunmap <CR>
@@ -77,9 +77,8 @@ autocmd FileType qf nunmap <CR>
 " search selected text
 vnoremap // y/<C-R>"<CR>
 
-" Bind nohl
 " Removes highlight of your last search
-noremap <C-n> :nohl<CR>
+nnoremap <C-n> :nohl<CR>
 vnoremap <C-n> :nohl<CR>
 
 " Quicksave command
@@ -99,7 +98,12 @@ function! PasteWithRetain(mode)
         echo "Unexpected Mode!!"
     endif
     if col(".") == col("$") - 1
-        normal! p
+        " if getline(".")[col(".") - 1] == " "
+        if strpart(getline("."), col(".") - 1, 1) == " "
+            normal! p
+        else
+            normal! P
+        endif
     else
         normal! P
     endif
@@ -319,13 +323,15 @@ autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
     imap <buffer> jj <Plug>(unite_insert_leave)
     imap <buffer> qq <Plug>(unite_exit)
+    nnoremap <buffer><expr> s unite#smart_map('v', unite#do_action('vsplit'))
 endfunction
-nnoremap <leader>uf :Unite file_rec/async<CR>
-nnoremap <leader>uy :Unite history/yank<CR>
-nnoremap <leader>ug :Unite grep:.:-iHn:<C-R><C-W><CR>
-nnoremap <leader>uG :Unite grep<CR>
-nnoremap <leader>ul :Unite -start-insert locate<CR>
-nnoremap <leader>/ :Unite -start-insert line<CR>
+nnoremap <leader>uf :Unite -buffer-name=file_rec -default-action=tabopen file_rec/async<CR>
+nnoremap <leader>uy :Unite -buffer-name=yank -default-action=append history/yank<CR>
+nnoremap <leader>ug :Unite -buffer-name=grep_auto -default-action=tabopen grep:.:-iHn:<C-R><C-W><CR>
+nnoremap <leader>uG :Unite -buffer-name=grep -default-action=tabopen grep<CR>
+nnoremap <leader>ur :UniteResume<CR>
+nnoremap <leader>ul :Unite -buffer-name=locate -default-action=tabopen -start-insert locate<CR>
+nnoremap <leader>/ :Unite -buffer-name=line -start-insert line<CR>
 
 " SuperTab options
 " au FileType python set omnifunc=pythoncomplete#Complete

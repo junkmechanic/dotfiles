@@ -24,6 +24,8 @@ $include /etc/inputrc
 # This is to cycle through history for partially entered commands
 "\e[A": history-search-backward
 "\e[B": history-search-forward
+"\C-p": history-substring-search-backward
+"\C-n": history-substring-search-forward
 
 # Cursor Navigation
 "\e[C": forward-char

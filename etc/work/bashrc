@@ -103,7 +103,6 @@ alias gitsbup='git submodule update --init --recursive'
 alias gt='cd $(git rev-parse --show-toplevel 2>/dev/null || (echo "."; echo "Not within a git repository" >&2))'
 alias l='ls -CF'
 alias la='ls -A'
-alias lgrep='ll | grep'
 alias ll='ls -alhF'
 alias mopidy='mopidy --save-debug-log'
 alias mypubip='curl http://ipecho.net/plain ; echo'
@@ -143,6 +142,7 @@ if ! shopt -oq posix; then
 fi
 
 #####################################################################
+# Functions
 
 # to view path in readable format
 function path(){
@@ -151,14 +151,6 @@ function path(){
     printf "%s\n" $PATH
     IFS=$old
 }
-
-# adding powerline
-. /home/ankur/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
-
-# virtualenvwrapper settings
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/devbench
-source /home/ankur/.local/bin/virtualenvwrapper.sh
 
 # This will create the directory passed and then change into it as well.
 function mkcd {
@@ -196,9 +188,46 @@ latest() {
 # estimate. also hidden files and directories are included)
 count (){ TMP_COUNT_LL=$(ll $1 | wc -l); echo $(($TMP_COUNT_LL - 3)); }
 
+function lgrep {
+  if [[ $# -eq 2 ]]; then
+      targetdir=$1
+      pattern=$2
+  elif [[ $# -eq 1 ]]; then
+      pattern=$1
+  else
+      echo "Usage : lgrep [directory] pattern"
+      return 1
+  fi
+  ls -alhF $targetdir | grep $pattern
+}
+
 set_title() { printf '\e]2;%s\a' "$*"; }
 
+#####################################################################
+# Setting variables and options
+
+# virtualenvwrapper settings
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/devbench
+source /home/ankur/.local/bin/virtualenvwrapper.sh
+
+# Use vim as the PAGER for programs like man.
+export MANPAGER="/bin/sh -c \"unset MANPAGER;col -b -x | \
+    vim -R \
+    -c 'set ft=man nomod noma nolist' \
+    -c 'map q :q<CR>' \
+    -c 'map <SPACE> <C-D>' \
+    -c 'map f <C-D>' \
+    -c 'map b <C-U>' \
+    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
+
 shopt -s autocd cdspell
+
+#####################################################################
+# Sourcing scripts
+
+# adding powerline
+. /home/ankur/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 
 source ~/bin/bd-completion
 
@@ -207,6 +236,7 @@ source ~/.fzf.bash
 # In __fzf_cd__ function in ~/.fzf/shell/key-bindings.bash,
 #    dir=$(command \find -L /home/ankur/ -type d -print 2> /dev/null | $(__fzfcmd) +m) && printf 'cd %q' "$dir"
 
+# PLEASE MAKE SURE THIS IS THE LAST LINE IN THIS FILE
 source ~/bin/acd_func.sh
 
 # Launch tmux automatically and attach to the 'general' session
