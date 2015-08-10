@@ -69,7 +69,7 @@ set bs=2
 " excluded (check http://vimdoc.sourceforge.net/htmldoc/eval.html#mode())
 "nnoremap <Leader><CR> O<Esc>
 nnoremap <CR> o<Esc>
-" Since the quickfix window is not modifiable, this mapping overwrites the
+" Since the quickfix window is not modifiable, the above mapping overwrites the
 " default quickfix <CR> behaviour to jump to the specified line/buffer. So the
 " following should help.
 autocmd FileType qf nunmap <CR>
@@ -113,7 +113,7 @@ vnoremap <leader>p :call PasteWithRetain('v')<CR>
 
 " Paste the selected text after the last line of the selected text
 " This is useful in the visual line mode
-vnoremap <leader>P y'>p
+vnoremap <leader>P y`>p
 
 " Delete to buffer 'a' instead of the default buffer
 nnoremap <expr> dw (v:register == '+') ? '"adw' : '"'.v:register.'dw'
@@ -270,6 +270,7 @@ highlight ColorColumn ctermbg=233
 " Multiple cursors setup
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_start_key='<F6>'
+let g:multi_cursor_start_word_key='g<C-n>'
 let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'

@@ -41,6 +41,9 @@ TAB: menu-complete
 # This is to have a '/' at the end of a symlinked dir
 set mark-symlinked-directories on
 
+# Ignore case while completion
+set completion-ignore-case on
+
 # The following is useful if you regularly use commands that need enclosing
 # brackets/quotes.
 # If the files start with an escapable character (in this case brackets/quotes)
