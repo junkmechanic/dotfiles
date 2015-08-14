@@ -197,7 +197,7 @@ function lgrep {
         echo "Usage : lgrep [directory] pattern"
         return 1
     fi
-    ls -alhF $targetdir | grep $pattern
+    ls -alhF $targetdir | grep -i $pattern
 }
 
 function dpgrep {
@@ -213,6 +213,18 @@ set_title() { printf '\e]2;%s\a' "$*"; }
 
 #####################################################################
 # Setting variables and options
+
+# Launch tmux automatically and attach to the 'general' session
+# Using 'exec' replaces the shell with the given command. This is done so that
+# detaching from tmux will exit the terminal session automatically.
+# But this will make going back to bash (normal non-tmux terminal) impossible,
+# specially when trying to open a terminal in a particular directory from a
+# file manager. So this has been removed from this core rc and will be invoked
+# from a different emulator profile.
+#if [[ -z $TMUX ]] && [[ $- = *i* ]]; then
+#    #tmux attach-session -t general || tmux attach || tmux; exit;
+#    exec tmux -2 attach-session -t general || exec tmux -2 attach || exec tmux -2
+#fi
 
 # virtualenvwrapper settings
 export WORKON_HOME=$HOME/.virtualenvs
@@ -246,16 +258,3 @@ source ~/.fzf.bash
 
 # PLEASE MAKE SURE THIS IS THE LAST LINE IN THIS FILE
 source ~/bin/acd_func.sh
-
-# Launch tmux automatically and attach to the 'general' session
-# Using 'exec' replaces the shell with the given command. This is done so that
-# detaching from tmux will exit the terminal session automatically.
-# But this will make going back to bash (normal non-tmux terminal) impossible,
-# that I have found to be quite problematic, specially for ssh-ing to external
-# hosts or when trying to open terminal in a particular dir from file manager.
-# So this has been removed from this core rc and will be invoked separately
-# from a different terminator profile.
-#if [[ -z $TMUX ]] && [[ $- = *i* ]]; then
-#    #tmux attach-session -t general || tmux attach || tmux; exit;
-#    exec tmux -2 attach-session -t general || exec tmux -2 attach || exec tmux -2
-#fi

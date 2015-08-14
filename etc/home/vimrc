@@ -74,6 +74,11 @@ nnoremap <CR> o<Esc>
 " following should help.
 autocmd FileType qf nunmap <CR>
 
+" Navigation to the last visited tab
+let g:lasttab = 1
+nnoremap <leader>b :exec "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
 " search selected text
 vnoremap // y/<C-R>"<CR>
 
@@ -297,7 +302,6 @@ let g:pymode_syntax = 1
 let g:pymode_syntax_builtin_objs = 0
 let g:pymode_syntax_builtin_funcs = 0
 let g:pymode_run_bind = "<S-e>"
-noremap <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 set completeopt=longest,menuone
 

@@ -197,7 +197,7 @@ function lgrep {
         echo "Usage : lgrep [directory] pattern"
         return 1
     fi
-    ls -alhF $targetdir | grep $pattern
+    ls -alhF $targetdir | grep -i $pattern
 }
 
 function dpgrep {
@@ -209,28 +209,22 @@ function dpgrep {
     dpkg -l | egrep -i $pat
 }
 
-# Use this function to set the title of the tab
 set_title() { printf '\e]2;%s\a' "$*"; }
-
-# Another hack to change the title of the tab is to run this command in bash
-# echo -en '\e]0;TITLE\a'
 
 #####################################################################
 # Setting variables and options
 
-# The following will start Tmux on starting the terminal
-#if which tmux 2>&1 >/dev/null; then
-#    #if not inside a tmux session, and if no session is started, start a new session
-#    test -z "$TMUX" && (tmux attach || tmux new-session)
+# Launch tmux automatically and attach to the 'general' session
+# Using 'exec' replaces the shell with the given command. This is done so that
+# detaching from tmux will exit the terminal session automatically.
+# But this will make going back to bash (normal non-tmux terminal) impossible,
+# specially when trying to open a terminal in a particular directory from a
+# file manager. So this has been removed from this core rc and will be invoked
+# from a different emulator profile.
+#if [[ -z $TMUX ]] && [[ $- = *i* ]]; then
+#    #tmux attach-session -t general || tmux attach || tmux; exit;
+#    exec tmux -2 attach-session -t general || exec tmux -2 attach || exec tmux -2
 #fi
-
-## changing the time zone
-#export TZ="/usr/share/zoneinfo/Asia/Singapore"
-
-## changing the default editor
-## VISUAL takes precedence over EDITOR
-#export EDITOR=vim
-#export VISUAL=vim
 
 # virtualenvwrapper settings
 export WORKON_HOME=$HOME/.virtualenvs
