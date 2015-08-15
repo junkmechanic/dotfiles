@@ -72,7 +72,7 @@ nnoremap <CR> o<Esc>
 " Since the quickfix window is not modifiable, the above mapping overwrites the
 " default quickfix <CR> behaviour to jump to the specified line/buffer. So the
 " following should help.
-autocmd FileType qf nunmap <CR>
+autocmd FileType qf silent! nunmap <CR>
 
 " Navigation to the last visited tab
 let g:lasttab = 1
