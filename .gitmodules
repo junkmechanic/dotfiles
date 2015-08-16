@@ -112,3 +112,6 @@
 [submodule "vim/bundle/slimux"]
 	path = vim/bundle/slimux
 	url = git@github.com:epeli/slimux.git
+[submodule "vim/bundle/surround"]
+	path = vim/bundle/surround
+	url = git@github.com:tpope/vim-surround.git
