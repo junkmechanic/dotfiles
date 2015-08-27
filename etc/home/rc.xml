@@ -451,9 +451,18 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
+          <name>Terminal (Tmux)</name>
+        </startupnotify>
+        <command>terminator --command="bash --rcfile ~/.files/etc/work/bashrc-tmux"</command>
+      </action>
+    </keybind>
+    <keybind key="W-t">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
           <name>Terminal</name>
         </startupnotify>
-        <command>terminator -m</command>
+        <command>terminator</command>
       </action>
     </keybind>
     <keybind key="C-A-i">

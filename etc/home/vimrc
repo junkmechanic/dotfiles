@@ -334,6 +334,8 @@ nnoremap <leader>uf :Unite -buffer-name=file_rec -default-action=tabopen file_re
 nnoremap <leader>uy :Unite -buffer-name=yank -default-action=append history/yank<CR>
 nnoremap <leader>ug :Unite -buffer-name=grep_auto -default-action=tabopen grep:.:-iHn:<C-R><C-W><CR>
 nnoremap <leader>uG :Unite -buffer-name=grep -default-action=tabopen grep<CR>
+vnoremap <leader>uv y:Unite -buffer-name=vgrep_auto -default-action=tabopen grep:.:-iHn:<C-R><C-R>"<CR>
+vnoremap <leader>uV y:Unite -buffer-name=vgrep -default-action=tabopen grep::-iHn:<C-R><C-R>"<CR>
 nnoremap <leader>ur :UniteResume<CR>
 nnoremap <leader>ul :Unite -buffer-name=locate -default-action=tabopen -start-insert locate<CR>
 nnoremap <leader>/ :Unite -buffer-name=line -start-insert line<CR>
