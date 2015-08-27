@@ -309,7 +309,17 @@
     </keybind>
     <keybind key="C-A-p">
       <action name="Execute">
-        <command>spotify_playback</command>
+        <command>spotify_playback 0</command>
+      </action>
+    </keybind>
+    <keybind key="C-A-9">
+      <action name="Execute">
+        <command>spotify_playback 2</command>
+      </action>
+    </keybind>
+    <keybind key="C-A-0">
+      <action name="Execute">
+        <command>spotify_playback 1</command>
       </action>
     </keybind>
     <!-- Keybindings for window switching -->
