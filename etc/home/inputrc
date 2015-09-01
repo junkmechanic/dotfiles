@@ -53,8 +53,8 @@ set completion-ignore-case on
 # So now one needs to press the char followed by 'space' character in order to
 # have the complement appear.
 "\C-b": backward-char
-"( ": "\C-v()\C-b"
-"[ ": "\C-v[]\C-b"
-"{ ": "\C-v{}\C-b"
-"\" ": "\C-v\"\C-v\"\C-b"
-"\047 ": "\C-v\047\C-v\047\C-b"
+"(\t": "\C-v()\C-b"
+"[\t": "\C-v[]\C-b"
+"{\t": "\C-v{}\C-b"
+"\"\t": "\C-v\"\C-v\"\C-b"
+"\047\t": "\C-v\047\C-v\047\C-b"

@@ -7,6 +7,9 @@ let mapleader=','
 nnoremap : ;
 nnoremap ; :
 
+nnoremap j 5j
+nnoremap k 5k
+
 nnoremap <Leader>q :xall<CR>
 nnoremap <leader>e :tabclose<CR>
 nnoremap x :tabclose<CR>
