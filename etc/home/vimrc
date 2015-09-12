@@ -18,6 +18,9 @@ set autochdir
 " A logical mapping for 'Y'
 nnoremap Y y$
 
+" Fixing an overshooting line (mainly comments)
+nnoremap yx Dj0whhp
+
 " Rebind <Leader> key
 let mapleader = ","
 
@@ -45,9 +48,9 @@ inoremap <C-J> <Esc>o
 " Python specific mapping
 inoremap <Leader><C-J> <Esc>A:<Esc>o
 
-" to wrap over to the next or previous line
-" nnoremap j gj
-" nnoremap k gk
+" Adding parameters to functions
+nnoremap <leader>i i,<space>
+nnoremap <leader>a a,<space>
 
 " open help in a right vertical split
 autocmd FileType help wincmd L
@@ -76,7 +79,7 @@ autocmd FileType qf silent! nunmap <CR>
 
 " Navigation to the last visited tab
 let g:lasttab = 1
-nnoremap <leader>b :exec "tabn ".g:lasttab<CR>
+nnoremap <leader>z :exec "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
 " search selected text
@@ -330,12 +333,20 @@ function! s:unite_my_settings()
     imap <buffer> qq <Plug>(unite_exit)
     nnoremap <buffer><expr> s unite#smart_map('v', unite#do_action('vsplit'))
 endfunction
+function! Unite_vgrep(search_string, auto)
+    let l:escaped_str = substitute(a:search_string, " ", "\\\\\\\\s", "g")
+    if a:auto
+        exec 'Unite -buffer-name=vgrep_auto -default-action=tabopen grep:.:-iHn:'.l:escaped_str
+    else
+        exec 'Unite -buffer-name=vgrep -default-action=tabopen grep::-iHn:'.l:escaped_str
+    endif
+endfunction
 nnoremap <leader>uf :Unite -buffer-name=file_rec -default-action=tabopen file_rec/async<CR>
 nnoremap <leader>uy :Unite -buffer-name=yank -default-action=append history/yank<CR>
 nnoremap <leader>ug :Unite -buffer-name=grep_auto -default-action=tabopen grep:.:-iHn:<C-R><C-W><CR>
 nnoremap <leader>uG :Unite -buffer-name=grep -default-action=tabopen grep<CR>
-vnoremap <leader>uv y:Unite -buffer-name=vgrep_auto -default-action=tabopen grep:.:-iHn:<C-R><C-R>"<CR>
-vnoremap <leader>uV y:Unite -buffer-name=vgrep -default-action=tabopen grep::-iHn:<C-R><C-R>"<CR>
+vnoremap <leader>uv y:call Unite_vgrep('<C-R><C-R>"', 1)<CR>
+vnoremap <leader>uV y:call Unite_vgrep('<C-R><C-R>"', 0)<CR>
 nnoremap <leader>ur :UniteResume<CR>
 nnoremap <leader>ul :Unite -buffer-name=locate -default-action=tabopen -start-insert locate<CR>
 nnoremap <leader>/ :Unite -buffer-name=line -start-insert line<CR>

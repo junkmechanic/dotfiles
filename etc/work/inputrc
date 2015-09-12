@@ -7,19 +7,19 @@ $include /etc/inputrc
 # Check `man readline' for function-name that you want to a key or sequence of
 # keys to.
 
-# Activate Vi Mode
-#set editing-mode vi
-## Clear screen with Control+l even in insert mode
-#$if mode=vi
-#  set keymap vi-insert
-#  Control-l: clear-screen
-#  #"\e[A": history-search-backward
-#  #"\e[B": history-search-forward
-#$endif
+# # Activate Vi Mode
+# set editing-mode vi
+# # Clear screen with Control+l even in insert mode
+# $if mode=vi
+#   set keymap vi-insert
+#   Control-l: clear-screen
+#   #"\e[A": history-search-backward
+#   #"\e[B": history-search-forward
+# $endif
 
-# You would also want to have an indicator for the mode with the prompt.
-# This is available since bash 4.3
-#set show-mode-in-prompt on
+# # You would also want to have an indicator for the mode with the prompt.
+# # This is available since bash 4.3
+# set show-mode-in-prompt on
 
 # This is to cycle through history for partially entered commands
 "\e[A": history-search-backward

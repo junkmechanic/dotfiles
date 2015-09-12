@@ -1,0 +1,233 @@
+#!/usr/bin/env python
+
+# Author : Ankur Khanna [junkmechanic]
+
+import sys
+import dbus
+import notify2
+import argparse
+from mpd import MPDClient
+
+players = ['mpd', 'spotify', 'deadbeef']
+
+dbus_names = [
+    'org.mpris.MediaPlayer2.mpd',
+    'org.mpris.MediaPlayer2.spotify',
+    'org.mpris.MediaPlayer2.DeaDBeeF',
+]
+
+object_path = '/org/mpris/MediaPlayer2'
+
+interface = 'org.mpris.MediaPlayer2.Player'
+
+picon = '/home/ankur/.files/images/play_pause.svg'
+
+notify2.init('unified_playback')
+
+music_players = {}
+
+bus = dbus.SessionBus()
+
+
+class MusicPlayer(object):
+    def __init__(self, player):
+        if player >= len(players):
+            notify2.Notification('Unified Playback',
+                                 "You're kidding yourself.")
+            print 'This doesnt represent any of the players : ' + player
+        else:
+            self.player = players[player]
+            self.player_proxy = bus.get_object(dbus_names[player], object_path)
+            self.iface = dbus.Interface(self.player_proxy, interface)
+            self.props = dbus.Interface(self.player_proxy,
+                                        'org.freedesktop.DBus.Properties')
+
+    def next(self):
+        self.iface.Next()
+
+    def previous(self):
+        self.iface.Previous()
+
+    def toggle(self):
+        self.iface.PlayPause()
+
+    def playback_status(self):
+        return self.props.Get(interface, 'PlaybackStatus')
+
+
+def is_player_running(player, silent=False):
+    if player == 0:
+        notif = notify2.Notification('Unified Playback',
+                                     'Couldnt connect to mpd.',
+                                     picon)
+        mpdc = MPDClient()
+        try:
+            mpdc.connect('localhost', '6600')
+        except Exception as e:
+            import socket
+            if isinstance(e, socket.error):
+                if e.errno == 111:
+                    if not silent:
+                        notif.show()
+                        print 'MPD not running'
+                    return False
+                else:
+                    raise
+            else:
+                raise
+        notif = notify2.Notification('Unified Playback',
+                                     'Couldnt connect to MPDris.',
+                                     picon)
+        found = False
+        for name in bus.list_names():
+            if 'mpd' in name.lower():
+                found = True
+                break
+        if not found:
+            if not silent:
+                notif.show()
+                print 'MPDris not running'
+            return False
+    elif player == 1:
+        notif = notify2.Notification('Unified Playback',
+                                     'Couldnt connect to Spotify.',
+                                     picon)
+        found = False
+        for name in bus.list_names():
+            if players[player] in name.lower():
+                found = True
+                break
+        if not found:
+            if not silent:
+                notif.show()
+                print 'Spotify not running'
+            return False
+    elif player == 2:
+        notif = notify2.Notification('Unified Playback',
+                                     'Couldnt connect to DeadBeef.',
+                                     picon)
+        found = False
+        for name in bus.list_names():
+            if players[player] in name.lower():
+                found = True
+                break
+        if not found:
+            if not silent:
+                notif.show()
+                print 'DeadBeef not running'
+            return False
+    elif player > len(players):
+        notify2.Notification('Unified Playback',
+                             players[player] +
+                             ' not supported. What are you doing?',
+                             picon).show()
+        return False
+    return True
+
+
+def get_current_player(player):
+    current_player = None
+    counter = 0
+    while current_player is None:
+        if not is_player_running(player):
+            player = (player + 1) % 3
+        else:
+            current_player = player
+        if counter <= len(players):
+            counter += 1
+        else:
+            notify2.Notification('Unified Playback',
+                                 'None of the players are running.\n' +
+                                 'Make an effort',
+                                 picon).show()
+            sys.exit()
+    return current_player
+
+
+def toggle_playback(player):
+    if player not in music_players:
+        music_players[player] = MusicPlayer(player)
+    music_players[player].toggle()
+    save_state(player)
+
+
+def is_playing(player):
+    if player not in music_players:
+        music_players[player] = MusicPlayer(player)
+    if music_players[player].playback_status() == 'Playing':
+        return True
+    else:
+        return False
+
+
+def playback_change(player, next=True):
+    if player not in music_players:
+        music_players[player] = MusicPlayer(player)
+    if next:
+        music_players[player].next()
+    else:
+        music_players[player].previous()
+
+
+def save_state(player):
+    try:
+        with open('/tmp/unified_playback.player', 'w') as ofile:
+            ofile.write(str(player))
+    except Exception as e:
+        notify2.Notification('Unified Playback',
+                             "Couldn't save player state",
+                             picon).show()
+        print "Couldn't save player state"
+        print str(e)
+
+
+try:
+    with open('/tmp/unified_playback.player') as ifile:
+        last_played = ifile.readline()
+        last_played = int(last_played)
+except IOError as e:
+    if e.errno == 2:
+        last_played = None
+    else:
+        raise
+
+if last_played is None:
+    last_played = 1
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--next', action='store_true')
+parser.add_argument('--previous', action='store_true')
+parser.add_argument('--change', action='store_true')
+args = parser.parse_args()
+
+if args.next or args.previous:
+    # find which player is currently playing
+    playing = None
+    for i in range(len(players)):
+        if is_player_running(i, True):
+            if is_playing(i):
+                playing = i
+    if playing is not None:
+        if args.next:
+            playback_change(playing, True)
+        if args.previous:
+            playback_change(playing, False)
+    else:
+        notify2.Notification('Unified Playback',
+                             'The world is not spinning yet', picon).show()
+        print 'None of the players is playing anything'
+        sys.exit()
+else:
+    if args.change:
+        last_played = (last_played + 1) % 3
+
+    current_player = get_current_player(last_played)
+
+    # pause any other player if its playing
+    for i in range(len(players)):
+        if i != current_player:
+            if is_player_running(i, True):
+                if is_playing(i):
+                    toggle_playback(i)
+
+    toggle_playback(current_player)

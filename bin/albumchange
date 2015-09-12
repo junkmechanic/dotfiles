@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# Doesnt handle 'Stop'. Will play the queued album if the current song is paused.
+# Doesnt handle 'Stop'. Will play the queued album if the current song is
+# paused.
+# Partially works if the same album appears in multiple positions (also goes
+# for songs of an album scattered around). The album list will be displayed but
+# the currently playing album would not be highlighted.
 
 # menu=$(mpc playlist --format '%artist% - %album%' | sort | uniq | dmenu -b -l 5 -p "Choose Album > ")
 # menu=$(mpc playlist --format '%artist% - %album%' | sort | uniq | rofi -dmenu -p "Choose Album > ")

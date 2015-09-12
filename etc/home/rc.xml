@@ -151,7 +151,7 @@
        Many programs reserve space automatically, but you can use this in other
        cases. -->
   <margins>
-    <top>1</top>
+    <top>0</top>
     <bottom>0</bottom>
     <left>0</left>
     <right>0</right>
@@ -309,17 +309,22 @@
     </keybind>
     <keybind key="C-A-p">
       <action name="Execute">
-        <command>spotify_playback 0</command>
+        <command>unified_playback</command>
+      </action>
+    </keybind>
+    <keybind key="C-A-o">
+      <action name="Execute">
+        <command>unified_playback --change</command>
       </action>
     </keybind>
     <keybind key="C-A-9">
       <action name="Execute">
-        <command>spotify_playback 2</command>
+        <command>unified_playback --previous</command>
       </action>
     </keybind>
     <keybind key="C-A-0">
       <action name="Execute">
-        <command>spotify_playback 1</command>
+        <command>unified_playback --next</command>
       </action>
     </keybind>
     <!-- Keybindings for window switching -->

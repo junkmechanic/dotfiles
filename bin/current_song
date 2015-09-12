@@ -1,28 +1,53 @@
 #!/bin/bash
 
-# all_in_one="\n$(mpc -f "Title\t\t: %title%\nArtist\t: %artist%\nAlbum\t: %album%" | head -n3)"
-
 # MPD
-song_artist="\n$(mpc -f "%title% - %artist% - %album% - %track%" current |  awk '{ split($0, vals, " - ");
-                         print "Title : " vals[1] "\nArtist : " vals[2] "\nAlbum : " vals[3] "\nTrack : " vals[4]}')"
-stat="\n$(mpc status | egrep 'playing|paused' | awk '{ print $3 "   " $4  "  " $1 }')"
-vol="\nVolume : $(mpc status | grep volume | awk '{ print $2 }')"
+song_artist="$(mpc -f "%title% - %artist% - %album% - %track%" current |  awk '{ split($0, vals, " - ");
+                         print "\nTitle : " vals[1] "\nArtist : " vals[2] "\nAlbum : " vals[3] "\nTrack : " vals[4]}')"
+stat="$(mpc status | egrep 'playing|paused' | awk '{ print "\n" $3 "   " $4  "  " $1 }')"
+vol="$(mpc status | grep volume | awk '{ print "\nVolume : " $2 }')"
+
+mpd_status="MPD:${song_artist}${stat}${vol}"
+
+# Spotify
+sp_current=$(sp current)
+if [[ $? -eq 0 ]]; then
+    sp_status="Spotify:\n$sp_current"
+fi
+
+# DeadBeef
+# if [[ ! -z $(pidof deadbeef) ]] ; then
+db_current=$(deadbeef --nowplaying "Current - %t - %a - %b - %n - %e - %l" 2>/dev/null | grep 'Current')
+if [[ ! -z $db_current ]] ; then
+    db_status="DeadBeef:\n$(echo $db_current | awk '{ split($0, vals, " - ");
+              print "Title : " vals[2] "\nArtist : " vals[3] "\nAlbum : " vals[4] "\nTrack : " vals[5] "\nPosition : " vals[6] " / " vals[7]}')"
+fi
+
+# System Volume
 sys_vol=$(amixer get Master | egrep 'Front Left: Playback' | awk '{ print $5 }')
 sys_vol=${sys_vol#[}
 sys_vol=${sys_vol%]}
+vol_status="System Volume: ${sys_vol}"
 
-# Spotify
-# For this, you need to have the following script
-# https://gist.github.com/wandernauta/6800547
-sp_current=$(sp current)
-
-if [[ $? -ne 0 ]]; then
-    todisplay="${song_artist}${stat}${vol}\n\nSystem Volume: ${sys_vol}"
-else
-    todisplay="\nMPD:${song_artist}${stat}${vol}\n\nSpotify:\n$sp_current\n\nSystem Volume: ${sys_vol}"
+if [[ ! -z $mpd_status ]] ; then
+    all_status="$mpd_status"
+fi
+if [[ ! -z $sp_status ]] ; then
+    all_status="$all_status\n\n$sp_status"
+fi
+if [[ ! -z $db_status ]] ; then
+    all_status="$all_status\n\n$db_status"
 fi
 
-notify-send -t 5000 -u low -i ~/.files/images/notify_song.png "Current Song" "$todisplay"
-
-# ncmpcpp_out=$(ncmpcpp --now-playing "{{{%n - %t}{ - (%l)}{\n%a}{\n%b }}|{{%f}{ - (%l)}}}")
-# notify-send -t 5000 -u low -i /usr/share/pixmaps/notify_song.png "Current Song" "${ncmpcpp_out}"
+case $1 in
+    0)
+        echo -e "$all_status" ;;
+    1)
+        echo -e "$mpd_status" ;;
+    2)
+        echo -e "$sp_status" ;;
+    3)
+        echo -e "$db_status" ;;
+    *)
+        notify-send -t 5000 -u low -i ~/.files/images/notify_song.png "Current Song" "\n$all_status"
+        ;;
+esac
