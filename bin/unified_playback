@@ -78,12 +78,10 @@ def is_player_running(player, silent=False):
         notif = notify2.Notification('Unified Playback',
                                      'Couldnt connect to MPDris.',
                                      picon)
-        found = False
         for name in bus.list_names():
             if 'mpd' in name.lower():
-                found = True
                 break
-        if not found:
+        else:
             if not silent:
                 notif.show()
                 print 'MPDris not running'
@@ -92,12 +90,10 @@ def is_player_running(player, silent=False):
         notif = notify2.Notification('Unified Playback',
                                      'Couldnt connect to Spotify.',
                                      picon)
-        found = False
         for name in bus.list_names():
             if players[player] in name.lower():
-                found = True
                 break
-        if not found:
+        else:
             if not silent:
                 notif.show()
                 print 'Spotify not running'
@@ -106,12 +102,10 @@ def is_player_running(player, silent=False):
         notif = notify2.Notification('Unified Playback',
                                      'Couldnt connect to DeadBeef.',
                                      picon)
-        found = False
         for name in bus.list_names():
             if players[player] in name.lower():
-                found = True
                 break
-        if not found:
+        else:
             if not silent:
                 notif.show()
                 print 'DeadBeef not running'
@@ -160,6 +154,15 @@ def is_playing(player):
         return False
 
 
+def any_player_playing():
+    playing = None
+    for i in range(len(players)):
+        if is_player_running(i, True):
+            if is_playing(i):
+                playing = i
+    return playing
+
+
 def playback_change(player, next=True):
     if player not in music_players:
         music_players[player] = MusicPlayer(player)
@@ -191,6 +194,10 @@ except IOError as e:
     else:
         raise
 
+playing = any_player_playing()
+if playing is not None or last_played is None:
+    last_played = playing
+
 if last_played is None:
     last_played = 1
 
@@ -201,12 +208,6 @@ parser.add_argument('--change', action='store_true')
 args = parser.parse_args()
 
 if args.next or args.previous:
-    # find which player is currently playing
-    playing = None
-    for i in range(len(players)):
-        if is_player_running(i, True):
-            if is_playing(i):
-                playing = i
     if playing is not None:
         if args.next:
             playback_change(playing, True)
