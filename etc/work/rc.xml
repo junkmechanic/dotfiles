@@ -287,12 +287,12 @@
       <action name="Iconify"/>
     </keybind>
     <!-- Keybinding for pause/play and other for ncmpcpp -->
-    <keybind key="XF86AudioNext">
+    <keybind key="C-A-0">
       <action name="Execute">
         <command>ncmpcpp next</command>
       </action>
     </keybind>
-    <keybind key="XF86AudioPrev">
+    <keybind key="C-A-9">
       <action name="Execute">
         <command>ncmpcpp prev</command>
       </action>
@@ -345,8 +345,8 @@
       </action>
     </keybind>
     <keybind key="W-Tab">
-      <action name="NextWindow">
-        <allDesktops>yes</allDesktops>
+      <action name="execute">
+          <execute>switch_within_app</execute>
       </action>
     </keybind>
     <keybind key="W-S-Tab">
