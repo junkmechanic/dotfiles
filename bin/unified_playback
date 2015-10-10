@@ -2,6 +2,11 @@
 
 # Author : Ankur Khanna [junkmechanic]
 
+# Dependencies
+#   1. mpDris2
+#   2. notify2 from PyPI
+#   3. dbus python bindings
+
 import sys
 import dbus
 import notify2
