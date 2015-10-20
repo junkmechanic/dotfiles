@@ -609,6 +609,63 @@
         <command>~/.screenlayout/dual_monitor_inverted.sh</command>
       </action>
     </keybind>
+    <!-- Moving the mouse using keyboard -->
+    <keybind key="C-S-h">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Move Mouse towards Left</name>
+        <command>xdotool mousemove_relative -- -10 0</command>
+      </action>
+    </keybind>
+    <keybind key="C-S-l">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Move Mouse towards Right</name>
+        <command>xdotool mousemove_relative 10 0</command>
+      </action>
+    </keybind>
+    <keybind key="C-S-j">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Move Mouse Downwards</name>
+        <command>xdotool mousemove_relative 0 10</command>
+      </action>
+    </keybind>
+    <keybind key="C-S-k">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Move Mouse Upwards</name>
+        <command>xdotool mousemove_relative 0 -10</command>
+      </action>
+    </keybind>
+    <keybind key="C-S-y">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Move Mouse towards Left</name>
+        <command>xdotool mousemove_relative -- -60 0</command>
+      </action>
+    </keybind>
+    <keybind key="C-S-o">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Move Mouse towards Right</name>
+        <command>xdotool mousemove_relative 60 0</command>
+      </action>
+    </keybind>
+    <keybind key="C-S-u">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Move Mouse Downwards</name>
+        <command>xdotool mousemove_relative 0 60</command>
+      </action>
+    </keybind>
+    <keybind key="C-S-i">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Move Mouse Upwards</name>
+        <command>xdotool mousemove_relative 0 -60</command>
+      </action>
+    </keybind>
     <!-- A bit of tiling -->
     <keybind key="W-C-Right">
       <action name="GrowToEdge">

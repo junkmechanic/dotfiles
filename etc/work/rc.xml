@@ -151,7 +151,7 @@
        Many programs reserve space automatically, but you can use this in other
        cases. -->
   <margins>
-    <top>1</top>
+    <top>0</top>
     <bottom>0</bottom>
     <left>0</left>
     <right>0</right>
@@ -346,7 +346,7 @@
     </keybind>
     <keybind key="W-Tab">
       <action name="execute">
-          <execute>switch_within_app</execute>
+        <execute>switch_within_app</execute>
       </action>
     </keybind>
     <keybind key="W-S-Tab">
@@ -545,6 +545,63 @@
     <keybind key="A-C-q">
       <action name="ShowMenu">
         <menu>root-menu</menu>
+      </action>
+    </keybind>
+    <!-- Moving the mouse using keyboard -->
+    <keybind key="C-S-h">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Move Mouse towards Left</name>
+        <command>xdotool mousemove_relative -- -10 0</command>
+      </action>
+    </keybind>
+    <keybind key="C-S-l">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Move Mouse towards Right</name>
+        <command>xdotool mousemove_relative 10 0</command>
+      </action>
+    </keybind>
+    <keybind key="C-S-j">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Move Mouse Downwards</name>
+        <command>xdotool mousemove_relative 0 10</command>
+      </action>
+    </keybind>
+    <keybind key="C-S-k">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Move Mouse Upwards</name>
+        <command>xdotool mousemove_relative 0 -10</command>
+      </action>
+    </keybind>
+    <keybind key="C-S-y">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Move Mouse towards Left</name>
+        <command>xdotool mousemove_relative -- -60 0</command>
+      </action>
+    </keybind>
+    <keybind key="C-S-o">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Move Mouse towards Right</name>
+        <command>xdotool mousemove_relative 60 0</command>
+      </action>
+    </keybind>
+    <keybind key="C-S-u">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Move Mouse Downwards</name>
+        <command>xdotool mousemove_relative 0 60</command>
+      </action>
+    </keybind>
+    <keybind key="C-S-i">
+      <action name="Execute">
+        <enabled>true</enabled>
+        <name>Move Mouse Upwards</name>
+        <command>xdotool mousemove_relative 0 -60</command>
       </action>
     </keybind>
     <!-- A bit of tiling -->
