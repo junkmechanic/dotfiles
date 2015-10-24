@@ -38,6 +38,8 @@ if [[ ! -z $db_status ]] ; then
     all_status="$all_status\n\n$db_status"
 fi
 
+all_status=${all_status//&/and}
+
 case $1 in
     0)
         echo -e "$all_status" ;;

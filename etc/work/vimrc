@@ -47,6 +47,7 @@ inoremap Uu <Esc>u
 inoremap <C-J> <Esc>o
 " Python specific mapping
 inoremap <Leader><C-J> <Esc>A:<Esc>o
+nnoremap <Leader>; A:<Esc>
 
 " Adding parameters to functions
 nnoremap <leader>i i,<space>
@@ -107,11 +108,12 @@ function! PasteWithRetain(mode)
     endif
     if col(".") == col("$") - 1
         " if getline(".")[col(".") - 1] == " "
-        if strpart(getline("."), col(".") - 1, 1) == " "
-            normal! p
-        else
-            normal! P
-        endif
+        " if strpart(getline("."), col(".") - 1, 1) == " "
+        "     normal! p
+        " else
+        "     normal! P
+        " endif
+        normal! p
     else
         normal! P
     endif
