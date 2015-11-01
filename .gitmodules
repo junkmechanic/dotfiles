@@ -118,3 +118,6 @@
 [submodule "vim/bundle/virtualenv"]
 	path = vim/bundle/virtualenv
 	url = git@github.com:jmcantrell/vim-virtualenv.git
+[submodule "vim/bundle/vim-tmux"]
+	path = vim/bundle/vim-tmux
+	url = git@github.com:tmux-plugins/vim-tmux.git

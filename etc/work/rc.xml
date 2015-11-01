@@ -491,9 +491,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Editor</name>
+          <name>spacefm</name>
         </startupnotify>
-        <command>terminator --maximise --command="vim"</command>
+        <command>spacefm</command>
       </action>
     </keybind>
     <keybind key="W-m">

@@ -360,8 +360,8 @@
       </action>
     </keybind>
     <keybind key="W-Tab">
-      <action name="NextWindow">
-        <allDesktops>yes</allDesktops>
+      <action name="execute">
+        <execute>switch_within_app</execute>
       </action>
     </keybind>
     <keybind key="W-S-Tab">
@@ -433,7 +433,7 @@
       <action name="Execute">
         <enabled>true</enabled>
         <name>Clerk</name>
-        <command>clerk</command>
+        <command>clerk --queue show</command>
       </action>
     </keybind>
     <keybind key="A-F1">
@@ -537,9 +537,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Editor</name>
+          <name>spacefm</name>
         </startupnotify>
-        <command>terminator --command="vim"</command>
+        <command>spacefm</command>
       </action>
     </keybind>
     <keybind key="W-m">

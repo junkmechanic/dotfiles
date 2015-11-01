@@ -60,7 +60,7 @@ border_color = #888888 20
 panel_monitor = all
 panel_position = top center horizontal
 panel_items = TSC
-panel_size = 100% 30
+panel_size = 100% 3%
 panel_margin = 0 -1
 panel_padding = 0 0
 panel_dock = 0
@@ -77,7 +77,7 @@ strut_policy = follow_size
 
 # Taskbar
 taskbar_mode = multi_desktop
-taskbar_padding = 6 0 6
+taskbar_padding = 6 0 4
 taskbar_background_id = 5
 taskbar_active_background_id = 6
 taskbar_name = 1
@@ -93,7 +93,7 @@ task_icon = 1
 task_text = 0
 task_centered = 1
 task_maximum_size = 40 40
-task_padding = 2 2
+task_padding = 2 0
 task_background_id = 3
 task_active_background_id = 2
 task_urgent_background_id = 4
