@@ -65,7 +65,7 @@ xscreensaver.passwd.thermometer.width:       8
 ! rofi.color-window: #000000,     #111111
 
 /* blue theme */
-rofi.opacity: 75
+rofi.opacity: 80
 rofi.font: Dejavu Sans Mono 10
 rofi.padding: 3
 rofi.lines: 15
@@ -73,8 +73,8 @@ rofi.borderwidth: 2
 rofi.ssh-command: {terminal} --maximise -e '{ssh-client} {host}'
 rofi.color-enabled: true
 ! State:           ´bg´,     ´fg´,     ´bgalt´,  ´hlbg´,   ´hlfg´
-rofi.color-normal: #070719,  #4e636e,  #070719,  #0b3861,  #83a5b8
-rofi.color-urgent: #070719,  #268d5a,  #070719,  #0b3861,  #268d5a
-rofi.color-active: #070719,  #268bd2,  #070719,  #0b3861,  #268bd2
+rofi.color-normal: #070719,  #4e636e,  #070719,  #08082f,  #83a5b8
+rofi.color-urgent: #070719,  #268d5a,  #070719,  #08082f,  #268d5a
+rofi.color-active: #070719,  #268bd2,  #070719,  #08082f,  #268bd2
 !                 ´background´, ´border´
-rofi.color-window: #070719,     #0b0b3b
+rofi.color-window: #070719,     #08082f

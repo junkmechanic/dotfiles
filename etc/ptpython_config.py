@@ -146,3 +146,26 @@ def configure(repl):
 #    is not a necessity.
 # 2. In ptpython/key_bindings.py, in the function 'load_confirm_exit_bindings',
 #    another decorator 'handle' was added for ContrlD
+# 3. In ptpython/ipython.py, added a function to execute lines from the ipython
+#    config file
+# -----------------------------------------------------------------------------
+# def execute_post_init_lines(shell, exec_lines):
+#     """
+#     Partial copy of 'InteractiveShellApp._run_exec_lines' from IPython.
+#     """
+#     try:
+#         iter(exec_lines)
+#     except TypeError:
+#         pass  # no lines to execute
+#     else:
+#         for line in exec_lines:
+#             try:
+#                 shell.run_cell(line, store_history=False)
+#             except:
+#                 ipy_utils.warn.warn(
+#                     "Error in executing line in user namespace: %s" % line +
+#                     "\nCheck your config files in %s" % ipy_utils.path.get_ipython_dir())
+#                 shell.showtraceback()
+# -----------------------------------------------------------------------------
+# execute_post_init_lines(shell, config['InteractiveShellApp']['exec_lines'])
+# -----------------------------------------------------------------------------
