@@ -108,7 +108,7 @@ syndaemon -i 1 -t -d &
 #synclient HorizTwoFingerScroll=1 &
 
 ## Script for showdesktop
-~/bin/showdesktop.sh &
+~/bin/showdesktop &
 
 ## Start the virtual keyboard
 (sleep 22s && florence) &

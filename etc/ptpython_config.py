@@ -139,6 +139,27 @@ def configure(repl):
 
         b.insert_text(' ')
 
+    cpairs = {
+        '(': ')',
+        '[': ']',
+        '{': '}',
+        "'": "'",
+        '"': '"',
+    }
+
+    def encloser(open_char):
+        pairs = cpairs
+
+        @repl.add_key_binding(open_char, Keys.Tab)
+        def _2(event):
+            b = event.cli.current_buffer
+            b.insert_text(open_char + pairs[open_char])
+            b.cursor_left()
+        return _2
+
+    for open_char in cpairs:
+        encloser(open_char)
+
 # Other changes made in the library:
 # 1. In ptipython/entry_points/run_ptipython.py, the 'embed' function call was
 #    modified to remove the passing of 'title' parameter that sets the title of

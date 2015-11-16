@@ -209,6 +209,10 @@ function dpgrep {
     dpkg -l | egrep -i $pat
 }
 
+function flac2mp3 {
+    parallel ffmpeg -i {} -qscale:a 0 {.}.mp3 ::: *.flac
+}
+
 set_title() { printf '\e]2;%s\a' "$*"; }
 
 #####################################################################
