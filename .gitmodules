@@ -109,21 +109,28 @@
 [submodule "vim/bundle/nerdtree-git-plugin"]
 	path = vim/bundle/nerdtree-git-plugin
 	url = git@github.com:Xuyuanp/nerdtree-git-plugin.git
+    ignore = dirty
 [submodule "vim/bundle/slimux"]
 	path = vim/bundle/slimux
 	url = git@github.com:epeli/slimux.git
+    ignore = dirty
 [submodule "vim/bundle/surround"]
 	path = vim/bundle/surround
 	url = git@github.com:tpope/vim-surround.git
+    ignore = dirty
 [submodule "vim/bundle/virtualenv"]
 	path = vim/bundle/virtualenv
 	url = git@github.com:jmcantrell/vim-virtualenv.git
+    ignore = dirty
 [submodule "vim/bundle/vim-tmux"]
 	path = vim/bundle/vim-tmux
 	url = git@github.com:tmux-plugins/vim-tmux.git
+    ignore = dirty
 [submodule "vim/bundle/vim-tmux-navigator"]
 	path = vim/bundle/vim-tmux-navigator
 	url = git@github.com:christoomey/vim-tmux-navigator.git
+    ignore = dirty
 [submodule "vim/bundle/tagbar"]
 	path = vim/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
+    ignore = dirty
