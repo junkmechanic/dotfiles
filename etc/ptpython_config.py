@@ -139,6 +139,7 @@ def configure(repl):
 
         b.insert_text(' ')
 
+    # Keybinding for autopair completions
     cpairs = {
         '(': ')',
         '[': ']',
@@ -159,6 +160,20 @@ def configure(repl):
 
     for open_char in cpairs:
         encloser(open_char)
+
+    # Keybinding for function declaration completion
+    @repl.add_key_binding(',', Keys.ControlJ)
+    def _3(event):
+        b = event.cli.current_buffer
+        b.cursor_position += b.document.get_end_of_line_position()
+        prev_line = b.document.current_line_before_cursor
+        b.insert_text(':\n')
+        for c in prev_line:
+            if c.isspace():
+                b.insert_text(c)
+            else:
+                break
+        b.insert_text(' ' * 4)
 
 # Other changes made in the library:
 # 1. In ptipython/entry_points/run_ptipython.py, the 'embed' function call was
