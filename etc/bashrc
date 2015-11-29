@@ -2,9 +2,6 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# Adding ~/.local/bin to PATH (for powerline presently)
-PATH=$PATH:$HOME/.local/bin
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -141,6 +138,15 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Add paths to $PATHS_TO_ADD instead of $PATH to avoid creating duplicates
+PATHS_TO_ADD=$HOME/.local/bin
+for new_path in ${PATHS_TO_ADD//:/ }; do
+    case ":$PATH:" in
+        *":$new_path:"*) :;;
+        *) PATH="$PATH:$new_path" ;;
+    esac
+done
+
 #####################################################################
 # Functions
 
@@ -230,6 +236,11 @@ set_title() { printf '\e]2;%s\a' "$*"; }
 #    #tmux attach-session -t general || tmux attach || tmux; exit;
 #    exec tmux -2 attach-session -t general || exec tmux -2 attach || exec tmux -2
 #fi
+# This is what I use on the server these days
+#if which tmux 2>&1 >/dev/null; then
+#    #if not inside a tmux session, and if no session is started, start a new session
+#    test -z "$TMUX" && (tmux attach || tmux new-session -s general)
+#fi
 
 # virtualenvwrapper settings
 export WORKON_HOME=$HOME/.virtualenvs
@@ -255,6 +266,8 @@ shopt -s autocd cdspell
 . /home/ankur/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 
 source ~/bin/bd-completion
+
+source ~/bin/split2flac-bash-completion.sh
 
 source ~/.fzf.bash
 # Changed the behaviour of Alt_c function to the following:

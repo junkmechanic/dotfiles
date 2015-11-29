@@ -8,7 +8,7 @@ import os
 class StatusIcon:
     def __init__(self):
         self.statusicon = gtk.StatusIcon()
-        self.statusicon.set_from_file("~/.files/images/simple-monitor-th-20x16.png")
+        self.statusicon.set_from_icon_name("monitor")
         self.statusicon.set_tooltip("Show Desktop")
 
         self.statusicon.connect("activate", self.left_click_event)
