@@ -67,6 +67,8 @@
       </action>
     </item>
     <separator/>
+    <menu execute="cb-clientlist-pipemenu" id="pipe-windowsmenu" label="Windows"/>
+    <separator/>
     <menu id="favorites" label="Favorites">
       <item label="Downloads">
         <action name="Execute">

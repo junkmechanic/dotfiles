@@ -88,7 +88,7 @@ xmodmap ~/.Xmodmap &
 (sleep 50s && guake) &
 
 ## Script for showdesktop
-~/bin/showdesktop.sh &
+~/bin/showdesktop &
 
 ## for ssh-agent to recognize automatically
 ssh-add &
