@@ -134,3 +134,6 @@
 	path = vim/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
     ignore = dirty
+[submodule "vim/bundle/unite-neoyank"]
+	path = vim/bundle/unite-neoyank
+	url = git@github.com:Shougo/neoyank.vim.git
