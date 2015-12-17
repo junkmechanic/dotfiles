@@ -137,3 +137,4 @@
 [submodule "vim/bundle/unite-neoyank"]
 	path = vim/bundle/unite-neoyank
 	url = git@github.com:Shougo/neoyank.vim.git
+    ignore = dirty
