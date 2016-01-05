@@ -86,9 +86,10 @@ fi
 
 # some more ls aliases
 alias bd='. bd -s'
-alias cat='cat -n'
+alias catn='cat -n'
 alias cd..='cd ..'
 alias dmesg='dmesg -T'
+alias duall='du -shc .[!.]* *'
 alias gita='git add'
 alias gitc='git commit'
 alias gitd='git diff'
@@ -105,7 +106,7 @@ alias mypubip='curl http://ipecho.net/plain ; echo'
 alias pipgrep='pip freeze | grep'
 alias psgrep='ps aux | grep'
 alias pti='ptipython'
-alias rsync='rsync --partial --progress --rsh=ssh'
+alias rsync='rsync --human-readable --partial --progress --rsh=ssh'
 alias sl='ls'
 alias tmat='tmux attach'
 alias tmgn='tmux new-session -s general'
@@ -221,10 +222,38 @@ function flac2mp3 {
     parallel ffmpeg -i {} -qscale:a 0 {.}.mp3 ::: *.flac
 }
 
+function dusort {
+    if [[ -z "$1" ]]; then
+        du_dir=.
+    else
+        du_dir=$1
+    fi
+    exec du -khxa -d 1 $du_dir | sort -h
+}
+
+# this will not auto-activate the same env once it has been manually
+# deactivated.
+# for dir structures with multiple .venv files, if navigating to a dir that
+# share the same env as its parent, a reference to the parent will be stored to
+# avoid activation when jumping back to the parent.
+function venv_prompt {
+    if [[ -e .venv ]]; then
+        if [[ "$PWD" != "$OLD_VENV_PWD" ]]; then
+            if [[ ! -z $VIRTUAL_ENV && $(cat .venv) = $(basename $VIRTUAL_ENV) ]]; then
+                echo "Already in $(basename $VIRTUAL_ENV)"
+                return
+            fi
+            OLD_VENV_PWD=$PWD
+            echo "Activating $(cat .venv)"
+            workon `cat .venv`
+        fi
+    fi
+}
+
 set_title() { printf '\e]2;%s\a' "$*"; }
 
 #####################################################################
-# Setting variables and options
+# Setting variables, sourcing scripts etc
 
 # Launch tmux automatically and attach to the 'general' session
 # Using 'exec' replaces the shell with the given command. This is done so that
@@ -260,11 +289,11 @@ export MANPAGER="/bin/sh -c \"unset MANPAGER;col -b -x | \
 
 shopt -s autocd cdspell
 
-#####################################################################
-# Sourcing scripts
-
 # adding powerline
 . /home/ankur/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+
+# auto-activation of virtualenv
+export PROMPT_COMMAND="$PROMPT_COMMAND venv_prompt"
 
 source ~/bin/bd-completion
 
