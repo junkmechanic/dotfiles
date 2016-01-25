@@ -289,6 +289,9 @@ export MANPAGER="/bin/sh -c \"unset MANPAGER;col -b -x | \
 
 shopt -s autocd cdspell
 
+# activating thefuck
+eval "$(thefuck --alias)"
+
 # adding powerline
 . /home/ankur/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 

@@ -7,7 +7,7 @@ class StatusIcon:
     def __init__(self):
         self.statusicon = gtk.StatusIcon()
         self.statusicon.set_from_icon_name("lxmusic")
-        self.statusicon.set_tooltip("Current Song")
+        self.statusicon.set_tooltip("Unified Playback")
 
         self.statusicon.connect("activate", self.left_click_event)
         self.statusicon.connect("popup-menu", self.right_click_event)
@@ -25,16 +25,23 @@ class StatusIcon:
         change = gtk.ImageMenuItem('Change')
         change.set_image(change_img)
 
+        status_img = gtk.Image()
+        status_img.set_from_icon_name('stock_text_justify', 1)
+        status = gtk.ImageMenuItem('Status')
+        status.set_image(status_img)
+
         about = gtk.ImageMenuItem(gtk.STOCK_ABOUT)
         quit = gtk.ImageMenuItem(gtk.STOCK_QUIT)
 
         change.connect("activate", self.change_media_player)
         play.connect("activate", self.play_media_player)
+        status.connect("activate", self.show_current_status)
         about.connect("activate", self.show_about_dialog)
         quit.connect("activate", gtk.main_quit)
 
         menu.append(play)
         menu.append(change)
+        menu.append(status)
         menu.append(about)
         menu.append(quit)
 
@@ -49,6 +56,9 @@ class StatusIcon:
         os.system('unified_playback')
 
     def left_click_event(self, event):
+        os.system('unified_playback')
+
+    def show_current_status(self, event):
         os.system('current_song')
 
     def show_about_dialog(self, widget):
