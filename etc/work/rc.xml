@@ -32,7 +32,7 @@
     <!-- with Smart placement on a multi-monitor system, try to place new windows
          on: 'Any' - any monitor, 'Mouse' - where the mouse is, 'Active' - where
          the active window is, 'Primary' - only on the primary monitor -->
-    <primaryMonitor>1</primaryMonitor>
+    <primaryMonitor>Active</primaryMonitor>
     <!-- The monitor where Openbox should place popup dialogs such as the
          focus cycling popup, or the desktop switch popup.  It can be an index
          from 1, specifying a particular monitor.  Or it can be one of the
@@ -289,17 +289,17 @@
     <!-- Keybinding for pause/play and other for ncmpcpp -->
     <keybind key="C-A-0">
       <action name="Execute">
-        <command>ncmpcpp next</command>
+        <command>spotify_playback 1</command>
       </action>
     </keybind>
     <keybind key="C-A-9">
       <action name="Execute">
-        <command>ncmpcpp prev</command>
+        <command>spotify_playback 2</command>
       </action>
     </keybind>
     <keybind key="XF86AudioPlay">
       <action name="Execute">
-        <command>ncmpcpp toggle</command>
+        <command>spotify_playback 0</command>
       </action>
     </keybind>
     <keybind key="XF86AudioStop">
@@ -309,7 +309,7 @@
     </keybind>
     <keybind key="C-A-p">
       <action name="Execute">
-        <command>ncmpcpp toggle</command>
+        <command>spotify_playback 0</command>
       </action>
     </keybind>
     <!-- Keybindings for window switching -->

@@ -107,13 +107,11 @@ function! PasteWithRetain(mode)
         echo "Unexpected Mode!!"
     endif
     if col(".") == col("$") - 1
-        " if getline(".")[col(".") - 1] == " "
-        " if strpart(getline("."), col(".") - 1, 1) == " "
-        "     normal! p
-        " else
-        "     normal! P
-        " endif
-        normal! p
+        if matchstr(getline('.'), '\%' . col('.') . 'c.') == " "
+            normal! p
+        else
+            normal! P
+        endif
     else
         normal! P
     endif
@@ -326,6 +324,9 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Toggle NerdTree
 nnoremap <leader><C-n> :NERDTreeToggle<CR>
+
+" Ignore files in the following array of regular expressions
+let NERDTreeIgnore = ['\~$', '\.pyc$']
 
 " Unite options
 autocmd FileType unite call s:unite_my_settings()
