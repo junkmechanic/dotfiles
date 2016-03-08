@@ -28,10 +28,8 @@ nnoremap <C-n> :nohlsearch<CR>
 
 nnoremap yt :tabduplicate<CR>
 
-colorscheme darkness
+colorscheme indigo
 
 set editor=~/bin/run_vim
 
 set hintchars=hjklasdfgyuiopqwertnmzxcvb
-
-highlight Hint font-family: Sans; font-size: 12px; font-weight: bold; color: yellow; background-color: rgba(0, 0, 0, 0.5); border: solid 1px LightGray;

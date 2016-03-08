@@ -138,3 +138,6 @@
 	path = vim/bundle/unite-neoyank
 	url = git@github.com:Shougo/neoyank.vim.git
     ignore = dirty
+[submodule "vim/bundle/argumentative"]
+	path = vim/bundle/argumentative
+	url = git@github.com:PeterRincker/vim-argumentative.git

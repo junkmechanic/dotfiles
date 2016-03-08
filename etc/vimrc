@@ -47,7 +47,7 @@ inoremap Uu <Esc>u
 inoremap <C-J> <Esc>o
 " Python specific mapping
 inoremap <Leader><C-J> <Esc>A:<Esc>o
-nnoremap <Leader>; A:<Esc>
+nnoremap <Leader><C-J> A:<Esc>o
 
 " Adding parameters to functions
 nnoremap <leader>i i,<space>
@@ -77,6 +77,9 @@ nnoremap <CR> o<Esc>
 " default quickfix <CR> behaviour to jump to the specified line/buffer. So the
 " following should help.
 autocmd FileType qf silent! nunmap <CR>
+
+" more quickfix mappings
+autocmd FileType qf silent! nnoremap q :q<CR>
 
 " Navigation to the last visited tab
 let g:lasttab = 1
@@ -153,7 +156,7 @@ nnoremap <Leader>o Do<C-R>"<Esc>
 nnoremap <Leader>O DO<C-R>"<Esc>
 
 " map sort function to a key
-vnoremap <Leader>s :sort<CR>
+" vnoremap <Leader>s :sort<CR>
 
 " open all buffers as tabs
 nnoremap <Leader>t :tab all<CR>
@@ -327,6 +330,16 @@ nnoremap <leader><C-n> :NERDTreeToggle<CR>
 
 " Ignore files in the following array of regular expressions
 let NERDTreeIgnore = ['\~$', '\.pyc$']
+
+" Toggle Tagbar
+nnoremap <leader><C-t> :TagbarToggle<CR>
+
+" Tagbar options
+let g:tagbar_sort = 0
+
+" Slimux mappings
+nnoremap <leader>s :SlimuxREPLSendLine<CR>
+vnoremap <leader>s :SlimuxREPLSendSelection<CR>
 
 " Unite options
 autocmd FileType unite call s:unite_my_settings()
