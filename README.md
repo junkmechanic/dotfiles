@@ -9,8 +9,7 @@ Setup:
   1. Link vim dir
   2. `git submodule update --init --recursive`
   3. Run `make` inside vim/bundle/vimproc/
-  4. To update vim plugins, use `git submodule update --remote` (`gitsbup`
-alias)
+4. To update vim plugins, use `git submodule update --remote` (`gitsbup` alias)
 
 TODO:
 -----
@@ -18,3 +17,4 @@ TODO:
 (Mostly a revamp of the whole organizaiton)
 
 1. Merge home and sec
+2. Better vim plugin management (departure from git submodules)

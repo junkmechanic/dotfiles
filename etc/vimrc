@@ -298,6 +298,7 @@ let g:ctrlp_max_height = 15
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
+nnoremap <leader><C-p> :CtrlPMRU<CR>
 
 " Settings for python-mode
 let g:pymode_rope = 0

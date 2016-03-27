@@ -293,7 +293,7 @@ shopt -s autocd cdspell
 eval "$(thefuck --alias)"
 
 # adding powerline
-. /home/ankur/.files/vim/bundle/powerline/powerline/bindings/bash/powerline.sh
+. /home/ankur/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 
 # auto-activation of virtualenv
 export PROMPT_COMMAND="$PROMPT_COMMAND venv_prompt"

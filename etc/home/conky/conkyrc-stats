@@ -105,5 +105,5 @@ ${endif}$hr${if_running spotify}
 ${exec sp current | grep -i artist | cut -d':'  -f1 --complement | sed 's/^ *//'}
 ${exec sp current | grep -i album | cut -d':'  -f1 --complement | sed 's/^ *//'}
 ${exec sp current | grep -i title | cut -d':'  -f1 --complement | sed 's/^ *//'}
-${exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player string:PlaybackStatus | grep variant | cut -d'"' -f2}
+# ${exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player string:PlaybackStatus | grep variant | cut -d'"' -f2}
 $hr${endif}

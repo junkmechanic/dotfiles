@@ -141,3 +141,4 @@
 [submodule "vim/bundle/argumentative"]
 	path = vim/bundle/argumentative
 	url = git@github.com:PeterRincker/vim-argumentative.git
+    ignore = dirty

@@ -151,6 +151,8 @@ def toggle_playback(player):
 
 
 def is_playing(player):
+    if player == 1:
+        return False
     if player not in music_players:
         music_players[player] = MusicPlayer(player)
     if music_players[player].playback_status() == 'Playing':

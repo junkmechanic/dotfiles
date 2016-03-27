@@ -1,7 +1,7 @@
 import os
 import json
 import codecs
-from collections import namedtuple
+from functools import wraps
 # import traceback as tb
 
 NEW_LINE = '\n'
@@ -59,39 +59,6 @@ class FileWriteBuffer:
             self.Buffer = []
 
 
-def cleanupToken(token, reps_allowed=1):
-    """
-    reps_allowed : no. of repretitions allowed. For example:
-        'sloooow' -> 'slow' for reps_allowed = 0
-        'sloooow' -> 'sloow' for reps_allowed = 1
-    """
-    Extra = namedtuple('Extra', ['index', 'times'])
-    extra_occurences = []
-    prev = ''
-    counter = 0
-    for i in range(len(token)):
-        if token[i] == prev:
-            counter += 1
-        else:
-            if counter > reps_allowed:
-                pos = i - (counter - reps_allowed)
-                extra = counter - reps_allowed
-                extra_occurences.append(Extra(index=pos, times=extra))
-            counter = 0
-            prev = token[i]
-    if counter > reps_allowed:
-        pos = i - (counter - reps_allowed)
-        extra = counter - reps_allowed
-        extra_occurences.append(Extra(index=pos, times=extra))
-    new_token = list(token)
-    deleted = 0
-    for extra in extra_occurences:
-        for _ in range(extra.times):
-            del new_token[extra.index - deleted]
-        deleted += extra.times
-    return ''.join(new_token)
-
-
 def loadJSON(filename):
     with open(filename) as ifi:
         json_tree = json.load(ifi)
@@ -107,3 +74,35 @@ def loadAllLines(filename):
 def saveJSON(obj, filename):
     with open(filename, 'w') as ofi:
         json.dump(obj, ofi)
+
+
+def replIter(repr):
+
+    @wraps(repr)
+    def list_iterator(lister):
+        for item in lister:
+            repr(item)
+            q = raw_input()
+            if q == 'q':
+                break
+
+    return list_iterator
+
+
+@replIter
+def simpleReplIter(item):
+    if isinstance(item, dict):
+        for key in item:
+            print '{} : {}'.format(key, item[key])
+    else:
+        print item
+
+
+def simple_file_lister(filename):
+    with open(filename) as ifi:
+        for line in ifi:
+            yield line
+
+
+def simpleFileIter(filename):
+    simpleReplIter(simple_file_lister(filename))
