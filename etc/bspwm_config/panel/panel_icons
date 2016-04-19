@@ -1,0 +1,23 @@
+. panel_colors
+
+icon() {
+  echo "%{F$COLOR_ICON}%{T2}$(printf $1)%{T-}%{F-}"
+}
+
+ICON_VOLUME="\uf3bc"
+ICON_VOLUME_LOW="\uf3b9"
+ICON_MUTE="\uf3bb"
+ICON_CLOCK="\uf337"
+ICON_DATE="\uf32e"
+ICON_BATTERY="\uf116"
+ICON_BATTERY_CHARGING="\uf114"
+ICON_BATTERY_FULL="\uf116"
+ICON_BATTERY_HALF="\uf116"
+ICON_BATTERY_EMPTY="\uf113"
+ICON_WIFI_HIGH="\uf2e8"
+ICON_WIFI_MID="\uf2e2"
+ICON_WIFI_LOW="\uf2e7"
+ICON_WIFI_NONE="\uf2e6"
+ICON_WIFI_NO_CON="\uf2e4"
+ICON_NET_DOWN="\uf2fe"
+ICON_NET_UP="\uf303"

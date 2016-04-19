@@ -1,0 +1,29 @@
+#! /bin/bash
+
+PANEL_FIFO=/tmp/panel-fifo
+PANEL_HEIGHT=45
+PANEL_WM_NAME="lemonbar"
+PANEL_FONT_FAMILY="DejaVu Sans-12"
+PANEL_ICON_FONT_FAMILY="Material\-Design\-Iconic\-Font-16"
+PANEL_DESK_ICON_FONT="FontAwesome-16"
+
+REFRESH_VOLUME=0.5
+REFRESH_BATTERY=10
+REFRESH_CLOCK=30
+REFRESH_DATE=60
+REFRESH_WIFI=5
+REFRESH_NET_SPEED=1
+
+WIFI_INTERFACE="wlan0"
+
+#num_mon=$(bspc query -M | wc -l)
+num_mon=$(xrandr | grep " connected" | wc -l)
+max_res=$(xrandr | grep "primary" | awk -F'[ +]' '{print $4}')
+IFS=x; read -a sizes <<<"$max_res"
+top_pad=5
+# top_pad=$(bspc config window_gap)
+side_pad=$(bspc config window_gap)
+monitor_pad=$(xrandr | grep "primary" | awk -F'+' '{print $2}')
+IFS=x; read -a sizes <<<"$max_res"
+rwidth=$(expr ${sizes[0]} - 2 \* $side_pad)
+BAR_GEOMETRY="${rwidth}x${PANEL_HEIGHT}+$(($side_pad + $monitor_pad))+${top_pad}"

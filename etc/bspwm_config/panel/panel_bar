@@ -1,0 +1,87 @@
+#! /bin/bash
+
+. panel_icons
+
+num_mon=$(bspc query -M | wc -l)
+
+separator="%{F$COLOR_SEPARATOR}\uf312%{F-}"
+desk_pad=" "
+
+while read -r line ; do
+  case $line in
+    CLK*)
+      # clock output
+      time=" ${line#???}"
+      ;;
+    DTE*)
+      # date output
+      date=" %{A:calendar.sh:}${line#???}%{A}"
+      ;;
+    TTL*)
+      # xtitle output
+      title=" %{T2}%{F$COLOR_TITLE}${line#???}%{F-}%{T-}"
+      ;;
+    BAT*)
+      # battery output
+      battery=" ${line#???}"
+      ;;
+    VOL*)
+      # volume
+      volume="%{A3:amixer sset Master toggle:}%{A4:amixer sset Master 2%+:}%{A5:amixer sset Master 2%-:}${line#???}%{A}%{A}%{A}"
+      ;;
+    NET*)
+      # network
+      network=" ${line#???}"
+      ;;
+    RXB*)
+      # network
+      rxed=" ${line#???}"
+      ;;
+    TXB*)
+      # network
+      txed=" ${line#???}"
+      ;;
+    W*)
+      # bspwm internal state
+      wm_infos="%{T3}"
+      IFS=':'
+      set -- ${line#?}
+      while [ $# -gt 0 ] ; do
+        item=$1
+        name="${item#?}"
+        name="%{A:bspc desktop -f $name:} ${desk_pad}${name}${desk_pad} %{A}"
+        # name="%{A:bspc desktop -f $name:} ${name} %{A}"
+        case $item in
+          O*)
+            # focused occupied desktop
+            wm_infos="$wm_infos%{B$COLOR_DESK_BACK}%{+u}${name}%{-u}%{B-}"
+            ;;
+          F*)
+            # focused free desktop
+            wm_infos="$wm_infos%{B$COLOR_DESK_BACK}%{+u}${name}%{-u}%{B-}"
+            ;;
+          U*)
+            # focused urgent desktop
+            wm_infos="$wm_infos%{B$COLOR_URGENT}%{+u}${name}%{-u}%{B-}"
+            ;;
+          o*)
+            # occupied desktop
+            wm_infos="$wm_infos${name}"
+            ;;
+          f*)
+            # free desktop
+            wm_infos="$wm_infos${name}"
+            ;;
+          u*)
+            # urgent desktop
+            wm_infos="$wm_infos%{B$COLOR_URGENT}${name}%{B-}"
+            ;;
+        esac
+        shift
+      done
+      wm_infos="$wm_infos%{T-}"
+      ;;
+  esac
+  # echo -e "%{l}${wm_infos} $separator ${title}%{r} $separator ${battery} $separator  ${volume} $separator ${time} "
+  echo -e "%{l}${wm_infos}  ${title}%{r}  ${txed}  ${rxed}  ${network}   ${battery}  ${volume} ${date} ${time} "
+done
