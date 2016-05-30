@@ -559,7 +559,7 @@
       <item label="Choose Wallpaper">
         <action name="Execute">
           <command>
-            nitrogen ~/images/wallpapers/
+            nitrogen --save ~/images/wallpapers/
           </command>
         </action>
       </item>

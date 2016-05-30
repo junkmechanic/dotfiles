@@ -31,7 +31,7 @@ draw_shades no
 draw_outline no
 draw_borders no
 draw_graph_borders yes
-default_color grey
+default_color 83a5b8
 default_shade_color red
 default_outline_color green
 alignment top_right
@@ -102,8 +102,8 @@ $mpd_album
 $mpd_bar
 $mpd_status$alignr$mpd_elapsed/$mpd_length
 ${endif}$hr${if_running spotify}
-${exec sp current | grep -i artist | cut -d':'  -f1 --complement | sed 's/^ *//'}
-${exec sp current | grep -i album | cut -d':'  -f1 --complement | sed 's/^ *//'}
+${exec sp current | grep -i albumartist | cut -d':'  -f1 --complement | sed 's/^ *//'}
+${exec sp current | grep -i 'album :' | cut -d':'  -f1 --complement | sed 's/^ *//'}
 ${exec sp current | grep -i title | cut -d':'  -f1 --complement | sed 's/^ *//'}
 # ${exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player string:PlaybackStatus | grep variant | cut -d'"' -f2}
 $hr${endif}
