@@ -11,7 +11,8 @@ output="$output"'<separator label="Current" />
     <item label="Monitor Zap">
         <action name="Execute">
             <command>
-                move-to-next-monitor '"$win_id"'
+                xdotool key Super+Shift+l
+                # move-to-next-monitor '"$win_id"'
             </command>
         </action>
     </item>

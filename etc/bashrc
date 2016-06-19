@@ -195,7 +195,7 @@ latest() {
 
 # Number of files in a directory (only an estimate. subtract 3 for closer
 # estimate. also hidden files and directories are included)
-count (){ TMP_COUNT_LL=$(ll $1 | wc -l); echo $(($TMP_COUNT_LL - 3)); }
+count (){ TMP_COUNT_LL=$(ls -AlhF $1 | wc -l); echo $(($TMP_COUNT_LL - 1)); }
 
 function lgrep {
     if [[ $# -eq 2 ]]; then
@@ -225,6 +225,10 @@ function flac2mp3 {
 
 function scpjtm {
     scp -r "$1" junktool:/sdcard/Music/
+}
+
+function remove_duplicates {
+    awk '!a[$0]++' $1 >"$1.no_duplicates"
 }
 
 function dusort {
@@ -317,6 +321,15 @@ source ~/.fzf.bash
 # In __fzf_cd__ function in ~/.fzf/shell/key-bindings.bash,
 # changed ' . ' in the find command to ' ~ ' , and removed the final command in
 # the pipe, ' cut -b3- '.
+# Instead, I have defined a new function with a new keybinding so I can have
+# both the functionalities
+__fzf_cd_home__() {
+  local dir
+  # dir=$(command \find -L ${1:-.} \( -path '*/\.*' -o -fstype 'dev' -o -fstype 'proc' \) -prune \
+  #   -o -type d -print 2> /dev/null | sed 1d | cut -b3- | $(__fzfcmd) +m) && printf 'cd %q' "$dir"
+  dir=$(command \find -L /home/ankur/ -type d -print 2> /dev/null | $(__fzfcmd) +m) && printf 'cd %q' "$dir"
+}
+bind '"\eh": " \C-e\C-u`__fzf_cd_home__`\e\C-e\er\C-m"'
 
 # PLEASE MAKE SURE THIS IS THE LAST LINE IN THIS FILE
 source ~/bin/acd_func.sh

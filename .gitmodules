@@ -142,3 +142,17 @@
 	path = vim/bundle/argumentative
 	url = git@github.com:PeterRincker/vim-argumentative.git
     ignore = dirty
+[submodule "vim/bundle/vim-fixkey"]
+	path = vim/bundle/vim-fixkey
+	url = git@github.com:drmikehenry/vim-fixkey.git
+    ignore = dirty
+[submodule "vim/bundle/vimshell"]
+	path = vim/bundle/vimshell
+	url = git@github.com:Shougo/vimshell.vim.git
+    ignore = dirty
+[submodule "vim/bundle/gitgutter"]
+	path = vim/bundle/gitgutter
+	url = git@github.com:airblade/vim-gitgutter.git
+[submodule "vim/bundle/neocomplete"]
+	path = vim/bundle/neocomplete
+	url = git@github.com:Shougo/neocomplete.vim.git

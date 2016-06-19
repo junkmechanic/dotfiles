@@ -13,7 +13,12 @@ set pastetoggle=<F2>
 set clipboard=unnamedplus
 
 " automatically change window's cwd to file's dir
-set autochdir
+" set autochdir
+
+" accept xterm keys
+" set term=xterm-256color
+" avoid clearing background color under xterm
+" set t_ut=
 
 " A logical mapping for 'Y'
 nnoremap Y y$
@@ -76,10 +81,10 @@ nnoremap <CR> o<Esc>
 " Since the quickfix window is not modifiable, the above mapping overwrites the
 " default quickfix <CR> behaviour to jump to the specified line/buffer. So the
 " following should help.
-autocmd FileType qf silent! nunmap <CR>
+autocmd FileType qf silent! nunmap <buffer> <CR>
 
 " more quickfix mappings
-autocmd FileType qf silent! nnoremap q :q<CR>
+autocmd FileType qf silent! nnoremap <buffer> q :q<CR>
 
 " Navigation to the last visited tab
 let g:lasttab = 1
@@ -165,25 +170,14 @@ nnoremap <Leader>t :tab all<CR>
 nnoremap <Leader>f yl:normal f<C-r>"<CR>
 
 " Meta/Alt key combinations
-let c='a'
-while c <= 'z'
-  exec "set <A-".c.">=\e".c
-  exec "imap \e".c." <A-".c.">"
-  let c = nr2char(1+char2nr(c))
-endw
-let c='A'
-while c <= 'Z'
-  exec "set <A-".c.">=\e".c
-  exec "imap \e".c." <A-".c.">"
-  let c = nr2char(1+char2nr(c))
-endw
-let c='0'
-while c <= '9'
-  exec "set <A-".c.">=\e".c
-  exec "imap \e".c." <A-".c.">"
-  let c = nr2char(1+char2nr(c))
-endw
-set ttimeout ttimeoutlen=5
+" The <m-alpha> have been set by vim-fixkey
+" let c='0'
+" while c <= '9'
+"   exec "set <A-".c.">=\e".c
+"   exec "imap \e".c." <A-".c.">"
+"   let c = nr2char(1+char2nr(c))
+" endw
+" set ttimeout ttimeoutlen=5
 
 " a saner approach to horizontal scrolling
 " <C-l> is also used for refershing the screen. So might have to add that later
@@ -387,7 +381,21 @@ nnoremap <S-F6> :w<CR>:execute 'ConqueTermVSplit ipython --profile=forvim -i '.e
 " mapping Shift + F7 to open a vertical split ipython conque shell
 nnoremap <S-F7> :ConqueTermVSplit ipython --profile=forvim<CR>
 " mapping Shift + F8 to open a vertical split bash conque shell
-nnoremap <S-F8> :ConqueTermVSplit bash<CR>
+" nnoremap <S-F8> :ConqueTermVSplit bash<CR>
+
+" Vimshell options
+let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+let g:vimshell_prompt = $USER." % "
+let g:vimshell_split_command="vsplit"
+nmap <S-F8> <Plug>(vimshell_split_switch)
+autocmd FileType vimshell
+	\  call vimshell#altercmd#define('gits', 'git status')
+	\| call vimshell#altercmd#define('ll', 'ls -AlhF')
+autocmd FileType vimshell call s:vimshell_local()
+
+function! s:vimshell_local()
+    imap <buffer> <C-d> <Plug>(vimshell_exit)
+endfunction
 
 " top open an xml file after passing it though xmllint from the GNU xmllib2
 " library to reformat and align the document along tags
