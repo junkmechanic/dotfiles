@@ -1,0 +1,37 @@
+#! /bin/bash
+
+sxhkd &
+
+bspc config border_width         4
+bspc config window_gap          12
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config focus_by_distance    true
+bspc config history_aware_focus  true
+
+bspc monitor eDP1 -d $(echo -e '\uf120') $(echo -e '\uf269') $(echo -e '\uf17c') $(echo -e '\uf013') $(echo -e '\uf109')
+bspc monitor HDMI1 -d $(echo -e '\uf26c')
+
+bspc config focused_border_color '#536641'
+
+bspc config remove_unplugged_monitors true
+bspc config remove_disabled_monitors true
+
+bspc rule -a Gimp desktop=^8 state=floating follow=on
+bspc rule -a Chromium desktop=^2
+bspc rule -a mplayer2 state=floating
+bspc rule -a Screenkey manage=off
+bspc rule -a Library state=floating
+
+# additions
+eval $(cat ~/.fehbg) &
+xrandr --output eDP1 --primary
+xsetroot -cursor_name left_ptr &
+xmodmap ~/.Xmodmap &
+compton --vsync opengl &
+syndaemon -i 1 -t -d &
+panel &
+clipit -d -n &
+conky &

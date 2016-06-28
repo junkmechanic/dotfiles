@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# sudo ip link set wlan0 up
+# sudo wpa_supplicant -Dwext -iwlan0 -c/etc/wpa_supplicant/wpa_supplicant.conf
+# sudo dhclient -r
+# sudo dhclient wlan0
+
+service wpa_supplicant restart
+sleep 1 && dhclient -r
+sleep 5 && dhclient wlan0

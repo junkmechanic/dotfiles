@@ -86,10 +86,6 @@
 	path = vim/bundle/vim-json
 	url = git@github.com:elzr/vim-json.git
     ignore = dirty
-[submodule "vim/bundle/yankstack"]
-	path = vim/bundle/yankstack
-	url = git@github.com:maxbrunsfeld/vim-yankstack.git
-    ignore = dirty
 [submodule "vim/bundle/unite"]
 	path = vim/bundle/unite
 	url = git@github.com:Shougo/unite.vim.git
@@ -153,6 +149,12 @@
 [submodule "vim/bundle/gitgutter"]
 	path = vim/bundle/gitgutter
 	url = git@github.com:airblade/vim-gitgutter.git
+    ignore = dirty
 [submodule "vim/bundle/neocomplete"]
 	path = vim/bundle/neocomplete
 	url = git@github.com:Shougo/neocomplete.vim.git
+    ignore = dirty
+[submodule "vim/bundle/fastfold"]
+	path = vim/bundle/fastfold
+	url = git@github.com:Konfekt/FastFold.git
+    ignore = dirty
