@@ -249,7 +249,7 @@ function venv_prompt {
     if [[ -e .venv ]]; then
         if [[ "$PWD" != "$OLD_VENV_PWD" ]]; then
             if [[ ! -z $VIRTUAL_ENV && $(cat .venv) = $(basename $VIRTUAL_ENV) ]]; then
-                echo "Already in $(basename $VIRTUAL_ENV)"
+                # echo "Already in $(basename $VIRTUAL_ENV)"
                 return
             fi
             OLD_VENV_PWD=$PWD
@@ -301,6 +301,9 @@ shopt -s autocd cdspell
 # activating thefuck
 eval "$(thefuck --alias)"
 
+# activating pip completion
+eval "`pip completion --bash`"
+
 # adding powerline
 . /home/ankur/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 
@@ -317,12 +320,7 @@ source ~/bin/bd-completion
 source ~/bin/split2flac-bash-completion.sh
 
 source ~/.fzf.bash
-# Changed the behaviour of Alt_c function to the following:
-# In __fzf_cd__ function in ~/.fzf/shell/key-bindings.bash,
-# changed ' . ' in the find command to ' ~ ' , and removed the final command in
-# the pipe, ' cut -b3- '.
-# Instead, I have defined a new function with a new keybinding so I can have
-# both the functionalities
+# Alt+h to open fzf from the home dir
 __fzf_cd_home__() {
   local dir
   # dir=$(command \find -L ${1:-.} \( -path '*/\.*' -o -fstype 'dev' -o -fstype 'proc' \) -prune \

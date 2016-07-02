@@ -5,20 +5,9 @@ autocmd! bufwritepost .vimrc source %
 call pathogen#infect()
 call pathogen#helptags()
 
-" yankstack compatibility with custom yank maps
-call yankstack#setup()
-
 " Better copy & paste
 set pastetoggle=<F2>
 set clipboard=unnamedplus
-
-" automatically change window's cwd to file's dir
-" set autochdir
-
-" accept xterm keys
-" set term=xterm-256color
-" avoid clearing background color under xterm
-" set t_ut=
 
 " A logical mapping for 'Y'
 nnoremap Y y$
@@ -256,10 +245,6 @@ cmap w!! w !sudo tee > /dev/null %
 " to wrap text, use ' :Wrap '
 command! -nargs=* Wrap set wrap linebreak nolist
 
-" Code folding
-" set foldmethod=indent
-" set foldlevel=99
-
 " Color scheme
 set t_Co=256
 color wombat256mod
@@ -326,10 +311,8 @@ nnoremap <leader><C-n> :NERDTreeToggle<CR>
 " Ignore files in the following array of regular expressions
 let NERDTreeIgnore = ['\~$', '\.pyc$']
 
-" Toggle Tagbar
-nnoremap <leader><C-t> :TagbarToggle<CR>
-
 " Tagbar options
+nnoremap <leader><C-t> :TagbarToggle<CR>
 let g:tagbar_sort = 0
 
 " Slimux mappings
@@ -361,9 +344,15 @@ nnoremap <leader>ur :UniteResume<CR>
 nnoremap <leader>ul :Unite -buffer-name=locate -default-action=tabopen -start-insert locate<CR>
 nnoremap <leader>/ :Unite -buffer-name=line -start-insert line<CR>
 
-" SuperTab options
-" au FileType python set omnifunc=pythoncomplete#Complete
-let g:SuperTabDefaultCompletionType = "context"
+" neocomplete options
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_auto_select = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+    return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
 
 " jedi-vim options
 let g:jedi#use_splits_not_buffers = "right"
@@ -405,14 +394,14 @@ au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 " Jump to the next or previous line that has the same level or a lower
 " level of indentation than the current line.
 "
-" exclusive (bool): true: Motion is exclusive
-" false: Motion is inclusive
-" fwd (bool): true: Go to next line
-" false: Go to previous line
-" lowerlevel (bool): true: Go to line with lower indentation level
-" false: Go to line with the same indentation level
-" skipblanks (bool): true: Skip blank lines
-" false: Don't skip blank lines
+" exclusive (bool)  :  true: Motion is exclusive
+"                      false: Motion is inclusive
+" fwd (bool)        :  true: Go to next line
+"                      false: Go to previous line
+" lowerlevel (bool) :  true: Go to line with lower indentation level
+"                      false: Go to line with the same indentation level
+" skipblanks (bool) :  true: Skip blank lines
+"                      false: Don't skip blank lines
 function! NextIndent(exclusive, fwd, lowerlevel, skipblanks)
   let line = line('.')
   let column = col('.')
@@ -461,18 +450,6 @@ let g:AutoPairsShortcutToggle = ''
 " <M-n> : Jump to next closed pair (g:AutoPairsShortcutJump)
 " <M-b> : BackInsert (g:AutoPairsShortcutBackInsert)
 
-" YankRing settings
-" nnoremap <F11> :YRShow<CR>
-"     let g:yankring_manual_clipboard_check = 1
-"     let g:yankring_replace_n_pkey = ',['
-"     let g:yankring_replace_n_nkey = ',]'
-"     let g:yankring_ignore_operator = 'g~ gu gU ! = gq g? > < zf g@ o O'
-"     let g:yankring_n_keys = 'D x X'
-"     let g:yankring_history_file = '.yankring_history_file'
-" function! YRRunAfterMaps()
-"     nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
-" endfunction
-
 " dragvisuals
 vmap  <expr>  <LEFT>   DVB_Drag('left')
 vmap  <expr>  <RIGHT>  DVB_Drag('right')
@@ -480,32 +457,5 @@ vmap  <expr>  <DOWN>   DVB_Drag('down')
 vmap  <expr>  <UP>     DVB_Drag('up')
 vmap  <expr>  D        DVB_Duplicate()
 
-"" ============================================================================
-"" LaTex Setup
-"" ============================================================================
-"
-"" using vim-latex
-"" git submodule add git://git.code.sf.net/p/vim-latex/vim-latex bundle/vim-latex
-"
-"" grep will sometimes skip displaying the file name if you
-"" search in a singe file. This will confuse Latex-Suite. Set your grep
-"" program to always generate a file-name.
-"set grepprg=grep\ -nH\ $*
-"
-"" Starting with Vim 7, the filetype of empty .tex files defaults to
-"" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-"" The following changes the default filetype back to 'tex':
-"let g:tex_flavor='latex'
-"
-"" this is mostly a matter of taste. but LaTeX looks good with just a bit
-"" of indentation.
-"set sw=2
-"
-"" if you write your \label's as \label{fig:something}, then if you
-"" type in \ref{fig: and press <C-n> you will automatically cycle through
-"" all the figure labels. Very useful!
-""set iskeyword+=:
-"
-"" This is to fix the <c-j> mapping that is being overwritten by imaps.vim in
-"" plugins dir of vim-latex
-"nnoremap <SID><c-q> <Plug>IMAP_JumpForward
+" LaTex options
+autocmd FileType tex set fo+=t
