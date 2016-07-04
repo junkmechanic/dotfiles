@@ -63,6 +63,9 @@ rofi.color-urgent: #000000,  #268d5a,  #000000,  #2e2e2e,  #268d5a
 rofi.color-active: #000000,  #268bd2,  #000000,  #2e2e2e,  #268bd2
 !                 ´background´, ´border´
 rofi.color-window: #000000,     #111111
+rofi.terminal: xfce4-terminal --maximize
+rofi.ssh-client: mosh
+rofi.ssh-command: {terminal} -e '{ssh-client} {host}'
 
 /* blue theme */
 ! rofi.opacity: 75

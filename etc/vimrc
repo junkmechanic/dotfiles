@@ -305,10 +305,8 @@ set nofoldenable
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" Toggle NerdTree
+" NERDTree options
 nnoremap <leader><C-n> :NERDTreeToggle<CR>
-
-" Ignore files in the following array of regular expressions
 let NERDTreeIgnore = ['\~$', '\.pyc$']
 
 " Tagbar options
@@ -459,3 +457,4 @@ vmap  <expr>  D        DVB_Duplicate()
 
 " LaTex options
 autocmd FileType tex set fo+=t
+autocmd FileType tex set spell spelllang=en_us

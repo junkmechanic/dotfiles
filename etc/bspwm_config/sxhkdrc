@@ -74,8 +74,10 @@ ctrl + alt + {h,l}
 super + {Tab,grave}
 	bspc {node,desktop} -f last
 
-alt + Tab
-    bspc node -f last local
+alt + {_,shift + }Tab
+    bspc node -l below; \
+    bspc node -f {next,prev}.local; \
+    bspc node -l normal
 
 # focus the older or newer node in the focus history
 super + {o,i}
@@ -142,6 +144,10 @@ super + @button{1-3}
 # lock screen
 ctrl + alt + Delete
     lock_screen
+
+# rofi windows
+alt + F1
+    rofi -show window
 
 # rofi ssh
 alt + F10
