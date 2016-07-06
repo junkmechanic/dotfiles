@@ -6,5 +6,4 @@
 # sudo dhclient wlan0
 
 service wpa_supplicant restart
-sleep 1 && dhclient -r
 sleep 5 && dhclient wlan0

@@ -80,13 +80,6 @@ let g:lasttab = 1
 nnoremap <leader>z :exec "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
-" search selected text
-vnoremap // y/<C-R>"<CR>
-
-" Removes highlight of your last search
-nnoremap <C-n> :nohl<CR>
-vnoremap <C-n> :nohl<CR>
-
 " Quicksave command
 noremap <C-Z> :update<CR>
 vnoremap <C-Z> <C-C>:update<CR>
@@ -97,20 +90,14 @@ inoremap <C-Z> <C-O>:update<CR>
 " text that needs to be replaced.
 function! PasteWithRetain(mode)
     if a:mode == 'n'
-        normal! viw"_d
+        normal! viw
     elseif a:mode == 'v'
-        normal! gv"_d
-    else
-        echo "Unexpected Mode!!"
+        normal! gv
     endif
     if col(".") == col("$") - 1
-        if matchstr(getline('.'), '\%' . col('.') . 'c.') == " "
-            normal! p
-        else
-            normal! P
-        endif
+        normal! "_dp
     else
-        normal! P
+        normal! "_dP
     endif
 endfunction
 nnoremap <leader>p :call PasteWithRetain('n')<CR>
@@ -230,6 +217,8 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+set updatetime=2000
+
 " Displaying line wrap
 set showbreak=↪
 
@@ -346,7 +335,12 @@ nnoremap <leader>/ :Unite -buffer-name=line -start-insert line<CR>
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#enable_auto_select = 1
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+let g:neocomplete#enable_auto_delimiter = 1
+inoremap <expr><C-l> neocomplete#complete_common_string()
+inoremap <expr><Tab>
+    \ neocomplete#complete_common_string() != '' ?
+        \ neocomplete#complete_common_string() :
+        \ pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
     return pumvisible() ? "\<C-y>" : "\<CR>"
@@ -379,13 +373,27 @@ autocmd FileType vimshell
 	\  call vimshell#altercmd#define('gits', 'git status')
 	\| call vimshell#altercmd#define('ll', 'ls -AlhF')
 autocmd FileType vimshell call s:vimshell_local()
-
 function! s:vimshell_local()
     imap <buffer> <C-d> <Plug>(vimshell_exit)
 endfunction
 
-" top open an xml file after passing it though xmllint from the GNU xmllib2
-" library to reformat and align the document along tags
+" SearchParty options
+let g:searchparty_load_user_maps = 0
+nmap <silent> <C-t>               <Plug>SearchPartyHighlightToggle
+nmap <silent> <c-n>                <Plug>SearchPartyHighlightClear
+nmap <silent> <leader>rm           <Plug>SearchPartyMultipleReplace
+nmap <silent> <leader>*            <Plug>SearchPartyHighlightWord
+nmap <silent> <leader>g*           <Plug>SearchPartyHighlightWORD
+nmap <silent> z/                   <Plug>SearchPartyToggleAutoHighlightWord
+nmap <silent> <leader><leader>/    <Plug>SearchPartySetSearch
+xmap <silent> *                    <Plug>SearchPartyVisualFindNext
+xmap <silent> #                    <Plug>SearchPartyVisualFindPrev
+xmap          &                    <Plug>SearchPartyVisualSubstitute
+
+" Format JSON files
+au FileType json exe ":silent %! python -m json.tool"
+
+" Format XML files
 au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 
 " -----------------------------------------------------------------------------
