@@ -376,6 +376,11 @@
         <command>rofi -show run</command>
       </action>
     </keybind>
+    <keybind key="A-grave">
+      <action name="Execute">
+        <command>rofi -show window</command>
+      </action>
+    </keybind>
     <!-- Keybindings for window switching with the arrow keys -->
     <keybind key="W-S-Up">
       <action name="DirectionalCycleWindows">

@@ -379,7 +379,8 @@ endfunction
 
 " SearchParty options
 let g:searchparty_load_user_maps = 0
-nmap <silent> <C-t>               <Plug>SearchPartyHighlightToggle
+let g:searchparty_visual_find_sets_search = 2
+nmap <silent> <C-t>                <Plug>SearchPartyHighlightToggle
 nmap <silent> <c-n>                <Plug>SearchPartyHighlightClear
 nmap <silent> <leader>rm           <Plug>SearchPartyMultipleReplace
 nmap <silent> <leader>*            <Plug>SearchPartyHighlightWord

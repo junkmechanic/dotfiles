@@ -155,3 +155,6 @@
 	path = vim/bundle/neco-look
 	url = git@github.com:ujihisa/neco-look.git
     ignore = dirty
+[submodule "vim/bundle/searchparty"]
+	path = vim/bundle/searchparty
+	url = git@github.com:dahu/SearchParty.git
