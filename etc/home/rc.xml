@@ -40,7 +40,7 @@
                     'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>GAIAPRO</name>
+    <name>Arc-Dark</name>
     <titleLayout>DSLIMC</titleLayout>
     <!--
       avaible characters are NDSLIMC, each can occur at most once.
@@ -868,13 +868,23 @@
         <action name="Unfocus"/>
       </mousebind>
       <mousebind button="A-Up" action="Click">
-        <action name="GoToDesktop">
-          <to>previous</to>
+        <action name="PreviousWindow">
+          <raise>yes</raise>
+          <finalactions>
+            <action name="Focus"/>
+            <action name="Raise"/>
+            <action name="Unshade"/>
+          </finalactions>
         </action>
       </mousebind>
       <mousebind button="A-Down" action="Click">
-        <action name="GoToDesktop">
-          <to>next</to>
+        <action name="NextWindow">
+          <raise>yes</raise>
+          <finalactions>
+            <action name="Focus"/>
+            <action name="Raise"/>
+            <action name="Unshade"/>
+          </finalactions>
         </action>
       </mousebind>
       <mousebind button="C-A-Up" action="Click">

@@ -158,3 +158,9 @@
 [submodule "vim/bundle/searchparty"]
 	path = vim/bundle/searchparty
 	url = git@github.com:dahu/SearchParty.git
+[submodule "vim/bundle/gitv"]
+	path = vim/bundle/gitv
+	url = git@github.com:gregsexton/gitv.git
+[submodule "vim/bundle/startify"]
+	path = vim/bundle/startify
+	url = git@github.com:mhinz/vim-startify.git

@@ -1,7 +1,10 @@
 import os
+import sys
 import json
 import codecs
 from functools import wraps
+from collections import OrderedDict
+from contextlib import contextmanager
 # import traceback as tb
 
 NEW_LINE = '\n'
@@ -9,10 +12,32 @@ BUFFER_MAX = 5000
 
 
 def to_unicode(text, encoding='utf-8'):
+    # provided that the text is not already decoded.
     if not isinstance(text, unicode):
         text = unicode(text, encoding)
     return text
 
+
+@contextmanager
+def ignored(*exceptions):
+    try:
+        yield
+    except exceptions:
+        pass
+
+
+@contextmanager
+def redirect_stdout(filename):
+    actual_stdout = sys.stdout
+    with open(filename, 'w') as f:
+        sys.stdout = f
+        try:
+            yield f
+        finally:
+            sys.stdout = actual_stdout
+
+
+# File I/O
 
 def writeToFile(filename, line, mode='a'):
     """
@@ -23,11 +48,11 @@ def writeToFile(filename, line, mode='a'):
         ofile.write(line)
 
 
-def deleteFiles(file_list):
+def deleteFiles(file_list, warn=False):
     for fname in file_list:
-        if os.path.isfile(fname):
-            d, f = os.path.split(fname)
-            print f + " exists. Deleting..."
+        with ignored(OSError):
+            if warn:
+                print "Deleting `{}` if it exists".format(fname)
             os.remove(fname)
 
 
@@ -59,6 +84,8 @@ class FileWriteBuffer:
             self.Buffer = []
 
 
+# JSON I/O
+
 def loadJSON(filename):
     with open(filename) as ifi:
         json_tree = json.load(ifi)
@@ -75,6 +102,8 @@ def saveJSON(obj, filename):
     with open(filename, 'w') as ofi:
         json.dump(obj, ofi)
 
+
+# REPL
 
 def replIter(repr):
 
@@ -106,3 +135,22 @@ def simple_file_lister(filename):
 
 def simpleFileIter(filename):
     simpleReplIter(simple_file_lister(filename))
+
+
+# Cache
+
+def lru_cache(max_size):
+    def cache_wrapper(pure_func):
+        cache = OrderedDict()
+
+        @wraps(pure_func)
+        def func_applier(*args):
+            if args in cache:
+                return cache[args]
+            result = pure_func(*args)
+            cache[args] = result
+            if len(cache) == max_size + 1:
+                cache.popitem(last=False)
+            return result
+        return func_applier
+    return cache_wrapper

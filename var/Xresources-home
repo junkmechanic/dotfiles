@@ -66,6 +66,7 @@ rofi.color-window: #000000,     #111111
 rofi.terminal: xfce4-terminal --maximize
 rofi.ssh-client: mosh
 rofi.ssh-command: {terminal} -e '{ssh-client} {host}'
+rofi.m: -5
 
 /* blue theme */
 ! rofi.opacity: 75

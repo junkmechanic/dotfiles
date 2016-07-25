@@ -2,6 +2,9 @@
 ! playback
 keycode 134 = XF86AudioPlay
 
+! Scult keyboard Menu key remapped to Super key
+keycode 135 = Super_L
+
 ! Remove Caps Lock and map the key to Ctrl
 remove Lock = Caps_Lock
 remove Control = Control_L

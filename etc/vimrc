@@ -12,9 +12,6 @@ set clipboard=unnamedplus
 " A logical mapping for 'Y'
 nnoremap Y y$
 
-" Fixing an overshooting line (mainly comments)
-nnoremap yx Dj0whhp
-
 " Rebind <Leader> key
 let mapleader = ","
 
@@ -156,8 +153,6 @@ nnoremap <Leader>f yl:normal f<C-r>"<CR>
 " set ttimeout ttimeoutlen=5
 
 " a saner approach to horizontal scrolling
-" <C-l> is also used for refershing the screen. So might have to add that later
-" if you run into screnios where refereshing the screen is necessary
 nnoremap <A-l> zl
 nnoremap <A-h> zh<c-h>
 
@@ -168,19 +163,16 @@ nnoremap <Leader>m <esc>:tabnext<CR>
 nnoremap <Leader><Leader>n <esc>:tabfirst<CR>
 nnoremap <Leader><Leader>m <esc>:tablast<CR>
 " jumping tabs by number
-let n = 1
-while n <= 9
-    exec 'nnoremap <A-' . n . '> ' . n . 'gt'
-    let n = n + 1
-endwhile
+" let n = 1
+" while n <= 9
+"     exec 'nnoremap <A-' . n . '> ' . n . 'gt'
+"     let n = n + 1
+" endwhile
 
 " lets go wild
 set wildmenu
 set wildmode=full
 
-" easier moving of code blocks
-" Try to go into visual mode (v), then select several lines of code here and
-" then press ``>`` several times.
 vnoremap < <gv
 vnoremap > >gv
 
@@ -189,10 +181,6 @@ vnoremap > >gv
 filetype off
 filetype plugin indent on
 syntax on
-
-" easier formatting of paragraphs
-vmap Q gq
-nmap Q gqap
 
 " Useful settings
 set history=700
@@ -291,8 +279,9 @@ set nofoldenable
 "-----------------------------------------------------------------------------
 
 " Start NerdTree automatically if vim is started without specifying any files
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Use case is deprecated in favor of Startify
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " NERDTree options
 nnoremap <leader><C-n> :NERDTreeToggle<CR>
@@ -341,6 +330,10 @@ inoremap <expr><Tab>
     \ neocomplete#complete_common_string() != '' ?
         \ neocomplete#complete_common_string() :
         \ pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr><S-Tab>
+    \ neocomplete#complete_common_string() != '' ?
+        \ neocomplete#complete_common_string() :
+        \ pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
     return pumvisible() ? "\<C-y>" : "\<CR>"
@@ -362,7 +355,9 @@ nnoremap <S-F6> :w<CR>:execute 'ConqueTermVSplit ipython --profile=forvim -i '.e
 " mapping Shift + F7 to open a vertical split ipython conque shell
 nnoremap <S-F7> :ConqueTermVSplit ipython --profile=forvim<CR>
 " mapping Shift + F8 to open a vertical split bash conque shell
+" this is now replaced by vimshell
 " nnoremap <S-F8> :ConqueTermVSplit bash<CR>
+autocmd FileType conque_term exe ":NeoCompleteLock"
 
 " Vimshell options
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
