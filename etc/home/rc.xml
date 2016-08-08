@@ -307,22 +307,22 @@
         <command>ncmpcpp stop</command>
       </action>
     </keybind>
-    <keybind key="C-A-p">
+    <keybind key="W-p">
       <action name="Execute">
         <command>unified_playback</command>
       </action>
     </keybind>
-    <keybind key="C-A-o">
+    <keybind key="W-o">
       <action name="Execute">
         <command>unified_playback --change</command>
       </action>
     </keybind>
-    <keybind key="C-A-9">
+    <keybind key="W-9">
       <action name="Execute">
         <command>unified_playback --previous</command>
       </action>
     </keybind>
-    <keybind key="C-A-0">
+    <keybind key="W-0">
       <action name="Execute">
         <command>unified_playback --next</command>
       </action>

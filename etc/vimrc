@@ -49,6 +49,7 @@ autocmd FileType help wincmd L
 
 " open all new splits on the right
 set splitright
+set splitbelow
 
 " mouse
 set mouse=a

@@ -287,12 +287,12 @@
       <action name="Iconify"/>
     </keybind>
     <!-- Keybinding for pause/play and other for ncmpcpp -->
-    <keybind key="C-A-0">
+    <keybind key="W-0">
       <action name="Execute">
         <command>spotify_playback 1</command>
       </action>
     </keybind>
-    <keybind key="C-A-9">
+    <keybind key="W-9">
       <action name="Execute">
         <command>spotify_playback 2</command>
       </action>
@@ -307,7 +307,7 @@
         <command>ncmpcpp stop</command>
       </action>
     </keybind>
-    <keybind key="C-A-p">
+    <keybind key="W-p">
       <action name="Execute">
         <command>spotify_playback 0</command>
       </action>

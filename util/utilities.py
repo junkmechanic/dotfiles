@@ -48,7 +48,9 @@ def writeToFile(filename, line, mode='a'):
         ofile.write(line)
 
 
-def deleteFiles(file_list, warn=False):
+def deleteFiles(file_list, warn=True):
+    if not isinstance(file_list, list):
+        file_list = [file_list]
     for fname in file_list:
         with ignored(OSError):
             if warn:
