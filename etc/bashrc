@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
-      *) return;;
+    *) return;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -47,12 +47,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
 
@@ -133,11 +133,11 @@ fi
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    fi
 fi
 
 # Add paths to $PATHS_TO_ADD instead of $PATH to avoid creating duplicates
@@ -150,7 +150,7 @@ for new_path in ${PATHS_TO_ADD//:/ }; do
 done
 
 #####################################################################
-# Functions
+# Functions without dependencies
 
 # to view path in readable format
 function path(){
@@ -314,19 +314,58 @@ fi
 # auto-activation of virtualenv
 export PROMPT_COMMAND="$PROMPT_COMMAND venv_prompt"
 
+# completion for bd
+# git clone git@github.com:vigneshwaranr/bd.git
 source ~/bin/bd-completion
 
+# completion for split2flac
+# git clone git@github.com:ftrvxmtrx/split2flac.git
 source ~/bin/split2flac-bash-completion.sh
 
 source ~/.fzf.bash
-# Alt+h to open fzf from the home dir
+# Custom functions
+# Alt+h to enter dir with home as root for fzf search
 __fzf_cd_home__() {
-  local dir
-  # dir=$(command \find -L ${1:-.} \( -path '*/\.*' -o -fstype 'dev' -o -fstype 'proc' \) -prune \
-  #   -o -type d -print 2> /dev/null | sed 1d | cut -b3- | $(__fzfcmd) +m) && printf 'cd %q' "$dir"
-  dir=$(command \find -L /home/ankur/ -type d -print 2> /dev/null | $(__fzfcmd) +m) && printf 'cd %q' "$dir"
+    local dir
+    dir=$(command \find -L /home/ankur/ -type d -print 2> /dev/null | $(__fzfcmd) +m) && printf 'cd %q' "$dir"
 }
 bind '"\eh": " \C-e\C-u`__fzf_cd_home__`\e\C-e\er\C-m"'
+
+# Alt+e to edit a file/dir with the current dir as root for fzf search
+__fzf_edit__() {
+    IFS='
+'
+    local declare files=($(fzf-tmux --select-1 --exit-0))
+    [[ -n "$files" ]] && printf 'vim %q' "${files[@]}"
+    unset IFS
+}
+bind '"\ee": " \C-e\C-u`__fzf_edit__`\e\C-e\er\C-m"'
+
+# Alt+a to edit a file/dir with home as root for fzf search
+__fzf_edit_home__() {
+    local dir
+    dir=$(command \find /home/ankur/ -print 2> /dev/null | $(__fzfcmd) +m) && printf 'vim %q' "$dir"
+}
+bind '"\ea": " \C-e\C-u`__fzf_edit_home__`\e\C-e\er\C-m"'
+
+# Alt+u to edit a file/dir with root as root for fzf search
+__fzf_edit_root__() {
+    local dir
+    dir=$(command \find / -print 2> /dev/null | $(__fzfcmd) +m) && printf 'vim %q' "$dir"
+}
+bind '"\eu": " \C-e\C-u`__fzf_edit_root__`\e\C-e\er\C-m"'
+
+# Browse git commits with fzf
+fshow() {
+    git log --graph --color=always \
+        --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+    fzf --ansi --no-sort --reverse --tiebreak=index \
+        --bind "ctrl-m:execute:
+               (grep -o '[a-f0-9]\{7\}' | head -1 |
+               xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+               {}
+FZF-EOF"
+}
 
 # PLEASE MAKE SURE THIS IS THE LAST LINE IN THIS FILE
 source ~/bin/acd_func.sh
