@@ -10,6 +10,10 @@ repo = 'vim-scripts/wombat256.vim'
 
 [[plugins]]
 repo = 'vim-airline/vim-airline'
+depends = ['vim-airline-themes']
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
 
 [[plugins]]
 repo = 'PeterRincker/vim-argumentative'
@@ -24,7 +28,7 @@ repo = 'tpope/vim-commentary'
 repo = 'oplatek/Conque-Shell'
 
 [[plugins]]
-repo = 'kien/ctrlp.vim'
+repo = 'ctrlpvim/ctrlp.vim'
 
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
@@ -130,3 +134,6 @@ repo = 'christoomey/vim-tmux-navigator'
 
 [[plugins]]
 repo = 'jmcantrell/vim-virtualenv'
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'

@@ -260,6 +260,12 @@ function venv_prompt {
 
 set_title() { printf '\e]2;%s\a' "$*"; }
 
+__git_diff__() {
+    printf "git diff $@"
+}
+bind '"\ez": " \C-e\C-u`__git_diff__`\e\C-e\er\C-m"'
+bind '"\ev": " \C-e\C-u`__git_diff__ --staged`\e\C-e\er\C-m"'
+
 #####################################################################
 # Setting variables, sourcing scripts etc
 
