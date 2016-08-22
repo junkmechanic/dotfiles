@@ -6,7 +6,8 @@ keycode 134 = XF86AudioPlay
 keycode 135 = Super_L
 
 ! Remove Caps Lock and map the key to Ctrl
-remove Lock = Caps_Lock
-remove Control = Control_L
-keysym Caps_Lock = Control_L
-add Control = Control_L
+! This is now done with setxkbmap in autostart
+! remove Lock = Caps_Lock
+! remove Control = Control_L
+! keysym Caps_Lock = Control_L
+! add Control = Control_L

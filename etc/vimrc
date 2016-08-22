@@ -311,7 +311,8 @@ function! Unite_vgrep(search_string, auto)
         exec 'Unite -buffer-name=vgrep -default-action=tabopen grep::-iHn:'.l:escaped_str
     endif
 endfunction
-nnoremap <leader>uf :Unite -buffer-name=file_rec -default-action=tabopen file_rec/async<CR>
+nnoremap <leader>uf :Unite -buffer-name=file_rec -default-action=tabopen -start-insert file_rec/async<CR>
+nnoremap <leader>uh :Unite -buffer-name=file_rec -default-action=tabopen -start-insert file_rec/async:/home/ankur/<CR>
 nnoremap <leader>uy :Unite -buffer-name=yank -default-action=append history/yank<CR>
 nnoremap <leader>ug :Unite -buffer-name=grep_auto -default-action=tabopen grep:.:-iHn:<C-R><C-W><CR>
 nnoremap <leader>uG :Unite -buffer-name=grep -default-action=tabopen grep<CR>
@@ -339,6 +340,9 @@ inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
     return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
+call neocomplete#custom#source('_', 'converters',
+    \ ['converter_remove_overlap', 'converter_remove_last_paren',
+    \  'converter_delimiter', 'converter_abbr'])
 
 " jedi-vim options
 let g:jedi#use_splits_not_buffers = "right"

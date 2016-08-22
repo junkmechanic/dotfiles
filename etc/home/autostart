@@ -83,6 +83,9 @@ cb-cowpowers &
 
 ## Mapping media keys
 xmodmap /home/ankur/.Xmodmap &
+setxkbmap -option 'caps:ctrl_modifier' &
+# git clone git@github.com:alols/xcape.git
+xcape -e 'Caps_Lock=Escape' &
 
 ## Starting QMPDClient
 qmpdclient &
@@ -115,9 +118,6 @@ syndaemon -i 1 -t -d &
 
 ## Start the virtual keyboard
 (sleep 22s && florence) &
-
-## Battery icon
-#cbatticon -u 60 -i standard -c "systemctl poweroff" -l 15 -r 3 &
 
 ## Alarm Clock
 # alarmclock &

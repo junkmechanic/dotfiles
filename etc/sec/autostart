@@ -35,6 +35,8 @@ xset b off &
 (sleep 10s && conky -q -c ~/.conky/conkyrc-stats) &
 
 xmodmap /home/ankur/.Xmodmap &
+setxkbmap -option 'caps:ctrl_modifier' &
+xcape -e 'Caps_Lock=Escape' &
 
 # To disable touchpad for 1 sec while typing
 syndaemon -i 1 -t -d &

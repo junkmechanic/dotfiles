@@ -380,6 +380,10 @@ inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr><C-g>     deoplete#undo_completion()
 inoremap <expr><C-l>     deoplete#refresh()
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function() abort
+    return pumvisible() ? deoplete#close_popup() : "\<CR>"
+endfunction
 " if you dont want deoplete to intrude on your editing, you can disable it on
 " startup (use the option above) and use the following mapping to trigger it
 " with <TAB>
@@ -391,7 +395,6 @@ inoremap <expr><C-l>     deoplete#refresh()
 "     let col = col('.') - 1
 "     return !col || getline('.')[col - 1]  =~ '\s'
 " endfunction"}}}
-" TODO: remove look source from source code files
 
 " dragvisuals
 vmap  <expr>  <LEFT>   DVB_Drag('left')
@@ -470,8 +473,8 @@ function! Unite_vgrep(search_string, auto)
     exec 'Unite -buffer-name=vgrep -default-action=tabopen grep::-iHn:'.l:escaped_str
   endif
 endfunction
-" TODO: make file_rec open in insert mode
-nnoremap <leader>uf :Unite -buffer-name=file_rec -default-action=tabopen file_rec/async<CR>
+nnoremap <leader>uf :Unite -buffer-name=file_rec -default-action=tabopen -start-insert file_rec/neovim<CR>
+nnoremap <leader>uh :Unite -buffer-name=file_rec -default-action=tabopen -start-insert file_rec/neovim:/home/ankur/<CR>
 nnoremap <leader>uy :Unite -buffer-name=yank -default-action=append history/yank<CR>
 nnoremap <leader>ug :Unite -buffer-name=grep_auto -default-action=tabopen grep:.:-iHn:<C-R><C-W><CR>
 nnoremap <leader>uG :Unite -buffer-name=grep -default-action=tabopen grep<CR>
