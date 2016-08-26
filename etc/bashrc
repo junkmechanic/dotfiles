@@ -93,6 +93,7 @@ alias duall='du -shc .[!.]* *'
 alias gita='git add'
 alias gitc='git commit'
 alias gitd='git diff'
+alias gitds='git diff --staged'
 alias gitl='git log -1'
 alias gitrso='git remote show origin'
 alias gits='git status'
@@ -260,11 +261,11 @@ function venv_prompt {
 
 set_title() { printf '\e]2;%s\a' "$*"; }
 
-__git_diff__() {
-    printf "git diff $@"
+__git_cmd__() {
+    printf "git "$@""
 }
-bind '"\ez": " \C-e\C-u`__git_diff__`\e\C-e\er\C-m"'
-bind '"\ev": " \C-e\C-u`__git_diff__ --staged`\e\C-e\er\C-m"'
+bind '"\ez": " \C-e\C-u`__git_cmd__ diff`\e\C-e\er\C-m"'
+bind '"\es": " \C-e\C-u`__git_cmd__ status`\e\C-e\er\C-m"'
 
 #####################################################################
 # Setting variables, sourcing scripts etc

@@ -68,7 +68,7 @@ nnoremap <CR> o<Esc>
 " Since the quickfix window is not modifiable, the above mapping overwrites the
 " default quickfix <CR> behaviour to jump to the specified line/buffer. So the
 " following should help.
-autocmd FileType qf silent! nunmap <buffer> <CR>
+autocmd FileType qf silent! nnoremap <buffer> <CR> <CR>
 
 " more quickfix mappings
 autocmd FileType qf silent! nnoremap <buffer> q :q<CR>

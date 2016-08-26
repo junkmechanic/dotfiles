@@ -788,15 +788,6 @@
         <command>cb-aerosnap --right</command>
       </action>
     </keybind>
-    <keybind key="A-s">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>coretemp</name>
-        </startupnotify>
-        <command>cput</command>
-      </action>
-    </keybind>
     <keybind key="C-A-c">
       <action name="Execute">
         <startupnotify>

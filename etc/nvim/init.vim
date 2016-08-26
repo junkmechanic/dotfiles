@@ -218,10 +218,11 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 " Open help in a right vertical split
 autocmd FileType help wincmd L
 
-" Since the quickfix window is not modifiable, the above mapping overwrites the
-" default quickfix <CR> behaviour to jump to the specified line/buffer. So the
-" following should help.
-autocmd FileType qf silent! nunmap <buffer> <CR>
+" Since the quickfix window is not modifiable, the global mapping for <CR>
+" overwrites the default quickfix <CR> behaviour to jump to the specified
+" line/buffer. So the following buffer local mapping would remap <CR> to behave
+" as intended.
+autocmd FileType qf silent! nnoremap <buffer> <CR> <CR>
 
 " Quick exit from quickfix
 autocmd FileType qf silent! nnoremap <buffer> q :q<CR>
