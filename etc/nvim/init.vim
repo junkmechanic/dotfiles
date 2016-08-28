@@ -404,6 +404,9 @@ vmap  <expr>  <DOWN>   DVB_Drag('down')
 vmap  <expr>  <UP>     DVB_Drag('up')
 vmap  <expr>  D        DVB_Duplicate()
 
+" fakeclip options
+let g:vim_fakeclip_tmux_plus=1
+
 " use Space and any character to insert that character at the position of the
 " cursor. Enter a number before spcae to include that many characters.
 nnoremap <SPACE> :<C-U>call InsertChar#insert(v:count1)<CR>

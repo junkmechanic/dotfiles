@@ -2,7 +2,7 @@
 ###| updater script: can be placed in /usr/bin/aptupd |################
 echo -e "\e[1;96m|[\e[97m commencing system update\e[96m ]|\e[0m" &&
 echo -e "\e[1;96m(1) --> updating source repos\e[0m" &&
-apt-get update &&
+apt-get -o Acquire::Check-Valid-Until=false update &&
 echo -e "\e[1;96m(2) --> updating package cache\e[0m" &&
 apt-get check &&
 echo -e "\e[1;96m(3) --> updating existing packages\e[0m" &&
@@ -19,6 +19,5 @@ echo -e "\e[1;96m(8) --> purging configuration files\e[0m" &&
 aptitude purge '~c' &&
 echo -e "\e[1;96m|[\e[97m system upgrade complete\e[96m ]|\e[0m" &&
 echo -e "\e[1;96m(9) --> updating flash player\e[0m" &&
-update-flashplugin-nonfree --install 2>/dev/null
 update-pepperflashplugin-nonfree --install 2>/dev/null
 echo -e "\e[1;96m|[\e[97m flash player updated\e[96m ]|\e[0m"

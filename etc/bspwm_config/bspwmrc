@@ -29,7 +29,8 @@ bspc rule -a Library state=floating
 eval $(cat ~/.fehbg) &
 xrandr --output eDP1 --primary
 xsetroot -cursor_name left_ptr &
-xmodmap ~/.Xmodmap &
+setxkbmap -option 'caps:ctrl_modifier' &
+xcape -e 'Caps_Lock=Escape' &
 compton --vsync opengl &
 syndaemon -i 1 -t -d &
 panel &
