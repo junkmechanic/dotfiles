@@ -206,6 +206,9 @@ nnoremap <Leader>m <esc>:tabnext<CR>
 nnoremap <Leader><Leader>n <esc>:tabfirst<CR>
 nnoremap <Leader><Leader>m <esc>:tablast<CR>
 
+" Terminal mode
+tnoremap <Esc> <C-\><C-n>
+
 
 "" Autocmds
 
@@ -236,6 +239,9 @@ au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 " LaTex options
 autocmd FileType plaintex set fo+=t
 autocmd FileType plaintex set spell spelllang=en_us
+
+" Enter insert on terminal buffer
+au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
 
 "" Custom functionality
@@ -320,20 +326,6 @@ onoremap <silent> <leader>J :call NextIndent(1, 1, 1, 1)<CR>
 " airline config
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts=1
-" if !exists('g:airline_symbols')
-"   let g:airline_symbols = {}
-" endif
-" let g:airline_left_sep = ''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_alt_sep = ''
-" let g:airline#extensions#tabline#left_sep = ''
-" let g:airline#extensions#tabline#left_alt_sep = ''
-" let g:airline#extensions#tabline#right_sep = ''
-" let g:airline#extensions#tabline#right_alt_sep = ''
-" let g:airline_symbols.branch = ''
-" let g:airline_symbols.readonly = ''
-" let g:airline_symbols.linenr = ''
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 2
 let g:airline#extensions#tabline#show_splits = 1
@@ -350,18 +342,6 @@ let g:AutoPairsShortcutToggle = ''
 " <M-e> : Fast Wrap (g:AutoPairsShortcutFastWrap)
 " <M-n> : Jump to next closed pair (g:AutoPairsShortcutJump)
 " <M-b> : BackInsert (g:AutoPairsShortcutBackInsert)
-
-" ConqueShell options
-let g:ConqueTerm_FastMode = 0
-let g:ConqueTerm_Color = 1
-" mapping Shift + F5 to run the program in an ipython conque shell
-nnoremap <S-F5> :w<CR>:execute 'ConqueTermVSplit ipython '.expand('%:p')<CR>
-" mapping Shift + F6 to run the program and then land in a vertical split ipython conque shell along with the namespace of the program
-nnoremap <S-F6> :w<CR>:execute 'ConqueTermVSplit ipython --profile=forvim -i '.expand('%:p')<CR>
-" mapping Shift + F7 to open a vertical split ipython conque shell
-nnoremap <S-F7> :ConqueTermVSplit ipython --profile=forvim<CR>
-" mapping Shift + F8 to open a vertical split bash conque shell
-" nnoremap <S-F8> :ConqueTermVSplit bash<CR>
 
 " Settings for ctrlp
 let g:ctrlp_max_height = 15
@@ -426,6 +406,14 @@ let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
+" neoterm options
+let g:neoterm_position='vertical'
+let g:neoterm_autoinsert=1
+nnoremap <S-F5> :w<CR>:T python %<CR>
+nnoremap <S-F6> :w<CR>:T ipython -i %<CR>
+nnoremap <S-F7> :w<CR>:T ipython<CR>
+nnoremap <S-F8> :w<CR>:Topen<CR>
+
 " NERDTree options
 nnoremap <leader><C-n> :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\~$', '\.pyc$']
@@ -487,19 +475,6 @@ vnoremap <leader>uV y:call Unite_vgrep('<C-R><C-R>"', 0)<CR>
 nnoremap <leader>ur :UniteResume<CR>
 nnoremap <leader>ul :Unite -buffer-name=locate -default-action=tabopen -start-insert locate<CR>
 nnoremap <leader>/ :Unite -buffer-name=line -start-insert line<CR>
-
-" Vimshell options
-let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
-let g:vimshell_prompt = $USER." % "
-let g:vimshell_split_command="vsplit"
-nmap <S-F8> <Plug>(vimshell_split_switch)
-autocmd FileType vimshell
-  \  call vimshell#altercmd#define('gits', 'git status')
-  \| call vimshell#altercmd#define('ll', 'ls -AlhF')
-autocmd FileType vimshell call s:vimshell_local()
-function! s:vimshell_local()
-  imap <buffer> <C-d> <Plug>(vimshell_exit)
-endfunction
 
 
 "" Deprecated functionality

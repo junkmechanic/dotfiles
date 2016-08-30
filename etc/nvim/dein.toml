@@ -25,9 +25,6 @@ repo = 'jiangmiao/auto-pairs'
 repo = 'tpope/vim-commentary'
 
 [[plugins]]
-repo = 'oplatek/Conque-Shell'
-
-[[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
 
 [[plugins]]
@@ -74,6 +71,9 @@ repo = 'AndrewRadev/linediff.vim'
 
 [[plugins]]
 repo = 'terryma/vim-multiple-cursors'
+
+[[plugins]]
+repo = 'kassio/neoterm'
 
 [[plugins]]
 repo = 'scrooloose/nerdtree'
@@ -125,9 +125,6 @@ repo = 'Shougo/neoyank.vim'
 
 [[plugins]]
 repo = 'elzr/vim-json'
-
-[[plugins]]
-repo = 'Shougo/vimshell.vim'
 
 [[plugins]]
 repo = 'tmux-plugins/vim-tmux'
