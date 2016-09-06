@@ -101,10 +101,11 @@ set completeopt=longest,menuone
 
 set nofoldenable
 
+set relativenumber
+
 " Colors
-color wombat256mod
-let g:enable_bold_font = 1
-highlight ColorColumn ctermbg=233
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+color onedark
 
 
 "" Mappings
@@ -205,6 +206,10 @@ nnoremap <Leader>n <esc>:tabprevious<CR>
 nnoremap <Leader>m <esc>:tabnext<CR>
 nnoremap <Leader><Leader>n <esc>:tabfirst<CR>
 nnoremap <Leader><Leader>m <esc>:tablast<CR>
+
+" Python toggle True/False
+nnoremap <Leader><Leader>t ciwTrue<Esc>
+nnoremap <Leader><Leader>f ciwFalse<Esc>
 
 " Terminal mode
 tnoremap <Esc> <C-\><C-n>
@@ -324,13 +329,14 @@ onoremap <silent> <leader>J :call NextIndent(1, 1, 1, 1)<CR>
 "------------------------------------------------------------------------------
 
 " airline config
-let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='onedark'
+let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#tab_nr_type = 2
-let g:airline#extensions#tabline#show_splits = 1
+let g:airline#extensions#tabline#tab_nr_type=2
+let g:airline#extensions#tabline#show_splits=1
 let g:airline_inactive_collapse=0
-let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#show_close_button=0
+let g:airline#extensions#tabline#excludes = ['term://']
 
 " For autopairs flymode activation
 let g:AutoPairsFlyMode = 1
@@ -387,6 +393,13 @@ vmap  <expr>  D        DVB_Duplicate()
 " fakeclip options
 let g:vim_fakeclip_tmux_plus=1
 
+" hardtime on startup
+let g:hardtime_default_on = 1
+let g:hardtime_timeout = 500
+let g:hardtime_ignore_buffer_patterns = ["NERD.*"]
+let g:hardtime_ignore_quickfix = 1
+let g:hardtime_allow_different_key = 1
+
 " use Space and any character to insert that character at the position of the
 " cursor. Enter a number before spcae to include that many characters.
 nnoremap <SPACE> :<C-U>call InsertChar#insert(v:count1)<CR>
@@ -396,6 +409,8 @@ let g:jedi#use_splits_not_buffers = "right"
 let g:jedi#usages_command = "<leader><leader>u"
 let g:jedi#show_call_signatures = "2"
 set noshowmode
+" disable jedi completions since deoplete-jedi handles that
+let g:jedi#completions_enabled=0
 
 " Multiple cursors setup
 let g:multi_cursor_use_default_mapping=0
@@ -410,8 +425,8 @@ let g:multi_cursor_quit_key='<Esc>'
 let g:neoterm_position='vertical'
 let g:neoterm_autoinsert=1
 nnoremap <S-F5> :w<CR>:T python %<CR>
-nnoremap <S-F6> :w<CR>:T ipython -i %<CR>
-nnoremap <S-F7> :w<CR>:T ipython<CR>
+nnoremap <S-F6> :w<CR>:T ptipython -i %<CR>
+nnoremap <S-F7> :w<CR>:T ptipython<CR>
 nnoremap <S-F8> :w<CR>:Topen<CR>
 
 " NERDTree options

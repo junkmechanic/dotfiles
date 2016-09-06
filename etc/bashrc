@@ -124,6 +124,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # If neovim is installed, use that instead of vim
 if type nvim > /dev/null 2>&1; then
     alias vim='nvim'
+    alias vimdiff='nvim -d'
 fi
 
 # Alias definitions.

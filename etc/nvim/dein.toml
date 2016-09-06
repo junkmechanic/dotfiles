@@ -6,7 +6,7 @@ repo = 'Shougo/vimproc.vim'
 build = 'make'
 
 [[plugins]]
-repo = 'vim-scripts/wombat256.vim'
+repo = 'joshdick/onedark.vim'
 
 [[plugins]]
 repo = 'vim-airline/vim-airline'
@@ -56,6 +56,9 @@ repo = 'gregsexton/gitv'
 
 [[plugins]]
 repo = 'sjl/gundo.vim'
+
+[[plugins]]
+repo = 'takac/vim-hardtime'
 
 [[plugins]]
 repo = 'vim-scripts/IndexedSearch'

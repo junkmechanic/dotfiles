@@ -47,10 +47,6 @@
 	path = vim/bundle/linediff
 	url = git@github.com:AndrewRadev/linediff.vim.git
     ignore = dirty
-[submodule "vim/bundle/wombat256mod"]
-	path = vim/bundle/wombat256mod
-	url = https://github.com/vim-scripts/wombat256.vim
-    ignore = dirty
 [submodule "vim/bundle/indexed-search"]
 	path = vim/bundle/indexed-search
 	url = https://github.com/vim-scripts/IndexedSearch.git
@@ -158,9 +154,16 @@
 [submodule "vim/bundle/searchparty"]
 	path = vim/bundle/searchparty
 	url = git@github.com:dahu/SearchParty.git
+    ignore = dirty
 [submodule "vim/bundle/gitv"]
 	path = vim/bundle/gitv
 	url = git@github.com:gregsexton/gitv.git
+    ignore = dirty
 [submodule "vim/bundle/startify"]
 	path = vim/bundle/startify
 	url = git@github.com:mhinz/vim-startify.git
+    ignore = dirty
+[submodule "vim/bundle/onedark"]
+	path = vim/bundle/onedark
+	url = git@github.com:joshdick/onedark.vim.git
+    ignore = dirty
