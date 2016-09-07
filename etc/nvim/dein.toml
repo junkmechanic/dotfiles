@@ -140,3 +140,11 @@ repo = 'jmcantrell/vim-virtualenv'
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
+
+# More colorschemes
+
+[[plugins]]
+repo = 'kristijanhusak/vim-hybrid-material'
+
+[[plugins]]
+repo = 'jordwalke/flatlandia'

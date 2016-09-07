@@ -105,7 +105,9 @@ set relativenumber
 
 " Colors
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set termguicolors
 color onedark
+hi ColorColumn guibg=#323642
 
 
 "" Mappings
@@ -395,7 +397,7 @@ let g:vim_fakeclip_tmux_plus=1
 
 " hardtime on startup
 let g:hardtime_default_on = 1
-let g:hardtime_timeout = 500
+let g:hardtime_maxcount = 2
 let g:hardtime_ignore_buffer_patterns = ["NERD.*"]
 let g:hardtime_ignore_quickfix = 1
 let g:hardtime_allow_different_key = 1
