@@ -7,7 +7,7 @@ endif
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 let s:toml = '~/.config/nvim/dein.toml'
-" let s:lazy_toml = '~/.config/nvim/dein_lazy.toml'
+let s:lazy_toml = '~/.config/nvim/dein_lazy.toml'
 
 if &runtimepath !~# '/dein.vim'
   if !isdirectory(s:dein_repo_dir)
@@ -20,7 +20,7 @@ if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
   call dein#load_toml(s:toml, {'lazy': 0})
-  " call dein#load_toml(s:lazy_toml, {'lazy': 1})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
   call dein#end()
   call dein#save_state()
@@ -158,12 +158,16 @@ inoremap <C-Z> <C-O>:update<CR>
 " This is useful in the visual line mode
 vnoremap <leader>P y`>p
 
-" Delete to buffer 'a' instead of the default buffer
-nnoremap <expr> dw (v:register == '+') ? '"adw' : '"'.v:register.'dw'
-nnoremap <expr> dd (v:register == '+') ? '"add' : '"'.v:register.'dd'
-nnoremap <expr> dl (v:register == '+') ? '"adl' : '"'.v:register.'dl'
-nnoremap <expr> dh (v:register == '+') ? '"adh' : '"'.v:register.'dh'
-vnoremap <expr> d (v:register == '+') ? '"ad' : '"'.v:register.'d'
+" Delete to buffer 'd' instead of the default buffer
+nnoremap <expr> <leader>dw (v:register == '+') ? '"ddw' : '"'.v:register.'dw'
+nnoremap <expr> <leader>dd (v:register == '+') ? '"ddd' : '"'.v:register.'dd'
+vnoremap <expr> <leader>d (v:register == '+') ? '"dd' : '"'.v:register.'d'
+
+" Quick movements
+nnoremap H ^
+nnoremap L g_
+nnoremap J 6j
+nnoremap K 6k
 
 " Quick quit command
 noremap <Leader>e :quit<CR>  " Quit current window
@@ -412,10 +416,13 @@ let g:hardtime_allow_different_key = 1
 nnoremap <SPACE> :<C-U>call InsertChar#insert(v:count1)<CR>
 
 " jedi-vim options
-let g:jedi#use_splits_not_buffers = "right"
-let g:jedi#usages_command = "<leader><leader>u"
-let g:jedi#show_call_signatures = "2"
 set noshowmode
+let g:jedi#use_splits_not_buffers = "right"
+let g:jedi#show_call_signatures = "2"
+let g:jedi#usages_command = "<leader>ju"
+let g:jedi#goto_command = "<leader>jd"
+let g:jedi#goto_assignments_command = "<leader>ja"
+let g:jedi#documentation_command = "<leader>jd"
 " disable jedi completions since deoplete-jedi handles that
 let g:jedi#completions_enabled=0
 
@@ -466,10 +473,6 @@ xmap <silent> *                    <Plug>SearchPartyVisualFindNext
 xmap <silent> #                    <Plug>SearchPartyVisualFindPrev
 xmap          &                    <Plug>SearchPartyVisualSubstitute
 
-" Tagbar options
-nnoremap <leader><C-t> :TagbarToggle<CR>
-let g:tagbar_sort = 0
-
 " Unite options
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
@@ -487,9 +490,11 @@ function! Unite_vgrep(search_string, auto)
 endfunction
 nnoremap <leader>uf :Unite -buffer-name=file_rec -default-action=tabopen -start-insert file_rec/neovim<CR>
 nnoremap <leader>uh :Unite -buffer-name=file_rec -default-action=tabopen -start-insert file_rec/neovim:/home/ankur/<CR>
+nnoremap <leader>um :Unite -buffer-name=mru -default-action=tabopen -start-insert neomru/file<CR>
 nnoremap <leader>uy :Unite -buffer-name=yank -default-action=append history/yank<CR>
 nnoremap <leader>ug :Unite -buffer-name=grep_auto -default-action=tabopen grep:.:-iHn:<C-R><C-W><CR>
 nnoremap <leader>uG :Unite -buffer-name=grep -default-action=tabopen grep<CR>
+nnoremap <leader>uo :Unite -buffer-name=outline -direction=botright -vertical -winwidth=45 outline<CR>
 vnoremap <leader>uv y:call Unite_vgrep('<C-R><C-R>"', 1)<CR>
 vnoremap <leader>uV y:call Unite_vgrep('<C-R><C-R>"', 0)<CR>
 nnoremap <leader>ur :UniteResume<CR>

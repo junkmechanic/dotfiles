@@ -115,10 +115,6 @@
 	path = vim/bundle/vim-tmux-navigator
 	url = git@github.com:christoomey/vim-tmux-navigator.git
     ignore = dirty
-[submodule "vim/bundle/tagbar"]
-	path = vim/bundle/tagbar
-	url = https://github.com/majutsushi/tagbar.git
-    ignore = dirty
 [submodule "vim/bundle/unite-neoyank"]
 	path = vim/bundle/unite-neoyank
 	url = git@github.com:Shougo/neoyank.vim.git
@@ -166,4 +162,12 @@
 [submodule "vim/bundle/onedark"]
 	path = vim/bundle/onedark
 	url = git@github.com:joshdick/onedark.vim.git
+    ignore = dirty
+[submodule "vim/bundle/unite-outline"]
+	path = vim/bundle/unite-outline
+	url = git@github.com:Shougo/unite-outline.git
+    ignore = dirty
+[submodule "vim/bundle/unite-neomru"]
+	path = vim/bundle/unite-neomru
+	url = git@github.com:Shougo/neomru.vim.git
     ignore = dirty

@@ -1,3 +1,7 @@
 [[plugins]]
 repo = 'jiangmiao/auto-pairs'
 on_event = 'InsertEnter'
+
+[[plugins]]
+repo = 'elzr/vim-json'
+on_ft = 'json'

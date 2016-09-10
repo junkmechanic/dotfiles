@@ -19,9 +19,6 @@ repo = 'vim-airline/vim-airline-themes'
 repo = 'PeterRincker/vim-argumentative'
 
 [[plugins]]
-repo = 'jiangmiao/auto-pairs'
-
-[[plugins]]
 repo = 'tpope/vim-commentary'
 
 [[plugins]]
@@ -100,9 +97,6 @@ repo = 'mhinz/vim-startify'
 repo = 'tpope/vim-surround'
 
 [[plugins]]
-repo = 'majutsushi/tagbar'
-
-[[plugins]]
 repo = 'wellle/targets.vim'
 
 [[plugins]]
@@ -121,10 +115,13 @@ repo = 'Shougo/unite.vim'
 repo = 'ujihisa/unite-locate'
 
 [[plugins]]
-repo = 'Shougo/neoyank.vim'
+repo = 'Shougo/unite-outline'
 
 [[plugins]]
-repo = 'elzr/vim-json'
+repo = 'Shougo/neomru.vim'
+
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
 
 [[plugins]]
 repo = 'tmux-plugins/vim-tmux'
