@@ -7,7 +7,7 @@ call pathogen#helptags()
 
 " Better copy & paste
 set pastetoggle=<F2>
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 
 " A logical mapping for 'Y'
 nnoremap Y y$

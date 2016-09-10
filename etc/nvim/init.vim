@@ -48,7 +48,7 @@ let mapleader = ","
 
 " Better copy & paste
 set pastetoggle=<F2>
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 
 " Open all new splits on the right and below
 set splitright
@@ -392,6 +392,11 @@ vmap  <expr>  <DOWN>   DVB_Drag('down')
 vmap  <expr>  <UP>     DVB_Drag('up')
 vmap  <expr>  D        DVB_Duplicate()
 
+" easymotion options
+let g:EasyMotion_smartcase = 1
+nmap s <Plug>(easymotion-s2)
+vmap s <Plug>(easymotion-s2)
+
 " fakeclip options
 let g:vim_fakeclip_tmux_plus=1
 
@@ -430,6 +435,8 @@ nnoremap <S-F5> :w<CR>:T python %<CR>
 nnoremap <S-F6> :w<CR>:T ptipython -i %<CR>
 nnoremap <S-F7> :w<CR>:T ptipython<CR>
 nnoremap <S-F8> :w<CR>:Topen<CR>
+nnoremap <leader>s :TREPLSend<CR>
+vnoremap <leader>s :TREPLSend<CR>
 
 " NERDTree options
 nnoremap <leader><C-n> :NERDTreeToggle<CR>
@@ -458,10 +465,6 @@ nmap <silent> <leader><leader>/    <Plug>SearchPartySetSearch
 xmap <silent> *                    <Plug>SearchPartyVisualFindNext
 xmap <silent> #                    <Plug>SearchPartyVisualFindPrev
 xmap          &                    <Plug>SearchPartyVisualSubstitute
-
-" Slimux mappings
-nnoremap <leader>s :SlimuxREPLSendLine<CR>
-vnoremap <leader>s :SlimuxREPLSendSelection<CR>
 
 " Tagbar options
 nnoremap <leader><C-t> :TagbarToggle<CR>

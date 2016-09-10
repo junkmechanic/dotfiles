@@ -94,9 +94,6 @@ repo = 'tpope/vim-repeat'
 repo = 'dahu/SearchParty'
 
 [[plugins]]
-repo = 'epeli/slimux'
-
-[[plugins]]
 repo = 'mhinz/vim-startify'
 
 [[plugins]]
