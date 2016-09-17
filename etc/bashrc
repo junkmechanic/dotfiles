@@ -346,11 +346,8 @@ bind '"\eh": " \C-e\C-u`__fzf_cd_home__`\e\C-e\er\C-m"'
 
 # Alt+e to edit a file/dir with the current dir as root for fzf search
 __fzf_edit__() {
-    IFS='
-'
-    local declare files=($(fzf-tmux --select-1 --exit-0))
-    [[ -n "$files" ]] && printf 'vim %q' "${files[@]}"
-    unset IFS
+    local dir
+    dir=$(command \find ./ -print 2> /dev/null | $(__fzfcmd) +m) && printf 'vim %q' "$dir"
 }
 bind '"\ee": " \C-e\C-u`__fzf_edit__`\e\C-e\er\C-m"'
 

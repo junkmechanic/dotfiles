@@ -210,8 +210,6 @@ cnoremap w!! w !sudo tee > /dev/null %
 " Tab navigation
 nnoremap <Leader>n <esc>:tabprevious<CR>
 nnoremap <Leader>m <esc>:tabnext<CR>
-nnoremap <Leader><Leader>n <esc>:tabfirst<CR>
-nnoremap <Leader><Leader>m <esc>:tablast<CR>
 
 " Python toggle True/False
 nnoremap <Leader><Leader>t ciwTrue<Esc>
@@ -375,7 +373,7 @@ inoremap <expr><C-g>     deoplete#undo_completion()
 inoremap <expr><C-l>     deoplete#refresh()
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function() abort
-    return pumvisible() ? deoplete#close_popup() : "\<CR>"
+  return pumvisible() ? deoplete#close_popup() : "\<CR>"
 endfunction
 " if you dont want deoplete to intrude on your editing, you can disable it on
 " startup (use the option above) and use the following mapping to trigger it
@@ -394,12 +392,15 @@ vmap  <expr>  <LEFT>   DVB_Drag('left')
 vmap  <expr>  <RIGHT>  DVB_Drag('right')
 vmap  <expr>  <DOWN>   DVB_Drag('down')
 vmap  <expr>  <UP>     DVB_Drag('up')
-vmap  <expr>  D        DVB_Duplicate()
 
 " easymotion options
 let g:EasyMotion_smartcase = 1
 nmap s <Plug>(easymotion-s2)
 vmap s <Plug>(easymotion-s2)
+nmap <leader><leader>n <Plug>(easymotion-next)
+vmap <leader><leader>n <Plug>(easymotion-next)
+nmap <leader><leader>p <Plug>(easymotion-prev)
+vmap <leader><leader>p <Plug>(easymotion-prev)
 
 " fakeclip options
 let g:vim_fakeclip_tmux_plus=1
@@ -420,7 +421,7 @@ set noshowmode
 let g:jedi#use_splits_not_buffers = "right"
 let g:jedi#show_call_signatures = "2"
 let g:jedi#usages_command = "<leader>ju"
-let g:jedi#goto_command = "<leader>jd"
+let g:jedi#goto_command = "<leader>jc"
 let g:jedi#goto_assignments_command = "<leader>ja"
 let g:jedi#documentation_command = "<leader>jd"
 " disable jedi completions since deoplete-jedi handles that
@@ -442,8 +443,18 @@ nnoremap <S-F5> :w<CR>:T python %<CR>
 nnoremap <S-F6> :w<CR>:T ptipython -i %<CR>
 nnoremap <S-F7> :w<CR>:T ptipython<CR>
 nnoremap <S-F8> :w<CR>:Topen<CR>
-nnoremap <leader>s :TREPLSend<CR>
-vnoremap <leader>s :TREPLSend<CR>
+function! SendToNeoterm(mode)
+  if len(g:neoterm.instances) == 1
+    exec 'TREPLSetTerm 1'
+  endif
+  if a:mode == 'n'
+    exec 'TREPLSendLine'
+  elseif a:mode == 'v'
+    exec 'TREPLSendSelection'
+  endif
+endfunction
+nnoremap <leader>s :call SendToNeoterm('n')<CR>
+vnoremap <leader>s :call SendToNeoterm('v')<CR>
 
 " NERDTree options
 nnoremap <leader><C-n> :NERDTreeToggle<CR>
@@ -451,6 +462,7 @@ let NERDTreeIgnore = ['\~$', '\.pyc$']
 
 " Settings for python-mode
 let g:pymode_rope = 0
+let g:pymode_doc = 0
 let g:pymode_lint_ignore = "E501,E302"
 let g:pymode_lint_checkers = ['pyflakes', 'pep8']
 let g:pymode_breakpoint = 0
@@ -506,6 +518,10 @@ nnoremap <leader>/ :Unite -buffer-name=line -start-insert line<CR>
 
 " map sort function to a key
 " vnoremap <Leader>s :sort<CR>
+
+" Jump to the first/last tab
+" nnoremap <Leader><Leader>n <esc>:tabfirst<CR>
+" nnoremap <Leader><Leader>m <esc>:tablast<CR>
 
 " Meta/Alt key combinations
 " The <m-alpha> have been set by vim-fixkey

@@ -171,8 +171,6 @@ nnoremap <A-h> zh<c-h>
 " moving to adjacent tabs
 nnoremap <Leader>n <esc>:tabprevious<CR>
 nnoremap <Leader>m <esc>:tabnext<CR>
-nnoremap <Leader><Leader>n <esc>:tabfirst<CR>
-nnoremap <Leader><Leader>m <esc>:tablast<CR>
 " jumping tabs by number
 " let n = 1
 " while n <= 9
@@ -268,6 +266,7 @@ nnoremap <leader><C-p> :CtrlPMRU<CR>
 
 " Settings for python-mode
 let g:pymode_rope = 0
+let g:pymode_doc = 0
 let g:pymode_lint_ignore = "E501,E302"
 let g:pymode_lint_checkers = ['pyflakes', 'pep8']
 let g:pymode_breakpoint = 0
@@ -356,7 +355,7 @@ set noshowmode
 let g:jedi#use_splits_not_buffers = "right"
 let g:jedi#show_call_signatures = "2"
 let g:jedi#usages_command = "<leader>ju"
-let g:jedi#goto_command = "<leader>jd"
+let g:jedi#goto_command = "<leader>jc"
 let g:jedi#goto_assignments_command = "<leader>ja"
 let g:jedi#documentation_command = "<leader>jd"
 " disable jedi completions since deoplete-jedi handles that
@@ -474,7 +473,15 @@ vmap  <expr>  <LEFT>   DVB_Drag('left')
 vmap  <expr>  <RIGHT>  DVB_Drag('right')
 vmap  <expr>  <DOWN>   DVB_Drag('down')
 vmap  <expr>  <UP>     DVB_Drag('up')
-vmap  <expr>  D        DVB_Duplicate()
+
+" easymotion options
+let g:EasyMotion_smartcase = 1
+nmap s <Plug>(easymotion-s2)
+vmap s <Plug>(easymotion-s2)
+nmap <leader><leader>n <Plug>(easymotion-next)
+vmap <leader><leader>n <Plug>(easymotion-next)
+nmap <leader><leader>p <Plug>(easymotion-prev)
+vmap <leader><leader>p <Plug>(easymotion-prev)
 
 " LaTex options
 autocmd FileType tex set fo+=t
