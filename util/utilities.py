@@ -2,7 +2,7 @@ import os
 import sys
 import json
 import codecs
-from functools import wraps
+from functools import wraps, partial
 from collections import OrderedDict
 from contextlib import contextmanager
 # import traceback as tb
@@ -141,18 +141,19 @@ def simpleFileIter(filename):
 
 # Cache
 
-def lru_cache(max_size):
-    def cache_wrapper(pure_func):
-        cache = OrderedDict()
+def lru_cache(pure_func=None, max_size=50):
+    if not pure_func:
+        return partial(lru_cache, max_size=max_size)
 
-        @wraps(pure_func)
-        def func_applier(*args):
-            if args in cache:
-                return cache[args]
-            result = pure_func(*args)
-            cache[args] = result
-            if len(cache) == max_size + 1:
-                cache.popitem(last=False)
-            return result
-        return func_applier
-    return cache_wrapper
+    cache = OrderedDict()
+
+    @wraps(pure_func)
+    def func_applier(*args):
+        if args in cache:
+            return cache[args]
+        result = pure_func(*args)
+        cache[args] = result
+        if len(cache) == max_size + 1:
+            cache.popitem(last=False)
+        return result
+    return func_applier
