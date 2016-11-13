@@ -1,0 +1,141 @@
+# The following lines were added by compinstall
+
+zstyle ':completion:*' auto-description 'Specify : %d'
+zstyle ':completion:*' completer _expand _complete _ignored _correct
+zstyle ':completion:*' completions 1
+zstyle ':completion:*' format 'Completing : %d'
+zstyle ':completion:*' glob 1
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' ignore-parents parent pwd
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %l \(%p\): Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' list-suffixes true
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' '+r:|[.]=** r:|=**'
+zstyle ':completion:*' max-errors 2
+zstyle ':completion:*' preserve-prefix '//[^/]##/'
+zstyle ':completion:*' substitute 1
+zstyle ':completion:*' verbose true
+zstyle :compinstall filename '/home/ankur/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=10000
+setopt appendhistory autocd nomatch notify sharehistory histignorealldups
+unsetopt beep extendedglob
+bindkey -e
+# End of lines configured by zsh-newuser-install
+
+# More completions
+setopt menu_complete
+zstyle ':completion:*' menu select
+
+# shift-tab for reverse menu completion
+zmodload zsh/complist
+bindkey '^[[Z' reverse-menu-complete
+
+# rsync host completion
+zstyle -s ':completion:*:hosts' hosts _ssh_config
+[[ -r ~/.ssh/config ]] && _ssh_config+=($(cat ~/.ssh/config | sed -ne 's/Host[=\t ]//p'))
+zstyle ':completion:*:hosts' hosts $_ssh_config
+
+# Aliases
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias cd..='cd ..'
+alias duall='du -shc .[!.]* *'
+alias gita='git add'
+alias gitc='git commit'
+alias gitd='git diff'
+alias gitds='git diff --staged'
+alias gitl='git log -1'
+alias gitrso='git remote show origin'
+alias gits='git status'
+alias gitsbup='git submodule update --init --recursive --remote'
+alias ls='ls --color=auto'
+alias ll='ls -AlhF'
+alias pipgrep='pip freeze | grep'
+alias psgrep='ps aux | grep -v grep | grep'
+alias pti='ptipython'
+alias rsync='rsync --human-readable --partial --progress --rsh=ssh'
+alias sl='ls --color=auto'
+alias vim='nvim'
+alias tmat='tmux attach'
+alias tmgn='tmux new-session -s general'
+alias vimo='vim -O'
+alias vimp='vim -p'
+alias vimdiff='nvim -d'
+
+# update PATH
+export PATH=~/.local/bin:~/bin:$PATH
+
+# locale
+export LC_ALL="en_US.UTF-8"
+
+# open man pages with neovim
+export MANPAGER="nvim -c 'set ft=man' -"
+
+# sudo command shortcut
+sudo-command-line() {
+    [[ -z $BUFFER ]] && zle up-history
+    if [[ $BUFFER == sudo\ * ]]; then
+        LBUFFER="${LBUFFER#sudo }"
+    elif [[ $BUFFER == $EDITOR\ * ]]; then
+        LBUFFER="${LBUFFER#$EDITOR }"
+        LBUFFER="sudoedit $LBUFFER"
+    elif [[ $BUFFER == sudoedit\ * ]]; then
+        LBUFFER="${LBUFFER#sudoedit }"
+        LBUFFER="$EDITOR $LBUFFER"
+    else
+        LBUFFER="sudo $LBUFFER"
+    fi
+}
+zle -N sudo-command-line
+# Defined shortcut keys: [Esc] [Esc]
+bindkey "\e\e" sudo-command-line
+
+# delete one word at a time
+backward-kill-dir () {
+    local WORDCHARS=${WORDCHARS/\/}
+    zle backward-kill-word
+}
+zle -N backward-kill-dir
+bindkey '^[^?' backward-kill-dir
+# autoload -U select-word-style
+# select-word-style bash
+
+# custom sources
+source ~/.local/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.zsh
+source ~/.zsh/zsh-cdr/cdr.plugin.zsh
+source ~/.zsh/zaw/zaw.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# history substring search keybindings
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
+
+# accept and execute the current suggestion with ctrl+space
+bindkey '^ ' autosuggest-execute
+
+# bounce through previous dirs
+bindkey '^[w' zaw-cdr
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# git commit browser
+fshow() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
+}
