@@ -1,5 +1,5 @@
 #!/bin/bash
 
+setxkbmap -option 'caps:ctrl_modifier'
 xmodmap ~/.Xmodmap || \
-# notify-send -t 3000 -u low -i ~/.files/images/keyboard_grey.svg "Keys Mapped !!" ""  || \
 notify-send -t 3000 -u low -i ~/.files/images/keyboard_grey.svg "Key Mapping Failed !!" ""
