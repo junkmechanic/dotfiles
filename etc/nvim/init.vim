@@ -108,6 +108,10 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 color onedark
 hi ColorColumn guibg=#323642
+" I dont like that onedark changes the IncSearch group. I prefer to have it
+" reversed to have better highlighting with SearchParty.
+hi clear IncSearch
+hi IncSearch cterm=reverse gui=reverse
 
 
 "" Mappings
@@ -484,6 +488,7 @@ nmap <silent> <leader><leader>/    <Plug>SearchPartySetSearch
 xmap <silent> *                    <Plug>SearchPartyVisualFindNext
 xmap <silent> #                    <Plug>SearchPartyVisualFindPrev
 xmap          &                    <Plug>SearchPartyVisualSubstitute
+nmap          <leader>fow          <Plug>SearchPartyMashFOWToggle
 
 " Unite options
 autocmd FileType unite call s:unite_my_settings()

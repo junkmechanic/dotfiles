@@ -7,7 +7,7 @@ convert /tmp/screen.png -blur 0x5 /tmp/screen.png
 # if [ "$(playerctl status)" = "Playing"  ] ; then
 #   playerctl pause
 # fi
-i3lock -e -i /tmp/screen.png -o '#0f312e' -l '#57647d' -w '#572020'
+i3lock -e -i /tmp/screen.png
 # i3lock -u -i /tmp/screen.png
 # systemctl suspend
 rm /tmp/screen.png

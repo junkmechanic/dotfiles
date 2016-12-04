@@ -6,7 +6,6 @@ Before=sleep.target
 User=%I
 Type=forking
 Environment=DISPLAY=:0
-; ExecStartPre= -/usr/bin/pkill -u %u unison ; /usr/local/bin/music.sh stop ; /usr/bin/mysql -e 'slave stop'
 ExecStart=/home/ankur/bin/lock_screen
 ExecStartPost=/bin/sleep 1
 
