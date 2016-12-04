@@ -48,7 +48,11 @@ let mapleader = ","
 
 " Better copy & paste
 set pastetoggle=<F2>
-set clipboard+=unnamedplus
+if system('uname -s') == "Darwin\n"
+  set clipboard-=unnamedplus
+else
+  set clipboard+=unnamedplus
+endif
 
 " Open all new splits on the right and below
 set splitright
@@ -135,10 +139,18 @@ inoremap Cc <Esc>C
 inoremap Ss <Esc>S
 inoremap Dd <Esc>dd
 inoremap Uu <Esc>u
-inoremap <C-J> <Esc>o
 " Python specific mapping
-inoremap <Leader><C-J> <Esc>A:<Esc>o
-nnoremap <Leader><C-J> A:<Esc>o
+if system('uname -s') == "Darwin\n"
+  " OSX
+  " iterm2 cant capture control+enter
+  " inoremap <C-M> <Esc>o
+  inoremap <Leader><C-M> <Esc>A:<Esc>o
+  nnoremap <Leader><C-M> A:<Esc>o
+else
+  inoremap <C-J> <Esc>o
+  inoremap <Leader><C-J> <Esc>A:<Esc>o
+  nnoremap <Leader><C-J> A:<Esc>o
+endif
 
 " Adding parameters to functions
 nnoremap <leader>i i,<space>
@@ -170,8 +182,12 @@ vnoremap <expr> <leader>d (v:register == '+') ? '"dd' : '"'.v:register.'d'
 " Quick movements
 nnoremap H ^
 nnoremap L g_
+vnoremap H ^
+vnoremap L g_
 nnoremap J 6j
 nnoremap K 6k
+vnoremap J 6j
+vnoremap K 6k
 
 " Quick quit command
 noremap <Leader>e :quit<CR>  " Quit current window
