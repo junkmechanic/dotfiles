@@ -1,0 +1,4 @@
+The json config will not work with the main karabiner-Elements app.
+This only works with a fork of that which has the functionality to allow
+standalone modifiers. The repo can be clone from here:
+    git@github.com:wwwjfy/Karabiner-Elements.git
