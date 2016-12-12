@@ -115,6 +115,7 @@ alias gitsbup="git submodule update --init --recursive --remote"
 alias gt='cd $(git rev-parse --show-toplevel 2>/dev/null || (echo "."; echo "Not within a git repository" >&2))'
 alias ll="ls -AlhF"
 alias pipgrep="pip freeze | grep"
+alias psgrep="ps aux | grep -v grep | grep"
 alias pti="ptipython"
 alias rsync="noglob rsync --human-readable --partial --progress --rsh=ssh"
 alias sl="ls"
