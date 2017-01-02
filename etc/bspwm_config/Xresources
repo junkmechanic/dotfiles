@@ -148,23 +148,30 @@ Xcursor.size: 16
 ! 83a5b8 - light greyish blue
 ! 4e636e - bluish grey
 
-/* black theme */
-rofi.opacity: 80
-!rofi.font: Roboto Mono 11
 rofi.font: xft:Meslo LG M DZ Regular for Powerline Nerd Font Complete, Monospace 12
 rofi.padding: 3
 rofi.lines: 10
 rofi.borderwidth: 2
-rofi.color-enabled: true
-! State:           ´bg´,     ´fg´,     ´bgalt´,  ´hlbg´,   ´hlfg´
-rofi.color-normal: #000000,  #4e636e,  #000000,  #2e2e2e,  #83a5b8
-rofi.color-urgent: #000000,  #268d5a,  #000000,  #2e2e2e,  #268d5a
-rofi.color-active: #000000,  #268bd2,  #000000,  #2e2e2e,  #268bd2
-!                 ´background´, ´border´
-rofi.color-window: #000000,     #111111
 rofi.terminal: urxvt
 rofi.ssh-client: mosh
-rofi.m: -5
+rofi.fixed-num-lines: false
+rofi.color-enabled: true
+! ------------------------------------------------------------------------------
+! ROFI Color theme - Black
+! ------------------------------------------------------------------------------
+! State:           ´bg´,           ´fg´,           ´bgalt´,        ´hlbg´,         ´hlfg´
+/* rofi.color-normal: argb:00000000,  argb:FF4e636e,  argb:00000000,  argb:CC2e2e2e,  argb:FF83a5b8 */
+/* rofi.color-urgent: argb:00000000,  argb:FF268d5a,  argb:00000000,  argb:CC2e2e2e,  argb:FF268d5a */
+/* rofi.color-active: argb:00000000,  argb:FF268bd2,  argb:00000000,  argb:CC2e2e2e,  argb:FF268bd2 */
+!                 ´background´,    ´border´,       'separator'
+/* rofi.color-window: argb:CC000000,  argb:FF111111,  argb:FF2e2e2e */
+! ------------------------------------------------------------------------------
+! ROFI Color theme - Solarized
+! ------------------------------------------------------------------------------
+rofi.color-window: #CC002b37, #002b37, #003642
+rofi.color-normal: #00002b37, #819396, #00002b37, #DD003642, #819396
+rofi.color-active: #00002b37, #008ed4, #00002b37, #DD003642, #008ed4
+rofi.color-urgent: #00002b37, #da4281, #00002b37, #DD003642, #da4281
 
 ! x11-ssh-askpass
 ssh-askpass.background: #000000

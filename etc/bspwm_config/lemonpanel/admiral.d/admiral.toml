@@ -1,0 +1,34 @@
+[admiral]
+items = ["left",
+            "workspaces",
+         "center", "title",
+         "right",
+            "volume",
+            "clock"]
+
+[workspaces]
+path = "./bspwm_workspaces.sh"
+
+[title]
+path = "./lemonpanel.helper title"
+
+[clock]
+path = "./lemonpanel.helper clock"
+reload = 1
+
+[volume]
+path = "./lemonpanel.helper vol"
+reload = 1
+
+# Used for formatting lemonbar
+[left]
+path = "echo '%{l}'"
+static = true
+
+[center]
+path = "echo '%{c}'"
+static = true
+
+[right]
+path = "echo '%{r}'"
+static = true

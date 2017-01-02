@@ -7,6 +7,8 @@
 #   2. notify2 from PyPI
 #   3. dbus python bindings
 
+from __future__ import print_function
+
 import sys
 import dbus
 import notify2
@@ -39,7 +41,7 @@ class MusicPlayer(object):
         if player >= len(players):
             notify2.Notification('Unified Playback',
                                  "You're kidding yourself.")
-            print 'This doesnt represent any of the players : ' + player
+            print('This doesnt represent any of the players : ' + player)
         else:
             self.player = players[player]
             self.player_proxy = bus.get_object(dbus_names[player], object_path)
@@ -74,7 +76,7 @@ def is_player_running(player, silent=False):
                 if e.errno == 111:
                     if not silent:
                         notif.show()
-                        print 'MPD not running'
+                        print('MPD not running')
                     return False
                 else:
                     raise
@@ -89,7 +91,7 @@ def is_player_running(player, silent=False):
         else:
             if not silent:
                 notif.show()
-                print 'MPDris not running'
+                print('MPDris not running')
             return False
     elif player == 1:
         notif = notify2.Notification('Unified Playback',
@@ -101,7 +103,7 @@ def is_player_running(player, silent=False):
         else:
             if not silent:
                 notif.show()
-                print 'Spotify not running'
+                print('Spotify not running')
             return False
     elif player == 2:
         notif = notify2.Notification('Unified Playback',
@@ -113,7 +115,7 @@ def is_player_running(player, silent=False):
         else:
             if not silent:
                 notif.show()
-                print 'DeadBeef not running'
+                print('DeadBeef not running')
             return False
     elif player > len(players):
         notify2.Notification('Unified Playback',
@@ -185,8 +187,8 @@ def save_state(player):
         notify2.Notification('Unified Playback',
                              "Couldn't save player state",
                              picon).show()
-        print "Couldn't save player state"
-        print str(e)
+        print("Couldn't save player state")
+        print(str(e))
 
 
 try:
@@ -221,7 +223,7 @@ if args.next or args.previous:
     else:
         notify2.Notification('Unified Playback',
                              'The world is not spinning yet', picon).show()
-        print 'None of the players is playing anything'
+        print('None of the players is playing anything')
         sys.exit()
 else:
     if args.change:

@@ -1,5 +1,7 @@
 #!/bin/bash
 
-setxkbmap -option 'caps:ctrl_modifier'
+setxkbmap -option 'caps:ctrl_modifier' &
+setxkbmap -option 'shift:both_capslock' &
+xcape -e 'Caps_Lock=Escape' &
 xmodmap ~/.Xmodmap || \
 notify-send -t 3000 -u low -i ~/.files/images/keyboard_grey.svg "Key Mapping Failed !!" ""

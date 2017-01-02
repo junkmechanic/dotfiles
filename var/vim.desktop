@@ -2,10 +2,10 @@
 Encoding=UTF-8
 Name=Vim (Console)
 Comment=Edit text files in a console using Vim
-Exec=vim %u
-Terminal=true
+Exec=xfce4-terminal -e 'nvim %u'
+#Terminal=true
 Type=Application
-Icon=/usr/share/pixmaps/vim_icon.png
+Icon=/home/ankur/.files/images/vim_icon.png
 Categories=Application;Utility;TextEditor;
 StartupNotify=true
 MimeType=text/plain;

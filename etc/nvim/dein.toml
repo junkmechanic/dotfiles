@@ -37,9 +37,6 @@ repo = 'shinokada/dragvisuals.vim'
 repo = 'Lokaltog/vim-easymotion'
 
 [[plugins]]
-repo = 'cazador481/fakeclip.neovim'
-
-[[plugins]]
 repo = 'Konfekt/FastFold'
 
 [[plugins]]

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+. lemonpanel.config
+
+case $1 in
+    title)
+        while read -r line; do
+            if [[ ! -z $line ]]; then
+                title_info="%{T2}%{B$BAR_BG}%{F$WRKSPC_BG}$SEP_L%{F-}%{B-}%{T-}"
+                title_info="$title_info%{T2}%{B$WRKSPC_BG}%{F$WRKSPC_FG}  $line  %{F-}%{B-}%{T-}"
+                title_info="$title_info%{T2}%{B$BAR_BG}%{F$WRKSPC_BG}$SEP_R%{F-}%{B-}%{T-}"
+                echo $title_info
+            else
+                echo
+            fi
+        done < <(xtitle -s -t 100)
+        ;;
+    clock)
+        clock_info="%{T2}%{B$BAR_BG}%{F$WRKSPC_BG}$SEP_L%{F-}%{B-}%{T-}"
+        clock_info="$clock_info%{T2}%{B$WRKSPC_BG}%{F$WRKSPC_FG}  "
+        clock_info="$clock_info$TIME_ICON $(date +"$clock_format")"
+        clock_info="$clock_info  $CALENDAR_ICON $(date +"$date_format")"
+        clock_info="$clock_info  %{F-}%{B-}%{T-}"
+        clock_info="$clock_info%{T2}%{B$BAR_BG}%{F$WRKSPC_BG}$SEP_R%{F-}%{B-}%{T-}"
+        echo $clock_info
+        ;;
+esac

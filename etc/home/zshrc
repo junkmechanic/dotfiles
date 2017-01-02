@@ -72,13 +72,21 @@ alias vimp='vim -p'
 alias vimdiff='nvim -d'
 
 # update PATH
-export PATH=~/.local/bin:~/bin:$PATH
+# this goes into ~/.zshenv
+# and also it should be set in ~/.zprofile on arch
+# src : https://wiki.archlinux.org/index.php/zsh#Configuring_.24PATH
+# export PATH=~/.local/bin:~/bin:$PATH
 
 # locale
 export LC_ALL="en_US.UTF-8"
 
 # open man pages with neovim
 export MANPAGER="nvim -c 'set ft=man' -"
+
+# virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/devbench
+source ~/.local/bin/virtualenvwrapper.sh
 
 # sudo command shortcut
 sudo-command-line() {
@@ -114,8 +122,12 @@ source ~/.local/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.zsh
 source ~/.zsh/zsh-cdr/cdr.plugin.zsh
 source ~/.zsh/zaw/zaw.zsh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+source ~/.zsh/zsh-autopair/autopair.zsh
+
+# Syntax Highlighting
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # history substring search keybindings
 bindkey -M emacs '^P' history-substring-search-up
@@ -140,3 +152,6 @@ fshow() {
                 {}
 FZF-EOF"
 }
+
+# disable freezing the terminal
+stty -ixon
