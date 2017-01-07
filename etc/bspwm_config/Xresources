@@ -123,12 +123,13 @@ URxvt.cursorBlink: true
 URxvt.depth: 32
 URxvt.background: rgba:001b/001b/001b/c800
 URxvt.perl-lib: /usr/lib/urxvt/perl/
-URxvt.perl-ext-common: default,url-select
+URxvt.perl-ext-common: default,url-select,-searchable-scrollback
 ! yankable urls
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher: /usr/bin/xdg-open
 URxvt.url-select.underline: true
-!URxvt.visualBell: true
+URxvt.iso14755: false
+URxvt.letterSpace: -1
 
 ! Cursor
 Xcursor.theme: Alkano

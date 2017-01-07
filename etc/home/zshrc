@@ -141,6 +141,38 @@ bindkey '^[w' zaw-cdr
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# zle custom functions
+
+function _git_status {
+    zle kill-whole-line
+    git status
+    zle accept-line
+}
+zle -N _git_status
+bindkey '\es' _git_status
+
+function _git_diff {
+    zle kill-whole-line
+    git diff
+    zle accept-line
+}
+zle -N _git_diff
+bindkey '\ez' _git_diff
+
+fzf-cd-home-widget() {
+  local cmd="${FZF_ALT_C_COMMAND:-"command find -L ~/ -type d -print 2> /dev/null"}"
+  setopt localoptions pipefail 2> /dev/null
+  cd "${$(eval "$cmd | $(__fzfcmd) +m $FZF_ALT_C_OPTS"):-.}"
+  local ret=$?
+  zle reset-prompt
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+  return $ret
+}
+zle     -N    fzf-cd-home-widget
+bindkey '\eh' fzf-cd-home-widget
+
+# custom functions
+
 # git commit browser
 fshow() {
   git log --graph --color=always \
@@ -151,6 +183,52 @@ fshow() {
                 xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
                 {}
 FZF-EOF"
+}
+
+dusort() {
+    if [[ -z "$1" ]]; then
+        du_dir=.
+    else
+        du_dir=$1
+    fi
+    exec du -khxa -d 1 $du_dir | sort -h
+}
+
+lgrep() {
+    if [[ $# -eq 2 ]]; then
+        targetdir=$1
+        pattern=$2
+    elif [[ $# -eq 1 ]]; then
+        pattern=$1
+    else
+        echo "Usage : lgrep [directory] pattern"
+        return 1
+    fi
+    ls -alhF $targetdir | grep -i $pattern
+}
+
+# to view path in readable format
+path() {
+    # old=$IFS
+    local IFS=:
+    pth=($=PATH)
+    printf "%s\n" $pth
+    # IFS=$old
+}
+
+# This will create the directory passed and then change into it as well.
+mkcd() {
+    if [ ! -n "$1" ]; then
+        echo "Enter a directory name"
+    elif [ -d $1 ]; then
+        echo "$1 already exists"
+    else
+        mkdir -p $1 && cd $1
+    fi
+}
+
+remove_duplicates() {
+    awk '!a[$0]++' $1 >"$1.no_duplicates"
 }
 
 # disable freezing the terminal

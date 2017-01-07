@@ -131,14 +131,6 @@ vnoremap ; :
 nnoremap : ;
 vnoremap : ;
 
-" Quick movements in insert mode <Potentially dangerous>
-inoremap Ii <Esc>I
-inoremap Aa <Esc>A
-inoremap Oo <Esc>O
-inoremap Cc <Esc>C
-inoremap Ss <Esc>S
-inoremap Dd <Esc>dd
-inoremap Uu <Esc>u
 " Python specific mapping
 if system('uname -s') == "Darwin\n"
   " OSX
