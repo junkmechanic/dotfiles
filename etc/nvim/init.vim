@@ -219,6 +219,12 @@ vnoremap > >gv
 " Save a file that has been openned without root permission and requires it
 cnoremap w!! w !sudo tee > /dev/null %
 
+" Swapping <c-p> with <up> in ex mode (and the companions)
+cnoremap <c-p> <up>
+cnoremap <up> <c-p>
+cnoremap <c-n> <down>
+cnoremap <down> <c-n>
+
 " Tab navigation
 nnoremap <Leader>n <esc>:tabprevious<CR>
 nnoremap <Leader>m <esc>:tabnext<CR>

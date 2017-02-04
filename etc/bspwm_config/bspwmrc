@@ -32,6 +32,9 @@ bspc rule -a Blueman-manager state=floating
 bspc rule -a Florence state=floating sticky=on
 bspc rule -a Spotify desktop=^10
 bspc rule -a "Tor Browser":Places state=floating
+# bspc rule -a Spacefm:Stopped state=floating
+bspc rule -a D-feet state=floating
+bspc rule -a Blueman-manager state=floating
 
 # additions
 sh ~/.fehbg &

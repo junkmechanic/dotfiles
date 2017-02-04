@@ -10,7 +10,7 @@ if [[ "$title" == 'Task Manager - Chromium' ]]; then
     echo "state=floating"
 elif [[ "$class" == "Spacefm" ]]; then
     case $title in
-        Stopped)
+        Stopped|Errors)
             echo "state=floating"
             ;;
     esac

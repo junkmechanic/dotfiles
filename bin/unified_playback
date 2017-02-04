@@ -13,7 +13,6 @@ import sys
 import dbus
 import notify2
 import argparse
-from mpd import MPDClient
 
 players = ['mpd', 'spotify', 'deadbeef']
 
@@ -67,8 +66,9 @@ def is_player_running(player, silent=False):
         notif = notify2.Notification('Unified Playback',
                                      'Couldnt connect to mpd.',
                                      picon)
-        mpdc = MPDClient()
         try:
+            from mpd import MPDClient
+            mpdc = MPDClient()
             mpdc.connect('localhost', '6600')
         except Exception as e:
             import socket
@@ -80,6 +80,11 @@ def is_player_running(player, silent=False):
                     return False
                 else:
                     raise
+            elif isinstance(e, ModuleNotFoundError):
+                if not silent:
+                    notif.show()
+                    print('MPDris is not installed')
+                return False
             else:
                 raise
         notif = notify2.Notification('Unified Playback',

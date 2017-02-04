@@ -135,23 +135,18 @@ super + {Left,Down,Up,Right}
 # utilities
 #
 
-# lock screen
 ctrl + alt + Delete
     lock_screen
 
-# rofi windows
 alt + F1
     rofi -show window
 
-# rofi ssh
 alt + F10
     rofi -show ssh
 
-# clerk
 alt + F9
     clerk --queue show
 
-# guake terminal
 F12
     xfce4-terminal --drop-down
 
@@ -160,6 +155,9 @@ super + e
 
 super + d
     dmenufm
+
+super + w
+    chromium
 
 # Volume
 XF86AudioRaiseVolume
