@@ -9,7 +9,7 @@ fi
 
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
-bspc config -m "$(xrandr | grep LVDS1 | cut -d' ' -f1)" top_padding $PANEL_HEIGHT
+bspc config -m "$(xrandr | grep LVDS-1 | cut -d' ' -f1)" bottom_padding $PANEL_HEIGHT
 
 admiral | \
     lemonbar -d \
