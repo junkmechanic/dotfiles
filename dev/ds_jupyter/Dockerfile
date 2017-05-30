@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
 
-FROM dataquestio/ubuntu-base
+FROM ubuntu:latest
 
 # Export env settings
 ENV TERM=xterm
+# Set the locale
+RUN apt-get clean && apt-get update
+RUN apt-get install locales
+RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
 
 RUN apt-get update -y && apt-get install build-essential -y
 
@@ -56,7 +62,8 @@ RUN /opt/ds/bin/pip install jupyter_contrib_nbextensions \
     && /opt/ds/bin/jupyter nbextension enable table_beautifier/main \
     && /opt/ds/bin/jupyter nbextension enable toc2/main \
     && /opt/ds/bin/jupyter nbextension enable collapsible_headings/main \
-    && /opt/ds/bin/jupyter nbextension enable notify/notify
+    && /opt/ds/bin/jupyter nbextension enable notify/notify \
+    && /opt/ds/bin/jupyter nbextension enable --py --sys-prefix widgetsnbextension
 
 RUN git clone https://github.com/lambdalisue/jupyter-vim-binding /opt/ds/share/jupyter/nbextensions/vim_binding \
     && /opt/ds/bin/jupyter nbextension enable vim_binding/vim_binding
