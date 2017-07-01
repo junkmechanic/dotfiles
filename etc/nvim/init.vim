@@ -26,8 +26,8 @@ if dein#load_state(s:dein_dir)
   call dein#save_state()
 endif
 
-if dein#check_install(['vimproc'])
-  call dein#install(['vimproc'])
+if dein#check_install(['vimproc.vim'])
+  call dein#install(['vimproc.vim'])
 endif
 
 if dein#check_install()
@@ -110,7 +110,7 @@ set relativenumber
 " Colors
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
-color onedark
+color synthwave
 hi ColorColumn guibg=#323642
 " I dont like that onedark changes the IncSearch group. I prefer to have it
 " reversed to have better highlighting with SearchParty.
@@ -351,9 +351,10 @@ onoremap <silent> <leader>J :call NextIndent(1, 1, 1, 1)<CR>
 "------------------------------------------------------------------------------
 
 " airline config
-let g:airline_theme='onedark'
+let g:airline_theme='synthwave'
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_nr_type=2
 let g:airline#extensions#tabline#show_splits=1
 let g:airline_inactive_collapse=0

@@ -144,6 +144,13 @@ bindkey -M vicmd 'j' history-substring-search-down
 # keybindings for zsh-navigation-tools
 zle -N znt-cd-widget
 bindkey '^[w' znt-cd-widget
+znt_cd_hotlist=(
+    ~/devbench
+    ~/.files
+    ~/Downloads
+    ~/.config/znt
+)
+
 
 # virtualenvwrapper settings
 export WORKON_HOME=$HOME/.virtualenvs
