@@ -39,7 +39,7 @@
       </item>
       <item label="Tor Browser">
         <action name="Execute">
-          <command>/home/ankur/.start_tor_browser</command>
+          <command>torbrowser-launcher</command>
         </action>
       </item>
     </menu>

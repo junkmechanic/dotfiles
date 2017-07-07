@@ -160,12 +160,12 @@ rofi.color-enabled: true
 ! ------------------------------------------------------------------------------
 ! ROFI Color theme - Black
 ! ------------------------------------------------------------------------------
-! State:           ´bg´,           ´fg´,           ´bgalt´,        ´hlbg´,         ´hlfg´
-/* rofi.color-normal: argb:00000000,  argb:FF4e636e,  argb:00000000,  argb:CC2e2e2e,  argb:FF83a5b8 */
-/* rofi.color-urgent: argb:00000000,  argb:FF268d5a,  argb:00000000,  argb:CC2e2e2e,  argb:FF268d5a */
-/* rofi.color-active: argb:00000000,  argb:FF268bd2,  argb:00000000,  argb:CC2e2e2e,  argb:FF268bd2 */
+! State:           ´bg´,       ´fg´,       ´bgalt´,    ´hlbg´,     ´hlfg´
+/* rofi.color-normal: #00000000,  #FF4e636e,  #00000000,  #CC2e2e2e,  #FF83a5b8 */
+/* rofi.color-urgent: #00000000,  #FF268d5a,  #00000000,  #CC2e2e2e,  #FF268d5a */
+/* rofi.color-active: #00000000,  #FF268bd2,  #00000000,  #CC2e2e2e,  #FF268bd2 */
 !                 ´background´,    ´border´,       'separator'
-/* rofi.color-window: argb:CC000000,  argb:FF111111,  argb:FF2e2e2e */
+/* rofi.color-window: argb:44000000,  argb:FF111111,  argb:FF2e2e2e */
 ! ------------------------------------------------------------------------------
 ! ROFI Color theme - Solarized
 ! ------------------------------------------------------------------------------

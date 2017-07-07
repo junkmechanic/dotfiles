@@ -50,35 +50,29 @@ xscreensaver.passwd.thermometer.width:       8
 ! 83a5b8 - light greyish blue
 ! 4e636e - bluish grey
 
-/* black theme */
-rofi.opacity: 80
 rofi.font: Dejavu Sans Mono 9
 rofi.padding: 3
 rofi.lines: 10
 rofi.borderwidth: 2
-rofi.color-enabled: true
-! State:           ´bg´,     ´fg´,     ´bgalt´,  ´hlbg´,   ´hlfg´
-rofi.color-normal: #000000,  #4e636e,  #000000,  #2e2e2e,  #83a5b8
-rofi.color-urgent: #000000,  #268d5a,  #000000,  #2e2e2e,  #268d5a
-rofi.color-active: #000000,  #268bd2,  #000000,  #2e2e2e,  #268bd2
-!                 ´background´, ´border´
-rofi.color-window: #000000,     #111111
 rofi.terminal: xfce4-terminal --maximize
 rofi.ssh-client: mosh
+rofi.fixed-num-lines: false
 rofi.ssh-command: {terminal} -e '{ssh-client} {host}'
-rofi.m: -5
-
-/* blue theme */
-! rofi.opacity: 75
-! rofi.font: Dejavu Sans Mono 10
-! rofi.padding: 3
-! rofi.lines: 15
-! rofi.borderwidth: 2
-! rofi.ssh-command: {terminal} --maximise -e '{ssh-client} {host}'
-! rofi.color-enabled: true
-! ! State:           ´bg´,     ´fg´,     ´bgalt´,  ´hlbg´,   ´hlfg´
-! rofi.color-normal: #070719,  #585858,  #070719,  #0b3861,  #bdbdbd
-! rofi.color-urgent: #070719,  #268d5a,  #070719,  #0b3861,  #268d5a
-! rofi.color-active: #070719,  #268bd2,  #070719,  #0b3861,  #268bd2
-! !                 ´background´, ´border´
-! rofi.color-window: #070719,     #0b0b3b
+rofi.m: -1
+rofi.color-enabled: true
+! ------------------------------------------------------------------------------
+! ROFI Color theme - Black
+! ------------------------------------------------------------------------------
+! State:           ´bg´,           ´fg´,           ´bgalt´,        ´hlbg´,         ´hlfg´
+rofi.color-normal: #00000000,  #FF4e636e,  #00000000,  #CC2e2e2e,  #FF83a5b8
+rofi.color-urgent: #00000000,  #FF268d5a,  #00000000,  #CC2e2e2e,  #FF268d5a
+rofi.color-active: #00000000,  #FF268bd2,  #00000000,  #CC2e2e2e,  #FF268bd2
+!                 ´background´,    ´border´,       'separator'
+rofi.color-window: #44000000,  #FF111111,  #FF2e2e2e
+! ------------------------------------------------------------------------------
+! ROFI Color theme - Solarized
+! ------------------------------------------------------------------------------
+/* rofi.color-window: #CC002b37, #002b37, #003642 */
+/* rofi.color-normal: #00002b37, #819396, #00002b37, #DD003642, #819396 */
+/* rofi.color-active: #00002b37, #008ed4, #00002b37, #DD003642, #008ed4 */
+/* rofi.color-urgent: #00002b37, #da4281, #00002b37, #DD003642, #da4281 */

@@ -1,9 +1,41 @@
+" Setting up plugins using dein.vim
+
+if &compatible
+  set nocompatible
+endif
+
+let s:dein_dir = expand('~/.cache/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+let s:toml = '~/.vim/dein/dein.toml'
+let s:lazy_toml = '~/.vim/dein/dein_lazy.toml'
+
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+endif
+
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
+
+  call dein#load_toml(s:toml, {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 0})
+
+  call dein#end()
+  call dein#save_state()
+endif
+
+if dein#check_install(['vimproc'])
+  call dein#install(['vimproc'])
+endif
+
+if dein#check_install()
+  call dein#install()
+endif
+
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
-
-" Setup Pathogen to manage your plugins
-call pathogen#infect()
-call pathogen#helptags()
 
 " Better copy & paste
 set pastetoggle=<F2>
@@ -226,7 +258,13 @@ nnoremap <SPACE> :<C-U>call InsertChar#insert(v:count1)<CR>
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 " Save a file that has been openned without root permission and requires it
 " using :w!!
-cmap w!! w !sudo tee > /dev/null %
+cnoremap w!! w !sudo tee > /dev/null %
+
+" Swapping <c-p> with <up> in ex mode (and the companions)
+cnoremap <c-p> <up>
+cnoremap <up> <c-p>
+cnoremap <c-n> <down>
+cnoremap <down> <c-n>
 
 " to wrap text, use ' :Wrap '
 command! -nargs=* Wrap set wrap linebreak nolist
@@ -328,27 +366,34 @@ nnoremap <leader>ur :UniteResume<CR>
 nnoremap <leader>ul :Unite -buffer-name=locate -default-action=tabopen -start-insert locate<CR>
 nnoremap <leader>/ :Unite -buffer-name=line -start-insert line<CR>
 
-" neocomplete options
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#enable_auto_select = 1
-let g:neocomplete#enable_auto_delimiter = 1
-inoremap <expr><C-l> neocomplete#complete_common_string()
-inoremap <expr><Tab>
-    \ neocomplete#complete_common_string() != '' ?
-        \ neocomplete#complete_common_string() :
-        \ pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr><S-Tab>
-    \ neocomplete#complete_common_string() != '' ?
-        \ neocomplete#complete_common_string() :
-        \ pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" deoplete options
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+" for auto selection of the first menu entry
+set completeopt+=noinsert
+" auto delimiter (for example in paths) and removing auto-paranthesis addition
+call deoplete#custom#set('_', 'converters', ['converter_auto_delimiter', 'converter_remove_paren', 'converter_remove_overlap'])
+" fully fuzzy matching
+call deoplete#custom#set('_', 'matchers', ['matcher_length', 'matcher_full_fuzzy'])
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr><C-g>     deoplete#undo_completion()
+inoremap <expr><C-l>     deoplete#refresh()
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-    return pumvisible() ? "\<C-y>" : "\<CR>"
+function! s:my_cr_function() abort
+  return pumvisible() ? deoplete#close_popup() : "\<CR>"
 endfunction
-call neocomplete#custom#source('_', 'converters',
-    \ ['converter_remove_overlap', 'converter_remove_last_paren',
-    \  'converter_delimiter', 'converter_abbr'])
+" if you dont want deoplete to intrude on your editing, you can disable it on
+" startup (use the option above) and use the following mapping to trigger it
+" with <TAB>
+" inoremap <silent><expr> <TAB>
+"     \ pumvisible() ? "\<C-n>" :
+"     \ <SID>check_back_space() ? "\<TAB>" :
+"     \ deoplete#mappings#manual_complete()
+" function! s:check_back_space() abort "{{{
+"     let col = col('.') - 1
+"     return !col || getline('.')[col - 1]  =~ '\s'
+" endfunction"}}}
 
 " jedi-vim options
 set noshowmode
