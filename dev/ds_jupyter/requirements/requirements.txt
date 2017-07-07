@@ -1,0 +1,17 @@
+jupyter
+pyzmq
+scipy
+pandas
+matplotlib
+statsmodels
+scikit-learn
+seaborn
+nltk
+sympy
+bokeh
+networkx
+requests
+beautifulsoup4
+ipywidgets
+tqdm
+xlrd

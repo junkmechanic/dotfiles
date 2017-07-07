@@ -6,7 +6,7 @@ repo = 'Shougo/vimproc.vim'
 build = 'make'
 
 [[plugins]]
-repo = 'joshdick/onedark.vim'
+repo = 'exitface/synthwave.vim'
 
 [[plugins]]
 repo = 'vim-airline/vim-airline'
@@ -134,8 +134,11 @@ repo = 'ryanoasis/vim-devicons'
 
 # More colorschemes
 
-[[plugins]]
-repo = 'kristijanhusak/vim-hybrid-material'
+# [[plugins]]
+# repo = 'kristijanhusak/vim-hybrid-material'
 
-[[plugins]]
-repo = 'jordwalke/flatlandia'
+# [[plugins]]
+# repo = 'jordwalke/flatlandia'
+
+# [[plugins]]
+# repo = 'joshdick/onedark.vim'

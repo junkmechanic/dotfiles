@@ -33,6 +33,11 @@ bindkey -e
 setopt menu_complete
 zstyle ':completion:*' menu select
 
+# Accept completion and also execute the command
+zmodload zsh/complist
+bindkey -M menuselect '^M' .accept-line
+bindkey -M menuselect '^f' accept-line
+
 # shift-tab for reverse menu completion
 zmodload zsh/complist
 bindkey '^[[Z' reverse-menu-complete

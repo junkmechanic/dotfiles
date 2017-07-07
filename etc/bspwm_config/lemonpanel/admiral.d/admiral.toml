@@ -3,6 +3,7 @@ items = ["left",
             "workspaces",
          "center", "title",
          "right",
+            "battery"
             "volume",
             "clock"]
 
@@ -18,6 +19,10 @@ reload = 1
 
 [volume]
 path = "./lemonpanel.helper vol"
+reload = 1
+
+[battery]
+path = "./lemonpanel.helper battery"
 reload = 1
 
 # Used for formatting lemonbar

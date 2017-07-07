@@ -1,0 +1,305 @@
+" Automatic reloading of .vimrc
+autocmd! bufwritepost .vimrc source %
+
+" Better copy & paste
+set pastetoggle=<F2>
+set clipboard+=unnamedplus
+
+" A logical mapping for 'Y'
+nnoremap Y y$
+
+" Rebind <Leader> key
+let mapleader = ","
+
+" to change : to ; to make life easier
+nnoremap ; :
+vnoremap ; :
+
+" and the reverse because that is used for repeating the last 'f' search
+nnoremap : ;
+vnoremap : ;
+
+" remember where you were the last time you edited the file, and return to the
+" same position.
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+
+" Quick movements in insert mode <Potentially dangerous>
+inoremap Ii <Esc>I
+inoremap Aa <Esc>A
+inoremap Oo <Esc>O
+inoremap Cc <Esc>C
+inoremap Ss <Esc>S
+inoremap Dd <Esc>dd
+inoremap Uu <Esc>u
+inoremap <C-J> <Esc>o
+" Python specific mapping
+inoremap <Leader><C-J> <Esc>A:<Esc>o
+nnoremap <Leader><C-J> A:<Esc>o
+
+" Python toggle True/False
+nnoremap <Leader><Leader>t ciwTrue<Esc>
+nnoremap <Leader><Leader>f ciwFalse<Esc>
+
+" Adding parameters to functions
+nnoremap <leader>i i,<space>
+nnoremap <leader>a a,<space>
+
+" open help in a right vertical split
+autocmd FileType help wincmd L
+
+" open all new splits on the right
+set splitright
+set splitbelow
+
+" mouse
+set mouse=a
+
+" make backspace behave like normal again
+set bs=2
+
+set relativenumber
+
+" Open a new line and stay in Normal mode. (Gives a meaning to Enter as well)
+" It has been reported that this might interfere with the command line normal
+" mode. Since I havent faced any problems with it as yet, I dont mind keeping
+" this mapping. In case, that ever needs to be done, possibly the expr should
+" be used (see below for example) along with the modes that need to be
+" excluded (check http://vimdoc.sourceforge.net/htmldoc/eval.html#mode())
+"nnoremap <Leader><CR> O<Esc>
+nnoremap <CR> o<Esc>
+" Since the quickfix window is not modifiable, the above mapping overwrites the
+" default quickfix <CR> behaviour to jump to the specified line/buffer. So the
+" following should help.
+autocmd FileType qf silent! nnoremap <buffer> <CR> <CR>
+
+" more quickfix mappings
+autocmd FileType qf silent! nnoremap <buffer> q :q<CR>
+
+" Navigation to the last visited tab
+let g:lasttab = 1
+nnoremap <leader>z :exec "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
+" Quicksave command
+noremap <C-Z> :update<CR>
+vnoremap <C-Z> <C-C>:update<CR>
+inoremap <C-Z> <C-O>:update<CR>
+
+" Replace the current 'word' (variable name) with the content of the defualt
+" register and retain that in the default register. You can also select the
+" text that needs to be replaced.
+function! PasteWithRetain(mode)
+    if a:mode == 'n'
+        normal! viw
+    elseif a:mode == 'v'
+        normal! gv
+    endif
+    if col(".") == col("$") - 1
+        normal! "_dp
+    else
+        normal! "_dP
+    endif
+endfunction
+nnoremap <leader>p :call PasteWithRetain('n')<CR>
+vnoremap <leader>p :call PasteWithRetain('v')<CR>
+
+" Paste the selected text after the last line of the selected text
+" This is useful in the visual line mode
+vnoremap <leader>P y`>p
+
+" Delete to buffer 'd' instead of the default buffer
+nnoremap <expr> <leader>dw (v:register == '+') ? '"ddw' : '"'.v:register.'dw'
+nnoremap <expr> <leader>dd (v:register == '+') ? '"ddd' : '"'.v:register.'dd'
+vnoremap <expr> <leader>d (v:register == '+') ? '"dd' : '"'.v:register.'d'
+
+" Quick movements
+nnoremap H ^
+nnoremap L g_
+nnoremap J 6j
+nnoremap K 6k
+
+" Quick quit command
+noremap <Leader>e :quit<CR>  " Quit current window
+noremap <Leader>E :q!<CR>    " Quit current window without saving
+noremap <Leader>q :qa<CR>    " Quit all windows
+noremap <Leader>Q :qa!<CR>   " Quit all windows window saving
+
+" bind Ctrl+<movement> keys to move around the windows
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+nnoremap <c-h> <c-w>h
+
+" now you can use Ctrl+w then h/j/k/l for shifting splits around
+nnoremap <c-w>j <c-w>J
+nnoremap <c-w>k <c-w>K
+nnoremap <c-w>l <c-w>L
+nnoremap <c-w>h <c-w>H
+
+" Shift the rest of the line up or down
+nnoremap <Leader>o Do<C-R>"<Esc>
+nnoremap <Leader>O DO<C-R>"<Esc>
+
+" map sort function to a key
+" vnoremap <Leader>s :sort<CR>
+
+" open all buffers as tabs
+nnoremap <Leader>t :tab all<CR>
+
+" jump to the next occurance of the character under the cursor
+nnoremap <Leader>f yl:normal f<C-r>"<CR>
+
+" Meta/Alt key combinations
+" The <m-alpha> have been set by vim-fixkey
+" let c='0'
+" while c <= '9'
+"   exec "set <A-".c.">=\e".c
+"   exec "imap \e".c." <A-".c.">"
+"   let c = nr2char(1+char2nr(c))
+" endw
+" set ttimeout ttimeoutlen=5
+
+" a saner approach to horizontal scrolling
+nnoremap <A-l> zl
+nnoremap <A-h> zh<c-h>
+
+" easier tab navigation
+" moving to adjacent tabs
+nnoremap <Leader>n <esc>:tabprevious<CR>
+nnoremap <Leader>m <esc>:tabnext<CR>
+" jumping tabs by number
+" let n = 1
+" while n <= 9
+"     exec 'nnoremap <A-' . n . '> ' . n . 'gt'
+"     let n = n + 1
+" endwhile
+
+" lets go wild
+set wildmenu
+set wildmode=full
+
+vnoremap < <gv
+vnoremap > >gv
+
+" Enable syntax highlighting
+" You need to reload this file for the change to apply
+filetype off
+filetype plugin indent on
+syntax on
+
+" Useful settings
+set history=700
+set undolevels=700
+
+" tabs and space formatting
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set shiftround
+set expandtab
+
+" Make search case insensitive
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" Disable stupid backup and swap files - they trigger too many events
+" for file system watchers
+set nobackup
+set nowritebackup
+set noswapfile
+
+set updatetime=2000
+
+" Displaying line wrap
+set showbreak=↪
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+" Save a file that has been openned without root permission and requires it
+" using :w!!
+cmap w!! w !sudo tee > /dev/null %
+
+" to wrap text, use ' :Wrap '
+command! -nargs=* Wrap set wrap linebreak nolist
+
+" Color scheme
+set t_Co=256
+
+" Showing line numbers and length
+set number  " show line numbers
+set tw=80   " width of document
+set nowrap  " don't automatically wrap on load
+set fo-=t   " don't automatically wrap text when typing
+set colorcolumn=+1
+
+set completeopt=longest,menuone
+
+" Python folding
+set nofoldenable
+
+" The following is an example of how to map to a specific mode among the visual
+" modes. Here I have mapped only to the Visual-Block mode using the ternary
+" expr1.
+"xnoremap <expr> <leader>c mode() ==# "\<C-V>" ? ":s/^/#\<CR>:nohl<CR>" : ""
+
+"-----------------------------------------------------------------------------
+
+" Format JSON files
+au FileType json exe ":silent %! python -m json.tool"
+
+" Format XML files
+au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
+
+" -----------------------------------------------------------------------------
+" Jump to the next or previous line that has the same level or a lower
+" level of indentation than the current line.
+"
+" exclusive (bool)  :  true: Motion is exclusive
+"                      false: Motion is inclusive
+" fwd (bool)        :  true: Go to next line
+"                      false: Go to previous line
+" lowerlevel (bool) :  true: Go to line with lower indentation level
+"                      false: Go to line with the same indentation level
+" skipblanks (bool) :  true: Skip blank lines
+"                      false: Don't skip blank lines
+function! NextIndent(exclusive, fwd, lowerlevel, skipblanks)
+  let line = line('.')
+  let column = col('.')
+  let lastline = line('$')
+  let indent = indent(line)
+  let stepvalue = a:fwd ? 1 : -1
+  while (line > 0 && line <= lastline)
+    let line = line + stepvalue
+    if ( ! a:lowerlevel && indent(line) == indent ||
+          \ a:lowerlevel && indent(line) < indent)
+      if (! a:skipblanks || strlen(getline(line)) > 0)
+        if (a:exclusive)
+          let line = line - stepvalue
+        endif
+        exe line
+        exe "normal " column . "|"
+        return
+      endif
+    endif
+  endwhile
+endfunction
+
+" Moving back and forth between lines of same or lower indentation.
+nnoremap <silent> <leader>k :call NextIndent(0, 0, 0, 1)<CR>
+nnoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
+nnoremap <silent> <leader>K :call NextIndent(0, 0, 1, 1)<CR>
+nnoremap <silent> <leader>J :call NextIndent(0, 1, 1, 1)<CR>
+vnoremap <silent> <leader>k <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
+vnoremap <silent> <leader>j <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
+vnoremap <silent> <leader>K <Esc>:call NextIndent(0, 0, 1, 1)<CR>m'gv''
+vnoremap <silent> <leader>J <Esc>:call NextIndent(0, 1, 1, 1)<CR>m'gv''
+onoremap <silent> <leader>k :call NextIndent(0, 0, 0, 1)<CR>
+onoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
+onoremap <silent> <leader>K :call NextIndent(1, 0, 1, 1)<CR>
+onoremap <silent> <leader>J :call NextIndent(1, 1, 1, 1)<CR>
+" -----------------------------------------------------------------------------
+
+" LaTex options
+autocmd FileType tex set fo+=t
+autocmd FileType tex set spell spelllang=en_us

@@ -12,8 +12,8 @@ bspc config click_to_focus       true
 bspc config pointer_modifier     mod4
 bspc config external_rules_command ~/.files/etc/bspwm_config/bin/bspwm_external_rules.sh
 
-bspc monitor LVDS1 -d          
-bspc monitor HDMI1 -d 
+bspc monitor LVDS-1 -d          
+bspc monitor HDMI-1 -d 
 
 bspc config normal_border_color '#1b1b1b'
 bspc config active_border_color '#193751'
@@ -30,7 +30,7 @@ bspc rule -a Pavucontrol state=floating
 bspc rule -a Xfce4-terminal state=floating
 bspc rule -a Blueman-manager state=floating
 bspc rule -a Florence state=floating sticky=on
-bspc rule -a Spotify desktop=^10
+bspc rule -a Spotify desktop=^0
 bspc rule -a "Tor Browser":Places state=floating
 # bspc rule -a Spacefm:Stopped state=floating
 bspc rule -a D-feet state=floating
@@ -41,7 +41,7 @@ sh ~/.fehbg &
 xsetroot -cursor_name left_ptr &
 run_modmaps &
 compton --vsync opengl &
-admiral_panel &
+# admiral_panel &
 clipit -d -n &
 libinput-gestures-setup start &
 conky &
