@@ -289,10 +289,10 @@ bind '"\es": " \C-e\C-u`__git_cmd__ status`\e\C-e\er\C-m"'
 #    exec tmux -2 attach-session -t general || exec tmux -2 attach || exec tmux -2
 #fi
 # This is what I use on the server these days
-#if which tmux 2>&1 >/dev/null; then
-#    #if not inside a tmux session, and if no session is started, start a new session
-#    test -z "$TMUX" && (tmux attach || tmux new-session -s general)
-#fi
+if which tmux 2>&1 >/dev/null; then
+    #if not inside a tmux session, and if no session is started, start a new session
+    test -z "$TMUX" && (tmux attach || tmux new-session -s general)
+fi
 
 # virtualenvwrapper settings
 export WORKON_HOME=$HOME/.virtualenvs
