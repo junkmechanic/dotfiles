@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FROM ds_jupyter:v2
+FROM junkmechanic/ds_jupyter
 
 USER root
 
