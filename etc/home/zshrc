@@ -74,8 +74,14 @@ alias tmat='tmux attach'
 alias tmgn='tmux new-session -s general'
 alias vim='nvim'
 alias vimdiff='nvim -d'
-alias vimo='vim -O'
-alias vimp='vim -p'
+alias vimo='nvim -O'
+alias vimp='nvim -p'
+# Neovim Remote Activation
+if [ -n "${NVIM_LISTEN_ADDRESS}" ]; then
+  alias vims='nvr -o'
+  alias vimv='nvr -O'
+  alias vimt='nvr --remote-tab'
+fi
 
 # update PATH
 # this goes into ~/.zshenv

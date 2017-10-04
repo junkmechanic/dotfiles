@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:/Users/ankur.khanna/Library/Python/2.7/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/Users/ankur.khanna/Library/Python/2.7/bin:/Users/ankur.khanna/Library/Python/3.6/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/ankur.khanna/.oh-my-zsh
@@ -129,6 +129,12 @@ alias vimdiff="nvim -d"
 # Prevent globbing
 alias s3cmd='noglob s3cmd'
 alias scp='noglob scp'
+# Neovim Remote Activation
+if [ -n "${NVIM_LISTEN_ADDRESS}" ]; then
+  alias vims='nvr -o'
+  alias vimv='nvr -O'
+  alias vimt='nvr --remote-tab'
+fi
 
 # powerline prompt
 . ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
