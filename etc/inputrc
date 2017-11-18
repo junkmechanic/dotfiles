@@ -47,6 +47,10 @@ set completion-ignore-case on
 # pressing Tab will show available options
 set show-all-if-ambiguous on
 
+# show colors during completion
+set colored-stats on
+set visible-stats on
+
 # The following is useful if you regularly use commands that need enclosing
 # brackets/quotes.
 # If the files start with an escapable character (in this case brackets/quotes)
