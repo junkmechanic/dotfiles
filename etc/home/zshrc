@@ -130,7 +130,7 @@ bindkey '^[^?' backward-kill-dir
 # select-word-style bash
 
 # custom sources
-source ~/.local/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.zsh
+source ~/.local/bin/powerline_binding_zsh.zsh
 source ~/.zsh/zsh-cdr/cdr.plugin.zsh
 source ~/.zsh/zaw/zaw.zsh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
