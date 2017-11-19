@@ -5,14 +5,12 @@ FROM ubuntu:latest
 # Export env settings
 ENV TERM=xterm
 # Set the locale
-RUN apt-get clean && apt-get update
-RUN apt-get install locales
+RUN apt-get clean && apt-get update && \
+    apt-get install locales
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
-
-RUN apt-get update -y && apt-get install build-essential -y
 
 ADD apt-packages.txt /tmp/apt-packages.txt
 RUN xargs -a /tmp/apt-packages.txt apt-get install -y
@@ -26,7 +24,7 @@ RUN /opt/ds/bin/pip install -r /tmp/requirements/pre-requirements.txt
 RUN /opt/ds/bin/pip install -r /tmp/requirements/requirements.txt
 
 RUN useradd --create-home --home-dir /home/ankur --shell /bin/bash ankur
-# RUN usermod -a -G sudo ankur
+# RUN useradd --create-home --home-dir /home/ankur -u 1002 --shell /bin/bash ankur
 RUN adduser ankur sudo
 RUN echo "ankur ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN chown -R ankur /opt/ds
@@ -48,7 +46,7 @@ RUN mkdir -p /home/ankur/notebooks
 ENV HOME=/home/ankur
 ENV SHELL=/bin/bash
 ENV USER=ankur
-VOLUME /home/ankur/notebooks
+# VOLUME /home/ankur/notebooks
 WORKDIR /home/ankur/notebooks
 
 RUN /opt/ds/bin/pip install jupyter_contrib_nbextensions \

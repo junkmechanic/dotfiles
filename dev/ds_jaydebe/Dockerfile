@@ -7,7 +7,8 @@ USER root
 # Export env settings
 ENV TERM=xterm
 ADD apt-packages.txt /tmp/apt-packages.txt
-RUN xargs -a /tmp/apt-packages.txt apt-get install -y
+RUN apt-get update && \
+    xargs -a /tmp/apt-packages.txt apt-get install -y
 
 ADD requirements.txt /tmp/requirements.txt
 

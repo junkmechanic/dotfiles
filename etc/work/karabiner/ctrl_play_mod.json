@@ -1,0 +1,31 @@
+{
+    "rules": [
+        {
+            "description": "Map Left Ctrl to Music Play if pressed alone",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "left_control",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "left_control"
+                        }
+                    ],
+                    "to_if_alone": [
+                        {
+                            "key_code": "vk_consumer_play"
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        }
+    ],
+    "title": "Easier Music PLayback 'Control'"
+}
