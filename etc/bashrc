@@ -318,7 +318,7 @@ eval "$(thefuck --alias)"
 eval "`pip completion --bash`"
 
 # adding powerline
-. /home/ankur/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+. /home/ankur/.local/bin/powerline_binding_bash.sh
 
 # Don't freeze the terminal man!
 if [[ ! -z "$PS1" ]]; then
@@ -330,11 +330,11 @@ export PROMPT_COMMAND="$PROMPT_COMMAND venv_prompt"
 
 # completion for bd
 # git clone git@github.com:vigneshwaranr/bd.git
-source ~/bin/bd-completion
+# source ~/bin/bd-completion
 
 # completion for split2flac
 # git clone git@github.com:ftrvxmtrx/split2flac.git
-source ~/bin/split2flac-bash-completion.sh
+# source ~/bin/split2flac-bash-completion.sh
 
 source ~/.fzf.bash
 # Custom functions

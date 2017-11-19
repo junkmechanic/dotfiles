@@ -17,7 +17,4 @@ echo -e "\e[1;96m(7) --> removing unneeded packages\e[0m" &&
 apt-get autoremove -f &&
 echo -e "\e[1;96m(8) --> purging configuration files\e[0m" &&
 aptitude purge '~c' &&
-echo -e "\e[1;96m|[\e[97m system upgrade complete\e[96m ]|\e[0m" &&
-echo -e "\e[1;96m(9) --> updating flash player\e[0m" &&
-update-pepperflashplugin-nonfree --install 2>/dev/null
-echo -e "\e[1;96m|[\e[97m flash player updated\e[96m ]|\e[0m"
+echo -e "\e[1;96m|[\e[97m system upgrade complete\e[96m ]|\e[0m"

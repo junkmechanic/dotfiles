@@ -112,6 +112,9 @@ repo = 'tpope/vim-unimpaired'
 repo = 'Shougo/unite.vim'
 
 [[plugins]]
+repo = 'Shougo/denite.nvim'
+
+[[plugins]]
 repo = 'ujihisa/unite-locate'
 
 [[plugins]]
