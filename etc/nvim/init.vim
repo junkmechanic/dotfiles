@@ -1,9 +1,5 @@
 " Setting up plugins using dein.vim
 
-if &compatible
-  set nocompatible
-endif
-
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 let s:toml = '~/.config/nvim/dein.toml'
@@ -428,7 +424,7 @@ let g:vim_fakeclip_tmux_plus=1
 " hardtime on startup
 let g:hardtime_default_on = 1
 let g:hardtime_maxcount = 2
-let g:hardtime_ignore_buffer_patterns = ["NERD.*"]
+let g:hardtime_ignore_buffer_patterns = ["NERD.*", ".*\.txt"]
 let g:hardtime_ignore_quickfix = 1
 let g:hardtime_allow_different_key = 1
 

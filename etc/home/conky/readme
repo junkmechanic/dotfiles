@@ -1,9 +1,0 @@
-1. link this dir to home.
-2. then in autostart, you can include conky invocation using config files for
-stats and clock.
-3. the screensaver conky can be used with xscreensaver. edit ~/.xscreensaver
-and include the following under the "programs" section.
-
-                "Conky" conky -q --window-id=$XSCREENSAVER_WINDOW \
-                -c ~/.conky/conkyrc-screensaver \n\
-

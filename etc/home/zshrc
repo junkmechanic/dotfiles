@@ -219,6 +219,15 @@ lgrep() {
     ls -alhF $targetdir | grep -i $pattern
 }
 
+dpgrep() {
+    if [[ -z "$1" ]]; then
+        read "pat?Pattern : "
+    else
+        pat="$1"
+    fi
+    dpkg -l | egrep -i "$pat"
+}
+
 # to view path in readable format
 path() {
     # old=$IFS

@@ -6,6 +6,8 @@
 . ~/.bashrc
 
 # Now attach to tmux.
+# Using 'exec' replaces the shell with the given command. This is done so that
+# detaching from tmux will exit the terminal session automatically.
 if [[ -z $TMUX ]] && [[ $- = *i* ]]; then
     #tmux attach-session -t general || tmux attach || tmux; exit;
     exec tmux -2 attach-session -t general

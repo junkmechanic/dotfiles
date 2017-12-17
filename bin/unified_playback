@@ -80,7 +80,7 @@ def is_player_running(player, silent=False):
                     return False
                 else:
                     raise
-            elif isinstance(e, ModuleNotFoundError):
+            elif isinstance(e, ImportError):
                 if not silent:
                     notif.show()
                     print('MPDris is not installed')

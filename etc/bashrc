@@ -250,7 +250,7 @@ function dusort {
 # this will not auto-activate the same env once it has been manually
 # deactivated.
 # for dir structures with multiple .venv files, if navigating to a dir that
-# share the same env as its parent, a reference to the parent will be stored to
+# shares the same env as its parent, a reference to the parent will be stored to
 # avoid activation when jumping back to the parent.
 function venv_prompt {
     if [[ -e .venv ]]; then
@@ -278,19 +278,9 @@ bind '"\es": " \C-e\C-u`__git_cmd__ status`\e\C-e\er\C-m"'
 # Setting variables, sourcing scripts etc
 
 # Launch tmux automatically and attach to the 'general' session
-# Using 'exec' replaces the shell with the given command. This is done so that
-# detaching from tmux will exit the terminal session automatically.
-# But this will make going back to bash (normal non-tmux terminal) impossible,
-# specially when trying to open a terminal in a particular directory from a
-# file manager. So this has been removed from this core rc and will be invoked
-# from a different emulator profile.
-#if [[ -z $TMUX ]] && [[ $- = *i* ]]; then
-#    #tmux attach-session -t general || tmux attach || tmux; exit;
-#    exec tmux -2 attach-session -t general || exec tmux -2 attach || exec tmux -2
-#fi
-# This is what I use on the server these days
 if which tmux 2>&1 >/dev/null; then
-    #if not inside a tmux session, and if no session is started, start a new session
+    # if not inside a tmux session, and if no session is started, start a new
+    # session
     test -z "$TMUX" && (tmux attach || tmux new-session -s general)
 fi
 
@@ -311,9 +301,6 @@ export MANPAGER="/bin/sh -c \"unset MANPAGER;col -b -x | \
 
 shopt -s autocd cdspell
 
-# activating thefuck
-eval "$(thefuck --alias)"
-
 # activating pip completion
 eval "`pip completion --bash`"
 
@@ -327,14 +314,6 @@ fi
 
 # auto-activation of virtualenv
 export PROMPT_COMMAND="$PROMPT_COMMAND venv_prompt"
-
-# completion for bd
-# git clone git@github.com:vigneshwaranr/bd.git
-# source ~/bin/bd-completion
-
-# completion for split2flac
-# git clone git@github.com:ftrvxmtrx/split2flac.git
-# source ~/bin/split2flac-bash-completion.sh
 
 source ~/.fzf.bash
 # Custom functions
@@ -379,4 +358,4 @@ FZF-EOF"
 }
 
 # PLEASE MAKE SURE THIS IS THE LAST LINE IN THIS FILE
-source ~/bin/acd_func.sh
+source ~/.local/bin/acd_func.sh

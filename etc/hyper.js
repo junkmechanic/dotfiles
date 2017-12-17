@@ -12,7 +12,7 @@ module.exports = {
     fontSize: 13,
 
     // font family with optional fallbacks
-    fontFamily: '"MesloLGMDZ Nerd Font", "Meslo LG M DZ for Powerline", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily: '"MesloLGMDZ Nerd Font", "MesloLGSDZ Nerd Font", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: 'rgba(248,28,229,0.8)',
@@ -38,9 +38,10 @@ module.exports = {
     // custom css to embed in the terminal window
     termCSS: 'x-row {line-height: initial} .unicode-node {position: relative}',
 
-    // set to `true` (without backticks) if you're using a Linux setup that doesn't show native menus
+    // set to `true` (without backticks and without quotes) if you're using a
+    // Linux setup that doesn't show native menus
     // default: `false` on Linux, `true` on Windows (ignored on macOS)
-    showHamburgerMenu: '',
+    showHamburgerMenu: true,
 
     // set to `false` if you want to hide the minimize, maximize and close buttons
     // additionally, set to `'left'` if you want them on the left, like in Ubuntu
@@ -69,7 +70,7 @@ module.exports = {
       lightBlue: '#0066ff',
       lightMagenta: '#cc00ff',
       lightCyan: '#00ffff',
-      lightWhite: '#ffffff'
+      lightWhite: '#ffffff',
     },
 
     // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
@@ -101,7 +102,7 @@ module.exports = {
 
     // if true, on right click selected text will be copied or pasted if no
     // selection is present (true by default on Windows)
-    // quickEdit: true
+    // quickEdit: true,
 
     // URL to custom bell
     // bellSoundURL: 'http://example.com/bell.mp3',
@@ -114,7 +115,7 @@ module.exports = {
 
     visor: {
         hotkey: 'F10',
-        position: 'top'
+        position: 'top',
     },
 
     materialBox: {

@@ -82,7 +82,7 @@ repo = 'scrooloose/nerdtree'
 repo = 'Xuyuanp/nerdtree-git-plugin'
 
 [[plugins]]
-repo = 'klen/python-mode'
+repo = 'python-mode/python-mode'
 
 [[plugins]]
 repo = 'tpope/vim-repeat'

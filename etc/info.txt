@@ -1,4 +1,0 @@
-autostart, menu.xml and rc.xml go into ~/.config/openbox/
-tint2rc goes into ~/.config/tint2/
-vimrc, bashrc, inputrc and tmux.conf go into the home dir as dotfiles.
-vrapperrc is used with eclipse
