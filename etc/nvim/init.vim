@@ -132,9 +132,11 @@ vnoremap : ;
 if system('uname -s') == "Darwin\n"
   " OSX
   " iterm2 cant capture control+enter
-  " inoremap <C-M> <Esc>o
-  inoremap <Leader><C-M> <Esc>A:<Esc>o
-  nnoremap <Leader><C-M> A:<Esc>o
+  " so change the profile by adding a key mapping that would send `Alt/Meta + c`
+  " on pressing `Ctrl + Enter`
+  "inoremap <C-M> <Esc>o
+  inoremap <Leader><M-c> <Esc>A:<Esc>o
+  nnoremap <Leader><M-c> A:<Esc>o
 else
   inoremap <C-J> <Esc>o
   inoremap <Leader><C-J> <Esc>A:<Esc>o

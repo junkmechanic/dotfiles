@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 FROM ubuntu:latest
 
 # Export env settings
