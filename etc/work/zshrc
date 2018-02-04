@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:/Users/ankur.khanna/Library/Python/2.7/bin:/Users/ankur.khanna/Library/Python/3.6/bin:$PATH
+export PATH=$HOME/.local/bin:/usr/local/bin:/Users/ankur.khanna/Library/Python/2.7/bin:/Users/ankur.khanna/Library/Python/3.6/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/ankur.khanna/.oh-my-zsh
@@ -157,6 +157,8 @@ znt_cd_hotlist=(
     ~/.config/znt
 )
 
+# accept and execute the current suggestion with ctrl+space
+bindkey '^ ' autosuggest-execute
 
 # virtualenvwrapper settings
 export WORKON_HOME=$HOME/.virtualenvs
@@ -164,11 +166,11 @@ export PROJECT_HOME=$HOME/devbench
 source ~/Library/Python/2.7/bin/virtualenvwrapper.sh
 
 # Updating Python for Pyspark integration
-if which pyspark > /dev/null; then
-  export SPARK_HOME="/usr/local/Cellar/apache-spark/2.1.0/libexec/"
-  export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/build:$PYTHONPATH
-  export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.4-src.zip:$PYTHONPATH
-fi
+# if which pyspark > /dev/null; then
+#   export SPARK_HOME="/usr/local/Cellar/apache-spark/2.1.0/libexec/"
+#   export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/build:$PYTHONPATH
+#   export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.4-src.zip:$PYTHONPATH
+# fi
 # Now you can run initialize the notebook with
 #   import os
 #   execfile(os.path.join(os.environ["SPARK_HOME"], 'python/pyspark/shell.py'))
@@ -181,6 +183,26 @@ fi
 
 # fzf configuration. All other zsh config goes before this line
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# to view path in readable format
+path() {
+    # old=$IFS
+    local IFS=:
+    pth=($=PATH)
+    printf "%s\n" $pth
+    # IFS=$old
+}
+
+# This will create the directory passed and then change into it as well.
+mkcd() {
+    if [ ! -n "$1" ]; then
+        echo "Enter a directory name"
+    elif [ -d $1 ]; then
+        echo "$1 already exists"
+    else
+        mkdir -p $1 && cd $1
+    fi
+}
 
 fshow() {
   git log --graph --color=always \

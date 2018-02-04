@@ -1,0 +1,153 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+[[plugins]]
+repo = 'kristijanhusak/vim-hybrid-material'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+depends = ['vim-airline-themes']
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo = 'PeterRincker/vim-argumentative'
+
+[[plugins]]
+repo = 'tpope/vim-commentary'
+
+[[plugins]]
+repo = 'ctrlpvim/ctrlp.vim'
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+
+[[plugins]]
+repo = 'zchee/deoplete-jedi'
+
+[[plugins]]
+repo = 'shinokada/dragvisuals.vim'
+
+[[plugins]]
+repo = 'Lokaltog/vim-easymotion'
+
+[[plugins]]
+repo = 'cazador481/fakeclip.neovim'
+
+[[plugins]]
+repo = 'Konfekt/FastFold'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'gregsexton/gitv'
+
+[[plugins]]
+repo = 'sjl/gundo.vim'
+
+[[plugins]]
+repo = 'takac/vim-hardtime'
+
+[[plugins]]
+repo = 'vim-scripts/IndexedSearch'
+
+[[plugins]]
+repo = 'vim-scripts/InsertChar'
+
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+
+[[plugins]]
+repo = 'Glench/Vim-Jinja2-Syntax'
+
+[[plugins]]
+repo = 'AndrewRadev/linediff.vim'
+
+[[plugins]]
+repo = 'terryma/vim-multiple-cursors'
+
+[[plugins]]
+repo = 'kassio/neoterm'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+
+[[plugins]]
+repo = 'Xuyuanp/nerdtree-git-plugin'
+
+[[plugins]]
+repo = 'python-mode/python-mode'
+
+[[plugins]]
+repo = 'tpope/vim-repeat'
+
+[[plugins]]
+repo = 'dahu/SearchParty'
+
+[[plugins]]
+repo = 'mhinz/vim-startify'
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'wellle/targets.vim'
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]]
+repo = 'tpope/vim-unimpaired'
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+
+[[plugins]]
+repo = 'ujihisa/unite-locate'
+
+[[plugins]]
+repo = 'Shougo/unite-outline'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
+
+[[plugins]]
+repo = 'tmux-plugins/vim-tmux'
+
+[[plugins]]
+repo = 'christoomey/vim-tmux-navigator'
+
+[[plugins]]
+repo = 'jmcantrell/vim-virtualenv'
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+# More colorschemes
+
+# [[plugins]]
+# repo = 'exitface/synthwave.vim'
+
+# [[plugins]]
+# repo = 'jordwalke/flatlandia'
+
+# [[plugins]]
+# repo = 'joshdick/onedark.vim'

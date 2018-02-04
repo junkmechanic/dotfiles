@@ -130,16 +130,20 @@ bindkey '^[^?' backward-kill-dir
 # select-word-style bash
 
 # custom sources
-source ~/.local/bin/powerline_binding_zsh.zsh
-source ~/.zsh/zsh-cdr/cdr.plugin.zsh
-source ~/.zsh/zaw/zaw.zsh
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
-source ~/.zsh/zsh-autopair/autopair.zsh
+source "$HOME/.local/bin/powerline_binding_zsh.zsh"
+# git://github.com/zsh-users/zsh-autosuggestions
+source "$HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# git@github.com:zsh-users/zsh-history-substring-search.git
+source "$HOME/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
+# git@github.com:hlissner/zsh-autopair.git
+source "$HOME/.zsh/plugins/zsh-autopair/autopair.zsh"
+# git@github.com:psprint/zsh-navigation-tools.git
+source "$HOME/.zsh/plugins/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh"
 
 # Syntax Highlighting
+# git@github.com:zsh-users/zsh-syntax-highlighting.git
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # history substring search keybindings
 bindkey -M emacs '^P' history-substring-search-up
@@ -148,8 +152,15 @@ bindkey -M emacs '^N' history-substring-search-down
 # accept and execute the current suggestion with ctrl+space
 bindkey '^ ' autosuggest-execute
 
-# bounce through previous dirs
-bindkey '^[w' zaw-cdr
+# keybindings for zsh-navigation-tools
+zle -N znt-cd-widget
+bindkey '^[w' znt-cd-widget
+znt_cd_hotlist=(
+    ~/devbench
+    ~/.files
+    ~/downloads
+    ~/.config/znt
+)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
