@@ -508,40 +508,40 @@ nmap          <leader>fow          <Plug>SearchPartyMashFOWToggle
 
 " Denite options
 call denite#custom#option('_', {
-	\ 'prompt': 'λ:',
-	\ 'empty': 0,
-	\ 'winheight': 16,
-	\ 'short_source_names': 1,
-	\ 'vertical_preview': 1,
-	\ })
+  \ 'prompt': 'λ:',
+  \ 'empty': 0,
+  \ 'winheight': 16,
+  \ 'short_source_names': 1,
+  \ 'vertical_preview': 1,
+  \ })
 
 let insert_mode_mappings = [
-	\  ['jj', '<denite:enter_mode:normal>', 'noremap'],
-	\  ['<Esc>', '<denite:enter_mode:normal>', 'noremap'],
-	\  ['<C-N>', '<denite:assign_next_matched_text>', 'noremap'],
-	\  ['<C-P>', '<denite:assign_previous_matched_text>', 'noremap'],
-	\  ['<Up>', '<denite:assign_previous_text>', 'noremap'],
-	\  ['<Down>', '<denite:assign_next_text>', 'noremap'],
-	\  ['<C-Y>', '<denite:redraw>', 'noremap'],
-	\  ['<C-J>', '<denite:move_to_next_line>', 'noremap'],
-	\  ['<C-K>', '<denite:move_to_previous_line>', 'noremap'],
-	\  ['<C-G>', '<denite:insert_digraph>', 'noremap'],
-	\  ['<C-T>', '<denite:input_command_line>', 'noremap'],
-	\ ]
+  \  ['jj', '<denite:enter_mode:normal>', 'noremap'],
+  \  ['<Esc>', '<denite:enter_mode:normal>', 'noremap'],
+  \  ['<C-N>', '<denite:assign_next_matched_text>', 'noremap'],
+  \  ['<C-P>', '<denite:assign_previous_matched_text>', 'noremap'],
+  \  ['<Up>', '<denite:assign_previous_text>', 'noremap'],
+  \  ['<Down>', '<denite:assign_next_text>', 'noremap'],
+  \  ['<C-Y>', '<denite:redraw>', 'noremap'],
+  \  ['<C-J>', '<denite:move_to_next_line>', 'noremap'],
+  \  ['<C-K>', '<denite:move_to_previous_line>', 'noremap'],
+  \  ['<C-G>', '<denite:insert_digraph>', 'noremap'],
+  \  ['<C-T>', '<denite:input_command_line>', 'noremap'],
+  \ ]
 
 let normal_mode_mappings = [
-	\   ["'", '<denite:toggle_select_down>', 'noremap'],
-	\   ['<C-n>', '<denite:jump_to_next_source>', 'noremap'],
-	\   ['<C-p>', '<denite:jump_to_previous_source>', 'noremap'],
-	\   ['v', '<denite:do_action:vsplit>', 'noremap'],
-	\   ['s', '<denite:do_action:split>', 'noremap'],
-	\ ]
+  \   ["'", '<denite:toggle_select_down>', 'noremap'],
+  \   ['<C-n>', '<denite:jump_to_next_source>', 'noremap'],
+  \   ['<C-p>', '<denite:jump_to_previous_source>', 'noremap'],
+  \   ['v', '<denite:do_action:vsplit>', 'noremap'],
+  \   ['s', '<denite:do_action:split>', 'noremap'],
+  \ ]
 
 for m in insert_mode_mappings
-	call denite#custom#map('insert', m[0], m[1], m[2])
+  call denite#custom#map('insert', m[0], m[1], m[2])
 endfor
 for m in normal_mode_mappings
-	call denite#custom#map('normal', m[0], m[1], m[2])
+  call denite#custom#map('normal', m[0], m[1], m[2])
 endfor
 
 nnoremap <silent><LocalLeader>r :<C-u>Denite -resume -refresh<CR>

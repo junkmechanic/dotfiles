@@ -29,6 +29,11 @@ unsetopt beep extendedglob
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
+# Setting LS_OPTIONS if possible
+if [[ -a /usr/bin/dircolors ]] then
+    eval `dircolors`
+fi
+
 # More completions
 setopt menu_complete
 zstyle ':completion:*' menu select
@@ -61,6 +66,7 @@ alias gitrso='git remote show origin'
 alias gits='git status'
 alias gitsbup='git submodule update --init --recursive --remote'
 alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
 alias gt='cd $(git rev-parse --show-toplevel 2>/dev/null || (echo "."; echo "Not within a git repository" >&2))'
 alias l='ls'
 alias ll='ls -AlhF'
@@ -89,8 +95,23 @@ fi
 # src : https://wiki.archlinux.org/index.php/zsh#Configuring_.24PATH
 # export PATH=~/.local/bin:~/bin:$PATH
 
+# update fpath
+fpath=( "$HOME/.zsh/zfunctions" $fpath )
+
 # locale
 export LC_ALL="en_US.UTF-8"
+
+# spaceship prompt
+# ln -s ~/.zsh/plugins/spaceship-prompt/spaceship.zsh ~/.zsh/zfunctions/prompt_spaceship_setup
+autoload -U promptinit; promptinit
+prompt spaceship
+# spaceship prompt settings
+SPACESHIP_EXIT_CODE_SHOW=true
+SPACESHIP_TIME_SHOW=true
+SPACESHIP_USER_PREFIX=' '
+SPACESHIP_HOST_PREFIX=' '
+SPACESHIP_DIR_PREFIX=' '
+SPACESHIP_TIME_COLOR=magenta
 
 # open man pages with neovim
 export MANPAGER="nvim -c 'set ft=man' -"
@@ -130,8 +151,8 @@ bindkey '^[^?' backward-kill-dir
 # select-word-style bash
 
 # custom sources
-source "$HOME/.local/bin/powerline_binding_zsh.zsh"
-# git://github.com/zsh-users/zsh-autosuggestions
+#source "$HOME/.local/bin/powerline_binding_zsh.zsh"
+# git@github.com:zsh-users/zsh-autosuggestions
 source "$HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # git@github.com:zsh-users/zsh-history-substring-search.git
 source "$HOME/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
@@ -162,6 +183,7 @@ znt_cd_hotlist=(
     ~/.config/znt
 )
 
+# git@github.com:junegunn/fzf.git
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # zle custom functions
