@@ -237,7 +237,7 @@ command! -nargs=* Wrap set wrap linebreak nolist
 
 " Color scheme
 set t_Co=256
-" color onedark
+color desert
 
 " Showing line numbers and length
 set number  " show line numbers
