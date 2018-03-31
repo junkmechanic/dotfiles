@@ -457,6 +457,7 @@ let g:multi_cursor_quit_key='<Esc>'
 " neoterm options
 let g:neoterm_position='vertical'
 let g:neoterm_autoinsert=1
+let g:neoterm_tnew_mod='vertical'
 nnoremap <S-F5> :w<CR>:T python %<CR>
 nnoremap <S-F6> :w<CR>:T ptipython -i %<CR>
 nnoremap <S-F7> :w<CR>:T ptipython<CR>

@@ -102,6 +102,7 @@ fpath=( "$HOME/.zsh/zfunctions" $fpath )
 export LC_ALL="en_US.UTF-8"
 
 # spaceship prompt
+# git@github.com:denysdovhan/spaceship-prompt.git
 # ln -s ~/.zsh/plugins/spaceship-prompt/spaceship.zsh ~/.zsh/zfunctions/prompt_spaceship_setup
 autoload -U promptinit; promptinit
 prompt spaceship

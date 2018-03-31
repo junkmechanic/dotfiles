@@ -137,7 +137,7 @@ if [ -n "${NVIM_LISTEN_ADDRESS}" ]; then
 fi
 
 # powerline prompt
-. ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
+. ~/.local/bin/powerline.zsh
 
 # keybindings for history-substring-search
 # bind P and N for EMACS mode
@@ -163,7 +163,8 @@ bindkey '^ ' autosuggest-execute
 # virtualenvwrapper settings
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/devbench
-source ~/Library/Python/2.7/bin/virtualenvwrapper.sh
+VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+source ~/Library/Python/3.6/bin/virtualenvwrapper.sh
 
 # Updating Python for Pyspark integration
 # if which pyspark > /dev/null; then
@@ -200,6 +201,24 @@ mkcd() {
         mkdir -p $1 && cd $1
     fi
 }
+
+# zle custom functions
+
+function _git_status {
+    zle kill-whole-line
+    git status
+    zle accept-line
+}
+zle -N _git_status
+bindkey '\es' _git_status
+
+function _git_diff {
+    zle kill-whole-line
+    git diff
+    zle accept-line
+}
+zle -N _git_diff
+bindkey '\ez' _git_diff
 
 # fzf configuration. All other zsh config goes before this line
 # git@github.com:junegunn/fzf.git

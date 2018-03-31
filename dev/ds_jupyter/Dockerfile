@@ -55,6 +55,10 @@ RUN /opt/ds/bin/pip install jupyter_contrib_nbextensions \
     && /opt/ds/bin/jupyter nbextension enable collapsible_headings/main \
     && /opt/ds/bin/jupyter nbextension enable notify/notify \
     && /opt/ds/bin/jupyter nbextension enable hide_input/main \
+    && /opt/ds/bin/jupyter nbextension enable splitcell/splitcell \
+    && /opt/ds/bin/jupyter nbextension enable nbextensions_configurator/tree_tab/main \
+    && /opt/ds/bin/jupyter nbextension enable nbextensions_configurator/config_menu/main \
+    && /opt/ds/bin/jupyter nbextension enable contrib_nbextensions_help_item/main \
     && /opt/ds/bin/jupyter nbextension enable --py --sys-prefix widgetsnbextension
 
 RUN git clone https://github.com/lambdalisue/jupyter-vim-binding /opt/ds/share/jupyter/nbextensions/vim_binding \
