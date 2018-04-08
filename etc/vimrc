@@ -86,6 +86,10 @@ let g:lasttab = 1
 nnoremap <leader>z :exec "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
+" Remove search highlighting
+noremap <C-n> :nohl<CR>
+vnoremap <C-n> :nohl<CR>
+
 " Quicksave command
 noremap <C-Z> :update<CR>
 vnoremap <C-Z> <C-C>:update<CR>
@@ -237,7 +241,7 @@ command! -nargs=* Wrap set wrap linebreak nolist
 
 " Color scheme
 set t_Co=256
-color desert
+color torte
 
 " Showing line numbers and length
 set number  " show line numbers
@@ -245,6 +249,7 @@ set tw=80   " width of document
 set nowrap  " don't automatically wrap on load
 set fo-=t   " don't automatically wrap text when typing
 set colorcolumn=+1
+hi ColorColumn ctermbg=235
 
 set completeopt=longest,menuone
 

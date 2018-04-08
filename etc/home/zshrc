@@ -173,6 +173,10 @@ source "$HOME/.zsh/plugins/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh"
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# split2flac completion
+# git@github.com:ftrvxmtrx/split2flac.git
+source "$HOME/.local/bin/split2flac-bash-completion.sh"
+
 # history substring search keybindings
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down

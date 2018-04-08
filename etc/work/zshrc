@@ -224,7 +224,7 @@ bindkey '\ez' _git_diff
 # git@github.com:junegunn/fzf.git
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-fshow() {
+function _git_fshow {
   git log --graph --color=always \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
   fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
@@ -234,3 +234,5 @@ fshow() {
                 {}
 FZF-EOF"
 }
+zle -N _git_fshow
+bindkey '\ea' _git_fshow
