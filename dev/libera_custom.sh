@@ -1,4 +1,5 @@
-chown -R root:root /opt/conda
+apt-get install mosh cron zsh
+chown -R ankur.khanna:ankur.khanna /opt/conda
 /opt/conda/bin/conda install -c conda-forge jupyter_contrib_nbextensions
 /opt/conda/bin/jupyter nbextension enable init_cell/main \
     && /opt/conda/bin/jupyter nbextension enable table_beautifier/main \
@@ -10,13 +11,22 @@ chown -R root:root /opt/conda
     && /opt/conda/bin/jupyter nbextension enable nbextensions_configurator/tree_tab/main \
     && /opt/conda/bin/jupyter nbextension enable nbextensions_configurator/config_menu/main \
     && /opt/conda/bin/jupyter nbextension enable contrib_nbextensions_help_item/main \
+    && /opt/conda/bin/jupyter nbextension enable execute_time/ExecuteTime \
+    && /opt/conda/bin/jupyter nbextension enable hinterland/hinterland \
+    && /opt/conda/bin/jupyter nbextension enable varInspector/main \
     && /opt/conda/bin/jupyter nbextension enable --py --sys-prefix widgetsnbextension
+/opt/conda/bin/pip install jupyter_spark
+/opt/conda/bin/jupyter serverextension enable --py jupyter_spark \
+    && /opt/conda/bin/jupyter nbextension install --py jupyter_spark \
+    && /opt/conda/bin/jupyter nbextension enable --py jupyter_spark
 mkdir -p $(/opt/conda/bin/jupyter --data-dir)/nbextensions
 cd $(/opt/conda/bin/jupyter --data-dir)/nbextensions
 git clone https://github.com/lambdalisue/jupyter-vim-binding vim_binding
 /opt/conda/bin/jupyter nbextension enable vim_binding/vim_binding
+# since jupyter is run as root
 mkdir -p /root/.jupyter/custom
 wget -O /root/.jupyter/custom/custom.js https://raw.githubusercontent.com/junkmechanic/dotfiles/master/dev/ds_jupyter/jupyter_custom.js
+wget -O /root/.jupyter/custom/custom.css https://raw.githubusercontent.com/junkmechanic/dotfiles/master/dev/ds_jupyter/jupyter_custom.css
 
 # supervisorctl --username ankur.khanna -password <password> restart jupyter
 
