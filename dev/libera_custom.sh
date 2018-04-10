@@ -1,4 +1,5 @@
-apt-get install mosh cron zsh
+apt-get update && apt-get upgrade
+apt-get install mosh cron zsh rsync software-properties-common
 chown -R ankur.khanna:ankur.khanna /opt/conda
 /opt/conda/bin/conda install -c conda-forge jupyter_contrib_nbextensions
 /opt/conda/bin/jupyter nbextension enable init_cell/main \
@@ -28,7 +29,14 @@ mkdir -p /root/.jupyter/custom
 wget -O /root/.jupyter/custom/custom.js https://raw.githubusercontent.com/junkmechanic/dotfiles/master/dev/ds_jupyter/jupyter_custom.js
 wget -O /root/.jupyter/custom/custom.css https://raw.githubusercontent.com/junkmechanic/dotfiles/master/dev/ds_jupyter/jupyter_custom.css
 
-# supervisorctl --username ankur.khanna -password <password> restart jupyter
+# install neovim
+add-apt-repository ppa:neovim-ppa/stable
+apt-get update
+apt-get install neovim
+apt-get install python-dev python-pip python3-dev python3-pip
+pip install install neovim neovim-remote
+
+# supervisorctl --username ankur.khanna --password <password> restart jupyter
 
 # git clone http://ankur@gitlab.grabdata.info/ankur/alloftheshit.git /workspace/jupyter_notebooks/alloftheshit
 
