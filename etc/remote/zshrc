@@ -17,7 +17,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-alias vim="nvim"
+# alias vim="nvim"
 alias catn="cat -n"
 alias cd..="cd .."
 alias duall="du -shc .[!.]* *"
@@ -35,9 +35,9 @@ alias tmat="tmux attach"
 alias tmgn="tmux new-session -s general"
 alias tmnw="tmux new-session -s"
 alias tmux="tmux -2"
-alias vimo="nvim -O"
-alias vimp="nvim -p"
-alias vimdiff="nvim -d"
+alias vimo="vim -O"
+alias vimp="vim -p"
+# alias vimdiff="vim -d"
 # Neovim Remote Activation
 if [ -n "${NVIM_LISTEN_ADDRESS}" ]; then
   alias vims='nvr -o'

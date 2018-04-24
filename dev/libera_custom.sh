@@ -1,7 +1,9 @@
-apt-get update && apt-get upgrade
-apt-get install mosh cron zsh rsync software-properties-common
+#!/bin/bash
+
+apt-get update && apt-get -y upgrade
+apt-get -y install mosh cron zsh rsync software-properties-common
 chown -R ankur.khanna:ankur.khanna /opt/conda
-/opt/conda/bin/conda install -c conda-forge jupyter_contrib_nbextensions
+/opt/conda/bin/conda install -y -c conda-forge jupyter_contrib_nbextensions
 /opt/conda/bin/jupyter nbextension enable init_cell/main \
     && /opt/conda/bin/jupyter nbextension enable table_beautifier/main \
     && /opt/conda/bin/jupyter nbextension enable toc2/main \
@@ -30,11 +32,11 @@ wget -O /root/.jupyter/custom/custom.js https://raw.githubusercontent.com/junkme
 wget -O /root/.jupyter/custom/custom.css https://raw.githubusercontent.com/junkmechanic/dotfiles/master/dev/ds_jupyter/jupyter_custom.css
 
 # install neovim
-add-apt-repository ppa:neovim-ppa/stable
+add-apt-repository ppa:neovim-ppa/stable -y
 apt-get update
-apt-get install neovim
-apt-get install python-dev python-pip python3-dev python3-pip
-pip install install neovim neovim-remote
+apt-get -y install neovim
+apt-get -y install python-dev python-pip python3-dev python3-pip
+pip3 install neovim neovim-remote
 
 # supervisorctl --username ankur.khanna --password <password> restart jupyter
 
