@@ -136,7 +136,7 @@ module.exports = {
     materialBox: {
         scheme: 'dracula',
         lightEffect: true,
-        backgroundOpacity: 0.7,
+        backgroundOpacity: 0.8,
         autoHideTitle: true,
         hideTrafficLights: true,
     },

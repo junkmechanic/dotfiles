@@ -17,4 +17,6 @@ tqdm
 xlrd
 scikit-optimize
 mord
+s3fs
 dask[complete]
+jupyter_spark

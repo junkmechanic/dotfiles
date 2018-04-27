@@ -2,7 +2,6 @@
 
 apt-get update && apt-get -y upgrade
 apt-get -y install mosh cron zsh rsync software-properties-common
-chown -R ankur.khanna:ankur.khanna /opt/conda
 /opt/conda/bin/conda install -y -c conda-forge jupyter_contrib_nbextensions
 /opt/conda/bin/jupyter nbextension enable init_cell/main \
     && /opt/conda/bin/jupyter nbextension enable table_beautifier/main \
@@ -26,10 +25,14 @@ mkdir -p $(/opt/conda/bin/jupyter --data-dir)/nbextensions
 cd $(/opt/conda/bin/jupyter --data-dir)/nbextensions
 git clone https://github.com/lambdalisue/jupyter-vim-binding vim_binding
 /opt/conda/bin/jupyter nbextension enable vim_binding/vim_binding
+/opt/conda/bin/pip install tqdm mord dask[complete]
+
+chown -R ankur.khanna:ankur.khanna /opt/conda
 # since jupyter is run as root
 mkdir -p /root/.jupyter/custom
 wget -O /root/.jupyter/custom/custom.js https://raw.githubusercontent.com/junkmechanic/dotfiles/master/dev/ds_jupyter/jupyter_custom.js
 wget -O /root/.jupyter/custom/custom.css https://raw.githubusercontent.com/junkmechanic/dotfiles/master/dev/ds_jupyter/jupyter_custom.css
+wget -O /root/.jupyter/jupyter_notebook_config.py https://raw.githubusercontent.com/junkmechanic/dotfiles/master/dev/ds_jupyter/jupyter_notebook_config.py
 
 # install neovim
 add-apt-repository ppa:neovim-ppa/stable -y

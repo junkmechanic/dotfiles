@@ -38,7 +38,7 @@ RUN chown ankur /home/ankur/.bashrc
 RUN chown ankur /home/ankur/.inputrc
 RUN chown ankur /home/ankur/.vimrc
 
-EXPOSE 8888
+# EXPOSE 8888
 USER ankur
 RUN mkdir -p /home/ankur/notebooks
 ENV HOME=/home/ankur
@@ -59,15 +59,27 @@ RUN /opt/ds/bin/pip install jupyter_contrib_nbextensions \
     && /opt/ds/bin/jupyter nbextension enable nbextensions_configurator/tree_tab/main \
     && /opt/ds/bin/jupyter nbextension enable nbextensions_configurator/config_menu/main \
     && /opt/ds/bin/jupyter nbextension enable contrib_nbextensions_help_item/main \
+    && /opt/ds/bin/jupyter nbextension enable execute_time/ExecuteTime \
+    && /opt/ds/bin/jupyter nbextension enable hinterland/hinterland \
+    && /opt/ds/bin/jupyter nbextension enable varInspector/main \
     && /opt/ds/bin/jupyter nbextension enable --py --sys-prefix widgetsnbextension
+
+RUN /opt/ds/bin/jupyter serverextension enable --py jupyter_spark \
+    && /opt/ds/bin/jupyter nbextension install --py jupyter_spark \
+    && /opt/ds/bin/jupyter nbextension enbale --py jupyter_spark
 
 RUN git clone https://github.com/lambdalisue/jupyter-vim-binding /opt/ds/share/jupyter/nbextensions/vim_binding \
     && /opt/ds/bin/jupyter nbextension enable vim_binding/vim_binding
 
 RUN mkdir -p /home/ankur/.jupyter/custom
 ADD jupyter_custom.js /home/ankur/.jupyter/custom/custom.js
+ADD jupyter_custom.css /home/ankur/.jupyter/custom/custom.css
+ADD jupyter_notebook_config.py /home/ankur/.jupyter/jupyter_notebook_config.py
+
 USER root
 RUN chown ankur /home/ankur/.jupyter/custom/custom.js
+RUN chown ankur /home/ankur/.jupyter/custom/custom.css
+RUN chown ankur /home/ankur/.jupyter/jupyter_notebook_config.py
 USER ankur
 
 CMD ["/home/ankur/run_jupyter.sh"]
