@@ -24,34 +24,34 @@ TXDIF=$(echo $(((TXBN - TXB) * 5  )))
 
 SPEEDU="B/s ↑"
 SPEEDD="B/s ↓"
-if [ $RXDIF -ge 10240 ]; then
+if [ $RXDIF -ge 1024 ]; then
     SPEEDD="KB/s ↓"
-    RXDIF=$(echo $((RXDIF / 10240 )) )
+    RXDIF=$(echo $((RXDIF / 1024 )) )
 fi
 
-if [ $TXDIF -ge 10240 ]; then
+if [ $TXDIF -ge 1024 ]; then
     SPEEDU="KB/s ↑"
-    TXDIF=$(echo $((TXDIF / 10240 )) )
+    TXDIF=$(echo $((TXDIF / 1024 )) )
 fi
 
-if [ $RXDIF -ge 10240 ]; then
+if [ $RXDIF -ge 1024 ]; then
     SPEEDD="MB/s ↓"
-    RXDIF=$(echo $((RXDIF / 10240 )) )
+    RXDIF=$(echo $((RXDIF / 1024 )) )
 fi
 
-if [ $TXDIF -ge 10240 ]; then
+if [ $TXDIF -ge 1024 ]; then
     SPEEDU="MB/s ↑"
-    TXDIF=$(echo $((TXDIF / 10240 )) )
+    TXDIF=$(echo $((TXDIF / 1024 )) )
 fi
 
-if [ $RXDIF -ge 10240 ]; then
+if [ $RXDIF -ge 1024 ]; then
     SPEEDD="GB/s ↓"
-    RXDIF=$(echo $((RXDIF / 10240 )) )
+    RXDIF=$(echo $((RXDIF / 1024 )) )
 fi
 
-if [ $TXDIF -ge 10240 ]; then
+if [ $TXDIF -ge 1024 ]; then
     SPEEDU="GB/s ↑"
-    TXDIF=$(echo $((TXDIF / 10240 )) )
+    TXDIF=$(echo $((TXDIF / 1024 )) )
 fi
 
 RXDIFF=$(($RXDIF % 10 ))

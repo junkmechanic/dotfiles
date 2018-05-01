@@ -38,6 +38,10 @@ fi
 setopt menu_complete
 zstyle ':completion:*' menu select
 
+# for bash completion scripts
+autoload bashcompinit
+bashcompinit
+
 # Accept completion and also execute the command
 zmodload zsh/complist
 bindkey -M menuselect '^M' .accept-line

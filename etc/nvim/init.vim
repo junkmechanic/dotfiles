@@ -382,9 +382,11 @@ let g:deoplete#enable_smart_case = 1
 " for auto selection of the first menu entry
 set completeopt+=noinsert
 " auto delimiter (for example in paths) and removing auto-paranthesis addition
-call deoplete#custom#set('_', 'converters', ['converter_auto_delimiter', 'converter_remove_paren', 'converter_remove_overlap'])
+call deoplete#custom#source('_', 'converters',
+    \ ['converter_auto_delimiter', 'converter_remove_paren', 'converter_remove_overlap'])
 " fully fuzzy matching
-call deoplete#custom#set('_', 'matchers', ['matcher_length', 'matcher_full_fuzzy'])
+call deoplete#custom#source('_', 'matchers',
+    \ ['matcher_length', 'matcher_full_fuzzy'])
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr><C-g>     deoplete#undo_completion()

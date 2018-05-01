@@ -1,8 +1,21 @@
 #!/bin/bash
 
 apt-get update && apt-get -y upgrade
-apt-get -y install mosh cron zsh rsync software-properties-common
-/opt/conda/bin/conda install -y -c conda-forge jupyter_contrib_nbextensions
+apt-get -y install \
+    mosh \
+    cron \
+    zsh \
+    rsync \
+    software-properties-common \
+    less \
+    graphviz
+
+/opt/conda/bin/conda update -y --all
+
+/opt/conda/bin/conda install -y -c conda-forge \
+    jupyter_contrib_nbextensions \
+    python-graphviz
+
 /opt/conda/bin/jupyter nbextension enable init_cell/main \
     && /opt/conda/bin/jupyter nbextension enable table_beautifier/main \
     && /opt/conda/bin/jupyter nbextension enable toc2/main \
@@ -17,10 +30,12 @@ apt-get -y install mosh cron zsh rsync software-properties-common
     && /opt/conda/bin/jupyter nbextension enable hinterland/hinterland \
     && /opt/conda/bin/jupyter nbextension enable varInspector/main \
     && /opt/conda/bin/jupyter nbextension enable --py --sys-prefix widgetsnbextension
+
 /opt/conda/bin/pip install jupyter_spark
 /opt/conda/bin/jupyter serverextension enable --py jupyter_spark \
     && /opt/conda/bin/jupyter nbextension install --py jupyter_spark \
     && /opt/conda/bin/jupyter nbextension enable --py jupyter_spark
+
 mkdir -p $(/opt/conda/bin/jupyter --data-dir)/nbextensions
 cd $(/opt/conda/bin/jupyter --data-dir)/nbextensions
 git clone https://github.com/lambdalisue/jupyter-vim-binding vim_binding
