@@ -7,8 +7,7 @@ require(['nbextensions/vim_binding/vim_binding'], function() {
 require([
   'nbextensions/vim_binding/vim_binding',
 ], function() {
-//  CodeMirror.Vim.map(";", ":", "normal");
-//  CodeMirror.Vim.map(":", ";", "normal");
+  CodeMirror.Vim.map("Y", "y$", "normal");
 });
 
 Jupyter.keyboard_manager.actions.register({
