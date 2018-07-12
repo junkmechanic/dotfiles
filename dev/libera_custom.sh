@@ -14,7 +14,10 @@ apt-get -y install \
 
 /opt/conda/bin/conda install -y -c conda-forge \
     jupyter_contrib_nbextensions \
-    python-graphviz
+    jupyter_dashboards \
+    python-graphviz \
+    mkl mkl-service \
+    s3fs
 
 /opt/conda/bin/jupyter nbextension enable init_cell/main \
     && /opt/conda/bin/jupyter nbextension enable table_beautifier/main \
@@ -31,7 +34,7 @@ apt-get -y install \
     && /opt/conda/bin/jupyter nbextension enable varInspector/main \
     && /opt/conda/bin/jupyter nbextension enable --py --sys-prefix widgetsnbextension
 
-/opt/conda/bin/pip install jupyter_spark
+/opt/conda/bin/pip install jupyter_spark pyspark_dist_explore
 /opt/conda/bin/jupyter serverextension enable --py jupyter_spark \
     && /opt/conda/bin/jupyter nbextension install --py jupyter_spark \
     && /opt/conda/bin/jupyter nbextension enable --py jupyter_spark
@@ -40,7 +43,7 @@ mkdir -p $(/opt/conda/bin/jupyter --data-dir)/nbextensions
 cd $(/opt/conda/bin/jupyter --data-dir)/nbextensions
 git clone https://github.com/lambdalisue/jupyter-vim-binding vim_binding
 /opt/conda/bin/jupyter nbextension enable vim_binding/vim_binding
-/opt/conda/bin/pip install tqdm mord dask[complete]
+/opt/conda/bin/pip install tqdm mord dask[complete] pymc3
 
 chown -R ankur.khanna:ankur.khanna /opt/conda
 # since jupyter is run as root
