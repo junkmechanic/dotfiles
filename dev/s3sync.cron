@@ -1,3 +1,4 @@
-*/2 * * * * aws s3 sync /workspace/jupyter_notebooks/alloftheshit s3://grab-ds-datastore/user/ankur/backup/alloftheshit >/workspace/jupyter_notebooks/logs/s3_sync_alloftheshit.log
-*/2 * * * * aws s3 sync /workspace/jupyter_notebooks/data s3://grab-ds-datastore/user/ankur/backup/data >/workspace/jupyter_notebooks/logs/s3_sync_data.log
+*/2 * * * * /opt/conda/bin/aws s3 sync /workspace/jupyter_notebooks/alloftheshit s3://grab-ds-datastore/user/ankur/backup/alloftheshit >/workspace/jupyter_notebooks/logs/s3_sync_alloftheshit.log
+*/2 * * * * /opt/conda/bin/aws s3 sync /workspace/jupyter_notebooks/data s3://grab-ds-datastore/user/ankur/backup/data >/workspace/jupyter_notebooks/logs/s3_sync_data.log
+*/2 * * * * /opt/conda/bin/aws s3 sync /workspace/notebooks s3://grab-ds-datastore/user/ankur/backup/zeppelin_notebooks >/workspace/jupyter_notebooks/logs/s3_sync_zeppelin.log
 

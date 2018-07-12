@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:/usr/local/bin:/Users/ankur.khanna/Library/Python/2.7/bin:/Users/ankur.khanna/Library/Python/3.6/bin:$PATH
+export PATH=$HOME/.local/bin:/usr/local/bin:/Users/ankur.khanna/Library/Python/2.7/bin:/Users/ankur.khanna/Library/Python/3.7/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/ankur.khanna/.oh-my-zsh
@@ -166,7 +166,7 @@ bindkey '^ ' autosuggest-execute
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/devbench
 VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-source ~/Library/Python/3.6/bin/virtualenvwrapper.sh
+source ~/Library/Python/3.7/bin/virtualenvwrapper.sh
 
 # Updating Python for Pyspark integration
 # if which pyspark > /dev/null; then

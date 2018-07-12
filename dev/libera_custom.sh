@@ -14,6 +14,7 @@ apt-get -y install \
 
 /opt/conda/bin/conda install -y -c conda-forge \
     jupyter_contrib_nbextensions \
+    jupyter_dashboards \
     python-graphviz \
     mkl mkl-service \
     s3fs
@@ -33,7 +34,7 @@ apt-get -y install \
     && /opt/conda/bin/jupyter nbextension enable varInspector/main \
     && /opt/conda/bin/jupyter nbextension enable --py --sys-prefix widgetsnbextension
 
-/opt/conda/bin/pip install jupyter_spark
+/opt/conda/bin/pip install jupyter_spark pyspark_dist_explore
 /opt/conda/bin/jupyter serverextension enable --py jupyter_spark \
     && /opt/conda/bin/jupyter nbextension install --py jupyter_spark \
     && /opt/conda/bin/jupyter nbextension enable --py jupyter_spark
