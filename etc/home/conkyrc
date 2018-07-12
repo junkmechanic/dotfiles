@@ -33,6 +33,7 @@ conky.config = {
 };
 
 conky.text = [[
+${time %d} ${time %B} ${time %y} ${alignr}${time %H:%M}
 # CPU1 $alignr ${cpu cpu0}%
 ${cpugraph cpu0 25,120}  ${cpugraph cpu1 25,120}
 # CPU2 $alignr ${cpu cpu1}%
