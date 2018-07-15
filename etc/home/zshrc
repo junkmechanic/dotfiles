@@ -86,6 +86,7 @@ alias vim='nvim'
 alias vimdiff='nvim -d'
 alias vimo='nvim -O'
 alias vimp='nvim -p'
+alias wget='noglob wget'
 # Neovim Remote Activation
 if [ -n "${NVIM_LISTEN_ADDRESS}" ]; then
   alias vims='nvr -o'
@@ -118,11 +119,12 @@ SPACESHIP_HOST_PREFIX=' '
 SPACESHIP_DIR_PREFIX=' '
 SPACESHIP_GIT_PREFIX=' '
 SPACESHIP_EXEC_TIME_PREFIX=' '
+SPACESHIP_TIME_FORMAT='%w  %T'
 SPACESHIP_TIME_COLOR=blue
 SPACESHIP_USER_COLOR=blue
 SPACESHIP_HOST_COLOR_SSH=cyan
 SPACESHIP_CHAR_COLOR_SUCCESS=blue
-SPACESHIP_EXEC_TIME_COLOR=cyan
+SPACESHIP_EXEC_TIME_COLOR=magenta
 
 # open man pages with neovim
 export MANPAGER="nvim -c 'set ft=man' -"

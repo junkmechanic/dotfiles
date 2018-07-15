@@ -102,7 +102,6 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim="nvim"
 alias catn="cat -n"
 alias cd..="cd .."
 alias duall="du -shc .[!.]* *"
@@ -120,17 +119,18 @@ alias pipgrep="pip freeze | grep"
 alias psgrep="ps aux | grep -v grep | grep"
 alias pti="ptipython"
 alias rsync="noglob rsync --human-readable --partial --progress --rsh=ssh"
+alias s3cmd='noglob s3cmd'
+alias scp='noglob scp'
 alias sl="ls"
 alias tmat="tmux attach"
 alias tmgn="tmux new-session -s general"
 alias tmnw="tmux new-session -s"
 alias tmux="tmux -2"
+alias vim="nvim"
+alias vimdiff='nvim -d'
 alias vimo="nvim -O"
 alias vimp="nvim -p"
-alias vimdiff="nvim -d"
-# Prevent globbing
-alias s3cmd='noglob s3cmd'
-alias scp='noglob scp'
+alias wget='noglob wget'
 # Neovim Remote Activation
 if [ -n "${NVIM_LISTEN_ADDRESS}" ]; then
   alias vims='nvr -o'
