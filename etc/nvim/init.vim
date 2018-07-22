@@ -331,18 +331,18 @@ function! NextIndent(exclusive, fwd, lowerlevel, skipblanks)
 endfunction
 
 " Moving back and forth between lines of same or lower indentation.
-nnoremap <silent> <leader>k :call NextIndent(0, 0, 0, 1)<CR>
-nnoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
-nnoremap <silent> <leader>K :call NextIndent(0, 0, 1, 1)<CR>
-nnoremap <silent> <leader>J :call NextIndent(0, 1, 1, 1)<CR>
-vnoremap <silent> <leader>k <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
-vnoremap <silent> <leader>j <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
-vnoremap <silent> <leader>K <Esc>:call NextIndent(0, 0, 1, 1)<CR>m'gv''
-vnoremap <silent> <leader>J <Esc>:call NextIndent(0, 1, 1, 1)<CR>m'gv''
-onoremap <silent> <leader>k :call NextIndent(0, 0, 0, 1)<CR>
-onoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
-onoremap <silent> <leader>K :call NextIndent(1, 0, 1, 1)<CR>
-onoremap <silent> <leader>J :call NextIndent(1, 1, 1, 1)<CR>
+nnoremap <silent> <leader><leader>k :call NextIndent(0, 0, 0, 1)<CR>
+nnoremap <silent> <leader><leader>j :call NextIndent(0, 1, 0, 1)<CR>
+" nnoremap <silent> <leader><leader>K :call NextIndent(0, 0, 1, 1)<CR>
+" nnoremap <silent> <leader><leader>J :call NextIndent(0, 1, 1, 1)<CR>
+vnoremap <silent> <leader><leader>k <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
+vnoremap <silent> <leader><leader>j <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
+" vnoremap <silent> <leader><leader>K <Esc>:call NextIndent(0, 0, 1, 1)<CR>m'gv''
+" vnoremap <silent> <leader><leader>J <Esc>:call NextIndent(0, 1, 1, 1)<CR>m'gv''
+onoremap <silent> <leader><leader>k :call NextIndent(0, 0, 0, 1)<CR>
+onoremap <silent> <leader><leader>j :call NextIndent(0, 1, 0, 1)<CR>
+" onoremap <silent> <leader><leader>K :call NextIndent(1, 0, 1, 1)<CR>
+" onoremap <silent> <leader><leader>J :call NextIndent(1, 1, 1, 1)<CR>
 
 
 " -----------------------------------------------------------------------------
@@ -415,8 +415,12 @@ vmap  <expr>  <UP>     DVB_Drag('up')
 
 " easymotion options
 let g:EasyMotion_smartcase = 1
-nmap s <Plug>(easymotion-s2)
-vmap s <Plug>(easymotion-s2)
+nmap <leader>s <Plug>(easymotion-s2)
+vmap <leader>s <Plug>(easymotion-s2)
+nmap <leader>j <Plug>(easymotion-j)
+vmap <leader>j <Plug>(easymotion-j)
+nmap <leader>k <Plug>(easymotion-k)
+vmap <leader>k <Plug>(easymotion-k)
 nmap <leader><leader>n <Plug>(easymotion-next)
 vmap <leader><leader>n <Plug>(easymotion-next)
 nmap <leader><leader>p <Plug>(easymotion-prev)
@@ -463,18 +467,18 @@ nnoremap <S-F5> :w<CR>:T python %<CR>
 nnoremap <S-F6> :w<CR>:T ptipython -i %<CR>
 nnoremap <S-F7> :w<CR>:T ptipython<CR>
 nnoremap <S-F8> :w<CR>:Topen<CR>
-function! SendToNeoterm(mode)
-  if len(g:neoterm.instances) == 1
-    exec 'TREPLSetTerm 1'
-  endif
-  if a:mode == 'n'
-    exec 'TREPLSendLine'
-  elseif a:mode == 'v'
-    exec 'TREPLSendSelection'
-  endif
-endfunction
-nnoremap <leader>s :call SendToNeoterm('n')<CR>
-vnoremap <leader>s :call SendToNeoterm('v')<CR>
+" function! SendToNeoterm(mode)
+"   if len(g:neoterm.instances) == 1
+"     exec 'TREPLSetTerm 1'
+"   endif
+"   if a:mode == 'n'
+"     exec 'TREPLSendLine'
+"   elseif a:mode == 'v'
+"     exec 'TREPLSendSelection'
+"   endif
+" endfunction
+" nnoremap <leader>s :call SendToNeoterm('n')<CR>
+" vnoremap <leader>s :call SendToNeoterm('v')<CR>
 
 " NERDTree options
 " `:NERDTreeFind` to locate the file in the dir tree

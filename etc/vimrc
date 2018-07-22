@@ -192,7 +192,6 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Enable syntax highlighting
-" You need to reload this file for the change to apply
 filetype off
 filetype plugin indent on
 syntax on
@@ -306,16 +305,17 @@ function! NextIndent(exclusive, fwd, lowerlevel, skipblanks)
 endfunction
 
 " Moving back and forth between lines of same or lower indentation.
-nnoremap <silent> <leader>k :call NextIndent(0, 0, 0, 1)<CR>
-nnoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
-nnoremap <silent> <leader>K :call NextIndent(0, 0, 1, 1)<CR>
-nnoremap <silent> <leader>J :call NextIndent(0, 1, 1, 1)<CR>
-vnoremap <silent> <leader>k <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
-vnoremap <silent> <leader>j <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
-vnoremap <silent> <leader>K <Esc>:call NextIndent(0, 0, 1, 1)<CR>m'gv''
-vnoremap <silent> <leader>J <Esc>:call NextIndent(0, 1, 1, 1)<CR>m'gv''
-onoremap <silent> <leader>k :call NextIndent(0, 0, 0, 1)<CR>
-onoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
-onoremap <silent> <leader>K :call NextIndent(1, 0, 1, 1)<CR>
-onoremap <silent> <leader>J :call NextIndent(1, 1, 1, 1)<CR>
+nnoremap <silent> <leader><leader>k :call NextIndent(0, 0, 0, 1)<CR>
+nnoremap <silent> <leader><leader>j :call NextIndent(0, 1, 0, 1)<CR>
+" nnoremap <silent> <leader><leader>K :call NextIndent(0, 0, 1, 1)<CR>
+" nnoremap <silent> <leader><leader>J :call NextIndent(0, 1, 1, 1)<CR>
+vnoremap <silent> <leader><leader>k <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
+vnoremap <silent> <leader><leader>j <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
+" vnoremap <silent> <leader><leader>K <Esc>:call NextIndent(0, 0, 1, 1)<CR>m'gv''
+" vnoremap <silent> <leader><leader>J <Esc>:call NextIndent(0, 1, 1, 1)<CR>m'gv''
+onoremap <silent> <leader><leader>k :call NextIndent(0, 0, 0, 1)<CR>
+onoremap <silent> <leader><leader>j :call NextIndent(0, 1, 0, 1)<CR>
+" onoremap <silent> <leader><leader>K :call NextIndent(1, 0, 1, 1)<CR>
+" onoremap <silent> <leader><leader>J :call NextIndent(1, 1, 1, 1)<CR>
+
 " -----------------------------------------------------------------------------
