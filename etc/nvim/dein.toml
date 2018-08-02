@@ -112,16 +112,7 @@ repo = 'bronson/vim-trailing-whitespace'
 repo = 'tpope/vim-unimpaired'
 
 [[plugins]]
-repo = 'Shougo/unite.vim'
-
-[[plugins]]
 repo = 'Shougo/denite.nvim'
-
-[[plugins]]
-repo = 'ujihisa/unite-locate'
-
-[[plugins]]
-repo = 'Shougo/unite-outline'
 
 [[plugins]]
 repo = 'Shougo/neomru.vim'

@@ -19,12 +19,12 @@ conky.config = {
 	draw_outline = false,
 	draw_borders = false,
 	draw_graph_borders = true,
-	default_color = '#0f1e1e',
+	default_color = '#7c8585',
 	default_shade_color = 'red',
 	default_outline_color = 'green',
 	alignment = 'top_right',
 	gap_x = 10,
-	gap_y = 40,
+	gap_y = 80,
 	no_buffers = true,
 	uppercase = false,
 	cpu_avg_samples = 2,
@@ -38,31 +38,52 @@ ${time %d} ${time %B} ${time %y} ${alignr}${time %H:%M}
 ${cpugraph cpu0 25,120}  ${cpugraph cpu1 25,120}
 # CPU2 $alignr ${cpu cpu1}%
 ${cpugraph cpu2 25,120}  ${cpugraph cpu3 25,120}
+
+
+
+
 MEM $alignc $mem / $memmax $alignr $memperc%
 $memgraph
 $membar
+
+
+
+
 swap $alignc $swap / $swapmax $alignr $swapperc%
 ${swapbar}
 / $alignc ${fs_used /} / ${fs_size /} $alignr ${fs_free_perc /}%
 ${fs_bar /}
 /home $alignc ${fs_used /home} / ${fs_size /home} $alignr ${fs_free_perc /home}%
 ${fs_bar /home}
-$hr
+#$hr
+
+
+
+
 # $alignc CPU
 # NAME $alignr PID    CPU   MEM
 ${top name 1} $alignr ${top pid 1}  ${top cpu 1}  ${top mem 1}
 ${top name 2} $alignr ${top pid 2}  ${top cpu 2}  ${top mem 2}
 ${top name 3} $alignr ${top pid 3}  ${top cpu 3}  ${top mem 3}
-$hr
+
+
+
+
 # $alignc MEM
 # NAME $alignr PID    CPU   MEM
 ${top_mem name 1} $alignr ${top_mem pid 1}  ${top_mem cpu 1}  ${top_mem mem 1}
 ${top_mem name 2} $alignr ${top_mem pid 2}  ${top_mem cpu 2}  ${top_mem mem 2}
 ${top_mem name 3} $alignr ${top_mem pid 3}  ${top_mem cpu 3}  ${top_mem mem 3}
-$hr
+
+
+
+
 Total Uptime $alignr $uptime
 System Volume $alignr ${exec amixer get Master | grep Left: | cut -d " " -f7 | tr -d []%}
-$hr
+
+
+
+
 ${if_existing /sys/class/net/wlp2s0/operstate up}Inbound $alignr ${downspeed wlp2s0}
 ${downspeedgraph wlp2s0}
 Outbound $alignr ${upspeed wlp2s0}
@@ -77,11 +98,14 @@ ${downspeedgraph enp4s0}
 Outbound $alignr ${upspeed enp4s0}
 ${upspeedgraph enp4s0}
 IP Address $alignr ${addr enp4s0}${else}${endif}${endif}
-$hr
+
+
+
+
 Battery :$alignr${battery_time BAT1}
 ${battery_bar BAT1}
-$hr
-${if_running spotify}
+#$hr
+#${if_running spotify}
 #${exec sp current | grep -i albumartist | cut -d':'  -f1 --complement | sed 's/^ *//'}
 #${exec sp current | grep -i 'album :' | cut -d':'  -f1 --complement | sed 's/^ *//'}
 #${exec sp current | grep -i title | cut -d':'  -f1 --complement | sed 's/^ *//'}

@@ -30,7 +30,6 @@ apt-get -y install \
     && /opt/conda/bin/jupyter nbextension enable nbextensions_configurator/config_menu/main \
     && /opt/conda/bin/jupyter nbextension enable contrib_nbextensions_help_item/main \
     && /opt/conda/bin/jupyter nbextension enable execute_time/ExecuteTime \
-    && /opt/conda/bin/jupyter nbextension enable hinterland/hinterland \
     && /opt/conda/bin/jupyter nbextension enable varInspector/main \
     && /opt/conda/bin/jupyter nbextension enable --py --sys-prefix widgetsnbextension
 

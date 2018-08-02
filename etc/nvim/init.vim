@@ -514,20 +514,20 @@ nmap          <leader>fow          <Plug>SearchPartyMashFOWToggle
 
 " Denite options
 call denite#custom#option('_', {
-  \ 'prompt': 'λ:',
+  \ 'prompt': '❯',
   \ 'empty': 0,
   \ 'winheight': 16,
   \ 'short_source_names': 1,
   \ 'vertical_preview': 1,
+  \ 'direction': 'dynamicbottom',
   \ })
 
 let insert_mode_mappings = [
   \  ['jj', '<denite:enter_mode:normal>', 'noremap'],
+  \  ['qq', '<denite:quit>', 'noremap'],
   \  ['<Esc>', '<denite:enter_mode:normal>', 'noremap'],
   \  ['<C-N>', '<denite:assign_next_matched_text>', 'noremap'],
   \  ['<C-P>', '<denite:assign_previous_matched_text>', 'noremap'],
-  \  ['<Up>', '<denite:assign_previous_text>', 'noremap'],
-  \  ['<Down>', '<denite:assign_next_text>', 'noremap'],
   \  ['<C-Y>', '<denite:redraw>', 'noremap'],
   \  ['<C-J>', '<denite:move_to_next_line>', 'noremap'],
   \  ['<C-K>', '<denite:move_to_previous_line>', 'noremap'],
@@ -551,30 +551,16 @@ for m in normal_mode_mappings
 endfor
 
 nnoremap <silent><LocalLeader>r :<C-u>Denite -resume -refresh<CR>
-nnoremap <silent><LocalLeader>f :<C-u>Denite -default-action=tabopen file_rec<CR>
-nnoremap <silent><LocalLeader>q :<C-u>Denite quickfix -buffer-name=list<CR>
+nnoremap <silent><LocalLeader>f :<C-u>Denite -default-action=tabopen file_rec file_mru<CR>
+nnoremap <silent><LocalLeader>h :<C-u>Denite -default-action=tabopen file_rec:~/<CR>
+nnoremap <silent><LocalLeader>y :<C-u>Denite -default-action=append -mode=normal neoyank<CR>
+nnoremap <silent><LocalLeader>g :<C-u>DeniteCursorWord -default-action=tabopen -mode=normal grep:.<CR>
 
-" Unite options
-function! Unite_vgrep(search_string, auto)
+function! Denite_vgrep(search_string)
   let l:escaped_str = substitute(a:search_string, " ", "\\\\\\\\s", "g")
-  if a:auto
-    exec 'Unite -buffer-name=vgrep_auto -default-action=tabopen grep:.:-iHn:'.l:escaped_str
-  else
-    exec 'Unite -buffer-name=vgrep -default-action=tabopen grep::-iHn:'.l:escaped_str
-  endif
+  exec 'Unite -buffer-name=vgrep_auto -default-action=tabopen grep:.:-iHn:'.l:escaped_str
 endfunction
-nnoremap <leader>uf :Unite -buffer-name=file_rec -default-action=tabopen -start-insert file_rec/neovim<CR>
-nnoremap <leader>uh :Unite -buffer-name=file_rec -default-action=tabopen -start-insert file_rec/neovim:/home/ankur/<CR>
-nnoremap <leader>um :Unite -buffer-name=mru -default-action=tabopen -start-insert neomru/file<CR>
-nnoremap <leader>uy :Unite -buffer-name=yank -default-action=append history/yank<CR>
-nnoremap <leader>ug :Unite -buffer-name=grep_auto -default-action=tabopen grep:.:-iHn:<C-R><C-W><CR>
-nnoremap <leader>uG :Unite -buffer-name=grep -default-action=tabopen grep<CR>
-nnoremap <leader>uo :Unite -buffer-name=outline -direction=botright -vertical -winwidth=45 outline<CR>
-vnoremap <leader>uv y:call Unite_vgrep('<C-R><C-R>"', 1)<CR>
-vnoremap <leader>uV y:call Unite_vgrep('<C-R><C-R>"', 0)<CR>
-nnoremap <leader>ur :UniteResume<CR>
-nnoremap <leader>ul :Unite -buffer-name=locate -default-action=tabopen -start-insert locate<CR>
-nnoremap <leader>/ :Unite -buffer-name=line -start-insert line<CR>
+vnoremap <silent><LocalLeader>v y:call Denite_vgrep('<C-R><C-R>"')<CR>
 
 
 "" Deprecated functionality
@@ -602,6 +588,28 @@ nnoremap <leader>/ :Unite -buffer-name=line -start-insert line<CR>
 "     exec 'nnoremap <A-' . n . '> ' . n . 'gt'
 "     let n = n + 1
 " endwhile
+
+" Unite options
+" function! Unite_vgrep(search_string, auto)
+"   let l:escaped_str = substitute(a:search_string, " ", "\\\\\\\\s", "g")
+"   if a:auto
+"     exec 'Unite -buffer-name=vgrep_auto -default-action=tabopen grep:.:-iHn:'.l:escaped_str
+"   else
+"     exec 'Unite -buffer-name=vgrep -default-action=tabopen grep::-iHn:'.l:escaped_str
+"   endif
+" endfunction
+" nnoremap <leader>uf :Unite -buffer-name=file_rec -default-action=tabopen -start-insert file_rec/neovim<CR>
+" nnoremap <leader>uh :Unite -buffer-name=file_rec -default-action=tabopen -start-insert file_rec/neovim:/home/ankur/<CR>
+" nnoremap <leader>um :Unite -buffer-name=mru -default-action=tabopen -start-insert neomru/file<CR>
+" nnoremap <leader>uy :Unite -buffer-name=yank -default-action=append history/yank<CR>
+" nnoremap <leader>ug :Unite -buffer-name=grep_auto -default-action=tabopen grep:.:-iHn:<C-R><C-W><CR>
+" nnoremap <leader>uG :Unite -buffer-name=grep -default-action=tabopen grep<CR>
+" nnoremap <leader>uo :Unite -buffer-name=outline -direction=botright -vertical -winwidth=45 outline<CR>
+" vnoremap <leader>uv y:call Unite_vgrep('<C-R><C-R>"', 1)<CR>
+" vnoremap <leader>uV y:call Unite_vgrep('<C-R><C-R>"', 0)<CR>
+" nnoremap <leader>ur :UniteResume<CR>
+" nnoremap <leader>ul :Unite -buffer-name=locate -default-action=tabopen -start-insert locate<CR>
+" nnoremap <leader>/ :Unite -buffer-name=line -start-insert line<CR>
 
 " Start NerdTree automatically if vim is started without specifying any files
 " autocmd StdinReadPre * let s:std_in=1

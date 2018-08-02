@@ -555,7 +555,7 @@
                         "key_code": "application"
                     },
                     "to": {
-                        "key_code": "left_control"
+                        "key_code": "right_command"
                     }
                 }
             ],
