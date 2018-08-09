@@ -2,6 +2,7 @@ FROM ubuntu:latest
 
 # Export env settings
 ENV TERM=xterm
+ENV DEBIAN_FRONTEND=noninteractive
 # Set the locale
 RUN apt-get clean && apt-get update && \
     apt-get install locales
@@ -12,6 +13,10 @@ ENV LC_ALL en_US.UTF-8
 
 ADD apt-packages.txt /tmp/apt-packages.txt
 RUN xargs -a /tmp/apt-packages.txt apt-get install -y
+
+RUN echo "Asia/Singapore" > /etc/timezone && \
+    rm /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata
 
 RUN pip install virtualenv
 RUN /usr/local/bin/virtualenv /opt/ds --distribute --python=/usr/bin/python3
@@ -50,7 +55,6 @@ WORKDIR /home/ankur/notebooks
 RUN /opt/ds/bin/pip install jupyter_contrib_nbextensions \
     && /opt/ds/bin/jupyter contrib nbextension install --sys-prefix \
     && /opt/ds/bin/jupyter nbextension enable init_cell/main \
-    && /opt/ds/bin/jupyter nbextension enable table_beautifier/main \
     && /opt/ds/bin/jupyter nbextension enable toc2/main \
     && /opt/ds/bin/jupyter nbextension enable collapsible_headings/main \
     && /opt/ds/bin/jupyter nbextension enable notify/notify \
@@ -60,13 +64,11 @@ RUN /opt/ds/bin/pip install jupyter_contrib_nbextensions \
     && /opt/ds/bin/jupyter nbextension enable nbextensions_configurator/config_menu/main \
     && /opt/ds/bin/jupyter nbextension enable contrib_nbextensions_help_item/main \
     && /opt/ds/bin/jupyter nbextension enable execute_time/ExecuteTime \
-    && /opt/ds/bin/jupyter nbextension enable hinterland/hinterland \
     && /opt/ds/bin/jupyter nbextension enable varInspector/main \
     && /opt/ds/bin/jupyter nbextension enable --py --sys-prefix widgetsnbextension
 
-RUN /opt/ds/bin/jupyter serverextension enable --py jupyter_spark \
-    && /opt/ds/bin/jupyter nbextension install --py jupyter_spark \
-    && /opt/ds/bin/jupyter nbextension enbale --py jupyter_spark
+RUN /opt/ds/bin/jupyter serverextension enable --py --sys-prefix jupyter_spark \
+    && /opt/ds/bin/jupyter nbextension install --py --sys-prefix jupyter_spark
 
 RUN git clone https://github.com/lambdalisue/jupyter-vim-binding /opt/ds/share/jupyter/nbextensions/vim_binding \
     && /opt/ds/bin/jupyter nbextension enable vim_binding/vim_binding

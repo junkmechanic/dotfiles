@@ -555,6 +555,7 @@ nnoremap <silent><LocalLeader>f :<C-u>Denite -default-action=tabopen file_rec fi
 nnoremap <silent><LocalLeader>h :<C-u>Denite -default-action=tabopen file_rec:~/<CR>
 nnoremap <silent><LocalLeader>y :<C-u>Denite -default-action=append -mode=normal neoyank<CR>
 nnoremap <silent><LocalLeader>g :<C-u>DeniteCursorWord -default-action=tabopen -mode=normal grep:.<CR>
+nnoremap <silent><LocalLeader>o :<C-u>Denite -buffer-name=outline -direction=botright -split=vertical -winwidth=45 outline<CR>
 
 function! Denite_vgrep(search_string)
   let l:escaped_str = substitute(a:search_string, " ", "\\\\\\\\s", "g")
