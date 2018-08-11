@@ -1,3 +1,7 @@
+if &compatible
+  set nocompatible
+endif
+
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
 
@@ -79,6 +83,10 @@ autocmd FileType qf silent! nnoremap <buffer> q :q<CR>
 let g:lasttab = 1
 nnoremap <leader>z :exec "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
+
+" Remove search highlighting
+noremap <C-n> :nohl<CR>
+vnoremap <C-n> :nohl<CR>
 
 " Quicksave command
 noremap <C-Z> :update<CR>
@@ -182,7 +190,6 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Enable syntax highlighting
-" You need to reload this file for the change to apply
 filetype off
 filetype plugin indent on
 syntax on
@@ -218,13 +225,20 @@ set showbreak=↪
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 " Save a file that has been openned without root permission and requires it
 " using :w!!
-cmap w!! w !sudo tee > /dev/null %
+cnoremap w!! w !sudo tee > /dev/null %
+
+" Swapping <c-p> with <up> in ex mode (and the companions)
+cnoremap <c-p> <up>
+cnoremap <up> <c-p>
+cnoremap <c-n> <down>
+cnoremap <down> <c-n>
 
 " to wrap text, use ' :Wrap '
 command! -nargs=* Wrap set wrap linebreak nolist
 
 " Color scheme
 set t_Co=256
+color torte
 
 " Showing line numbers and length
 set number  " show line numbers
@@ -232,6 +246,7 @@ set tw=80   " width of document
 set nowrap  " don't automatically wrap on load
 set fo-=t   " don't automatically wrap text when typing
 set colorcolumn=+1
+hi ColorColumn ctermbg=235
 
 set completeopt=longest,menuone
 
@@ -243,13 +258,15 @@ set nofoldenable
 " expr1.
 "xnoremap <expr> <leader>c mode() ==# "\<C-V>" ? ":s/^/#\<CR>:nohl<CR>" : ""
 
-"-----------------------------------------------------------------------------
-
 " Format JSON files
 au FileType json exe ":silent %! python -m json.tool"
 
 " Format XML files
 au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
+
+" LaTex options
+autocmd FileType tex set fo+=t
+autocmd FileType tex set spell spelllang=en_us
 
 " -----------------------------------------------------------------------------
 " Jump to the next or previous line that has the same level or a lower
@@ -286,20 +303,11 @@ function! NextIndent(exclusive, fwd, lowerlevel, skipblanks)
 endfunction
 
 " Moving back and forth between lines of same or lower indentation.
-nnoremap <silent> <leader>k :call NextIndent(0, 0, 0, 1)<CR>
-nnoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
-nnoremap <silent> <leader>K :call NextIndent(0, 0, 1, 1)<CR>
-nnoremap <silent> <leader>J :call NextIndent(0, 1, 1, 1)<CR>
-vnoremap <silent> <leader>k <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
-vnoremap <silent> <leader>j <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
-vnoremap <silent> <leader>K <Esc>:call NextIndent(0, 0, 1, 1)<CR>m'gv''
-vnoremap <silent> <leader>J <Esc>:call NextIndent(0, 1, 1, 1)<CR>m'gv''
-onoremap <silent> <leader>k :call NextIndent(0, 0, 0, 1)<CR>
-onoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
-onoremap <silent> <leader>K :call NextIndent(1, 0, 1, 1)<CR>
-onoremap <silent> <leader>J :call NextIndent(1, 1, 1, 1)<CR>
-" -----------------------------------------------------------------------------
+nnoremap <silent> <leader><leader>k :call NextIndent(0, 0, 0, 1)<CR>
+nnoremap <silent> <leader><leader>j :call NextIndent(0, 1, 0, 1)<CR>
+vnoremap <silent> <leader><leader>k <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
+vnoremap <silent> <leader><leader>j <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
+onoremap <silent> <leader><leader>k :call NextIndent(0, 0, 0, 1)<CR>
+onoremap <silent> <leader><leader>j :call NextIndent(0, 1, 0, 1)<CR>
 
-" LaTex options
-autocmd FileType tex set fo+=t
-autocmd FileType tex set spell spelllang=en_us
+" -----------------------------------------------------------------------------

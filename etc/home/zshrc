@@ -96,9 +96,9 @@ fi
 
 # update PATH
 # this goes into ~/.zshenv
-# and also it should be set in ~/.zprofile on arch
-# src : https://wiki.archlinux.org/index.php/zsh#Configuring_.24PATH
 # export PATH=~/.local/bin:~/bin:$PATH
+# keep a single copy of each item in the path
+typeset -U path
 
 # update fpath
 fpath=( "$HOME/.zsh/zfunctions" $fpath )

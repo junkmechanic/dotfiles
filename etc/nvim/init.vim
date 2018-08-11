@@ -142,6 +142,8 @@ else
   inoremap <Leader><C-J> <Esc>A:<Esc>o
   nnoremap <Leader><C-J> A:<Esc>o
 endif
+" enter spaces after comma to avoid E231
+" %s/,\([^\s ]\)/, \1/g
 
 " Adding parameters to functions
 nnoremap <leader>i i,<space>
@@ -204,6 +206,9 @@ nnoremap <Leader>O DO<C-R>"<Esc>
 
 " Open all buffers as tabs
 nnoremap <Leader>t :tab all<CR>
+
+" Open all buffers as vertical splits
+nnoremap <Leader>v :vert ba<CR>
 
 " Jump to the next occurance of the character under the cursor
 nnoremap <Leader>f yl:normal f<C-r>"<CR>
@@ -333,16 +338,10 @@ endfunction
 " Moving back and forth between lines of same or lower indentation.
 nnoremap <silent> <leader><leader>k :call NextIndent(0, 0, 0, 1)<CR>
 nnoremap <silent> <leader><leader>j :call NextIndent(0, 1, 0, 1)<CR>
-" nnoremap <silent> <leader><leader>K :call NextIndent(0, 0, 1, 1)<CR>
-" nnoremap <silent> <leader><leader>J :call NextIndent(0, 1, 1, 1)<CR>
 vnoremap <silent> <leader><leader>k <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
 vnoremap <silent> <leader><leader>j <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
-" vnoremap <silent> <leader><leader>K <Esc>:call NextIndent(0, 0, 1, 1)<CR>m'gv''
-" vnoremap <silent> <leader><leader>J <Esc>:call NextIndent(0, 1, 1, 1)<CR>m'gv''
 onoremap <silent> <leader><leader>k :call NextIndent(0, 0, 0, 1)<CR>
 onoremap <silent> <leader><leader>j :call NextIndent(0, 1, 0, 1)<CR>
-" onoremap <silent> <leader><leader>K :call NextIndent(1, 0, 1, 1)<CR>
-" onoremap <silent> <leader><leader>J :call NextIndent(1, 1, 1, 1)<CR>
 
 
 " -----------------------------------------------------------------------------
@@ -483,19 +482,17 @@ nnoremap <S-F8> :w<CR>:Topen<CR>
 " NERDTree options
 " `:NERDTreeFind` to locate the file in the dir tree
 " `:NERDTree %` to open the dir tree that the current file is in
-nnoremap <leader><C-n> :NERDTreeToggle<CR>
+nnoremap <localleader>n :NERDTreeToggle<CR>
+nnoremap <localleader>m :NERDTree %<CR>
 let NERDTreeIgnore = ['\~$', '\.pyc$']
 
 " Settings for python-mode
 let g:pymode_rope = 0
 let g:pymode_doc = 0
-let g:pymode_lint_ignore = "E501,E302"
+let g:pymode_lint_ignore = ["E501", "E302"]
 let g:pymode_lint_checkers = ['pyflakes', 'pep8']
 let g:pymode_breakpoint = 0
 let g:pymode_syntax = 1
-let g:pymode_syntax_builtin_objs = 0
-let g:pymode_syntax_builtin_funcs = 0
-let g:pymode_run_bind = "<S-e>"
 
 " SearchParty options
 let g:searchparty_load_user_maps = 0
@@ -556,6 +553,7 @@ nnoremap <silent><LocalLeader>h :<C-u>Denite -default-action=tabopen file_rec:~/
 nnoremap <silent><LocalLeader>y :<C-u>Denite -default-action=append -mode=normal neoyank<CR>
 nnoremap <silent><LocalLeader>g :<C-u>DeniteCursorWord -default-action=tabopen -mode=normal grep:.<CR>
 nnoremap <silent><LocalLeader>o :<C-u>Denite -buffer-name=outline -direction=botright -split=vertical -winwidth=45 outline<CR>
+nnoremap <silent><LocalLeader>c :<C-u>Denite command_history<CR>
 
 function! Denite_vgrep(search_string)
   let l:escaped_str = substitute(a:search_string, " ", "\\\\\\\\s", "g")

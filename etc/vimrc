@@ -307,15 +307,9 @@ endfunction
 " Moving back and forth between lines of same or lower indentation.
 nnoremap <silent> <leader><leader>k :call NextIndent(0, 0, 0, 1)<CR>
 nnoremap <silent> <leader><leader>j :call NextIndent(0, 1, 0, 1)<CR>
-" nnoremap <silent> <leader><leader>K :call NextIndent(0, 0, 1, 1)<CR>
-" nnoremap <silent> <leader><leader>J :call NextIndent(0, 1, 1, 1)<CR>
 vnoremap <silent> <leader><leader>k <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
 vnoremap <silent> <leader><leader>j <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
-" vnoremap <silent> <leader><leader>K <Esc>:call NextIndent(0, 0, 1, 1)<CR>m'gv''
-" vnoremap <silent> <leader><leader>J <Esc>:call NextIndent(0, 1, 1, 1)<CR>m'gv''
 onoremap <silent> <leader><leader>k :call NextIndent(0, 0, 0, 1)<CR>
 onoremap <silent> <leader><leader>j :call NextIndent(0, 1, 0, 1)<CR>
-" onoremap <silent> <leader><leader>K :call NextIndent(1, 0, 1, 1)<CR>
-" onoremap <silent> <leader><leader>J :call NextIndent(1, 1, 1, 1)<CR>
 
 " -----------------------------------------------------------------------------

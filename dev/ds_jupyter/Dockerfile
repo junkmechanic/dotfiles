@@ -70,6 +70,8 @@ RUN /opt/ds/bin/pip install jupyter_contrib_nbextensions \
 RUN /opt/ds/bin/jupyter serverextension enable --py --sys-prefix jupyter_spark \
     && /opt/ds/bin/jupyter nbextension install --py --sys-prefix jupyter_spark
 
+RUN /opt/ds/bin/jupyter labextension install jupyterlab_vim
+
 RUN git clone https://github.com/lambdalisue/jupyter-vim-binding /opt/ds/share/jupyter/nbextensions/vim_binding \
     && /opt/ds/bin/jupyter nbextension enable vim_binding/vim_binding
 
