@@ -51,6 +51,7 @@ ENV SHELL=/bin/bash
 ENV USER=ankur
 # VOLUME /home/ankur/notebooks
 WORKDIR /home/ankur/notebooks
+ADD BoilerplateInit.ipynb /home/ankur/notebooks/BoilerplateInit.ipynb
 
 RUN /opt/ds/bin/pip install jupyter_contrib_nbextensions \
     && /opt/ds/bin/jupyter contrib nbextension install --sys-prefix \
