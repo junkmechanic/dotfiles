@@ -166,11 +166,11 @@
                         ]
                     },
                     {
-                        "description": "Map Left Ctrl to Music Play if pressed alone",
+                        "description": "Map Right Ctrl to Music Play if pressed alone",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "left_control",
+                                    "key_code": "right_control",
                                     "modifiers": {
                                         "optional": [
                                             "any"
@@ -179,7 +179,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "left_control"
+                                        "key_code": "right_control"
                                     }
                                 ],
                                 "to_if_alone": [

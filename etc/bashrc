@@ -113,7 +113,6 @@ alias tmat='tmux attach'
 alias tmgn='tmux new-session -s general'
 alias tmnw='tmux new-session -s'
 alias tmux='tmux -2'
-alias vim='nvim'
 alias vimo='vim -O'
 alias vimp='vim -p'
 alias xclip='xclip -selection clipboard'
@@ -287,7 +286,7 @@ fi
 # virtualenvwrapper settings
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/devbench
-source /home/ankur/.local/bin/virtualenvwrapper.sh
+source ~/.local/bin/virtualenvwrapper.sh
 
 # Use vim as the PAGER for programs like man.
 export MANPAGER="/bin/sh -c \"unset MANPAGER;col -b -x | \
@@ -305,7 +304,7 @@ shopt -s autocd cdspell
 eval "`pip completion --bash`"
 
 # adding powerline
-. /home/ankur/.local/bin/powerline_binding_bash.sh
+. ~/.local/bin/powerline_binding_bash.sh
 
 # Don't freeze the terminal man!
 if [[ ! -z "$PS1" ]]; then

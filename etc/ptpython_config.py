@@ -4,7 +4,10 @@ Configuration example for ``ptpython``.
 Copy this file to ~/.ptpython/config.py
 """
 from __future__ import unicode_literals
+from prompt_toolkit.filters import ViInsertMode
 from prompt_toolkit.keys import Keys
+from pygments.token import Token
+
 from ptpython.layout import CompletionVisualisation
 
 __all__ = (
@@ -22,7 +25,7 @@ def configure(repl):
     repl.show_signature = True
 
     # Show docstring (bool).
-    repl.show_docstring = False
+    repl.show_docstring = True
 
     # Show the "[Meta+Enter] Execute" message when pressing [Enter] only
     # inserts a newline instead of executing the code.
@@ -66,17 +69,20 @@ def configure(repl):
     # Use the classic prompt. (Display '>>>' instead of 'In [1]'.)
     repl.prompt_style = 'ipython'  # 'classic' or 'ipython'
 
+    # Don't insert a blank line after the output.
+    repl.insert_blank_line_after_output = True
+
     # History Search.
     # When True, going back in history will filter the history on the records
     # starting with the current input. (Like readline.)
     # Note: When enable, please disable the `complete_while_typing` option.
     #       otherwise, when there is a completion available, the arrows will
     #       browse through the available completions instead of the history.
-    repl.enable_history_search = False
+    repl.enable_history_search = True
 
     # Enable auto suggestions. (Pressing right arrow will complete the input,
     # based on the history.)
-    repl.enable_auto_suggest = False
+    repl.enable_auto_suggest = True
 
     # Enable open-in-editor. Pressing C-X C-E in emacs mode or 'v' in
     # Vi navigation mode will open the input in the current editor.
@@ -94,7 +100,14 @@ def configure(repl):
     repl.enable_input_validation = True
 
     # Use this colorscheme for the code.
-    repl.use_code_colorscheme('vim')
+    repl.use_code_colorscheme('paraiso-dark')
+
+    # Enable 24bit True color. (Not all terminals support this. -- maybe check
+    # $TERM before changing.)
+    repl.true_color = True
+
+    # Syntax.
+    repl.enable_syntax_highlighting = True
 
     # Install custom colorscheme named 'my-colorscheme' and use it.
     """
@@ -102,12 +115,13 @@ def configure(repl):
     repl.use_ui_colorscheme('my-colorscheme')
     """
 
-    # I dont use this often and can insert breakpoints manually if need be.
     # Add custom key binding for PDB.
-    # @repl.add_key_binding(Keys.ControlB)
-    # def _(event):
-    #     ' Pressing Control-B will insert "pdb.set_trace()" '
-    #     event.cli.current_buffer.insert_text('\nimport pdb; pdb.set_trace()\n')
+    """
+    @repl.add_key_binding(Keys.ControlB)
+    def _(event):
+        ' Pressing Control-B will insert "pdb.set_trace()" '
+        event.cli.current_buffer.insert_text('\nimport pdb; pdb.set_trace()\n')
+    """
 
     # Typing ControlE twice should also execute the current command.
     # (Alternative for Meta-Enter.)
@@ -116,6 +130,15 @@ def configure(repl):
         b = event.current_buffer
         if b.accept_action.is_returnable:
             b.accept_action.validate_and_handle(event.cli, b)
+
+    # Typing 'jj' in Vi Insert mode, should send escape. (Go back to navigation
+    # mode.)
+    """
+    @repl.add_key_binding('j', 'j', filter=ViInsertMode())
+    def _(event):
+        " Map 'jj' to Escape. "
+        event.cli.input_processor.feed(KeyPress(Keys.Escape))
+    """
 
     # Custom key binding for some simple autocorrection while typing.
     corrections = {
