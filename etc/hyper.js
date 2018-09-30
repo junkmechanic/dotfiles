@@ -129,7 +129,7 @@ module.exports = {
     },
 
     visor: {
-        hotkey: 'F10',
+        // hotkey: 'F10',
         position: 'top',
     },
 

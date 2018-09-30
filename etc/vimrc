@@ -125,8 +125,12 @@ vnoremap <expr> <leader>d (v:register == '+') ? '"dd' : '"'.v:register.'d'
 " Quick movements
 nnoremap H ^
 nnoremap L g_
+vnoremap H ^
+vnoremap L g_
 nnoremap J 6j
 nnoremap K 6k
+vnoremap J 6j
+vnoremap K 6k
 
 " Quick quit command
 noremap <Leader>e :quit<CR>  " Quit current window
@@ -155,6 +159,9 @@ nnoremap <Leader>O DO<C-R>"<Esc>
 
 " open all buffers as tabs
 nnoremap <Leader>t :tab all<CR>
+
+" Open all buffers as vertical splits
+nnoremap <Leader>v :vert ba<CR>
 
 " jump to the next occurance of the character under the cursor
 nnoremap <Leader>f yl:normal f<C-r>"<CR>

@@ -109,8 +109,7 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 color synthwave
 hi ColorColumn guibg=#323642
-" I dont like that onedark changes the IncSearch group. I prefer to have it
-" reversed to have better highlighting with SearchParty.
+" Reverse IncSearch to have better highlighting with SearchParty.
 hi clear IncSearch
 hi IncSearch cterm=reverse gui=reverse
 
@@ -406,12 +405,6 @@ endfunction
 "     return !col || getline('.')[col - 1]  =~ '\s'
 " endfunction"}}}
 
-" dragvisuals
-vmap  <expr>  <LEFT>   DVB_Drag('left')
-vmap  <expr>  <RIGHT>  DVB_Drag('right')
-vmap  <expr>  <DOWN>   DVB_Drag('down')
-vmap  <expr>  <UP>     DVB_Drag('up')
-
 " easymotion options
 let g:EasyMotion_smartcase = 1
 nmap <leader>s <Plug>(easymotion-s2)
@@ -451,6 +444,7 @@ let g:jedi#documentation_command = "<leader>jd"
 let g:jedi#completions_enabled=0
 
 " Multiple cursors setup
+" why dont you try using `cgn`
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_start_key='<F6>'
 let g:multi_cursor_start_word_key='g<C-n>'

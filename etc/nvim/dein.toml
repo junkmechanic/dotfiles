@@ -31,9 +31,6 @@ repo = 'Shougo/deoplete.nvim'
 repo = 'zchee/deoplete-jedi'
 
 [[plugins]]
-repo = 'shinokada/dragvisuals.vim'
-
-[[plugins]]
 repo = 'Lokaltog/vim-easymotion'
 
 [[plugins]]
