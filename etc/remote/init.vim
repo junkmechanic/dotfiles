@@ -38,7 +38,7 @@ syntax on
 "" Remapping <leader>
 
 let mapleader = ","
-let maplocalleader = "\\"
+let maplocalleader = "`"
 
 
 "" Setting options
@@ -110,8 +110,7 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
 color hybrid_material
 hi ColorColumn guibg=#323642
-" I dont like that onedark changes the IncSearch group. I prefer to have it
-" reversed to have better highlighting with SearchParty.
+" Reverse IncSearch to have better highlighting with SearchParty.
 hi clear IncSearch
 hi IncSearch cterm=reverse gui=reverse
 
@@ -205,6 +204,9 @@ nnoremap <Leader>O DO<C-R>"<Esc>
 
 " Open all buffers as tabs
 nnoremap <Leader>t :tab all<CR>
+
+" Open all buffers as vertical splits
+nnoremap <Leader>v :vert ba<CR>
 
 " Jump to the next occurance of the character under the cursor
 nnoremap <Leader>f yl:normal f<C-r>"<CR>
@@ -332,18 +334,12 @@ function! NextIndent(exclusive, fwd, lowerlevel, skipblanks)
 endfunction
 
 " Moving back and forth between lines of same or lower indentation.
-nnoremap <silent> <leader>k :call NextIndent(0, 0, 0, 1)<CR>
-nnoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
-nnoremap <silent> <leader>K :call NextIndent(0, 0, 1, 1)<CR>
-nnoremap <silent> <leader>J :call NextIndent(0, 1, 1, 1)<CR>
-vnoremap <silent> <leader>k <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
-vnoremap <silent> <leader>j <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
-vnoremap <silent> <leader>K <Esc>:call NextIndent(0, 0, 1, 1)<CR>m'gv''
-vnoremap <silent> <leader>J <Esc>:call NextIndent(0, 1, 1, 1)<CR>m'gv''
-onoremap <silent> <leader>k :call NextIndent(0, 0, 0, 1)<CR>
-onoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
-onoremap <silent> <leader>K :call NextIndent(1, 0, 1, 1)<CR>
-onoremap <silent> <leader>J :call NextIndent(1, 1, 1, 1)<CR>
+nnoremap <silent> <leader><leader>k :call NextIndent(0, 0, 0, 1)<CR>
+nnoremap <silent> <leader><leader>j :call NextIndent(0, 1, 0, 1)<CR>
+vnoremap <silent> <leader><leader>k <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
+vnoremap <silent> <leader><leader>j <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
+onoremap <silent> <leader><leader>k :call NextIndent(0, 0, 0, 1)<CR>
+onoremap <silent> <leader><leader>j :call NextIndent(0, 1, 0, 1)<CR>
 
 
 " -----------------------------------------------------------------------------
@@ -383,9 +379,11 @@ let g:deoplete#enable_smart_case = 1
 " for auto selection of the first menu entry
 set completeopt+=noinsert
 " auto delimiter (for example in paths) and removing auto-paranthesis addition
-call deoplete#custom#set('_', 'converters', ['converter_auto_delimiter', 'converter_remove_paren', 'converter_remove_overlap'])
+call deoplete#custom#source('_', 'converters',
+    \ ['converter_auto_delimiter', 'converter_remove_paren', 'converter_remove_overlap'])
 " fully fuzzy matching
-call deoplete#custom#set('_', 'matchers', ['matcher_length', 'matcher_full_fuzzy'])
+call deoplete#custom#source('_', 'matchers',
+    \ ['matcher_length', 'matcher_full_fuzzy'])
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr><C-g>     deoplete#undo_completion()
@@ -406,16 +404,14 @@ endfunction
 "     return !col || getline('.')[col - 1]  =~ '\s'
 " endfunction"}}}
 
-" dragvisuals
-vmap  <expr>  <LEFT>   DVB_Drag('left')
-vmap  <expr>  <RIGHT>  DVB_Drag('right')
-vmap  <expr>  <DOWN>   DVB_Drag('down')
-vmap  <expr>  <UP>     DVB_Drag('up')
-
 " easymotion options
 let g:EasyMotion_smartcase = 1
-nmap s <Plug>(easymotion-s2)
-vmap s <Plug>(easymotion-s2)
+nmap <leader>s <Plug>(easymotion-s2)
+vmap <leader>s <Plug>(easymotion-s2)
+nmap <leader>j <Plug>(easymotion-j)
+vmap <leader>j <Plug>(easymotion-j)
+nmap <leader>k <Plug>(easymotion-k)
+vmap <leader>k <Plug>(easymotion-k)
 nmap <leader><leader>n <Plug>(easymotion-next)
 vmap <leader><leader>n <Plug>(easymotion-next)
 nmap <leader><leader>p <Plug>(easymotion-prev)
@@ -456,41 +452,27 @@ let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
 " neoterm options
-let g:neoterm_position='vertical'
 let g:neoterm_autoinsert=1
+let g:neoterm_default_mod='vertical'
 nnoremap <S-F5> :w<CR>:T python %<CR>
 nnoremap <S-F6> :w<CR>:T ptipython -i %<CR>
 nnoremap <S-F7> :w<CR>:T ptipython<CR>
 nnoremap <S-F8> :w<CR>:Topen<CR>
-function! SendToNeoterm(mode)
-  if len(g:neoterm.instances) == 1
-    exec 'TREPLSetTerm 1'
-  endif
-  if a:mode == 'n'
-    exec 'TREPLSendLine'
-  elseif a:mode == 'v'
-    exec 'TREPLSendSelection'
-  endif
-endfunction
-nnoremap <leader>s :call SendToNeoterm('n')<CR>
-vnoremap <leader>s :call SendToNeoterm('v')<CR>
 
 " NERDTree options
 " `:NERDTreeFind` to locate the file in the dir tree
 " `:NERDTree %` to open the dir tree that the current file is in
-nnoremap <leader><C-n> :NERDTreeToggle<CR>
+nnoremap <localleader>n :NERDTreeToggle<CR>
+nnoremap <localleader>m :NERDTree %<CR>
 let NERDTreeIgnore = ['\~$', '\.pyc$']
 
 " Settings for python-mode
 let g:pymode_rope = 0
 let g:pymode_doc = 0
-let g:pymode_lint_ignore = "E501,E302"
+let g:pymode_lint_ignore = ["E501", "E302"]
 let g:pymode_lint_checkers = ['pyflakes', 'pep8']
 let g:pymode_breakpoint = 0
 let g:pymode_syntax = 1
-let g:pymode_syntax_builtin_objs = 0
-let g:pymode_syntax_builtin_funcs = 0
-let g:pymode_run_bind = "<S-e>"
 
 " SearchParty options
 let g:searchparty_load_user_maps = 0
@@ -509,67 +491,55 @@ nmap          <leader>fow          <Plug>SearchPartyMashFOWToggle
 
 " Denite options
 call denite#custom#option('_', {
-	\ 'prompt': 'λ:',
-	\ 'empty': 0,
-	\ 'winheight': 16,
-	\ 'short_source_names': 1,
-	\ 'vertical_preview': 1,
-	\ })
+  \ 'prompt': '❯',
+  \ 'empty': 0,
+  \ 'winheight': 16,
+  \ 'short_source_names': 1,
+  \ 'vertical_preview': 1,
+  \ 'direction': 'dynamicbottom',
+  \ })
 
 let insert_mode_mappings = [
-	\  ['jj', '<denite:enter_mode:normal>', 'noremap'],
-	\  ['<Esc>', '<denite:enter_mode:normal>', 'noremap'],
-	\  ['<C-N>', '<denite:assign_next_matched_text>', 'noremap'],
-	\  ['<C-P>', '<denite:assign_previous_matched_text>', 'noremap'],
-	\  ['<Up>', '<denite:assign_previous_text>', 'noremap'],
-	\  ['<Down>', '<denite:assign_next_text>', 'noremap'],
-	\  ['<C-Y>', '<denite:redraw>', 'noremap'],
-	\  ['<C-J>', '<denite:move_to_next_line>', 'noremap'],
-	\  ['<C-K>', '<denite:move_to_previous_line>', 'noremap'],
-	\  ['<C-G>', '<denite:insert_digraph>', 'noremap'],
-	\  ['<C-T>', '<denite:input_command_line>', 'noremap'],
-	\ ]
+  \  ['jj', '<denite:enter_mode:normal>', 'noremap'],
+  \  ['qq', '<denite:quit>', 'noremap'],
+  \  ['<Esc>', '<denite:enter_mode:normal>', 'noremap'],
+  \  ['<C-N>', '<denite:assign_next_matched_text>', 'noremap'],
+  \  ['<C-P>', '<denite:assign_previous_matched_text>', 'noremap'],
+  \  ['<C-Y>', '<denite:redraw>', 'noremap'],
+  \  ['<C-J>', '<denite:move_to_next_line>', 'noremap'],
+  \  ['<C-K>', '<denite:move_to_previous_line>', 'noremap'],
+  \  ['<C-G>', '<denite:insert_digraph>', 'noremap'],
+  \  ['<C-T>', '<denite:input_command_line>', 'noremap'],
+  \ ]
 
 let normal_mode_mappings = [
-	\   ["'", '<denite:toggle_select_down>', 'noremap'],
-	\   ['<C-n>', '<denite:jump_to_next_source>', 'noremap'],
-	\   ['<C-p>', '<denite:jump_to_previous_source>', 'noremap'],
-	\   ['v', '<denite:do_action:vsplit>', 'noremap'],
-	\   ['s', '<denite:do_action:split>', 'noremap'],
-	\ ]
+  \   ["'", '<denite:toggle_select_down>', 'noremap'],
+  \   ['<C-n>', '<denite:jump_to_next_source>', 'noremap'],
+  \   ['<C-p>', '<denite:jump_to_previous_source>', 'noremap'],
+  \   ['v', '<denite:do_action:vsplit>', 'noremap'],
+  \   ['s', '<denite:do_action:split>', 'noremap'],
+  \ ]
 
 for m in insert_mode_mappings
-	call denite#custom#map('insert', m[0], m[1], m[2])
+  call denite#custom#map('insert', m[0], m[1], m[2])
 endfor
 for m in normal_mode_mappings
-	call denite#custom#map('normal', m[0], m[1], m[2])
+  call denite#custom#map('normal', m[0], m[1], m[2])
 endfor
 
 nnoremap <silent><LocalLeader>r :<C-u>Denite -resume -refresh<CR>
-nnoremap <silent><LocalLeader>f :<C-u>Denite -default-action=tabopen file_rec<CR>
-nnoremap <silent><LocalLeader>q :<C-u>Denite quickfix -buffer-name=list<CR>
+nnoremap <silent><LocalLeader>f :<C-u>Denite -default-action=tabopen file_rec file_mru<CR>
+nnoremap <silent><LocalLeader>h :<C-u>Denite -default-action=tabopen file_rec:~/<CR>
+nnoremap <silent><LocalLeader>y :<C-u>Denite -default-action=append -mode=normal neoyank<CR>
+nnoremap <silent><LocalLeader>g :<C-u>DeniteCursorWord -default-action=tabopen -mode=normal grep:.<CR>
+nnoremap <silent><LocalLeader>o :<C-u>Denite -buffer-name=outline -direction=botright -split=vertical -winwidth=45 outline<CR>
+nnoremap <silent><LocalLeader>c :<C-u>Denite command_history<CR>
 
-" Unite options
-function! Unite_vgrep(search_string, auto)
+function! Denite_vgrep(search_string)
   let l:escaped_str = substitute(a:search_string, " ", "\\\\\\\\s", "g")
-  if a:auto
-    exec 'Unite -buffer-name=vgrep_auto -default-action=tabopen grep:.:-iHn:'.l:escaped_str
-  else
-    exec 'Unite -buffer-name=vgrep -default-action=tabopen grep::-iHn:'.l:escaped_str
-  endif
+  exec 'Denite -buffer-name=vgrep_auto -default-action=tabopen grep:.:-iHn:'.l:escaped_str
 endfunction
-nnoremap <leader>uf :Unite -buffer-name=file_rec -default-action=tabopen -start-insert file_rec/neovim<CR>
-nnoremap <leader>uh :Unite -buffer-name=file_rec -default-action=tabopen -start-insert file_rec/neovim:/home/ankur/<CR>
-nnoremap <leader>um :Unite -buffer-name=mru -default-action=tabopen -start-insert neomru/file<CR>
-nnoremap <leader>uy :Unite -buffer-name=yank -default-action=append history/yank<CR>
-nnoremap <leader>ug :Unite -buffer-name=grep_auto -default-action=tabopen grep:.:-iHn:<C-R><C-W><CR>
-nnoremap <leader>uG :Unite -buffer-name=grep -default-action=tabopen grep<CR>
-nnoremap <leader>uo :Unite -buffer-name=outline -direction=botright -vertical -winwidth=45 outline<CR>
-vnoremap <leader>uv y:call Unite_vgrep('<C-R><C-R>"', 1)<CR>
-vnoremap <leader>uV y:call Unite_vgrep('<C-R><C-R>"', 0)<CR>
-nnoremap <leader>ur :UniteResume<CR>
-nnoremap <leader>ul :Unite -buffer-name=locate -default-action=tabopen -start-insert locate<CR>
-nnoremap <leader>/ :Unite -buffer-name=line -start-insert line<CR>
+vnoremap <silent><LocalLeader>v y:call Denite_vgrep('<C-R><C-R>"')<CR>
 
 
 "" Deprecated functionality

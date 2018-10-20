@@ -38,7 +38,7 @@ syntax on
 "" Remapping <leader>
 
 let mapleader = ","
-let maplocalleader = "\\"
+let maplocalleader = "`"
 
 
 "" Setting options
@@ -551,7 +551,7 @@ nnoremap <silent><LocalLeader>c :<C-u>Denite command_history<CR>
 
 function! Denite_vgrep(search_string)
   let l:escaped_str = substitute(a:search_string, " ", "\\\\\\\\s", "g")
-  exec 'Unite -buffer-name=vgrep_auto -default-action=tabopen grep:.:-iHn:'.l:escaped_str
+  exec 'Denite -buffer-name=vgrep_auto -default-action=tabopen grep:.:-iHn:'.l:escaped_str
 endfunction
 vnoremap <silent><LocalLeader>v y:call Denite_vgrep('<C-R><C-R>"')<CR>
 
