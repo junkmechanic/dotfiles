@@ -96,7 +96,6 @@ set number
 set tw=80
 set nowrap
 set fo-=t
-set colorcolumn=+1
 
 set completeopt=longest,menuone
 
@@ -105,14 +104,15 @@ set nofoldenable
 set relativenumber
 
 " Colors
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
-color synthwave
+set colorcolumn=+1
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 hi ColorColumn guibg=#323642
 " Reverse IncSearch to have better highlighting with SearchParty.
 hi clear IncSearch
 hi IncSearch cterm=reverse gui=reverse
 
+color synthwave
 
 "" Mappings
 
@@ -164,7 +164,7 @@ inoremap <C-Z> <C-O>:update<CR>
 
 " Paste the selected text after the last line of the selected text
 " This is useful in the visual line mode
-vnoremap <leader>P y`>p
+vnoremap <leader>p y`>p
 
 " Delete to buffer 'd' instead of the default buffer
 nnoremap <expr> <leader>dw (v:register == '+') ? '"ddw' : '"'.v:register.'dw'
@@ -176,16 +176,16 @@ nnoremap H ^
 nnoremap L g_
 vnoremap H ^
 vnoremap L g_
-nnoremap J 6j
-nnoremap K 6k
-vnoremap J 6j
-vnoremap K 6k
+nnoremap J 3j
+nnoremap K 3k
+vnoremap J 3j
+vnoremap K 3k
 
 " Quick quit command
-noremap <Leader>e :quit<CR>  " Quit current window
-noremap <Leader>E :q!<CR>    " Quit current window without saving
-noremap <Leader>q :qa<CR>    " Quit all windows
-noremap <Leader>Q :qa!<CR>   " Quit all windows window saving
+noremap <Leader>e :quit<CR>
+noremap <Leader>E :q!<CR>
+noremap <Leader>q :qa<CR>
+noremap <Leader>Q :qa!<CR>
 
 " Bind Ctrl+<movement> keys to move around the windows
 nnoremap <c-j> <c-w>j
@@ -238,6 +238,8 @@ nnoremap <Leader><Leader>f ciwFalse<Esc>
 
 " Terminal mode
 tnoremap <Esc> <C-\><C-n>
+tnoremap ,n <C-\><C-n>:tabprevious<CR>
+tnoremap ,m <C-\><C-n>:tabnext<CR>
 
 
 "" Autocmds
@@ -295,8 +297,8 @@ function! PasteWithRetain(mode)
     normal! "_dP
   endif
 endfunction
-nnoremap <leader>p :call PasteWithRetain('n')<CR>
-vnoremap <leader>p :call PasteWithRetain('v')<CR>
+nnoremap <localleader>p :call PasteWithRetain('n')<CR>
+vnoremap <localleader>p :call PasteWithRetain('v')<CR>
 
 " to wrap text, use ' :Wrap '
 command! -nargs=* Wrap set wrap linebreak nolist
@@ -460,18 +462,7 @@ nnoremap <S-F5> :w<CR>:T python %<CR>
 nnoremap <S-F6> :w<CR>:T ptipython -i %<CR>
 nnoremap <S-F7> :w<CR>:T ptipython<CR>
 nnoremap <S-F8> :w<CR>:Topen<CR>
-" function! SendToNeoterm(mode)
-"   if len(g:neoterm.instances) == 1
-"     exec 'TREPLSetTerm 1'
-"   endif
-"   if a:mode == 'n'
-"     exec 'TREPLSendLine'
-"   elseif a:mode == 'v'
-"     exec 'TREPLSendSelection'
-"   endif
-" endfunction
-" nnoremap <leader>s :call SendToNeoterm('n')<CR>
-" vnoremap <leader>s :call SendToNeoterm('v')<CR>
+nnoremap <localleader>t :tab Tnew<CR>
 
 " NERDTree options
 " `:NERDTreeFind` to locate the file in the dir tree
@@ -483,6 +474,7 @@ let NERDTreeIgnore = ['\~$', '\.pyc$']
 " Settings for python-mode
 let g:pymode_rope = 0
 let g:pymode_doc = 0
+let g:pymode_python = 'python3'
 let g:pymode_lint_ignore = ["E501", "E302"]
 let g:pymode_lint_checkers = ['pyflakes', 'pep8']
 let g:pymode_breakpoint = 0
@@ -548,6 +540,7 @@ nnoremap <silent><LocalLeader>y :<C-u>Denite -default-action=append -mode=normal
 nnoremap <silent><LocalLeader>g :<C-u>DeniteCursorWord -default-action=tabopen -mode=normal grep:.<CR>
 nnoremap <silent><LocalLeader>o :<C-u>Denite -buffer-name=outline -direction=botright -split=vertical -winwidth=45 outline<CR>
 nnoremap <silent><LocalLeader>c :<C-u>Denite command_history<CR>
+nnoremap <silent><LocalLeader>b :<C-u>Denite -default_action=switch buffer<CR>
 
 function! Denite_vgrep(search_string)
   let l:escaped_str = substitute(a:search_string, " ", "\\\\\\\\s", "g")
