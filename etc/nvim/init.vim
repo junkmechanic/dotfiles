@@ -258,6 +258,8 @@ autocmd FileType help wincmd L
 " line/buffer. So the following buffer local mapping would remap <CR> to behave
 " as intended.
 autocmd FileType qf silent! nnoremap <buffer> <CR> <CR>
+" The same goes for windows opened as vim ft
+autocmd FileType vim silent! nnoremap <buffer> <CR> <CR>
 
 " Quick exit from quickfix
 autocmd FileType qf silent! nnoremap <buffer> q :q<CR>

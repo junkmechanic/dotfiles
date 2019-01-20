@@ -53,7 +53,7 @@ DISABLE_AUTO_TITLE="true"
 # Add wisely, as too many plugins slow down shell startup.
 # Try to keep zsh-syntax-highlighting as the last plugin
 plugins=(git history-substring-search zsh-navigation-tools zsh-autopair \
-    docker \
+    docker zsh-interactive-cd \
     zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
@@ -169,16 +169,6 @@ export PROJECT_HOME=$HOME/devbench
 VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 source ~/Library/Python/3.7/bin/virtualenvwrapper.sh
 
-# Updating Python for Pyspark integration
-# if which pyspark > /dev/null; then
-#   export SPARK_HOME="/usr/local/Cellar/apache-spark/2.1.0/libexec/"
-#   export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/build:$PYTHONPATH
-#   export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.4-src.zip:$PYTHONPATH
-# fi
-# Now you can run initialize the notebook with
-#   import os
-#   execfile(os.path.join(os.environ["SPARK_HOME"], 'python/pyspark/shell.py'))
-
 # for homebrew completions, link the files in the Homebrew completions directory
 # for zsh (which could be /usr/local/Homebrew/completions/zsh/) to
 # ~/.oh-my-zsh/completions/ since it is included in the fpath before
@@ -227,15 +217,48 @@ bindkey '\ez' _git_diff
 # git@github.com:junegunn/fzf.git
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-function _git_fshow {
+# git commit browser
+function _git_log {
+  git rev-parse HEAD > /dev/null 2>&1 || return
+
+  local _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
+  local _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always %'"
+  local _viewGitLogLineShort="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always --stat %'"
+
   git log --graph --color=always \
-      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
-      --bind "ctrl-m:execute:
-                (grep -o '[a-f0-9]\{7\}' | head -1 |
-                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
-                {}
-FZF-EOF"
+    --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@" |
+  fzf --no-sort --reverse --tiebreak=index --no-multi \
+    --ansi --preview="$_viewGitLogLineShort" --preview-window=down \
+    --bind "enter:execute:$_viewGitLogLine | less -R && print $_gitLogLineToHash"
 }
-zle -N _git_fshow
-bindkey '\ea' _git_fshow
+
+function _git_log_zsh_wrapper {
+    zle kill-whole-line
+    _git_log
+    zle accept-line
+}
+zle -N _git_log_zsh_wrapper
+bindkey '\ea' _git_log_zsh_wrapper
+
+# edit a file under the current dir tree
+ve() {
+  local files
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --preview '
+    [[ $(file --mime {}) =~ binary ]] && echo {} is a binary file ||
+    (highlight -O ansi -l {} || cat {}) 2> /dev/null | head -100'))
+  [[ -n "$files" ]] && vim -- "${files[@]}"
+}
+
+# open after searching pattern in the file
+vg() {
+  local file
+  local line
+
+  read -r file line <<<"$(grep -irn $@ . | fzf | awk -F: '{print $1, $2}')"
+
+  if [[ -n $file ]]
+  then
+     vim $file +$line
+     print $file at $line
+  fi
+}

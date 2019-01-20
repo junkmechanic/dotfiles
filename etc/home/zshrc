@@ -72,6 +72,7 @@ alias gitsbup='git submodule update --init --recursive --remote'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias gt='cd $(git rev-parse --show-toplevel 2>/dev/null || (echo "."; echo "Not within a git repository" >&2))'
+alias killmosh='pgrep -u "$USER" mosh-server | tr " " "\n" | grep -v "$PPID" | xargs kill'
 alias l='ls'
 alias ll='ls -AlhF'
 alias ls='ls --color=auto'
@@ -80,7 +81,6 @@ alias psgrep='ps aux | grep -v grep | grep'
 alias pti='ptipython'
 alias rsync='rsync --human-readable --partial --progress --rsh=ssh'
 alias sl='ls --color=auto'
-alias tmat='tmux attach'
 alias tmgn='tmux new-session -s general'
 alias vim='nvim'
 alias vimdiff='nvim -d'
@@ -121,10 +121,13 @@ SPACESHIP_GIT_PREFIX=' '
 SPACESHIP_EXEC_TIME_PREFIX=' '
 SPACESHIP_TIME_FORMAT='%w  %T'
 SPACESHIP_TIME_COLOR=blue
-SPACESHIP_USER_COLOR=blue
+SPACESHIP_USER_COLOR=cyan
+SPACESHIP_DIR_COLOR=blue
 SPACESHIP_HOST_COLOR_SSH=cyan
 SPACESHIP_CHAR_COLOR_SUCCESS=blue
 SPACESHIP_EXEC_TIME_COLOR=magenta
+SPACESHIP_VENV_COLOR=green
+SPACESHIP_VENV_SYMBOL=" "
 
 # open man pages with neovim
 export MANPAGER="nvim -c 'set ft=man' -"
@@ -173,6 +176,8 @@ source "$HOME/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-se
 source "$HOME/.zsh/plugins/zsh-autopair/autopair.zsh"
 # git@github.com:psprint/zsh-navigation-tools.git
 source "$HOME/.zsh/plugins/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh"
+# git@github.com:changyuheng/zsh-interactive-cd.git
+source "$HOME/.zsh/plugins/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh"
 
 # Syntax Highlighting
 # git@github.com:zsh-users/zsh-syntax-highlighting.git
@@ -221,8 +226,31 @@ function _git_diff {
 zle -N _git_diff
 bindkey '\ez' _git_diff
 
-fzf-cd-home-widget() {
-  local cmd="${FZF_ALT_C_COMMAND:-"command find -L ~/ -type d -print 2> /dev/null"}"
+# git commit browser
+function _git_log {
+  git rev-parse HEAD > /dev/null 2>&1 || return
+
+  local _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
+  local _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always %'"
+  local _viewGitLogLineShort="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always --stat %'"
+
+  git log --graph --color=always \
+    --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@" |
+  fzf --no-sort --reverse --tiebreak=index --no-multi \
+    --ansi --preview="$_viewGitLogLineShort" --preview-window=down \
+    --bind "enter:execute:$_viewGitLogLine | less -R && print $_gitLogLineToHash"
+}
+
+function _git_log_zsh_wrapper {
+    zle kill-whole-line
+    _git_log
+    zle accept-line
+}
+zle -N _git_log_zsh_wrapper
+bindkey '\ea' _git_log_zsh_wrapper
+
+function _fzf_cd_from_home {
+  local cmd="command find -L ~/ -type d -print 2> /dev/null"
   setopt localoptions pipefail 2> /dev/null
   cd "${$(eval "$cmd | $(__fzfcmd) +m $FZF_ALT_C_OPTS"):-.}"
   local ret=$?
@@ -230,21 +258,57 @@ fzf-cd-home-widget() {
   typeset -f zle-line-init >/dev/null && zle zle-line-init
   return $ret
 }
-zle     -N    fzf-cd-home-widget
-bindkey '\eh' fzf-cd-home-widget
+zle     -N    _fzf_cd_from_home
+bindkey '\eh' _fzf_cd_from_home
 
 # custom functions
 
-# git commit browser
-fshow() {
-  git log --graph --color=always \
-      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
-      --bind "ctrl-m:execute:
-                (grep -o '[a-f0-9]\{7\}' | head -1 |
-                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
-                {}
-FZF-EOF"
+# edit a file under the current dir tree
+ve() {
+  local files
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --preview '
+    [[ $(file --mime {}) =~ binary ]] && echo {} is a binary file ||
+    (highlight -O ansi -l {} || cat {}) 2> /dev/null | head -100'))
+  [[ -n "$files" ]] && vim -- "${files[@]}"
+}
+
+# edit a file anywhere
+vf() {
+  local files
+
+  files=(${(f)"$(locate -Ai -0 $@ | grep -z -vE '~$' |
+    fzf --read0 -m --preview '
+      [[ $(file --mime {}) =~ binary ]] && echo {} is a binary file ||
+      (highlight -O ansi -l {} || cat {}) 2> /dev/null | head -100')"})
+
+  if [[ -n $files ]]
+  then
+     vim -- $files
+     print -l $files
+  fi
+}
+
+# open after searching pattern in the file
+vg() {
+  local file
+  local line
+
+  read -r file line <<<"$(grep -irn $@ | fzf | awk -F: '{print $1, $2}')"
+
+  if [[ -n $file ]]
+  then
+     vim $file +$line
+     print $file at $line
+  fi
+}
+
+# attach to a tmux session
+tmat() {
+  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+  if [ $1 ]; then
+    tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
+  fi
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf ) &&  tmux $change -t "$session" || echo "No sessions found."
 }
 
 dusort() {

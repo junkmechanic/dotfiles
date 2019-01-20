@@ -1,0 +1,12 @@
+[user]
+	name = junkmechanic
+	email = khanna89ankur@gmail.com
+[core]
+	editor = vim
+[color]
+	ui = true
+[push]
+	default = matching
+[alias]
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
