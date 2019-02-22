@@ -219,6 +219,8 @@ nnoremap <A-h> zh<c-h>
 vnoremap < <gv
 vnoremap > >gv
 
+nmap gV `[v`]
+
 " Save a file that has been openned without root permission and requires it
 cnoremap w!! w !sudo tee > /dev/null %
 

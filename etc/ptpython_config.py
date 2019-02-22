@@ -102,9 +102,12 @@ def configure(repl):
     # Use this colorscheme for the code.
     repl.use_code_colorscheme('paraiso-dark')
 
-    # Enable 24bit True color. (Not all terminals support this. -- maybe check
-    # $TERM before changing.)
-    repl.true_color = True
+    # Set color depth (keep in mind that not all terminals support true color).
+
+    #repl.color_depth = 'DEPTH_1_BIT'  # Monochrome.
+    #repl.color_depth = 'DEPTH_4_BIT'  # ANSI colors only.
+    #repl.color_depth = 'DEPTH_8_BIT'  # The default, 256 colors.
+    repl.color_depth = 'DEPTH_24_BIT'  # True color.
 
     # Syntax.
     repl.enable_syntax_highlighting = True
@@ -127,9 +130,7 @@ def configure(repl):
     # (Alternative for Meta-Enter.)
     @repl.add_key_binding(Keys.ControlE, Keys.ControlE)
     def _(event):
-        b = event.current_buffer
-        if b.accept_action.is_returnable:
-            b.accept_action.validate_and_handle(event.cli, b)
+        event.current_buffer.validate_and_handle()
 
     # Typing 'jj' in Vi Insert mode, should send escape. (Go back to navigation
     # mode.)
@@ -137,7 +138,7 @@ def configure(repl):
     @repl.add_key_binding('j', 'j', filter=ViInsertMode())
     def _(event):
         " Map 'jj' to Escape. "
-        event.cli.input_processor.feed(KeyPress(Keys.Escape))
+        event.cli.key_processor.feed(KeyPress(Keys.Escape))
     """
 
     # Custom key binding for some simple autocorrection while typing.

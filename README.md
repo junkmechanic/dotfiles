@@ -3,16 +3,22 @@ dotfiles for setups at home, work and beyond.
 Setup:
 =====
 
-1. Clone the repo
-2. Link all bin files
-3. Vim setup
-  1. Install neovim
-  2. Install neovim and neovim-remote from PyPI
-4. `exuberant-ctags` is required for unite-outline to support tags for C family
+Required Packages
+---
 
-TODO:
------
+  1. vim/neovim
+  2. zsh (check rc for custom sources)
+  3. fzf [https://github.com/junegunn/fzf]
+  4. tmux
+  5. tpm [https://github.com/tmux-plugins/tpm]
+  6. exuberant-ctags
 
-(Mostly a revamp of the whole organizaiton)
+Home
+---
+  1. conky
 
-1. Configuring denit.vim and deoplete.vim
+Work
+---
+  1. karabiner
+  2. powerline-status
+  3. oh-my-zsh
