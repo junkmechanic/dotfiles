@@ -34,6 +34,9 @@ repo = 'zchee/deoplete-jedi'
 repo = 'Lokaltog/vim-easymotion'
 
 [[plugins]]
+repo = 'tommcdo/vim-exchange'
+
+[[plugins]]
 repo = 'cazador481/fakeclip.neovim'
 
 [[plugins]]

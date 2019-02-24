@@ -107,12 +107,13 @@ set relativenumber
 set termguicolors
 set colorcolumn=+1
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+color synthwave
 hi ColorColumn guibg=#323642
 " Reverse IncSearch to have better highlighting with SearchParty.
 hi clear IncSearch
 hi IncSearch cterm=reverse gui=reverse
-
-color synthwave
+hi TermCursorNC guifg=#2e997b guibg=#2e997b cterm=reverse gui=reverse
 
 "" Mappings
 
@@ -216,10 +217,14 @@ nnoremap <Leader>f yl:normal f<C-r>"<CR>
 nnoremap <A-l> zl
 nnoremap <A-h> zh<c-h>
 
+nnoremap Q :normal n.<CR>
+
 vnoremap < <gv
 vnoremap > >gv
 
 nmap gV `[v`]
+
+map! <C-F> <Esc>gUiw`]a
 
 " Save a file that has been openned without root permission and requires it
 cnoremap w!! w !sudo tee > /dev/null %
@@ -341,12 +346,12 @@ function! NextIndent(exclusive, fwd, lowerlevel, skipblanks)
 endfunction
 
 " Moving back and forth between lines of same or lower indentation.
-nnoremap <silent> <leader><leader>k :call NextIndent(0, 0, 0, 1)<CR>
-nnoremap <silent> <leader><leader>j :call NextIndent(0, 1, 0, 1)<CR>
-vnoremap <silent> <leader><leader>k <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
-vnoremap <silent> <leader><leader>j <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
-onoremap <silent> <leader><leader>k :call NextIndent(0, 0, 0, 1)<CR>
-onoremap <silent> <leader><leader>j :call NextIndent(0, 1, 0, 1)<CR>
+nnoremap <silent> <leader>k :call NextIndent(0, 0, 0, 1)<CR>
+nnoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
+vnoremap <silent> <leader>k <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
+vnoremap <silent> <leader>j <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
+onoremap <silent> <leader>k :call NextIndent(0, 0, 0, 1)<CR>
+onoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
 
 
 " -----------------------------------------------------------------------------
@@ -415,10 +420,10 @@ imap <expr><CR> pumvisible() ? deoplete#close_popup() : "\<CR>\<Plug>AutoPairsRe
 let g:EasyMotion_smartcase = 1
 nmap <leader>s <Plug>(easymotion-s2)
 vmap <leader>s <Plug>(easymotion-s2)
-nmap <leader>j <Plug>(easymotion-j)
-vmap <leader>j <Plug>(easymotion-j)
-nmap <leader>k <Plug>(easymotion-k)
-vmap <leader>k <Plug>(easymotion-k)
+nmap <localleader>j <Plug>(easymotion-j)
+vmap <localleader>j <Plug>(easymotion-j)
+nmap <localleader>k <Plug>(easymotion-k)
+vmap <localleader>k <Plug>(easymotion-k)
 nmap <leader><leader>n <Plug>(easymotion-next)
 vmap <leader><leader>n <Plug>(easymotion-next)
 nmap <leader><leader>p <Plug>(easymotion-prev)

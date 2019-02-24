@@ -114,7 +114,7 @@ hi ColorColumn guibg=#323642
 " Reverse IncSearch to have better highlighting with SearchParty.
 hi clear IncSearch
 hi IncSearch cterm=reverse gui=reverse
-
+hi TermCursorNC guifg=#2e997b guibg=#2e997b cterm=reverse gui=reverse
 
 "" Mappings
 
@@ -153,7 +153,7 @@ nnoremap <leader>a a,<space>
 " mode. Since I havent faced any problems with it as yet, I dont mind keeping
 " this mapping. In case, that ever needs to be done, possibly the expr should
 " be used (see below for example) along with the modes that need to be
-" excluded (check http://vimdoc.sourceforge.net/htmldoc/eval.html#mode())
+" excluded (check http://vimdoc.sourceforge.net/htmldoc/eval.html#mode() )
 "nnoremap <Leader><CR> O<Esc>
 nnoremap <CR> o<Esc>
 
@@ -216,10 +216,14 @@ nnoremap <Leader>f yl:normal f<C-r>"<CR>
 nnoremap <A-l> zl
 nnoremap <A-h> zh<c-h>
 
+nnoremap Q :normal n.<CR>
+
 vnoremap < <gv
 vnoremap > >gv
 
 nmap gV `[v`]
+
+map! <C-F> <Esc>gUiw`]a
 
 " Save a file that has been openned without root permission and requires it
 cnoremap w!! w !sudo tee > /dev/null %
@@ -260,6 +264,8 @@ autocmd FileType help wincmd L
 " line/buffer. So the following buffer local mapping would remap <CR> to behave
 " as intended.
 autocmd FileType qf silent! nnoremap <buffer> <CR> <CR>
+" The same goes for windows opened as vim ft
+autocmd FileType vim silent! nnoremap <buffer> <CR> <CR>
 
 " Quick exit from quickfix
 autocmd FileType qf silent! nnoremap <buffer> q :q<CR>
@@ -339,12 +345,12 @@ function! NextIndent(exclusive, fwd, lowerlevel, skipblanks)
 endfunction
 
 " Moving back and forth between lines of same or lower indentation.
-nnoremap <silent> <leader><leader>k :call NextIndent(0, 0, 0, 1)<CR>
-nnoremap <silent> <leader><leader>j :call NextIndent(0, 1, 0, 1)<CR>
-vnoremap <silent> <leader><leader>k <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
-vnoremap <silent> <leader><leader>j <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
-onoremap <silent> <leader><leader>k :call NextIndent(0, 0, 0, 1)<CR>
-onoremap <silent> <leader><leader>j :call NextIndent(0, 1, 0, 1)<CR>
+nnoremap <silent> <leader>k :call NextIndent(0, 0, 0, 1)<CR>
+nnoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
+vnoremap <silent> <leader>k <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
+vnoremap <silent> <leader>j <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
+onoremap <silent> <leader>k :call NextIndent(0, 0, 0, 1)<CR>
+onoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
 
 
 " -----------------------------------------------------------------------------
@@ -365,6 +371,8 @@ let g:airline#extensions#tabline#excludes = ['term://']
 " For autopairs flymode activation
 let g:AutoPairsFlyMode = 1
 let g:AutoPairsShortcutToggle = ''
+" <CR> trigger will be launched manually after deoplete
+let g:AutoPairsMapCR = 0
 " The shortcuts for autopairs
 " <CR>  : Insert new indented line after return if cursor in blank brackets or quotes.
 " <BS>  : Delete brackets in pair
@@ -389,14 +397,12 @@ call deoplete#custom#source('_', 'converters',
 " fully fuzzy matching
 call deoplete#custom#source('_', 'matchers',
     \ ['matcher_length', 'matcher_full_fuzzy'])
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr><C-g>     deoplete#undo_completion()
 inoremap <expr><C-l>     deoplete#refresh()
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function() abort
-  return pumvisible() ? deoplete#close_popup() : "\<CR>"
-endfunction
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+imap <expr><CR> pumvisible() ? deoplete#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
+
 " if you dont want deoplete to intrude on your editing, you can disable it on
 " startup (use the option above) and use the following mapping to trigger it
 " with <TAB>
@@ -413,10 +419,10 @@ endfunction
 let g:EasyMotion_smartcase = 1
 nmap <leader>s <Plug>(easymotion-s2)
 vmap <leader>s <Plug>(easymotion-s2)
-nmap <leader>j <Plug>(easymotion-j)
-vmap <leader>j <Plug>(easymotion-j)
-nmap <leader>k <Plug>(easymotion-k)
-vmap <leader>k <Plug>(easymotion-k)
+nmap <localleader>j <Plug>(easymotion-j)
+vmap <localleader>j <Plug>(easymotion-j)
+nmap <localleader>k <Plug>(easymotion-k)
+vmap <localleader>k <Plug>(easymotion-k)
 nmap <leader><leader>n <Plug>(easymotion-next)
 vmap <leader><leader>n <Plug>(easymotion-next)
 nmap <leader><leader>p <Plug>(easymotion-prev)
