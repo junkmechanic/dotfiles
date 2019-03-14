@@ -46,6 +46,9 @@ repo = 'Konfekt/FastFold'
 repo = 'tpope/vim-fugitive'
 
 [[plugins]]
+repo = 'rbong/vim-flog'
+
+[[plugins]]
 repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
@@ -53,9 +56,6 @@ repo = 'gregsexton/gitv'
 
 [[plugins]]
 repo = 'sjl/gundo.vim'
-
-[[plugins]]
-repo = 'takac/vim-hardtime'
 
 [[plugins]]
 repo = 'vim-scripts/IndexedSearch'

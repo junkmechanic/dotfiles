@@ -432,13 +432,6 @@ vmap <leader><leader>p <Plug>(easymotion-prev)
 " fakeclip options
 let g:vim_fakeclip_tmux_plus=1
 
-" hardtime on startup
-let g:hardtime_default_on = 1
-let g:hardtime_maxcount = 2
-let g:hardtime_ignore_buffer_patterns = ["NERD.*", ".*\.txt"]
-let g:hardtime_ignore_quickfix = 1
-let g:hardtime_allow_different_key = 1
-
 " use Space and any character to insert that character at the position of the
 " cursor. Enter a number before spcae to include that many characters.
 nnoremap <SPACE> :<C-U>call InsertChar#insert(v:count1)<CR>
@@ -546,16 +539,16 @@ nnoremap <silent><LocalLeader>r :<C-u>Denite -resume -refresh<CR>
 nnoremap <silent><LocalLeader>f :<C-u>Denite -default-action=tabopen file_rec file_mru<CR>
 nnoremap <silent><LocalLeader>h :<C-u>Denite -default-action=tabopen file_rec:~/<CR>
 nnoremap <silent><LocalLeader>y :<C-u>Denite -default-action=append -mode=normal neoyank<CR>
-nnoremap <silent><LocalLeader>g :<C-u>DeniteCursorWord -default-action=tabopen -mode=normal grep:.<CR>
-nnoremap <silent><LocalLeader>o :<C-u>Denite -buffer-name=outline -direction=botright -split=vertical -winwidth=45 outline<CR>
+nnoremap <silent><LocalLeader>g :<C-u>DeniteCursorWord -default-action=tabopen -mode=normal -split=tab -auto-preview grep:.<CR>
+nnoremap <silent><LocalLeader>o :<C-u>Denite -direction=botright -split=vertical -winwidth=45 outline<CR>
 nnoremap <silent><LocalLeader>c :<C-u>Denite command_history<CR>
 nnoremap <silent><LocalLeader>b :<C-u>Denite -default_action=switch buffer<CR>
 
 function! Denite_vgrep(search_string)
   let l:escaped_str = substitute(a:search_string, " ", "\\\\\\\\s", "g")
-  exec 'Denite -buffer-name=vgrep_auto -default-action=tabopen grep:.:-iHn:'.l:escaped_str
+  exec 'Denite -default-action=tabopen -mode=normal -split=tab -auto-preview grep:.:-iHn:'.l:escaped_str
 endfunction
-vnoremap <silent><LocalLeader>v y:call Denite_vgrep('<C-R><C-R>"')<CR>
+vnoremap <silent><LocalLeader>g y:call Denite_vgrep('<C-R><C-R>"')<CR>
 
 
 "" Deprecated functionality
