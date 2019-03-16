@@ -70,4 +70,4 @@ if [ $TXDIFF -ne 0 ]; then
     TXDIF=$( echo  "$TXDIFI.$TXDIFF" )
 fi
 
-echo "#[fg=colour025]$RXDIF $SPEEDD #[fg=colour031]$TXDIF $SPEEDU"
+echo "#[fg=cyan]$RXDIF $SPEEDD #[fg=blue]$TXDIF $SPEEDU"
