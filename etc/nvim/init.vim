@@ -2,8 +2,6 @@
 
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-let s:toml = '~/.config/nvim/dein.toml'
-let s:lazy_toml = '~/.config/nvim/dein_lazy.toml'
 
 if &runtimepath !~# '/dein.vim'
   if !isdirectory(s:dein_repo_dir)
@@ -15,15 +13,57 @@ endif
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  call dein#load_toml(s:toml, {'lazy': 0})
-  call dein#load_toml(s:lazy_toml, {'lazy': 0})
+  call dein#add('Shougo/dein.vim')
+
+  call dein#add('vim-airline/vim-airline', {'depends': ['vim-airline-themes']})
+  call dein#add('vim-airline/vim-airline-themes')
+  call dein#add('PeterRincker/vim-argumentative')
+  call dein#add('jiangmiao/auto-pairs')
+  call dein#add('tpope/vim-commentary', {'on_map': 'gc'})
+  call dein#add('ctrlpvim/ctrlp.vim')
+  call dein#add('Shougo/denite.nvim')
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('zchee/deoplete-jedi', {'depends': 'deoplete'})
+  call dein#add('ryanoasis/vim-devicons')
+  call dein#add('Lokaltog/vim-easymotion', {'on_map': '<Plug>(easymotion'})
+  call dein#add('tommcdo/vim-exchange', {'on_map' : {'n' : 'cx', 'x' : 'X'}})
+  call dein#add('cazador481/fakeclip.neovim')
+  " call dein#add('Konfekt/FastFold')
+  call dein#add('tpope/vim-fugitive', {'on_cmd': ['Git', 'Gstatus', 'Gwrite', 'Glog', 'Gcommit', 'Gblame', 'Ggrep', 'Gdiff']})
+  call dein#add('rbong/vim-flog')
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('junegunn/goyo.vim', {'on_cmd': ['Goyo']})
+  call dein#add('sjl/gundo.vim')
+  call dein#add('vim-scripts/IndexedSearch')
+  " call dein#add('henrik/vim-indexed-search')
+  call dein#add('rjayatilleka/vim-insert-char', {'on_map': {'n': '<space>'}})
+  call dein#add('davidhalter/jedi-vim', {'on_ft': 'python'})
+  call dein#add('Glench/Vim-Jinja2-Syntax', {'on_ft': 'jinja'})
+  call dein#add('elzr/vim-json', {'on_ft': 'json'})
+  call dein#add('AndrewRadev/linediff.vim', {'on_cmd': ['Linediff', 'LinediffMerge']})
+  call dein#add('terryma/vim-multiple-cursors', {'on_map': ['<F6>', 'g<c-n>']})
+  call dein#add('Shougo/neomru.vim', {'depends': 'denite'})
+  call dein#add('kassio/neoterm')
+  call dein#add('Shougo/neoyank.vim', {'depends': 'denite'})
+  call dein#add('scrooloose/nerdtree', {'on_cmd': ['NERDTree', 'NERDTreeToggle']})
+  call dein#add('Xuyuanp/nerdtree-git-plugin', {'depends': 'nerdtree'})
+  call dein#add('arcticicestudio/nord-vim')
+  call dein#add('python-mode/python-mode', {'rev': 'develop', 'on_ft': 'python'})
+  call dein#add('tpope/vim-repeat', {'on_map' : '.'})
+  call dein#add('dahu/SearchParty')
+  call dein#add('mhinz/vim-startify')
+  call dein#add('lambdalisue/suda.vim')
+  call dein#add('tpope/vim-surround', {'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 'depends' : 'vim-repeat'})
+  " call dein#add('exitface/synthwave.vim')
+  call dein#add('wellle/targets.vim')
+  call dein#add('bronson/vim-trailing-whitespace')
+  call dein#add('tpope/vim-unimpaired')
+  call dein#add('tmux-plugins/vim-tmux')
+  call dein#add('christoomey/vim-tmux-navigator')
+  call dein#add('jmcantrell/vim-virtualenv', {'on_ft': 'python'})
 
   call dein#end()
   call dein#save_state()
-endif
-
-if dein#check_install(['vimproc.vim'])
-  call dein#install(['vimproc.vim'])
 endif
 
 if dein#check_install()
@@ -104,11 +144,15 @@ set nofoldenable
 set relativenumber
 
 " Colors
-set termguicolors
-set colorcolumn=+1
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" set termguicolors
+let g:nord_italic = 1
+let g:nord_underline = 1
+let g:nord_italic_comments = 1
+let g:nord_uniform_diff_background = 1
+color nord
 
-color synthwave
+set colorcolumn=+1
 hi ColorColumn guibg=#323642
 " Reverse IncSearch to have better highlighting with SearchParty.
 hi clear IncSearch
@@ -155,6 +199,7 @@ nnoremap <leader>a a,<space>
 " this mapping. In case, that ever needs to be done, possibly the expr should
 " be used (see below for example) along with the modes that need to be
 " excluded (check http://vimdoc.sourceforge.net/htmldoc/eval.html#mode() )
+" Use unimpaired mapping with <space>
 "nnoremap <Leader><CR> O<Esc>
 nnoremap <CR> o<Esc>
 
@@ -227,7 +272,8 @@ nmap gV `[v`]
 map! <C-F> <Esc>gUiw`]a
 
 " Save a file that has been openned without root permission and requires it
-cnoremap w!! w !sudo tee > /dev/null %
+" cnoremap w!! w !sudo tee > /dev/null %
+cnoremap w!! w suda://%
 
 " Swapping <c-p> with <up> in ex mode (and the companions)
 cnoremap <c-p> <up>
@@ -358,8 +404,8 @@ onoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
 " Plugin specific config
 "------------------------------------------------------------------------------
 
-" airline config
-let g:airline_theme='synthwave'
+" airline
+let g:airline_theme='nord'
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#show_buffers = 0
@@ -369,7 +415,7 @@ let g:airline_inactive_collapse=0
 let g:airline#extensions#tabline#show_close_button=0
 let g:airline#extensions#tabline#excludes = ['term://']
 
-" For autopairs flymode activation
+" autopairs
 let g:AutoPairsFlyMode = 1
 let g:AutoPairsShortcutToggle = ''
 " <CR> trigger will be launched manually after deoplete
@@ -382,122 +428,12 @@ let g:AutoPairsMapCR = 0
 " <M-n> : Jump to next closed pair (g:AutoPairsShortcutJump)
 " <M-b> : BackInsert (g:AutoPairsShortcutBackInsert)
 
-" Settings for ctrlp
+" ctrlp
 let g:ctrlp_max_height = 15
 set wildignore+=*.pyc
 nnoremap <leader><C-p> :CtrlPMRU<CR>
 
-" deoplete options
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-" for auto selection of the first menu entry
-set completeopt+=noinsert
-" auto delimiter (for example in paths) and removing auto-paranthesis addition
-call deoplete#custom#source('_', 'converters',
-    \ ['converter_auto_delimiter', 'converter_remove_paren', 'converter_remove_overlap'])
-" fully fuzzy matching
-call deoplete#custom#source('_', 'matchers',
-    \ ['matcher_length', 'matcher_full_fuzzy'])
-inoremap <expr><C-g>     deoplete#undo_completion()
-inoremap <expr><C-l>     deoplete#refresh()
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-imap <expr><CR> pumvisible() ? deoplete#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
-
-" if you dont want deoplete to intrude on your editing, you can disable it on
-" startup (use the option above) and use the following mapping to trigger it
-" with <TAB>
-" inoremap <silent><expr> <TAB>
-"     \ pumvisible() ? "\<C-n>" :
-"     \ <SID>check_back_space() ? "\<TAB>" :
-"     \ deoplete#mappings#manual_complete()
-" function! s:check_back_space() abort "{{{
-"     let col = col('.') - 1
-"     return !col || getline('.')[col - 1]  =~ '\s'
-" endfunction"}}}
-
-" easymotion options
-let g:EasyMotion_smartcase = 1
-nmap <leader>s <Plug>(easymotion-s2)
-vmap <leader>s <Plug>(easymotion-s2)
-nmap <localleader>j <Plug>(easymotion-j)
-vmap <localleader>j <Plug>(easymotion-j)
-nmap <localleader>k <Plug>(easymotion-k)
-vmap <localleader>k <Plug>(easymotion-k)
-nmap <leader><leader>n <Plug>(easymotion-next)
-vmap <leader><leader>n <Plug>(easymotion-next)
-nmap <leader><leader>p <Plug>(easymotion-prev)
-vmap <leader><leader>p <Plug>(easymotion-prev)
-
-" fakeclip options
-let g:vim_fakeclip_tmux_plus=1
-
-" use Space and any character to insert that character at the position of the
-" cursor. Enter a number before spcae to include that many characters.
-nnoremap <SPACE> :<C-U>call InsertChar#insert(v:count1)<CR>
-
-" jedi-vim options
-set noshowmode
-let g:jedi#use_splits_not_buffers = "right"
-let g:jedi#show_call_signatures = "2"
-let g:jedi#usages_command = "<leader>ju"
-let g:jedi#goto_command = "<leader>jc"
-let g:jedi#goto_assignments_command = "<leader>ja"
-let g:jedi#documentation_command = "<leader>jd"
-" disable jedi completions since deoplete-jedi handles that
-let g:jedi#completions_enabled=0
-
-" Multiple cursors setup
-" why dont you try using `cgn`
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_start_key='<F6>'
-let g:multi_cursor_start_word_key='g<C-n>'
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
-
-" neoterm options
-let g:neoterm_autoinsert=1
-let g:neoterm_default_mod='vertical'
-nnoremap <S-F5> :w<CR>:T python %<CR>
-nnoremap <S-F6> :w<CR>:T ptipython -i %<CR>
-nnoremap <S-F7> :w<CR>:T ptipython<CR>
-nnoremap <S-F8> :w<CR>:Topen<CR>
-nnoremap <localleader>t :tab Tnew<CR>
-
-" NERDTree options
-" `:NERDTreeFind` to locate the file in the dir tree
-" `:NERDTree %` to open the dir tree that the current file is in
-nnoremap <localleader>n :NERDTreeToggle<CR>
-nnoremap <localleader>m :NERDTree %<CR>
-let NERDTreeIgnore = ['\~$', '\.pyc$']
-
-" Settings for python-mode
-let g:pymode_rope = 0
-let g:pymode_doc = 0
-let g:pymode_python = 'python3'
-let g:pymode_lint_ignore = ["E501", "E302"]
-let g:pymode_lint_checkers = ['pyflakes', 'pep8']
-let g:pymode_breakpoint = 0
-let g:pymode_syntax = 1
-
-" SearchParty options
-let g:searchparty_load_user_maps = 0
-let g:searchparty_visual_find_sets_search = 2
-nmap <silent> <C-t>                <Plug>SearchPartyHighlightToggle
-nmap <silent> <c-n>                <Plug>SearchPartyHighlightClear
-nmap <silent> <leader>rm           <Plug>SearchPartyMultipleReplace
-nmap <silent> <leader>*            <Plug>SearchPartyHighlightWord
-nmap <silent> <leader>g*           <Plug>SearchPartyHighlightWORD
-nmap <silent> z/                   <Plug>SearchPartyToggleAutoHighlightWord
-nmap <silent> <leader><leader>/    <Plug>SearchPartySetSearch
-xmap <silent> *                    <Plug>SearchPartyVisualFindNext
-xmap <silent> #                    <Plug>SearchPartyVisualFindPrev
-xmap          &                    <Plug>SearchPartyVisualSubstitute
-nmap          <leader>fow          <Plug>SearchPartyMashFOWToggle
-
-" Denite options
+" denite
 call denite#custom#option('_', {
   \ 'prompt': '❯',
   \ 'empty': 0,
@@ -550,11 +486,137 @@ function! Denite_vgrep(search_string)
 endfunction
 vnoremap <silent><LocalLeader>g y:call Denite_vgrep('<C-R><C-R>"')<CR>
 
+" deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+" for auto selection of the first menu entry
+set completeopt+=noinsert
+" auto delimiter (for example in paths) and removing auto-paranthesis addition
+call deoplete#custom#source('_', 'converters',
+    \ ['converter_auto_delimiter', 'converter_remove_paren', 'converter_remove_overlap'])
+" fully fuzzy matching
+call deoplete#custom#source('_', 'matchers',
+    \ ['matcher_length', 'matcher_full_fuzzy'])
+inoremap <expr><C-g>     deoplete#undo_completion()
+inoremap <expr><C-l>     deoplete#refresh()
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+imap <expr><CR> pumvisible() ? deoplete#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
+
+" if you dont want deoplete to intrude on your editing, you can disable it on
+" startup (use the option above) and use the following mapping to trigger it
+" with <TAB>
+" inoremap <silent><expr> <TAB>
+"     \ pumvisible() ? "\<C-n>" :
+"     \ <SID>check_back_space() ? "\<TAB>" :
+"     \ deoplete#mappings#manual_complete()
+" function! s:check_back_space() abort "{{{
+"     let col = col('.') - 1
+"     return !col || getline('.')[col - 1]  =~ '\s'
+" endfunction"}}}
+
+" easymotion
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
+nmap <leader>s <Plug>(easymotion-s2)
+vmap <leader>s <Plug>(easymotion-s2)
+nmap <localleader>j <Plug>(easymotion-j)
+vmap <localleader>j <Plug>(easymotion-j)
+nmap <localleader>k <Plug>(easymotion-k)
+vmap <localleader>k <Plug>(easymotion-k)
+nmap <leader><leader>n <Plug>(easymotion-next)
+vmap <leader><leader>n <Plug>(easymotion-next)
+nmap <leader><leader>p <Plug>(easymotion-prev)
+vmap <leader><leader>p <Plug>(easymotion-prev)
+
+" fakeclip
+let g:vim_fakeclip_tmux_plus=1
+
+" goyo
+function! s:goyo_enter()
+  let b:quitting = 0
+  let b:quitting_bang = 0
+  autocmd QuitPre <buffer> let b:quitting = 1
+  cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+endfunction
+
+function! s:goyo_leave()
+  " Quit Vim if this is the only remaining buffer
+  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+    if b:quitting_bang
+      qa!
+    else
+      qa
+    endif
+  endif
+endfunction
+
+autocmd! User GoyoEnter call <SID>goyo_enter()
+autocmd! User GoyoLeave call <SID>goyo_leave()
+
+" jedi-vim
+set noshowmode
+let g:jedi#use_splits_not_buffers = "right"
+let g:jedi#show_call_signatures = "2"
+let g:jedi#usages_command = "<leader>ju"
+let g:jedi#goto_command = "<leader>jc"
+let g:jedi#goto_assignments_command = "<leader>ja"
+let g:jedi#documentation_command = "<leader>jd"
+" disable jedi completions since deoplete-jedi handles that
+let g:jedi#completions_enabled=0
+
+" multiple_cursors
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_start_key='<F6>'
+let g:multi_cursor_start_word_key='g<C-n>'
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+
+" neoterm
+let g:neoterm_autoinsert=1
+let g:neoterm_default_mod='vertical'
+nnoremap <S-F5> :w<CR>:T python %<CR>
+nnoremap <S-F6> :w<CR>:T ptipython -i %<CR>
+nnoremap <S-F7> :w<CR>:T ptipython<CR>
+nnoremap <S-F8> :w<CR>:Topen<CR>
+nnoremap <localleader>t :tab Tnew<CR>
+
+" nerdtree
+" `:NERDTreeFind` to locate the file in the dir tree
+" `:NERDTree %` to open the dir tree that the current file is in
+nnoremap <localleader>n :NERDTreeToggle<CR>
+nnoremap <localleader>m :NERDTree %<CR>
+let NERDTreeIgnore = ['\~$', '\.pyc$']
+
+" python-mode
+let g:pymode_rope = 0
+let g:pymode_doc = 0
+let g:pymode_python = 'python3'
+let g:pymode_lint_ignore = ["E501", "E302"]
+let g:pymode_lint_checkers = ['pyflakes', 'pep8']
+let g:pymode_breakpoint = 0
+let g:pymode_syntax = 1
+
+" SearchParty
+let g:searchparty_load_user_maps = 0
+let g:searchparty_visual_find_sets_search = 2
+nmap <silent> <C-t>                <Plug>SearchPartyHighlightToggle
+nmap <silent> <c-n>                <Plug>SearchPartyHighlightClear
+nmap <silent> <leader>rm           <Plug>SearchPartyMultipleReplace
+nmap <silent> <leader>*            <Plug>SearchPartyHighlightWord
+nmap <silent> <leader>g*           <Plug>SearchPartyHighlightWORD
+nmap <silent> z/                   <Plug>SearchPartyToggleAutoHighlightWord
+nmap <silent> <leader><leader>/    <Plug>SearchPartySetSearch
+xmap <silent> *                    <Plug>SearchPartyVisualFindNext
+xmap <silent> #                    <Plug>SearchPartyVisualFindPrev
+xmap          &                    <Plug>SearchPartyVisualSubstitute
+nmap          <leader>fow          <Plug>SearchPartyMashFOWToggle
+
 
 "" Deprecated functionality
 
-" map sort function to a key
-" vnoremap <Leader>s :sort<CR>
 
 " Jump to the first/last tab
 " nnoremap <Leader><Leader>n <esc>:tabfirst<CR>
@@ -576,28 +638,6 @@ vnoremap <silent><LocalLeader>g y:call Denite_vgrep('<C-R><C-R>"')<CR>
 "     exec 'nnoremap <A-' . n . '> ' . n . 'gt'
 "     let n = n + 1
 " endwhile
-
-" Unite options
-" function! Unite_vgrep(search_string, auto)
-"   let l:escaped_str = substitute(a:search_string, " ", "\\\\\\\\s", "g")
-"   if a:auto
-"     exec 'Unite -buffer-name=vgrep_auto -default-action=tabopen grep:.:-iHn:'.l:escaped_str
-"   else
-"     exec 'Unite -buffer-name=vgrep -default-action=tabopen grep::-iHn:'.l:escaped_str
-"   endif
-" endfunction
-" nnoremap <leader>uf :Unite -buffer-name=file_rec -default-action=tabopen -start-insert file_rec/neovim<CR>
-" nnoremap <leader>uh :Unite -buffer-name=file_rec -default-action=tabopen -start-insert file_rec/neovim:/home/ankur/<CR>
-" nnoremap <leader>um :Unite -buffer-name=mru -default-action=tabopen -start-insert neomru/file<CR>
-" nnoremap <leader>uy :Unite -buffer-name=yank -default-action=append history/yank<CR>
-" nnoremap <leader>ug :Unite -buffer-name=grep_auto -default-action=tabopen grep:.:-iHn:<C-R><C-W><CR>
-" nnoremap <leader>uG :Unite -buffer-name=grep -default-action=tabopen grep<CR>
-" nnoremap <leader>uo :Unite -buffer-name=outline -direction=botright -vertical -winwidth=45 outline<CR>
-" vnoremap <leader>uv y:call Unite_vgrep('<C-R><C-R>"', 1)<CR>
-" vnoremap <leader>uV y:call Unite_vgrep('<C-R><C-R>"', 0)<CR>
-" nnoremap <leader>ur :UniteResume<CR>
-" nnoremap <leader>ul :Unite -buffer-name=locate -default-action=tabopen -start-insert locate<CR>
-" nnoremap <leader>/ :Unite -buffer-name=line -start-insert line<CR>
 
 " Start NerdTree automatically if vim is started without specifying any files
 " autocmd StdinReadPre * let s:std_in=1

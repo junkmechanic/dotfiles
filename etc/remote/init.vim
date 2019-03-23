@@ -30,6 +30,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('cazador481/fakeclip.neovim')
   " call dein#add('Konfekt/FastFold')
   call dein#add('tpope/vim-fugitive', {'on_cmd': ['Git', 'Gstatus', 'Gwrite', 'Glog', 'Gcommit', 'Gblame', 'Ggrep', 'Gdiff']})
+  call dein#add('rbong/vim-flog')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('junegunn/goyo.vim', {'on_cmd': ['Goyo']})
   call dein#add('sjl/gundo.vim')
@@ -51,6 +52,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('tpope/vim-repeat', {'on_map' : '.'})
   call dein#add('dahu/SearchParty')
   call dein#add('mhinz/vim-startify')
+  call dein#add('lambdalisue/suda.vim')
   call dein#add('tpope/vim-surround', {'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 'depends' : 'vim-repeat'})
   " call dein#add('exitface/synthwave.vim')
   call dein#add('wellle/targets.vim')
@@ -267,7 +269,8 @@ nmap gV `[v`]
 map! <C-F> <Esc>gUiw`]a
 
 " Save a file that has been openned without root permission and requires it
-cnoremap w!! w !sudo tee > /dev/null %
+" cnoremap w!! w !sudo tee > /dev/null %
+cnoremap w!! w suda://%
 
 " Swapping <c-p> with <up> in ex mode (and the companions)
 cnoremap <c-p> <up>
@@ -401,7 +404,7 @@ onoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
 " airline
 let g:airline_theme='nord'
 let g:airline#extensions#tabline#enabled=1
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_nr_type=2
 let g:airline#extensions#tabline#show_splits=1
@@ -510,6 +513,7 @@ imap <expr><CR> pumvisible() ? deoplete#close_popup() : "\<CR>\<Plug>AutoPairsRe
 " endfunction"}}}
 
 " easymotion
+let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 nmap <leader>s <Plug>(easymotion-s2)
 vmap <leader>s <Plug>(easymotion-s2)
