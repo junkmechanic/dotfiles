@@ -1,19 +1,26 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:/usr/local/bin:/Users/ankur.khanna/Library/Python/2.7/bin:/Users/ankur.khanna/Library/Python/3.7/bin:$PATH
+export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/ankur.khanna/.oh-my-zsh
+export ZSH="/Users/ankurkhanna/.oh-my-zsh"
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
@@ -26,7 +33,7 @@ export ZSH=/Users/ankur.khanna/.oh-my-zsh
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-DISABLE_AUTO_TITLE="true"
+# DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -41,20 +48,24 @@ DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# Try to keep zsh-syntax-highlighting as the last plugin
-plugins=(git history-substring-search zsh-navigation-tools zsh-autopair \
-    docker zsh-interactive-cd \
-    zsh-autosuggestions zsh-syntax-highlighting)
+# Keep zsh-syntax-highlighting as the last plugin
+plugins=(git docker colorize kubectl mosh pip sudo \
+    history-substring-search zsh-navigation-tools zsh-autopair \
+    zsh-interactive-cd zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -86,13 +97,10 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
 # Prevent zsh from erroring out when it doesnt find any matches for globs
 # This is a permanet solution. For a more refined solution use aliases for the
 # specific commands that you dont want zsh to glob through
-# unsetopt nomatch
+unsetopt nomatch
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -139,9 +147,6 @@ if [ -n "${NVIM_LISTEN_ADDRESS}" ]; then
   alias vimt='nvr --remote-tab'
 fi
 
-# powerline prompt
-. ~/.local/bin/powerline.zsh
-
 # keybindings for history-substring-search
 # bind P and N for EMACS mode
 bindkey -M emacs '^P' history-substring-search-up
@@ -168,12 +173,6 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/devbench
 VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 source ~/Library/Python/3.7/bin/virtualenvwrapper.sh
-
-# for homebrew completions, link the files in the Homebrew completions directory
-# for zsh (which could be /usr/local/Homebrew/completions/zsh/) to
-# ~/.oh-my-zsh/completions/ since it is included in the fpath before
-# initializing autocompletion. Otherwise, you would have to 'autoload' compinit
-# again.
 
 # to view path in readable format
 path() {

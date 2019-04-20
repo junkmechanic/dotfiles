@@ -168,7 +168,7 @@ bindkey '^[^?' backward-kill-dir
 
 # custom sources
 #source "$HOME/.local/bin/powerline_binding_zsh.zsh"
-# git@github.com:zsh-users/zsh-autosuggestions
+# git@github.com:zsh-users/zsh-autosuggestions.git
 source "$HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # git@github.com:zsh-users/zsh-history-substring-search.git
 source "$HOME/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
