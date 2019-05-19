@@ -20,5 +20,4 @@ Home
 Work
 ---
   1. karabiner
-  2. powerline-status
-  3. oh-my-zsh
+  2. oh-my-zsh

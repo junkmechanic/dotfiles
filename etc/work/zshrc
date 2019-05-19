@@ -63,7 +63,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # Keep zsh-syntax-highlighting as the last plugin
-plugins=(git docker colorize kubectl mosh pip sudo \
+plugins=(git docker colorize kubectl mosh pip ssh-agent sudo \
     history-substring-search zsh-navigation-tools zsh-autopair \
     zsh-interactive-cd zsh-autosuggestions zsh-syntax-highlighting)
 

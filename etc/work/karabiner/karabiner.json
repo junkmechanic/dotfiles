@@ -11,7 +11,8 @@
                     "basic.simultaneous_threshold_milliseconds": 50,
                     "basic.to_delayed_action_delay_milliseconds": 500,
                     "basic.to_if_alone_timeout_milliseconds": 1000,
-                    "basic.to_if_held_down_threshold_milliseconds": 500
+                    "basic.to_if_held_down_threshold_milliseconds": 500,
+                    "mouse_motion_to_scroll.speed": 100
                 },
                 "rules": [
                     {
@@ -361,14 +362,14 @@
                         ]
                     },
                     {
-                        "description": "Change right_command+hjkl to arrow keys",
+                        "description": "Change right_alt+hjkl to arrow keys",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "h",
                                     "modifiers": {
                                         "mandatory": [
-                                            "right_command"
+                                            "right_alt"
                                         ],
                                         "optional": [
                                             "any"
@@ -387,7 +388,7 @@
                                     "key_code": "j",
                                     "modifiers": {
                                         "mandatory": [
-                                            "right_command"
+                                            "right_alt"
                                         ],
                                         "optional": [
                                             "any"
@@ -406,7 +407,7 @@
                                     "key_code": "k",
                                     "modifiers": {
                                         "mandatory": [
-                                            "right_command"
+                                            "right_alt"
                                         ],
                                         "optional": [
                                             "any"
@@ -425,7 +426,7 @@
                                     "key_code": "l",
                                     "modifiers": {
                                         "mandatory": [
-                                            "right_command"
+                                            "right_alt"
                                         ],
                                         "optional": [
                                             "any"
@@ -544,7 +545,16 @@
             ],
             "name": "Default profile",
             "selected": false,
-            "simple_modifications": [],
+            "simple_modifications": [
+                {
+                    "from": {
+                        "key_code": "application"
+                    },
+                    "to": {
+                        "key_code": "right_command"
+                    }
+                }
+            ],
             "virtual_hid_keyboard": {
                 "country_code": 0
             }
@@ -555,7 +565,8 @@
                     "basic.simultaneous_threshold_milliseconds": 50,
                     "basic.to_delayed_action_delay_milliseconds": 500,
                     "basic.to_if_alone_timeout_milliseconds": 1000,
-                    "basic.to_if_held_down_threshold_milliseconds": 500
+                    "basic.to_if_held_down_threshold_milliseconds": 500,
+                    "mouse_motion_to_scroll.speed": 100
                 },
                 "rules": [
                     {
@@ -780,14 +791,14 @@
                         ]
                     },
                     {
-                        "description": "Change right_command+hjkl to arrow keys",
+                        "description": "Change right_alt+hjkl to arrow keys",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "h",
                                     "modifiers": {
                                         "mandatory": [
-                                            "right_command"
+                                            "right_alt"
                                         ],
                                         "optional": [
                                             "any"
@@ -806,7 +817,7 @@
                                     "key_code": "j",
                                     "modifiers": {
                                         "mandatory": [
-                                            "right_command"
+                                            "right_alt"
                                         ],
                                         "optional": [
                                             "any"
@@ -825,7 +836,7 @@
                                     "key_code": "k",
                                     "modifiers": {
                                         "mandatory": [
-                                            "right_command"
+                                            "right_alt"
                                         ],
                                         "optional": [
                                             "any"
@@ -844,7 +855,7 @@
                                     "key_code": "l",
                                     "modifiers": {
                                         "mandatory": [
-                                            "right_command"
+                                            "right_alt"
                                         ],
                                         "optional": [
                                             "any"
@@ -963,7 +974,16 @@
             ],
             "name": "Default profile minus Preview",
             "selected": true,
-            "simple_modifications": [],
+            "simple_modifications": [
+                {
+                    "from": {
+                        "key_code": "application"
+                    },
+                    "to": {
+                        "key_code": "right_command"
+                    }
+                }
+            ],
             "virtual_hid_keyboard": {
                 "country_code": 0
             }
