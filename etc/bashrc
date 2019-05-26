@@ -276,7 +276,7 @@ bind '"\es": " \C-e\C-u`__git_cmd__ status`\e\C-e\er\C-m"'
 #####################################################################
 # Setting variables, sourcing scripts etc
 
-# Launch tmux automatically and attach to the 'general' session
+# Launch tmux automatically or attach to it
 if which tmux 2>&1 >/dev/null; then
     # if not inside a tmux session, and if no session is started, start a new
     # session

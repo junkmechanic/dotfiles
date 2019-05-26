@@ -8,8 +8,8 @@
 # git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 #
 # Extra plugins to go in `~/.zprezto/modules`
-# git clone https://github.com/psprint/zsh-navigation-tools.git
-# git clone https://github.com/hlissner/zsh-autopair.git
+# git clone https://github.com/psprint/zsh-navigation-tools.git "${ZDOTDIR:-$HOME}/.zprezto/modules/zsh-navigation-tools"
+# git clone https://github.com/hlissner/zsh-autopair.git "${ZDOTDIR:-$HOME}/.zprezto/modules/zsh-autopair"
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -34,8 +34,8 @@ alias psgrep='ps aux | grep -v grep | grep'
 alias sl="ls"
 alias tmat="tmux attach"
 alias tmgn="tmux new-session -s general"
-alias tmnw="tmux new-session -s"
 alias tmux="tmux -2"
+alias vim='nvim'
 alias vimo="vim -O"
 alias vimp="vim -p"
 # alias vimdiff="vim -d"
@@ -45,7 +45,14 @@ if [ -n "${NVIM_LISTEN_ADDRESS}" ]; then
   alias vimv='nvr -O'
   alias vimt='nvr --remote-tab'
 fi
-export PATH="$PATH:$HOME/.local/bin"
+# export PATH="$PATH:$HOME/.local/bin"
+
+# Launch tmux automatically or attach to it
+if which tmux 2>&1 >/dev/null; then
+    # if not inside a tmux session, and if no session is started, start a new
+    # session
+    test -z "$TMUX" && (tmux attach || tmux new-session -s general)
+fi
 
 # keybindings for history-substring-search
 # bind P and N for EMACS mode
@@ -67,3 +74,22 @@ znt_cd_hotlist=(
 
 # accept and execute the current suggestion with ctrl+space
 bindkey '^ ' autosuggest-execute
+
+mkcd() {
+    if [ ! -n "$1" ]; then
+        echo "Enter a directory name"
+    elif [ -d $1 ]; then
+        echo "$1 already exists"
+    else
+        mkdir -p $1 && cd $1
+    fi
+}
+
+# to view path in readable format
+path() {
+    # old=$IFS
+    local IFS=:
+    pth=($=PATH)
+    printf "%s\n" $pth
+    # IFS=$old
+}
