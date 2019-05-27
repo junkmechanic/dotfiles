@@ -18,7 +18,6 @@ if dein#load_state(s:dein_dir)
   call dein#add('vim-airline/vim-airline', {'depends': ['vim-airline-themes']})
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('PeterRincker/vim-argumentative')
-  call dein#add('jiangmiao/auto-pairs')
   call dein#add('tpope/vim-commentary', {'on_map': 'gc'})
   call dein#add('ctrlpvim/ctrlp.vim')
   call dein#add('Shougo/denite.nvim')
@@ -35,7 +34,6 @@ if dein#load_state(s:dein_dir)
   call dein#add('junegunn/goyo.vim', {'on_cmd': ['Goyo']})
   call dein#add('sjl/gundo.vim')
   call dein#add('vim-scripts/IndexedSearch')
-  " call dein#add('henrik/vim-indexed-search')
   call dein#add('rjayatilleka/vim-insert-char', {'on_map': {'n': '<space>'}})
   call dein#add('davidhalter/jedi-vim', {'on_ft': 'python'})
   call dein#add('Glench/Vim-Jinja2-Syntax', {'on_ft': 'jinja'})
@@ -48,6 +46,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('scrooloose/nerdtree', {'on_cmd': ['NERDTree', 'NERDTreeToggle']})
   call dein#add('Xuyuanp/nerdtree-git-plugin', {'depends': 'nerdtree'})
   call dein#add('arcticicestudio/nord-vim')
+  call dein#add('tmsvg/pear-tree', {'on_event': 'InsertEnter'})
   call dein#add('python-mode/python-mode', {'rev': 'develop', 'on_ft': 'python'})
   call dein#add('tpope/vim-repeat', {'on_map' : '.'})
   call dein#add('dahu/SearchParty')
@@ -192,12 +191,6 @@ nnoremap <leader>i i,<space>
 nnoremap <leader>a a,<space>
 
 " Open a new line and stay in Normal mode. (Gives a meaning to Enter as well)
-" It has been reported that this might interfere with the command line normal
-" mode. Since I havent faced any problems with it as yet, I dont mind keeping
-" this mapping. In case, that ever needs to be done, possibly the expr should
-" be used (see below for example) along with the modes that need to be
-" excluded (check http://vimdoc.sourceforge.net/htmldoc/eval.html#mode() )
-"nnoremap <Leader><CR> O<Esc>
 nnoremap <CR> o<Esc>
 
 " Quicksave command
@@ -412,23 +405,9 @@ let g:airline_inactive_collapse=0
 let g:airline#extensions#tabline#show_close_button=0
 let g:airline#extensions#tabline#excludes = ['term://']
 
-" autopairs
-let g:AutoPairsFlyMode = 1
-let g:AutoPairsShortcutToggle = ''
-" <CR> trigger will be launched manually after deoplete
-let g:AutoPairsMapCR = 0
-" The shortcuts for autopairs
-" <CR>  : Insert new indented line after return if cursor in blank brackets or quotes.
-" <BS>  : Delete brackets in pair
-" <M-p> : Toggle Autopairs (g:AutoPairsShortcutToggle)
-" <M-e> : Fast Wrap (g:AutoPairsShortcutFastWrap)
-" <M-n> : Jump to next closed pair (g:AutoPairsShortcutJump)
-" <M-b> : BackInsert (g:AutoPairsShortcutBackInsert)
-
 " ctrlp
 let g:ctrlp_max_height = 15
 set wildignore+=*.pyc
-nnoremap <leader><C-p> :CtrlPMRU<CR>
 
 " denite
 call denite#custom#option('_', {
@@ -498,7 +477,6 @@ inoremap <expr><C-g>     deoplete#undo_completion()
 inoremap <expr><C-l>     deoplete#refresh()
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-imap <expr><CR> pumvisible() ? deoplete#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
 
 " if you dont want deoplete to intrude on your editing, you can disable it on
 " startup (use the option above) and use the following mapping to trigger it
@@ -586,6 +564,13 @@ nnoremap <localleader>t :tab Tnew<CR>
 nnoremap <localleader>n :NERDTreeToggle<CR>
 nnoremap <localleader>m :NERDTree %<CR>
 let NERDTreeIgnore = ['\~$', '\.pyc$']
+
+" pear-tree
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
+let g:pear_tree_repeatable_expand = 0
+imap <M-n> <Plug>(PearTreeJump)
 
 " python-mode
 let g:pymode_rope = 0

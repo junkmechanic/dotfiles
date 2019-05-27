@@ -193,13 +193,6 @@ nnoremap <leader>i i,<space>
 nnoremap <leader>a a,<space>
 
 " Open a new line and stay in Normal mode. (Gives a meaning to Enter as well)
-" It has been reported that this might interfere with the command line normal
-" mode. Since I havent faced any problems with it as yet, I dont mind keeping
-" this mapping. In case, that ever needs to be done, possibly the expr should
-" be used (see below for example) along with the modes that need to be
-" excluded (check http://vimdoc.sourceforge.net/htmldoc/eval.html#mode() )
-" Use unimpaired mapping with <space>
-"nnoremap <Leader><CR> O<Esc>
 nnoremap <CR> o<Esc>
 
 " Quicksave command
