@@ -196,28 +196,28 @@ mkcd() {
 
 # zle custom functions
 
-function _git_status {
+function _git_status_zle {
     zle kill-whole-line
     git status
     zle accept-line
 }
-zle -N _git_status
-bindkey '\es' _git_status
+zle -N _git_status_zle
+bindkey '\es' _git_status_zle
 
-function _git_diff {
+function _git_diff_zle {
     zle kill-whole-line
     git diff
     zle accept-line
 }
-zle -N _git_diff
-bindkey '\ez' _git_diff
+zle -N _git_diff_zle
+bindkey '\ez' _git_diff_zle
 
 # fzf configuration. All other zsh config goes before this line
 # git@github.com:junegunn/fzf.git
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # git commit browser
-function _git_log {
+function _git_log_zle {
   git rev-parse HEAD > /dev/null 2>&1 || return
 
   local _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
@@ -233,7 +233,7 @@ function _git_log {
 
 function _git_log_zsh_wrapper {
     zle kill-whole-line
-    _git_log
+    _git_log_zle
     zle accept-line
 }
 zle -N _git_log_zsh_wrapper
