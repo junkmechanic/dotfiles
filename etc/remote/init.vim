@@ -27,8 +27,8 @@ if dein#load_state(s:dein_dir)
   call dein#add('Lokaltog/vim-easymotion', {'on_map': '<Plug>(easymotion'})
   call dein#add('tommcdo/vim-exchange', {'on_map' : {'n' : 'cx', 'x' : 'X'}})
   call dein#add('cazador481/fakeclip.neovim')
-  " call dein#add('Konfekt/FastFold')
-  call dein#add('tpope/vim-fugitive', {'on_cmd': ['Git', 'Gstatus', 'Gwrite', 'Glog', 'Gcommit', 'Gblame', 'Ggrep', 'Gdiff']})
+  call dein#add('Konfekt/FastFold')
+  call dein#add('tpope/vim-fugitive')
   call dein#add('rbong/vim-flog')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('junegunn/goyo.vim', {'on_cmd': ['Goyo']})
@@ -50,6 +50,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('python-mode/python-mode', {'rev': 'develop', 'on_ft': 'python'})
   call dein#add('tpope/vim-repeat', {'on_map' : '.'})
   call dein#add('dahu/SearchParty')
+  call dein#add('tmhedberg/SimpylFold', {'on_ft': 'python'})
   call dein#add('mhinz/vim-startify')
   call dein#add('lambdalisue/suda.vim')
   call dein#add('tpope/vim-surround', {'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 'depends' : 'vim-repeat'})
@@ -190,9 +191,6 @@ endif
 nnoremap <leader>i i,<space>
 nnoremap <leader>a a,<space>
 
-" Open a new line and stay in Normal mode. (Gives a meaning to Enter as well)
-nnoremap <CR> o<Esc>
-
 " Quicksave command
 noremap <C-Z> :update<CR>
 vnoremap <C-Z> <C-C>:update<CR>
@@ -296,14 +294,6 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 " Open help in a right vertical split
 autocmd FileType help wincmd L
 
-" Since the quickfix window is not modifiable, the global mapping for <CR>
-" overwrites the default quickfix <CR> behaviour to jump to the specified
-" line/buffer. So the following buffer local mapping would remap <CR> to behave
-" as intended.
-autocmd FileType qf silent! nnoremap <buffer> <CR> <CR>
-" The same goes for windows opened as vim ft
-autocmd FileType vim silent! nnoremap <buffer> <CR> <CR>
-
 " Quick exit from quickfix
 autocmd FileType qf silent! nnoremap <buffer> q :q<CR>
 
@@ -396,12 +386,12 @@ onoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
 
 " airline
 let g:airline_theme='nord'
+let g:airline_powerline_fonts=1
+let g:airline_inactive_collapse=0
 let g:airline#extensions#tabline#enabled=1
-let g:airline_powerline_fonts=0
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_nr_type=2
 let g:airline#extensions#tabline#show_splits=1
-let g:airline_inactive_collapse=0
 let g:airline#extensions#tabline#show_close_button=0
 let g:airline#extensions#tabline#excludes = ['term://']
 
@@ -506,6 +496,15 @@ vmap <leader><leader>p <Plug>(easymotion-prev)
 
 " fakeclip
 let g:vim_fakeclip_tmux_plus=1
+
+" FastFold
+let g:vimsyn_folding = 'af'
+let g:xml_syntax_folding = 1
+let g:javaScript_fold = 1
+let g:sh_fold_enabled= 7
+let g:ruby_fold = 1
+let g:r_syntax_folding = 1
+nmap <F5> <Plug>(FastFoldUpdate)
 
 " goyo
 function! s:goyo_enter()
