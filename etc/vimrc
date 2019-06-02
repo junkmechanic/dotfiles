@@ -38,9 +38,9 @@ set completeopt=longest,menuone
 set nofoldenable
 set relativenumber
 set t_Co=256
-set colorcolumn=+1
-hi ColorColumn ctermbg=235
 color torte
+set colorcolumn=+1
+hi ColorColumn ctermbg=66
 
 nnoremap Y y$
 nnoremap ; :
