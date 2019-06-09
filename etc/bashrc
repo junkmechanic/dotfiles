@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
-    *) return;;
+      *) return;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -286,6 +286,7 @@ fi
 # virtualenvwrapper settings
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/devbench
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 source ~/.local/bin/virtualenvwrapper.sh
 
 # Use vim as the PAGER for programs like man.
@@ -302,9 +303,6 @@ shopt -s autocd cdspell
 
 # activating pip completion
 eval "`pip completion --bash`"
-
-# adding powerline
-. ~/.local/bin/powerline_binding_bash.sh
 
 # Don't freeze the terminal man!
 if [[ ! -z "$PS1" ]]; then
