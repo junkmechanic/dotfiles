@@ -299,6 +299,9 @@ autocmd FileType help wincmd L
 " Quick exit from quickfix
 autocmd FileType qf silent! nnoremap <buffer> q :q<CR>
 
+" Quick exit from quickfix
+autocmd FileType qf set switchbuf+=usetab,newtab
+
 " Format JSON files
 au FileType json exe ":silent %! python -m json.tool"
 
@@ -426,11 +429,11 @@ let insert_mode_mappings = [
   \ ]
 
 let normal_mode_mappings = [
-  \   ["'", '<denite:toggle_select_down>', 'noremap'],
-  \   ['<C-n>', '<denite:jump_to_next_source>', 'noremap'],
-  \   ['<C-p>', '<denite:jump_to_previous_source>', 'noremap'],
-  \   ['v', '<denite:do_action:vsplit>', 'noremap'],
-  \   ['s', '<denite:do_action:split>', 'noremap'],
+  \  ["'", '<denite:toggle_select_down>', 'noremap'],
+  \  ['<C-n>', '<denite:jump_to_next_source>', 'noremap'],
+  \  ['<C-p>', '<denite:jump_to_previous_source>', 'noremap'],
+  \  ['v', '<denite:do_action:vsplit>', 'noremap'],
+  \  ['s', '<denite:do_action:split>', 'noremap'],
   \ ]
 
 for m in insert_mode_mappings
@@ -441,9 +444,9 @@ for m in normal_mode_mappings
 endfor
 
 nnoremap <silent><LocalLeader>r :<C-u>Denite -resume -refresh<CR>
-nnoremap <silent><LocalLeader>f :<C-u>Denite -default-action=tabopen file_rec file_mru<CR>
-nnoremap <silent><LocalLeader>h :<C-u>Denite -default-action=tabopen file_rec:~/<CR>
-nnoremap <silent><LocalLeader>y :<C-u>Denite -default-action=append -mode=normal neoyank<CR>
+nnoremap <silent><LocalLeader>f :<C-u>Denite -default-action=tabopen file/rec file_mru<CR>
+nnoremap <silent><LocalLeader>h :<C-u>Denite -default-action=tabopen file/rec:~/<CR>
+nnoremap <silent><LocalLeader>y :<C-u>Denite -default-action=append neoyank<CR>
 nnoremap <silent><LocalLeader>g :<C-u>DeniteCursorWord -default-action=tabopen -mode=normal -split=tab -auto-preview grep:.<CR>
 nnoremap <silent><LocalLeader>o :<C-u>Denite -direction=botright -split=vertical -winwidth=45 outline<CR>
 nnoremap <silent><LocalLeader>c :<C-u>Denite command_history<CR>
