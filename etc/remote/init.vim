@@ -250,7 +250,7 @@ nnoremap <Leader>f yl:normal f<C-r>"<CR>
 nnoremap <A-l> zl
 nnoremap <A-h> zh<c-h>
 
-nnoremap Q :normal n.<CR>
+nnoremap Q @q
 
 vnoremap < <gv
 vnoremap > >gv
@@ -386,7 +386,6 @@ onoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
 
 " airline
 let g:airline_theme='nord'
-let g:airline_powerline_fonts=1
 let g:airline_inactive_collapse=0
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#tabline#enabled=1

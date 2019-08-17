@@ -252,7 +252,7 @@ nnoremap <Leader>f yl:normal f<C-r>"<CR>
 nnoremap <A-l> zl
 nnoremap <A-h> zh<c-h>
 
-nnoremap Q :normal n.<CR>
+nnoremap Q @q
 
 vnoremap < <gv
 vnoremap > >gv
