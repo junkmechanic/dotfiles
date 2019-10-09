@@ -12,12 +12,6 @@ Required Packages
   4. tmux
   5. tpm [https://github.com/tmux-plugins/tpm]
   6. exuberant-ctags
-
-Home
----
-  1. conky
-
-Work
----
-  1. karabiner
-  2. oh-my-zsh
+  7. conky
+  8. karabiner
+  9. oh-my-zsh

@@ -444,17 +444,17 @@ for m in normal_mode_mappings
 endfor
 
 nnoremap <silent><LocalLeader>r :<C-u>Denite -resume -refresh<CR>
-nnoremap <silent><LocalLeader>f :<C-u>Denite -default-action=tabopen file/rec file_mru<CR>
-nnoremap <silent><LocalLeader>h :<C-u>Denite -default-action=tabopen file/rec:~/<CR>
+nnoremap <silent><LocalLeader>f :<C-u>Denite -default-action=tabopen -split=tab -auto-action=preview file/rec file_mru<CR>
+nnoremap <silent><LocalLeader>h :<C-u>Denite -default-action=tabopen -split=tab -auto-action=preview file/rec:~/
 nnoremap <silent><LocalLeader>y :<C-u>Denite -default-action=append neoyank<CR>
-nnoremap <silent><LocalLeader>g :<C-u>DeniteCursorWord -default-action=tabopen -mode=normal -split=tab -auto-preview grep:.<CR>
+nnoremap <silent><LocalLeader>g :<C-u>DeniteCursorWord -default-action=tabopen -split=tab -auto-action=preview grep:.<CR>
 nnoremap <silent><LocalLeader>o :<C-u>Denite -direction=botright -split=vertical -winwidth=45 outline<CR>
 nnoremap <silent><LocalLeader>c :<C-u>Denite command_history<CR>
 nnoremap <silent><LocalLeader>b :<C-u>Denite -default_action=switch buffer<CR>
 
 function! Denite_vgrep(search_string)
   let l:escaped_str = substitute(a:search_string, " ", "\\\\\\\\s", "g")
-  exec 'Denite -default-action=tabopen -mode=normal -split=tab -auto-preview grep:.:-iHn:'.l:escaped_str
+  exec 'Denite -default-action=tabopen -split=tab -auto-action=preview grep:.:-iHn:'.l:escaped_str
 endfunction
 vnoremap <silent><LocalLeader>g y:call Denite_vgrep('<C-R><C-R>"')<CR>
 
@@ -513,6 +513,7 @@ let g:r_syntax_folding = 1
 nmap <F5> <Plug>(FastFoldUpdate)
 
 " goyo
+let g:goyo_width = 82
 function! s:goyo_enter()
   let b:quitting = 0
   let b:quitting_bang = 0
@@ -537,11 +538,13 @@ autocmd! User GoyoLeave call <SID>goyo_leave()
 " jedi-vim
 set noshowmode
 let g:jedi#use_splits_not_buffers = "right"
+" let g:jedi#use_tabs_not_buffers = 1
 let g:jedi#show_call_signatures = "2"
 let g:jedi#usages_command = "<leader>ju"
 let g:jedi#goto_command = "<leader>jc"
 let g:jedi#goto_assignments_command = "<leader>ja"
 let g:jedi#documentation_command = "<leader>jd"
+let g:jedi#goto_stubs_command = ""
 " disable jedi completions since deoplete-jedi handles that
 let g:jedi#completions_enabled=0
 
