@@ -312,6 +312,9 @@ au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 autocmd FileType plaintex set fo+=t
 autocmd FileType plaintex set spell spelllang=en_us
 
+" Markdown options
+autocmd FileType markdown set spell spelllang=en_us
+
 " Enter insert on terminal buffer
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
@@ -513,7 +516,7 @@ let g:r_syntax_folding = 1
 nmap <F5> <Plug>(FastFoldUpdate)
 
 " goyo
-let g:goyo_width = 82
+let g:goyo_width = 100
 function! s:goyo_enter()
   let b:quitting = 0
   let b:quitting_bang = 0
