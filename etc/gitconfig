@@ -2,7 +2,7 @@
     name = junkmechanic
     email = khanna89ankur@gmail.com
 [core]
-    editor = vim
+    editor = nvim
     pager = less -RSFX
 [color]
     ui = true

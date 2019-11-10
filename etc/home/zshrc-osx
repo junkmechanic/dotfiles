@@ -1,8 +1,8 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/ankurkhanna/.oh-my-zsh"
+export ZSH="/Users/ankur/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -26,8 +26,14 @@ ZSH_THEME="robbyrussell"
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -116,14 +122,12 @@ alias duall="du -shc .[!.]* *"
 alias gita="git add"
 alias gita.="git add ."
 alias gitc="git commit"
-alias gitcam="git commit --amend --no-edit"
 alias gitd="git diff"
 alias gitds="git diff --staged"
 alias gitl="git log -1"
 alias gitrpo="git remote prune origin"
 alias gitrso="git remote show origin"
 alias gits="git status"
-alias gitsbup="git submodule update --init --recursive --remote"
 alias gt='cd $(git rev-parse --show-toplevel 2>/dev/null || (echo "."; echo "Not within a git repository" >&2))'
 alias ll="ls -AlhF"
 alias pipgrep="pip freeze | grep"
@@ -174,7 +178,10 @@ bindkey '^ ' autosuggest-execute
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/devbench
 VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-source ~/Library/Python/3.7/bin/virtualenvwrapper.sh
+source /usr/local/bin/virtualenvwrapper.sh
+
+# add github token for homebrew
+export HOMEBREW_GITHUB_API_TOKEN=10c6de100b37439a0822f076e08d8f327e197910
 
 # to view path in readable format
 path() {

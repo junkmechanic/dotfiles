@@ -11,7 +11,5 @@ Required Packages
   3. fzf [https://github.com/junegunn/fzf]
   4. tmux
   5. tpm [https://github.com/tmux-plugins/tpm]
-  6. exuberant-ctags
-  7. conky
-  8. karabiner
-  9. oh-my-zsh
+  6. conky
+  7. karabiner
