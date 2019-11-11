@@ -605,37 +605,3 @@ xmap <silent> *                    <Plug>SearchPartyVisualFindNext
 xmap <silent> #                    <Plug>SearchPartyVisualFindPrev
 xmap          &                    <Plug>SearchPartyVisualSubstitute
 nmap          <leader>fow          <Plug>SearchPartyMashFOWToggle
-
-
-"" Deprecated functionality
-
-
-" Jump to the first/last tab
-" nnoremap <Leader><Leader>n <esc>:tabfirst<CR>
-" nnoremap <Leader><Leader>m <esc>:tablast<CR>
-
-" Meta/Alt key combinations
-" The <m-alpha> have been set by vim-fixkey
-" let c='0'
-" while c <= '9'
-"   exec "set <A-".c.">=\e".c
-"   exec "imap \e".c." <A-".c.">"
-"   let c = nr2char(1+char2nr(c))
-" endw
-" set ttimeout ttimeoutlen=5
-
-" jumping tabs by number
-" let n = 1
-" while n <= 9
-"     exec 'nnoremap <A-' . n . '> ' . n . 'gt'
-"     let n = n + 1
-" endwhile
-
-" Start NerdTree automatically if vim is started without specifying any files
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" The following is an example of how to map to a specific mode among the visual
-" modes. Here I have mapped only to the Visual-Block mode using the ternary
-" expr1.
-"xnoremap <expr> <leader>c mode() ==# "\<C-V>" ? ":s/^/#\<CR>:nohl<CR>" : ""

@@ -26,7 +26,6 @@ if dein#load_state(s:dein_dir)
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('Lokaltog/vim-easymotion', {'on_map': '<Plug>(easymotion'})
   call dein#add('tommcdo/vim-exchange', {'on_map' : {'n' : 'cx', 'x' : 'X'}})
-  call dein#add('cazador481/fakeclip.neovim')
   call dein#add('Konfekt/FastFold')
   call dein#add('tpope/vim-fugitive')
   call dein#add('rbong/vim-flog')
@@ -54,7 +53,6 @@ if dein#load_state(s:dein_dir)
   call dein#add('mhinz/vim-startify')
   call dein#add('lambdalisue/suda.vim')
   call dein#add('tpope/vim-surround', {'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 'depends' : 'vim-repeat'})
-  " call dein#add('exitface/synthwave.vim')
   call dein#add('wellle/targets.vim')
   call dein#add('bronson/vim-trailing-whitespace')
   call dein#add('tpope/vim-unimpaired')
@@ -63,6 +61,8 @@ if dein#load_state(s:dein_dir)
   call dein#add('jmcantrell/vim-virtualenv', {'on_ft': 'python'})
 
   call dein#end()
+
+  call dein#remote_plugins()
   call dein#save_state()
 endif
 
@@ -200,20 +200,11 @@ inoremap <C-Z> <C-O>:update<CR>
 " This is useful in the visual line mode
 vnoremap <leader>p y`>p
 
-" Delete to buffer 'd' instead of the default buffer
-nnoremap <expr> <leader>dw (v:register == '+') ? '"ddw' : '"'.v:register.'dw'
-nnoremap <expr> <leader>dd (v:register == '+') ? '"ddd' : '"'.v:register.'dd'
-vnoremap <expr> <leader>d (v:register == '+') ? '"dd' : '"'.v:register.'d'
-
 " Quick movements
 nnoremap H ^
 nnoremap L g_
 vnoremap H ^
 vnoremap L g_
-nnoremap J 3j
-nnoremap K 3k
-vnoremap J 3j
-vnoremap K 3k
 
 " Quick quit command
 noremap <Leader>e :quit<CR>
@@ -297,6 +288,9 @@ autocmd FileType help wincmd L
 " Quick exit from quickfix
 autocmd FileType qf silent! nnoremap <buffer> q :q<CR>
 
+" Quick exit from quickfix
+autocmd FileType qf set switchbuf+=usetab,newtab
+
 " Format JSON files
 au FileType json exe ":silent %! python -m json.tool"
 
@@ -306,6 +300,9 @@ au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 " LaTex options
 autocmd FileType plaintex set fo+=t
 autocmd FileType plaintex set spell spelllang=en_us
+
+" Markdown options
+autocmd FileType markdown set spell spelllang=en_us
 
 " Enter insert on terminal buffer
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
@@ -386,6 +383,7 @@ onoremap <silent> <leader>j :call NextIndent(0, 1, 0, 1)<CR>
 
 " airline
 let g:airline_theme='nord'
+let g:airline_powerline_fonts=0
 let g:airline_inactive_collapse=0
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#tabline#enabled=1
@@ -395,60 +393,71 @@ let g:airline#extensions#tabline#show_splits=1
 let g:airline#extensions#tabline#show_close_button=0
 let g:airline#extensions#tabline#excludes = ['term://']
 
+" commentary
+xnoremap <Leader>c :g/./Commentary<CR>
+
 " ctrlp
 let g:ctrlp_max_height = 15
 set wildignore+=*.pyc
 
 " denite
-call denite#custom#option('_', {
-  \ 'prompt': '❯',
-  \ 'empty': 0,
-  \ 'winheight': 16,
-  \ 'short_source_names': 1,
-  \ 'vertical_preview': 1,
-  \ 'direction': 'dynamicbottom',
+autocmd FileType denite call s:denite_settings()
+function! s:denite_settings() abort
+  nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> <tab> denite#do_map('choose_action')
+  nnoremap <silent><buffer><expr> o denite#do_map('do_action', 'open')
+  nnoremap <silent><buffer><expr> q denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> v denite#do_map('do_action', 'vsplit')
+  nnoremap <silent><buffer><expr> s denite#do_map('do_action', 'split')
+  nnoremap <nowait> <silent><buffer><expr> y denite#do_map('do_action', 'yank')
+  nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
+endfunction
+
+autocmd FileType denite-filter call s:denite_filter_settings()
+function! s:denite_filter_settings() abort
+  imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+  inoremap <silent><buffer><expr> <C-i> denite#do_map('do_action')
+
+  call deoplete#custom#buffer_option('auto_complete', v:false)
+endfunction
+
+call denite#custom#kind('file', 'default_action', 'tabopen')
+
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+
+call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
+  \ [ '.git/', '.ropeproject/', '__pycache__/*', '*.pyc', 'node_modules/',
+  \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/', '*.png'])
+
+call denite#custom#var('file/rec', 'command',
+  \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+
+call denite#custom#option('_',
+  \ {
+  \   'statusline': v:false,
+  \   'vertical_preview': v:true,
+  \   'direction': 'botright',
+  \   'split': 'floating',
+  \   'prompt': '❯',
   \ })
 
-let insert_mode_mappings = [
-  \  ['jj', '<denite:enter_mode:normal>', 'noremap'],
-  \  ['qq', '<denite:quit>', 'noremap'],
-  \  ['<Esc>', '<denite:enter_mode:normal>', 'noremap'],
-  \  ['<C-N>', '<denite:assign_next_matched_text>', 'noremap'],
-  \  ['<C-P>', '<denite:assign_previous_matched_text>', 'noremap'],
-  \  ['<C-Y>', '<denite:redraw>', 'noremap'],
-  \  ['<C-J>', '<denite:move_to_next_line>', 'noremap'],
-  \  ['<C-K>', '<denite:move_to_previous_line>', 'noremap'],
-  \  ['<C-G>', '<denite:insert_digraph>', 'noremap'],
-  \  ['<C-T>', '<denite:input_command_line>', 'noremap'],
-  \ ]
-
-let normal_mode_mappings = [
-  \   ["'", '<denite:toggle_select_down>', 'noremap'],
-  \   ['<C-n>', '<denite:jump_to_next_source>', 'noremap'],
-  \   ['<C-p>', '<denite:jump_to_previous_source>', 'noremap'],
-  \   ['v', '<denite:do_action:vsplit>', 'noremap'],
-  \   ['s', '<denite:do_action:split>', 'noremap'],
-  \ ]
-
-for m in insert_mode_mappings
-  call denite#custom#map('insert', m[0], m[1], m[2])
-endfor
-for m in normal_mode_mappings
-  call denite#custom#map('normal', m[0], m[1], m[2])
-endfor
-
 nnoremap <silent><LocalLeader>r :<C-u>Denite -resume -refresh<CR>
-nnoremap <silent><LocalLeader>f :<C-u>Denite -default-action=tabopen file_rec file_mru<CR>
-nnoremap <silent><LocalLeader>h :<C-u>Denite -default-action=tabopen file_rec:~/<CR>
-nnoremap <silent><LocalLeader>y :<C-u>Denite -default-action=append -mode=normal neoyank<CR>
-nnoremap <silent><LocalLeader>g :<C-u>DeniteCursorWord -default-action=tabopen -mode=normal -split=tab -auto-preview grep:.<CR>
-nnoremap <silent><LocalLeader>o :<C-u>Denite -direction=botright -split=vertical -winwidth=45 outline<CR>
-nnoremap <silent><LocalLeader>c :<C-u>Denite command_history<CR>
+nnoremap <silent><LocalLeader>f :<C-u>Denite -start-filter file/rec file_mru<CR>
+nnoremap <silent><LocalLeader>h :<C-u>Denite -start-filter file/rec:~/devbench/<CR>
 nnoremap <silent><LocalLeader>b :<C-u>Denite -default_action=switch buffer<CR>
+nnoremap <silent><LocalLeader>y :<C-u>Denite -default-action=append neoyank<CR>
+nnoremap <silent><LocalLeader>c :<C-u>Denite command_history<CR>
+nnoremap <silent><LocalLeader>g :<C-u>DeniteCursorWord grep:.<CR>
 
 function! Denite_vgrep(search_string)
   let l:escaped_str = substitute(a:search_string, " ", "\\\\\\\\s", "g")
-  exec 'Denite -default-action=tabopen -mode=normal -split=tab -auto-preview grep:.:-iHn:'.l:escaped_str
+  exec 'Denite grep:.:-Q:'.l:escaped_str
 endfunction
 vnoremap <silent><LocalLeader>g y:call Denite_vgrep('<C-R><C-R>"')<CR>
 
@@ -494,9 +503,6 @@ vmap <leader><leader>n <Plug>(easymotion-next)
 nmap <leader><leader>p <Plug>(easymotion-prev)
 vmap <leader><leader>p <Plug>(easymotion-prev)
 
-" fakeclip
-let g:vim_fakeclip_tmux_plus=1
-
 " FastFold
 let g:vimsyn_folding = 'af'
 let g:xml_syntax_folding = 1
@@ -507,6 +513,7 @@ let g:r_syntax_folding = 1
 nmap <F5> <Plug>(FastFoldUpdate)
 
 " goyo
+let g:goyo_width = 100
 function! s:goyo_enter()
   let b:quitting = 0
   let b:quitting_bang = 0
@@ -536,6 +543,7 @@ let g:jedi#usages_command = "<leader>ju"
 let g:jedi#goto_command = "<leader>jc"
 let g:jedi#goto_assignments_command = "<leader>ja"
 let g:jedi#documentation_command = "<leader>jd"
+let g:jedi#goto_stubs_command = ""
 " disable jedi completions since deoplete-jedi handles that
 let g:jedi#completions_enabled=0
 
