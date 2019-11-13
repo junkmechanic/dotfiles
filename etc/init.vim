@@ -150,6 +150,7 @@ let g:nord_italic = 1
 let g:nord_underline = 1
 let g:nord_italic_comments = 1
 let g:nord_uniform_diff_background = 1
+let g:nord_bold_vertical_split_line = 1
 color nord
 
 set colorcolumn=+1
@@ -540,7 +541,6 @@ autocmd! User GoyoLeave call <SID>goyo_leave()
 " jedi-vim
 set noshowmode
 let g:jedi#use_splits_not_buffers = "right"
-" let g:jedi#use_tabs_not_buffers = 1
 let g:jedi#show_call_signatures = "2"
 let g:jedi#usages_command = "<leader>ju"
 let g:jedi#goto_command = "<leader>jc"

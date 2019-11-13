@@ -150,6 +150,7 @@ let g:nord_italic = 1
 let g:nord_underline = 1
 let g:nord_italic_comments = 1
 let g:nord_uniform_diff_background = 1
+let g:nord_bold_vertical_split_line = 1
 color nord
 
 set colorcolumn=+1
@@ -186,6 +187,8 @@ else
   inoremap <Leader><C-J> <Esc>A:<Esc>o
   nnoremap <Leader><C-J> A:<Esc>o
 endif
+" enter spaces after comma to avoid E231
+" %s/,\([^\s ]\)/, \1/g
 
 " Adding parameters to functions
 nnoremap <leader>i i,<space>
