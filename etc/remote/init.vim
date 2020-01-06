@@ -31,7 +31,6 @@ if dein#load_state(s:dein_dir)
   call dein#add('rbong/vim-flog')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('junegunn/goyo.vim', {'on_cmd': ['Goyo']})
-  call dein#add('sjl/gundo.vim')
   call dein#add('vim-scripts/IndexedSearch')
   call dein#add('rjayatilleka/vim-insert-char', {'on_map': {'n': '<space>'}})
   call dein#add('davidhalter/jedi-vim', {'on_ft': 'python'})
@@ -39,6 +38,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('elzr/vim-json', {'on_ft': 'json'})
   call dein#add('AndrewRadev/linediff.vim', {'on_cmd': ['Linediff', 'LinediffMerge']})
   call dein#add('terryma/vim-multiple-cursors', {'on_map': ['<F6>', 'g<c-n>']})
+  call dein#add('simnalamburt/vim-mundo')
   call dein#add('Shougo/neomru.vim', {'depends': 'denite'})
   call dein#add('kassio/neoterm')
   call dein#add('Shougo/neoyank.vim', {'depends': 'denite'})
@@ -150,6 +150,7 @@ let g:nord_italic = 1
 let g:nord_underline = 1
 let g:nord_italic_comments = 1
 let g:nord_uniform_diff_background = 1
+let g:nord_bold_vertical_split_line = 1
 color nord
 
 set colorcolumn=+1
@@ -186,6 +187,8 @@ else
   inoremap <Leader><C-J> <Esc>A:<Esc>o
   nnoremap <Leader><C-J> A:<Esc>o
 endif
+" enter spaces after comma to avoid E231
+" %s/,\([^\s ]\)/, \1/g
 
 " Adding parameters to functions
 nnoremap <leader>i i,<space>
@@ -299,10 +302,10 @@ au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 
 " LaTex options
 autocmd FileType plaintex set fo+=t
-autocmd FileType plaintex set spell spelllang=en_us
+autocmd FileType plaintex setlocal spell spelllang=en_us
 
 " Markdown options
-autocmd FileType markdown set spell spelllang=en_us
+autocmd FileType markdown setlocal spell spelllang=en_us
 
 " Enter insert on terminal buffer
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
@@ -408,6 +411,7 @@ function! s:denite_settings() abort
   nnoremap <silent><buffer><expr> o denite#do_map('do_action', 'open')
   nnoremap <silent><buffer><expr> q denite#do_map('quit')
   nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> t denite#do_map('do_action', 'tabswitch')
   nnoremap <silent><buffer><expr> v denite#do_map('do_action', 'vsplit')
   nnoremap <silent><buffer><expr> s denite#do_map('do_action', 'split')
   nnoremap <nowait> <silent><buffer><expr> y denite#do_map('do_action', 'yank')
@@ -450,14 +454,14 @@ call denite#custom#option('_',
 nnoremap <silent><LocalLeader>r :<C-u>Denite -resume -refresh<CR>
 nnoremap <silent><LocalLeader>f :<C-u>Denite -start-filter file/rec file_mru<CR>
 nnoremap <silent><LocalLeader>h :<C-u>Denite -start-filter file/rec:~/devbench/<CR>
-nnoremap <silent><LocalLeader>b :<C-u>Denite -default_action=switch buffer<CR>
+nnoremap <silent><LocalLeader>b :<C-u>Denite -default_action=tabswitch buffer<CR>
 nnoremap <silent><LocalLeader>y :<C-u>Denite -default-action=append neoyank<CR>
 nnoremap <silent><LocalLeader>c :<C-u>Denite command_history<CR>
-nnoremap <silent><LocalLeader>g :<C-u>DeniteCursorWord grep:.<CR>
+nnoremap <silent><LocalLeader>g :<C-u>DeniteCursorWord -default_action=tabswitch grep:.<CR>
 
 function! Denite_vgrep(search_string)
   let l:escaped_str = substitute(a:search_string, " ", "\\\\\\\\s", "g")
-  exec 'Denite grep:.:-Q:'.l:escaped_str
+  exec 'Denite -default_action=tabswitch grep:.:-Q:'.l:escaped_str
 endfunction
 vnoremap <silent><LocalLeader>g y:call Denite_vgrep('<C-R><C-R>"')<CR>
 
@@ -538,6 +542,7 @@ autocmd! User GoyoLeave call <SID>goyo_leave()
 " jedi-vim
 set noshowmode
 let g:jedi#use_splits_not_buffers = "right"
+" let g:jedi#use_tabs_not_buffers = 1
 let g:jedi#show_call_signatures = "2"
 let g:jedi#usages_command = "<leader>ju"
 let g:jedi#goto_command = "<leader>jc"
