@@ -176,6 +176,12 @@ export PROJECT_HOME=$HOME/devbench
 VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 source ~/Library/Python/3.7/bin/virtualenvwrapper.sh
 
+# ruby (brew version)
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/ruby/lib"
+export CPPFLAGS="-I/usr/local/opt/ruby/include"
+
+
 # to view path in readable format
 path() {
     # old=$IFS
