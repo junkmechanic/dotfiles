@@ -34,6 +34,7 @@ alias gt='cd $(git rev-parse --show-toplevel 2>/dev/null || (echo "."; echo "Not
 alias killmosh='pgrep -u "$USER" mosh-server | tr " " "\n" | grep -v "$PPID" | xargs kill'
 alias ll="ls -AlhF"
 alias psgrep='ps aux | grep -v grep | grep'
+alias rsync="noglob rsync --human-readable --partial --progress --rsh=ssh"
 alias sl="ls"
 alias tmat="tmux attach"
 alias tmgn="tmux new-session -s general"
@@ -49,7 +50,7 @@ if [ -n "${NVIM_LISTEN_ADDRESS}" ]; then
   alias vimv='nvr -O'
   alias vimt='nvr --remote-tab'
 fi
-# export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 # Launch tmux automatically or attach to it
 if which tmux 2>&1 >/dev/null; then
@@ -59,6 +60,12 @@ if which tmux 2>&1 >/dev/null; then
 fi
 
 export MANPAGER='nvim +Man!'
+
+# virtualenvwrapper settings
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/devbench
+VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source ~/.local/bin/virtualenvwrapper.sh
 
 # keybindings for history-substring-search
 # bind P and N for EMACS mode

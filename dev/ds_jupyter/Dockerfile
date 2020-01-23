@@ -14,7 +14,7 @@ ENV LC_ALL en_US.UTF-8
 ADD apt-packages.txt /tmp/apt-packages.txt
 RUN xargs -a /tmp/apt-packages.txt apt-get install -y
 
-RUN echo "Asia/Singapore" > /etc/timezone && \
+RUN echo "Europe/London" > /etc/timezone && \
     rm /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata
 
@@ -26,7 +26,7 @@ ADD /requirements/ /tmp/requirements
 RUN /opt/ds/bin/pip install -r /tmp/requirements/pre-requirements.txt
 RUN /opt/ds/bin/pip install -r /tmp/requirements/requirements.txt
 
-RUN useradd --create-home --home-dir /home/ankur --shell /bin/bash ankur
+RUN useradd --create-home --home-dir /home/ankur --shell /bin/bash -u 1001 ankur
 # RUN useradd --create-home --home-dir /home/ankur -u 1002 --shell /bin/bash ankur
 RUN adduser ankur sudo
 RUN echo "ankur ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
@@ -43,7 +43,6 @@ RUN chown ankur /home/ankur/.bashrc
 RUN chown ankur /home/ankur/.inputrc
 RUN chown ankur /home/ankur/.vimrc
 
-# EXPOSE 8888
 USER ankur
 RUN mkdir -p /home/ankur/notebooks
 ENV HOME=/home/ankur
@@ -70,8 +69,6 @@ RUN /opt/ds/bin/pip install jupyter_contrib_nbextensions \
 
 RUN /opt/ds/bin/jupyter serverextension enable --py --sys-prefix jupyter_spark \
     && /opt/ds/bin/jupyter nbextension install --py --sys-prefix jupyter_spark
-
-RUN /opt/ds/bin/jupyter labextension install jupyterlab_vim
 
 RUN git clone https://github.com/lambdalisue/jupyter-vim-binding /opt/ds/share/jupyter/nbextensions/vim_binding \
     && /opt/ds/bin/jupyter nbextension enable vim_binding/vim_binding

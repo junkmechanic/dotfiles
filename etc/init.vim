@@ -396,9 +396,6 @@ let g:airline#extensions#tabline#show_splits=1
 let g:airline#extensions#tabline#show_close_button=0
 let g:airline#extensions#tabline#excludes = ['term://']
 
-" commentary
-xnoremap <Leader>c :g/./Commentary<CR>
-
 " ctrlp
 let g:ctrlp_max_height = 15
 set wildignore+=*.pyc
@@ -607,3 +604,7 @@ xmap <silent> *                    <Plug>SearchPartyVisualFindNext
 xmap <silent> #                    <Plug>SearchPartyVisualFindPrev
 xmap          &                    <Plug>SearchPartyVisualSubstitute
 nmap          <leader>fow          <Plug>SearchPartyMashFOWToggle
+
+
+" source local settings
+source ~/.config/nvim/local_config.vim

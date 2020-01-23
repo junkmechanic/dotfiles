@@ -2,6 +2,7 @@ beautifulsoup4
 bokeh
 dask[complete]
 ipywidgets
+joblib
 jupyter
 jupyter_spark
 jupyterlab
@@ -10,6 +11,7 @@ mord
 networkx
 nltk
 pandas
+pyarrow
 pyzmq
 requests
 s3fs

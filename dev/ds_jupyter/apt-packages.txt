@@ -19,8 +19,6 @@ libreadline-dev
 libssl-dev
 libxml2-dev
 libxslt1-dev
-nodejs
-npm
 openssl
 pkg-config
 python
