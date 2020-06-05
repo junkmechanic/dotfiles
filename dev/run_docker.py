@@ -9,12 +9,12 @@ import docker
 client = docker.from_env()
 
 client.containers.run(
-    image='dsnb_db.img',
+    image='ds_jupyter.img',
     detach=True,
     init=True,
     ports={'8888/tcp': 8989},
     volumes={
-        '/home/ankur/devbench/notebooks/': {
+        '/Users/ankur/devbench/notebooks/': {
             'bind': '/home/ankur/notebooks',
             'mode': 'rw'
         },

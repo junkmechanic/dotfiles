@@ -464,7 +464,7 @@ vnoremap <silent><LocalLeader>g y:call Denite_vgrep('<C-R><C-R>"')<CR>
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
+call deoplete#custom#option('smart_case', v:true)
 " for auto selection of the first menu entry
 set completeopt+=noinsert
 " auto delimiter (for example in paths) and removing auto-paranthesis addition

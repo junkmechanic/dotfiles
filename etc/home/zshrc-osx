@@ -122,6 +122,7 @@ alias duall="du -shc .[!.]* *"
 alias gita="git add"
 alias gita.="git add ."
 alias gitc="git commit"
+alias gitcam="git commit --amend --no-edit"
 alias gitd="git diff"
 alias gitds="git diff --staged"
 alias gitl="git log -1"
@@ -201,6 +202,15 @@ mkcd() {
     else
         mkdir -p $1 && cd $1
     fi
+}
+
+function dusort {
+    if [[ -z "$1" ]]; then
+        du_dir=.
+    else
+        du_dir=$1
+    fi
+    exec du -khx -d 1 $du_dir | sort -h
 }
 
 # zle custom functions

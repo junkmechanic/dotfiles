@@ -18,13 +18,13 @@ RUN echo "Europe/London" > /etc/timezone && \
     rm /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata
 
-RUN pip install virtualenv
-RUN /usr/local/bin/virtualenv /opt/ds --distribute --python=/usr/bin/python3
+RUN pip3 install virtualenv
+RUN /usr/local/bin/virtualenv /opt/ds
 
 ADD /requirements/ /tmp/requirements
 
-RUN /opt/ds/bin/pip install -r /tmp/requirements/pre-requirements.txt
-RUN /opt/ds/bin/pip install -r /tmp/requirements/requirements.txt
+RUN /opt/ds/bin/pip3 install -r /tmp/requirements/pre-requirements.txt
+RUN /opt/ds/bin/pip3 install -r /tmp/requirements/requirements.txt
 
 RUN useradd --create-home --home-dir /home/ankur --shell /bin/bash -u 1001 ankur
 # RUN useradd --create-home --home-dir /home/ankur -u 1002 --shell /bin/bash ankur
@@ -52,7 +52,7 @@ ENV USER=ankur
 WORKDIR /home/ankur/notebooks
 ADD BoilerplateInit.ipynb /home/ankur/notebooks/BoilerplateInit.ipynb
 
-RUN /opt/ds/bin/pip install jupyter_contrib_nbextensions \
+RUN /opt/ds/bin/pip3 install jupyter_contrib_nbextensions \
     && /opt/ds/bin/jupyter contrib nbextension install --sys-prefix \
     && /opt/ds/bin/jupyter nbextension enable init_cell/main \
     && /opt/ds/bin/jupyter nbextension enable toc2/main \
