@@ -26,7 +26,7 @@ ADD /requirements/ /tmp/requirements
 RUN /opt/ds/bin/pip3 install -r /tmp/requirements/pre-requirements.txt
 RUN /opt/ds/bin/pip3 install -r /tmp/requirements/requirements.txt
 
-RUN useradd --create-home --home-dir /home/ankur --shell /bin/bash -u 1001 ankur
+RUN useradd --create-home --home-dir /home/ankur --shell /bin/bash ankur
 # RUN useradd --create-home --home-dir /home/ankur -u 1002 --shell /bin/bash ankur
 RUN adduser ankur sudo
 RUN echo "ankur ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
@@ -66,9 +66,6 @@ RUN /opt/ds/bin/pip3 install jupyter_contrib_nbextensions \
     && /opt/ds/bin/jupyter nbextension enable execute_time/ExecuteTime \
     && /opt/ds/bin/jupyter nbextension enable varInspector/main \
     && /opt/ds/bin/jupyter nbextension enable --py --sys-prefix widgetsnbextension
-
-RUN /opt/ds/bin/jupyter serverextension enable --py --sys-prefix jupyter_spark \
-    && /opt/ds/bin/jupyter nbextension install --py --sys-prefix jupyter_spark
 
 RUN git clone https://github.com/lambdalisue/jupyter-vim-binding /opt/ds/share/jupyter/nbextensions/vim_binding \
     && /opt/ds/bin/jupyter nbextension enable vim_binding/vim_binding

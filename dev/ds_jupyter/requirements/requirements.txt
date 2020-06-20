@@ -4,7 +4,6 @@ dask[complete]
 ipywidgets
 joblib
 jupyter
-jupyter_spark
 jupyterlab
 matplotlib
 mord
