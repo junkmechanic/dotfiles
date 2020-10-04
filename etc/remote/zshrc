@@ -52,20 +52,7 @@ if [ -n "${NVIM_LISTEN_ADDRESS}" ]; then
 fi
 export PATH="$PATH:$HOME/.local/bin"
 
-# Launch tmux automatically or attach to it
-if which tmux 2>&1 >/dev/null; then
-    # if not inside a tmux session, and if no session is started, start a new
-    # session
-    test -z "$TMUX" && (tmux attach || tmux new-session -s general)
-fi
-
 export MANPAGER='nvim +Man!'
-
-# virtualenvwrapper settings
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/devbench
-VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source ~/.local/bin/virtualenvwrapper.sh
 
 # keybindings for history-substring-search
 # bind P and N for EMACS mode
@@ -84,6 +71,11 @@ znt_cd_hotlist=(
     ~/downloads
     ~/.config/znt
 )
+
+# pyenv
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+source $(pyenv root)/completions/pyenv.zsh
 
 # accept and execute the current suggestion with ctrl+space
 bindkey '^ ' autosuggest-execute
