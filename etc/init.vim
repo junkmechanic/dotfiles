@@ -304,9 +304,6 @@ au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 autocmd FileType plaintex set fo+=t
 autocmd FileType plaintex setlocal spell spelllang=en_us
 
-" Markdown options
-autocmd FileType markdown setlocal spell spelllang=en_us
-
 " Enter insert on terminal buffer
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 

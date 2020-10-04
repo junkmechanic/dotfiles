@@ -5,11 +5,13 @@ ipywidgets
 joblib
 jupyter
 jupyterlab
+logmatic-python
 matplotlib
 mord
 networkx
 nltk
 pandas
+pandarallel
 pyarrow
 pyzmq
 requests
@@ -19,6 +21,8 @@ scikit-optimize
 scipy
 seaborn
 statsmodels
+swifter
 sympy
+tables
 tqdm
 xlrd

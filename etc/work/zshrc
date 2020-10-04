@@ -2,7 +2,7 @@
 export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/ankurkhanna/.oh-my-zsh"
+export ZSH="/Users/akhanna/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -63,7 +63,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # Keep zsh-syntax-highlighting as the last plugin
-plugins=(git docker colorize kubectl mosh pip ssh-agent sudo \
+plugins=(git docker colorize kubectl mosh pip ssh-agent sudo aws \
     history-substring-search zsh-navigation-tools zsh-autopair \
     zsh-interactive-cd zsh-autosuggestions zsh-syntax-highlighting)
 
@@ -164,23 +164,28 @@ znt_cd_hotlist=(
     ~/devbench
     ~/.files
     ~/Downloads
-    ~/.config/znt
+    ~/devbench/fraud/data-graph
+    ~/devbench/fraud/data-products/fraud-detection
+    ~/devbench/fraud/data-ml-experiment-analysis
+    ~/devbench/fraud/random
 )
 
 # accept and execute the current suggestion with ctrl+space
 bindkey '^ ' autosuggest-execute
 
 # virtualenvwrapper settings
-export WORKON_HOME=$HOME/.virtualenvs
+export WORKON_HOME=$HOME/.local/share/virtualenvs
 export PROJECT_HOME=$HOME/devbench
 VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-source ~/Library/Python/3.7/bin/virtualenvwrapper.sh
+source /usr/local/bin/virtualenvwrapper.sh
 
 # ruby (brew version)
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/ruby/lib"
 export CPPFLAGS="-I/usr/local/opt/ruby/include"
 
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # to view path in readable format
 path() {
@@ -250,10 +255,11 @@ bindkey '\ea' _git_log_zsh_wrapper
 # edit a file under the current dir tree
 ve() {
   local files
-  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --preview '
+  local IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --preview '
     [[ $(file --mime {}) =~ binary ]] && echo {} is a binary file ||
     (highlight -O ansi -l {} || cat {}) 2> /dev/null | head -100'))
   [[ -n "$files" ]] && vim -- "${files[@]}"
+  print "$files"
 }
 
 # open after searching pattern in the file
@@ -261,11 +267,19 @@ vg() {
   local file
   local line
 
-  read -r file line <<<"$(grep -irn $@ . | fzf | awk -F: '{print $1, $2}')"
+  read -r file line <<<"$(grep -irn $@ . | fzf-tmux | awk -F: '{print $1, $2}')"
 
-  if [[ -n $file ]]
+  if [[ -n "$file" ]]
   then
-     vim $file +$line
-     print $file at $line
+     vim "$file" +"$line"
+     print "$file" at "$line"
   fi
+}
+
+# change to directory under the given or current directory
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf-tmux +m) &&
+  cd "$dir"
 }
