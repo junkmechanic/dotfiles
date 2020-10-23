@@ -33,6 +33,7 @@ alias gits="git status"
 alias gt='cd $(git rev-parse --show-toplevel 2>/dev/null || (echo "."; echo "Not within a git repository" >&2))'
 alias killmosh='pgrep -u "$USER" mosh-server | tr " " "\n" | grep -v "$PPID" | xargs kill'
 alias ll="ls -AlhF"
+alias ls="lsd"
 alias psgrep='ps aux | grep -v grep | grep'
 alias rsync="noglob rsync --human-readable --partial --progress --rsh=ssh"
 alias sl="ls"
@@ -97,4 +98,81 @@ path() {
     pth=($=PATH)
     printf "%s\n" $pth
     # IFS=$old
+}
+
+# zle custom functions
+
+function _git_status_zle {
+    zle kill-whole-line
+    git status
+    zle accept-line
+}
+zle -N _git_status_zle
+bindkey '\es' _git_status_zle
+
+function _git_diff_zle {
+    zle kill-whole-line
+    git diff
+    zle accept-line
+}
+zle -N _git_diff_zle
+bindkey '\ez' _git_diff_zle
+
+# fzf configuration. All other zsh config goes before this line
+# git@github.com:junegunn/fzf.git
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# git commit browser
+function _git_log_zle {
+  git rev-parse HEAD > /dev/null 2>&1 || return
+
+  local _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
+  local _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always %'"
+  local _viewGitLogLineShort="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always --stat %'"
+
+  git log --graph --color=always \
+    --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@" |
+  fzf --no-sort --reverse --tiebreak=index --no-multi \
+    --ansi --preview="$_viewGitLogLineShort" --preview-window=down \
+    --bind "enter:execute:$_viewGitLogLine | less -R && print $_gitLogLineToHash"
+}
+
+function _git_log_zsh_wrapper {
+    zle kill-whole-line
+    _git_log_zle
+    zle accept-line
+}
+zle -N _git_log_zsh_wrapper
+bindkey '\ea' _git_log_zsh_wrapper
+
+# edit a file under the current dir tree
+ve() {
+  local files
+  local IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --preview '
+    [[ $(file --mime {}) =~ binary ]] && echo {} is a binary file ||
+    (highlight -O ansi -l {} || cat {}) 2> /dev/null | head -100'))
+  [[ -n "$files" ]] && vim -- "${files[@]}"
+  print "$files"
+}
+
+# open after searching pattern in the file
+vg() {
+  local file
+  local line
+
+  read -r file line <<<"$(grep -irn $@ . | fzf-tmux | awk -F: '{print $1, $2}')"
+
+  if [[ -n "$file" ]]
+  then
+     vim "$file" +"$line"
+     print "$file" at "$line"
+  fi
+}
+
+# change to directory under the given or current directory
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf-tmux +m) &&
+  cd "$dir"
 }
