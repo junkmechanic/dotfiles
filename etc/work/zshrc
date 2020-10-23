@@ -158,6 +158,8 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 # keybindings for zsh-navigation-tools
+# removing binding for znt-history-widget as fzf is used for this
+bindkey -r '^[r'
 zle -N znt-cd-widget
 bindkey '^[w' znt-cd-widget
 znt_cd_hotlist=(
@@ -225,7 +227,7 @@ function _git_diff_zle {
 zle -N _git_diff_zle
 bindkey '\ez' _git_diff_zle
 
-# fzf configuration. All other zsh config goes before this line
+# fzf configuration
 # git@github.com:junegunn/fzf.git
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -252,12 +254,37 @@ function _git_log_zsh_wrapper {
 zle -N _git_log_zsh_wrapper
 bindkey '\ea' _git_log_zsh_wrapper
 
+# command history search
+__fzfcmd() {
+  [ -n "$TMUX_PANE" ] && { [ "${FZF_TMUX:-0}" != 0 ] || [ -n "$FZF_TMUX_OPTS" ]; } &&
+    echo "fzf-tmux ${FZF_TMUX_OPTS:--d${FZF_TMUX_HEIGHT:-40%}} -- " || echo "fzf"
+}
+
+fzf-history-widget() {
+  local selected num
+  setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
+  selected=( $(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |
+    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS --query=${(qqq)LBUFFER} +m" $(__fzfcmd)) )
+  local ret=$?
+  if [ -n "$selected" ]; then
+    num=$selected[1]
+    if [ -n "$num" ]; then
+      zle vi-fetch-history -n $num
+    fi
+  fi
+  zle reset-prompt
+  return $ret
+}
+zle     -N   fzf-history-widget
+bindkey '^R' fzf-history-widget
+
 # edit a file under the current dir tree
 ve() {
   local files
   local IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --preview '
     [[ $(file --mime {}) =~ binary ]] && echo {} is a binary file ||
-    (highlight -O ansi -l {} || cat {}) 2> /dev/null | head -100'))
+    (highlight -O ansi -l {} || cat {}) 2> /dev/null | head -100' \
+    --bind 'ctrl-n:page-down,ctrl-p:page-up,alt-j:preview-page-down,alt-k:preview-page-up'))
   [[ -n "$files" ]] && vim -- "${files[@]}"
   print "$files"
 }
@@ -267,7 +294,9 @@ vg() {
   local file
   local line
 
-  read -r file line <<<"$(grep -irn $@ . | fzf-tmux | awk -F: '{print $1, $2}')"
+  read -r file line <<<"$(grep -irn $@ . | \
+      fzf-tmux --bind 'ctrl-n:page-down,ctrl-p:page-up' | \
+      awk -F: '{print $1, $2}')"
 
   if [[ -n "$file" ]]
   then
