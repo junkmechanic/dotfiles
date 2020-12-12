@@ -7,12 +7,12 @@ export ZSH="/Users/akhanna/.oh-my-zsh"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="cloud"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
@@ -26,8 +26,14 @@ ZSH_THEME="robbyrussell"
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -58,14 +64,14 @@ ZSH_THEME="robbyrussell"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # Keep zsh-syntax-highlighting as the last plugin
-plugins=(git docker colorize kubectl mosh pip ssh-agent sudo aws \
-    history-substring-search zsh-navigation-tools zsh-autopair \
-    zsh-interactive-cd zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git gitfast docker colorize kubectl mosh pip ssh-agent sudo aws \
+    history-substring-search zsh-navigation-tools zsh-autopair pyenv \
+    zsh-interactive-cd zsh-autosuggestions zsh-syntax-highlighting git-extras)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -134,7 +140,7 @@ alias s3cmd='noglob s3cmd'
 alias scp='noglob scp'
 alias sl="ls"
 alias tmat="tmux attach"
-alias tmgn="tmux new-session -s general"
+alias tmgn="tmux new-session -s SYS"
 alias tmnw="tmux new-session -s"
 alias tmux="tmux -2"
 alias vim="nvim"
@@ -174,12 +180,6 @@ znt_cd_hotlist=(
 
 # accept and execute the current suggestion with ctrl+space
 bindkey '^ ' autosuggest-execute
-
-# virtualenvwrapper settings
-export WORKON_HOME=$HOME/.local/share/virtualenvs
-export PROJECT_HOME=$HOME/devbench
-VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
 
 # ruby (brew version)
 export PATH="/usr/local/opt/ruby/bin:$PATH"
@@ -294,7 +294,7 @@ vg() {
   local file
   local line
 
-  read -r file line <<<"$(grep -irn $@ . | \
+  read -r file line <<<"$(ag --nobreak --noheading --nocolor $@ . | \
       fzf-tmux --bind 'ctrl-n:page-down,ctrl-p:page-up' | \
       awk -F: '{print $1, $2}')"
 

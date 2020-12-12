@@ -309,6 +309,10 @@ autocmd FileType plaintex setlocal spell spelllang=en_us
 " Enter insert on terminal buffer
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
+" disable tabNine for init.vim
+autocm FileType vim
+  \ call deoplete#custom#option('ignore_sources', {'_': ['tabnine']})
+
 
 "" Custom functionality
 
@@ -443,7 +447,8 @@ call denite#custom#option('_',
   \   'statusline': v:false,
   \   'vertical_preview': v:true,
   \   'direction': 'botright',
-  \   'split': 'floating',
+  \   'split': 'floating_relative_cursor',
+  \   'winwidth': &columns / 1.5,
   \   'prompt': '❯',
   \ })
 
