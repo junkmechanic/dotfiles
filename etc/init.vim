@@ -39,6 +39,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('Glench/Vim-Jinja2-Syntax', {'on_ft': 'jinja'})
   call dein#add('elzr/vim-json', {'on_ft': 'json'})
   call dein#add('AndrewRadev/linediff.vim', {'on_cmd': ['Linediff', 'LinediffMerge']})
+  call dein#add('dstein64/vim-menu')
   call dein#add('terryma/vim-multiple-cursors', {'on_map': ['<F6>', 'g<c-n>']})
   call dein#add('simnalamburt/vim-mundo')
   call dein#add('Shougo/neomru.vim', {'depends': 'denite'})
@@ -50,9 +51,11 @@ if dein#load_state(s:dein_dir)
   call dein#add('tmsvg/pear-tree', {'on_event': 'InsertEnter'})
   call dein#add('python-mode/python-mode', {'rev': 'develop', 'on_ft': 'python'})
   call dein#add('tpope/vim-repeat', {'on_map' : '.'})
+  call dein#add('dstein64/nvim-scrollview')
   call dein#add('dahu/SearchParty')
   call dein#add('tmhedberg/SimpylFold', {'on_ft': 'python'})
   call dein#add('mhinz/vim-startify')
+  call dein#add('dstein64/vim-startuptime')
   call dein#add('lambdalisue/suda.vim')
   call dein#add('tpope/vim-surround', {'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 'depends' : 'vim-repeat'})
   call dein#add('wellle/targets.vim')
@@ -310,7 +313,7 @@ autocmd FileType plaintex setlocal spell spelllang=en_us
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
 " disable tabNine for init.vim
-autocm FileType vim
+autocmd FileType vim
   \ call deoplete#custom#option('ignore_sources', {'_': ['tabnine']})
 
 
@@ -428,19 +431,21 @@ endfunction
 
 call denite#custom#kind('file', 'default_action', 'tabopen')
 
-call denite#custom#var('grep', 'command', ['ag'])
-call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
-call denite#custom#var('grep', 'recursive_opts', [])
-call denite#custom#var('grep', 'pattern_opt', [])
-call denite#custom#var('grep', 'separator', ['--'])
-call denite#custom#var('grep', 'final_opts', [])
+call denite#custom#var('grep', {
+    \ 'command': ['ag'],
+    \ 'default_opts': ['-i', '--vimgrep'],
+    \ 'recursive_opts': [],
+    \ 'pattern_opt': [],
+    \ 'separator': ['--'],
+    \ 'final_opts': [],
+    \ })
+
+call denite#custom#var('file/rec', 'command',
+  \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 
 call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
   \ [ '.git/', '.ropeproject/', '__pycache__/*', '*.pyc', 'node_modules/',
   \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/', '*.png'])
-
-call denite#custom#var('file/rec', 'command',
-  \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 
 call denite#custom#option('_',
   \ {
@@ -460,11 +465,16 @@ nnoremap <silent><LocalLeader>y :<C-u>Denite -default-action=append neoyank<CR>
 nnoremap <silent><LocalLeader>c :<C-u>Denite command_history<CR>
 nnoremap <silent><LocalLeader>g :<C-u>DeniteCursorWord -default_action=tabswitch grep:.<CR>
 
-function! Denite_vgrep(search_string)
-  let l:escaped_str = substitute(a:search_string, " ", "\\\\\\\\s", "g")
-  exec 'Denite -default_action=tabswitch grep:.:-Q:'.l:escaped_str
+function! g:GetVisualWord() abort
+  let word = getline("'<")[getpos("'<")[2] - 1:getpos("'>")[2] - 1]
+  return word
 endfunction
-vnoremap <silent><LocalLeader>g y:call Denite_vgrep('<C-R><C-R>"')<CR>
+function! g:GetVisualWordEscape() abort
+  let word = substitute(GetVisualWord(), '\\', '\\\\', 'g')
+  let word = substitute(word, '[.?*+^$|()[\]]', '\\\0', 'g')
+  return word
+endfunction
+xnoremap <silent> <LocalLeader>g :<C-u>Denite -default_action=tabswitch grep:.::`GetVisualWordEscape()`<CR>
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
