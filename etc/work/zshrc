@@ -8,7 +8,7 @@ export ZSH="/Users/akhanna/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="cloud"
+ZSH_THEME="typewritten"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -119,30 +119,18 @@ unsetopt nomatch
 alias catn="cat -n"
 alias cd..="cd .."
 alias duall="du -shc .[!.]* *"
-alias gita="git add"
-alias gita.="git add ."
-alias gitc="git commit"
-alias gitcam="git commit --amend --no-edit"
-alias gitd="git diff"
-alias gitds="git diff --staged"
-alias gitl="git log -1"
+alias ga.="git add ."
 alias gitrpo="git remote prune origin"
 alias gitrso="git remote show origin"
-alias gits="git status"
-alias gitsbup="git submodule update --init --recursive --remote"
 alias gt='cd $(git rev-parse --show-toplevel 2>/dev/null || (echo "."; echo "Not within a git repository" >&2))'
 alias ll="ls -AlhF"
 alias pipgrep="pip freeze | grep"
 alias psgrep="ps aux | grep -v grep | grep"
-alias pti="ptipython"
 alias rsync="noglob rsync --human-readable --partial --progress --rsh=ssh"
-alias s3cmd='noglob s3cmd'
 alias scp='noglob scp'
 alias sl="ls"
 alias tmat="tmux attach"
 alias tmgn="tmux new-session -s SYS"
-alias tmnw="tmux new-session -s"
-alias tmux="tmux -2"
 alias vim="nvim"
 alias vimdiff='nvim -d'
 alias vimo="nvim -O"
@@ -311,4 +299,17 @@ fd() {
   dir=$(find ${1:-.} -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf-tmux +m) &&
   cd "$dir"
+}
+
+# homebrew with fzf
+bip() {
+    local inst=$(brew search | \
+        fzf-tmux ${FZF_DEFAULT_OPTS} \
+        -m --header='[brew:search]' --preview 'brew info {}')
+
+    if [[ $inst ]]; then
+        for prog in $(echo $inst)
+        do brew install $prog && brew upgrade $prog
+        done
+    fi
 }
