@@ -10,6 +10,8 @@ export ZSH="/Users/akhanna/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="typewritten"
 
+export TYPEWRITTEN_PROMPT_LAYOUT="pure"
+export TYPEWRITTEN_COLORS="current_directory:blue;git_branch:cyan"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -112,10 +114,7 @@ unsetopt nomatch
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+
 alias catn="cat -n"
 alias cd..="cd .."
 alias duall="du -shc .[!.]* *"
@@ -127,20 +126,24 @@ alias ll="ls -AlhF"
 alias pipgrep="pip freeze | grep"
 alias psgrep="ps aux | grep -v grep | grep"
 alias rsync="noglob rsync --human-readable --partial --progress --rsh=ssh"
-alias scp='noglob scp'
+alias scp="noglob scp"
 alias sl="ls"
 alias tmat="tmux attach"
 alias tmgn="tmux new-session -s SYS"
 alias vim="nvim"
-alias vimdiff='nvim -d'
-alias vimo="nvim -O"
-alias vimp="nvim -p"
-alias wget='noglob wget'
+alias vimdiff="nvim -d"
+alias vims="nvim -o"
+alias vimv="nvim -O"
+alias vimt="nvim -p"
+alias wget="noglob wget"
+alias wr-data="awsExec wr-data"
+alias wr-dev="awsExec wr-dev"
+
 # Neovim Remote Activation
 if [ -n "${NVIM_LISTEN_ADDRESS}" ]; then
   alias vims='nvr -o'
   alias vimv='nvr -O'
-  alias vimt='nvr --remote-tab'
+  alias vim='nvr --remote-tab'
 fi
 
 # keybindings for history-substring-search
@@ -176,6 +179,7 @@ export CPPFLAGS="-I/usr/local/opt/ruby/include"
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+source $(pyenv root)/completions/pyenv.zsh
 
 # to view path in readable format
 path() {
@@ -303,13 +307,25 @@ fd() {
 
 # homebrew with fzf
 bip() {
-    local inst=$(brew search | \
+    local to_install=$( { brew search --formulae; brew search --casks; } | \
         fzf-tmux ${FZF_DEFAULT_OPTS} \
         -m --header='[brew:search]' --preview 'brew info {}')
 
-    if [[ $inst ]]; then
-        for prog in $(echo $inst)
+    if [[ $to_install ]]; then
+        for prog in $(echo $to_install)
         do brew install $prog && brew upgrade $prog
         done
     fi
+}
+
+# aws-okta wrapper
+function awsExec() {
+  local profile="$1"
+  shift
+
+  if [[ -n "${DEBUG}" ]]; then
+      aws-okta --debug exec "${profile}" -- $@
+  else
+      aws-okta exec "${profile}" -- $@
+  fi
 }

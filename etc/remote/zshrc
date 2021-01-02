@@ -16,21 +16,12 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
-# alias vim="nvim"
 alias catn="cat -n"
 alias cd..="cd .."
 alias duall="du -shc .[!.]* *"
-alias gita="git add"
-alias gita.="git add ."
-alias gitc="git commit"
-alias gitcam="git commit --amend --no-edit"
-alias gitd="git diff"
-alias gitds="git diff --staged"
-alias gitl="git log --oneline -1"
+alias ga.="git add ."
 alias gitrpo="git remote prune origin"
 alias gitrso="git remote show origin"
-alias gits="git status"
 alias gt='cd $(git rev-parse --show-toplevel 2>/dev/null || (echo "."; echo "Not within a git repository" >&2))'
 alias killmosh='pgrep -u "$USER" mosh-server | tr " " "\n" | grep -v "$PPID" | xargs kill'
 alias ll="ls -AlhF"
@@ -38,22 +29,25 @@ alias ls="lsd"
 alias pipgrep="pip freeze | grep"
 alias psgrep="ps aux | grep -v grep | grep"
 alias rsync="noglob rsync --human-readable --partial --progress --rsh=ssh"
+alias scp="noglob scp"
 alias sl="ls"
 alias tmat="tmux attach"
 alias tmgn="tmux new-session -s JUNK"
-alias tmux="tmux -2"
-alias vim='nvim'
-alias vimdiff='nvim -d'
-alias vimo="nvim -O"
-alias vimp="nvim -p"
+alias vim="nvim"
+alias vimdiff="nvim -d"
+alias vims="nvim -o"
+alias vimv="nvim -O"
+alias vimt="nvim -p"
+alias wget="noglob wget"
+
 # Neovim Remote Activation
 if [ -n "${NVIM_LISTEN_ADDRESS}" ]; then
   alias vims='nvr -o'
   alias vimv='nvr -O'
-  alias vimt='nvr --remote-tab'
+  alias vim='nvr --remote-tab'
 fi
-export PATH="$PATH:$HOME/.local/bin"
 
+export PATH="$PATH:$HOME/.local/bin"
 export MANPAGER='nvim +Man!'
 
 # keybindings for history-substring-search
@@ -72,16 +66,15 @@ bindkey '^[w' znt-cd-widget
 znt_cd_hotlist=(
     ~/devbench
     ~/.files
-    ~/downloads
+    ~/Downloads
 )
-
-# pyenv
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-source $(pyenv root)/completions/pyenv.zsh
 
 # accept and execute the current suggestion with ctrl+space
 bindkey '^ ' autosuggest-execute
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+source $(pyenv root)/completions/pyenv.zsh
 
 # to view path in readable format
 path() {
@@ -187,7 +180,7 @@ vg() {
   local file
   local line
 
-  read -r file line <<<"$(grep -irn $@ . | \
+  read -r file line <<<"$(ag --nobreak --noheading --nocolor $@ . | \
       fzf-tmux --bind 'ctrl-n:page-down,ctrl-p:page-up' | \
       awk -F: '{print $1, $2}')"
 
@@ -204,4 +197,17 @@ fd() {
   dir=$(find ${1:-.} -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf-tmux +m) &&
   cd "$dir"
+}
+
+# homebrew with fzf
+bip() {
+    local to_install=$( { brew search --formulae; brew search --casks; } | \
+        fzf-tmux ${FZF_DEFAULT_OPTS} \
+        -m --header='[brew:search]' --preview 'brew info {}')
+
+    if [[ $to_install ]]; then
+        for prog in $(echo $to_install)
+        do brew install $prog && brew upgrade $prog
+        done
+    fi
 }

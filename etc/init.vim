@@ -39,6 +39,10 @@ if dein#load_state(s:dein_dir)
   call dein#add('Glench/Vim-Jinja2-Syntax', {'on_ft': 'jinja'})
   call dein#add('elzr/vim-json', {'on_ft': 'json'})
   call dein#add('AndrewRadev/linediff.vim', {'on_cmd': ['Linediff', 'LinediffMerge']})
+  call dein#add('iamcco/markdown-preview.nvim', {
+    \ 'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
+    \ 'build': 'sh -c "cd app && yarn install"'
+    \ })
   call dein#add('dstein64/vim-menu')
   call dein#add('terryma/vim-multiple-cursors', {'on_map': ['<F6>', 'g<c-n>']})
   call dein#add('simnalamburt/vim-mundo')
@@ -432,13 +436,13 @@ endfunction
 call denite#custom#kind('file', 'default_action', 'tabopen')
 
 call denite#custom#var('grep', {
-    \ 'command': ['ag'],
-    \ 'default_opts': ['-i', '--vimgrep'],
-    \ 'recursive_opts': [],
-    \ 'pattern_opt': [],
-    \ 'separator': ['--'],
-    \ 'final_opts': [],
-    \ })
+  \ 'command': ['ag'],
+  \ 'default_opts': ['-i', '--vimgrep'],
+  \ 'recursive_opts': [],
+  \ 'pattern_opt': [],
+  \ 'separator': ['--'],
+  \ 'final_opts': [],
+  \ })
 
 call denite#custom#var('file/rec', 'command',
   \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
@@ -483,10 +487,10 @@ call deoplete#custom#option('smart_case', v:true)
 set completeopt+=noinsert
 " auto delimiter (for example in paths) and removing auto-paranthesis addition
 call deoplete#custom#source('_', 'converters',
-    \ ['converter_auto_delimiter', 'converter_remove_paren', 'converter_remove_overlap'])
+  \ ['converter_auto_delimiter', 'converter_remove_paren', 'converter_remove_overlap'])
 " fully fuzzy matching
 call deoplete#custom#source('_', 'matchers',
-    \ ['matcher_length', 'matcher_full_fuzzy'])
+  \ ['matcher_length', 'matcher_full_fuzzy'])
 inoremap <expr><C-g>     deoplete#undo_completion()
 inoremap <expr><C-l>     deoplete#refresh()
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -563,6 +567,10 @@ let g:jedi#goto_stubs_command = ""
 " disable jedi completions since deoplete-jedi handles that
 let g:jedi#completions_enabled=0
 
+" markdown-preview
+let g:mkdp_auto_close = 0
+let g:mkdp_refresh_slow = 1
+
 " multiple_cursors
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_start_key='<F6>'
@@ -587,6 +595,15 @@ nnoremap <localleader>t :tab Tnew<CR>
 nnoremap <localleader>n :NERDTreeToggle<CR>
 nnoremap <localleader>m :NERDTree %<CR>
 let NERDTreeIgnore = ['\~$', '\.pyc$']
+" Open in horizontal split if window width is smaller than 100
+let g:neoterm_callbacks = {}
+function! g:neoterm_callbacks.before_new()
+  if winwidth('.') > 100
+    let g:neoterm_default_mod = 'botright vertical'
+  else
+    let g:neoterm_default_mod = 'botright'
+  end
+endfunction
 
 " pear-tree
 let g:pear_tree_smart_openers = 1
