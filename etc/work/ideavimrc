@@ -1,0 +1,55 @@
+let mapleader=","
+let maplocalleader = "`"
+
+set showmode
+set so=5
+set incsearch
+set rnu
+set ignorecase
+
+set ReplaceWithRegister
+set argtextobj
+set commentary
+set easymotion
+set highlightedyank
+set multiple-cursors
+set surround
+set textobj-entire
+
+set ideajoin
+set ideastatusicon=gray
+set idearefactormode=keep
+
+nnoremap Y y$
+nnoremap ; :
+vnoremap ; :
+nnoremap : ;
+vnoremap : ;
+
+
+" Plugin Settings
+
+let g:argtextobj_pairs="[:],(:),<:>"
+
+" easymotion
+let g:EasyMotion_do_mapping = 0
+nmap <leader>s <Plug>(easymotion-s2)
+vmap <leader>s <Plug>(easymotion-s2)
+nmap <leader><leader>j <Plug>(easymotion-j)
+vmap <leader><leader>j <Plug>(easymotion-j)
+nmap <leader><leader>k <Plug>(easymotion-k)
+vmap <leader><leader>k <Plug>(easymotion-k)
+
+" map <leader>d :action Debug<CR>
+" map <leader>r :action RenameElement<CR>
+" map <leader>c :action Stop<CR>
+" map <leader>z :action ToggleDistractionFreeMode<CR>
+
+" map <leader>s :action SelectInProjectView<CR>
+" map <leader>a :action Annotate<CR>
+" map <leader>h :action Vcs.ShowTabbedFileHistory<CR>
+" map <S-Space> :action GotoNextError<CR>
+
+" map <leader>b :action ToggleLineBreakpoint<CR>
+" map <leader>o :action FileStructurePopup<CR>
+

@@ -176,6 +176,7 @@
                                         "bundle_identifiers": [
                                             "^com\\.google\\.Chrome$",
                                             "^org\\.torproject\\.torbrowser$",
+                                            "^com\\.brave\\.Browser$",
                                             "^org\\.mozilla\\.firefox$"
                                         ],
                                         "type": "frontmost_application_if"
@@ -208,6 +209,7 @@
                                         "bundle_identifiers": [
                                             "^com\\.google\\.Chrome$",
                                             "^org\\.torproject\\.torbrowser$",
+                                            "^com\\.brave\\.Browser$",
                                             "^org\\.mozilla\\.firefox$"
                                         ],
                                         "type": "frontmost_application_if"
@@ -739,6 +741,7 @@
                                         "bundle_identifiers": [
                                             "^com\\.google\\.Chrome$",
                                             "^org\\.torproject\\.torbrowser$",
+                                            "^com\\.brave\\.Browser$",
                                             "^org\\.mozilla\\.firefox$"
                                         ],
                                         "type": "frontmost_application_if"
@@ -771,6 +774,7 @@
                                         "bundle_identifiers": [
                                             "^com\\.google\\.Chrome$",
                                             "^org\\.torproject\\.torbrowser$",
+                                            "^com\\.brave\\.Browser$",
                                             "^org\\.mozilla\\.firefox$"
                                         ],
                                         "type": "frontmost_application_if"

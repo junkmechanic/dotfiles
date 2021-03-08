@@ -23,7 +23,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('zchee/deoplete-jedi', {'depends': 'deoplete'})
-  call dein#add('tbodt/deoplete-tabnine', {'build': './install.sh'})
+  call dein#add('tbodt/deoplete-tabnine', {'build': './install.sh'}, {'on_ft': 'python'})
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('dracula/vim', {'name': 'dracula'})
   call dein#add('Lokaltog/vim-easymotion', {'on_map': '<Plug>(easymotion'})
@@ -33,6 +33,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('rbong/vim-flog')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('junegunn/goyo.vim', {'on_cmd': ['Goyo']})
+  call dein#add('machakann/vim-highlightedyank')
   call dein#add('vim-scripts/IndexedSearch')
   call dein#add('rjayatilleka/vim-insert-char', {'on_map': {'n': '<space>'}})
   call dein#add('davidhalter/jedi-vim', {'on_ft': 'python'})
@@ -316,10 +317,6 @@ autocmd FileType plaintex setlocal spell spelllang=en_us
 " Enter insert on terminal buffer
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
-" disable tabNine for init.vim
-autocmd FileType vim
-  \ call deoplete#custom#option('ignore_sources', {'_': ['tabnine']})
-
 
 "" Custom functionality
 
@@ -553,6 +550,10 @@ endfunction
 
 autocmd! User GoyoEnter call <SID>goyo_enter()
 autocmd! User GoyoLeave call <SID>goyo_leave()
+
+" highlightedyank
+hi HighlightedyankRegion cterm=reverse gui=reverse
+let g:highlightedyank_highlight_duration = 100
 
 " jedi-vim
 set noshowmode
