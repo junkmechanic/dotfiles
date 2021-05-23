@@ -88,7 +88,7 @@ SPACESHIP_CHAR_SYMBOL="❯ "
 
 # forgit settings
 forgit_clean=gclf
-forgit_checkout=gcbf
+forgit_checkout_branch=gcbf
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -190,9 +190,11 @@ znt_cd_hotlist=(
     ~/Downloads
     ~/devbench/fraud
     ~/devbench/fraud/data-graph
+    ~/devbench/fraud/data-fraud
     ~/devbench/fraud/data-products/fraud-detection
     ~/devbench/fraud/data-ml-experiment-analysis
     ~/devbench/fraud/data-ml-pipelines
+    ~/devbench/fraud/streaming
     ~/devbench/random/
 )
 
@@ -203,6 +205,9 @@ bindkey '^ ' autosuggest-execute
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/ruby/lib"
 export CPPFLAGS="-I/usr/local/opt/ruby/include"
+
+export DEVDIR="$HOME/devbench"
+export FRDDIR="$HOME/devbench/fraud"
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
@@ -370,7 +375,7 @@ bip() {
 }
 
 # aws-okta wrapper
-function awsExec() {
+awsExec() {
   local profile="$1"
   shift
 
@@ -379,4 +384,11 @@ function awsExec() {
   else
       aws-okta exec "${profile}" -- $@
   fi
+}
+
+# clean python cache files
+pyclean() {
+    find . | \
+        grep -E "(__pycache__|\.pyc$)" | \
+        xargs rm -rf
 }
