@@ -361,7 +361,7 @@ fd() {
 
 # homebrew with fzf
 bip() {
-    local to_install=$( { brew formulae; brew search --casks; } | \
+    local to_install=$( { brew formulae; brew casks; } | \
         fzf-tmux ${FZF_DEFAULT_OPTS} \
         -m --header='[brew:search]' --preview 'brew info {}')
 

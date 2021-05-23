@@ -20,7 +20,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('PeterRincker/vim-argumentative')
   call dein#add('tpope/vim-commentary', {'on_map': 'gc'})
   call dein#add('ctrlpvim/ctrlp.vim')
-  call dein#add('Shougo/denite.nvim')
+  call dein#add('okcompute/vim-ctrlp-session', {'depends': 'ctrlp'})
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('zchee/deoplete-jedi', {'depends': 'deoplete'})
   call dein#add('tbodt/deoplete-tabnine', {'build': './install.sh'}, {'on_ft': 'python'})
@@ -31,6 +31,10 @@ if dein#load_state(s:dein_dir)
   call dein#add('Konfekt/FastFold')
   call dein#add('tpope/vim-fugitive')
   call dein#add('rbong/vim-flog')
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+  call dein#add('stsewd/fzf-checkout.vim', { 'depends': 'fzf' })
+  call dein#add('justinhoward/fzf-neoyank', { 'depends': ['fzf', 'neoyank'] })
   call dein#add('airblade/vim-gitgutter')
   call dein#add('junegunn/goyo.vim', {'on_cmd': ['Goyo']})
   call dein#add('machakann/vim-highlightedyank')
@@ -47,9 +51,8 @@ if dein#load_state(s:dein_dir)
   call dein#add('dstein64/vim-menu')
   call dein#add('terryma/vim-multiple-cursors', {'on_map': ['<F6>', 'g<c-n>']})
   call dein#add('simnalamburt/vim-mundo')
-  call dein#add('Shougo/neomru.vim', {'depends': 'denite'})
   call dein#add('kassio/neoterm')
-  call dein#add('Shougo/neoyank.vim', {'depends': 'denite'})
+  call dein#add('Shougo/neoyank.vim')
   call dein#add('scrooloose/nerdtree', {'on_cmd': ['NERDTree', 'NERDTreeToggle']})
   call dein#add('Xuyuanp/nerdtree-git-plugin', {'depends': 'nerdtree'})
   call dein#add('arcticicestudio/nord-vim')
@@ -69,6 +72,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('tmux-plugins/vim-tmux')
   call dein#add('christoomey/vim-tmux-navigator')
   call dein#add('jmcantrell/vim-virtualenv', {'on_ft': 'python'})
+  call dein#add('folke/which-key.nvim')
 
   call dein#end()
 
@@ -155,7 +159,7 @@ set relativenumber
 
 " Colors
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-" set termguicolors
+set termguicolors
 let g:nord_italic = 1
 let g:nord_underline = 1
 let g:nord_italic_comments = 1
@@ -237,10 +241,6 @@ nnoremap <c-w>k <c-w>K
 nnoremap <c-w>l <c-w>L
 nnoremap <c-w>h <c-w>H
 
-" Shift the rest of the line up or down
-nnoremap <Leader>o Do<C-R>"<Esc>
-nnoremap <Leader>O DO<C-R>"<Esc>
-
 " Open all buffers as tabs
 nnoremap <Leader>t :tab all<CR>
 
@@ -319,6 +319,9 @@ au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
 
 "" Custom functionality
+
+" Python3 provider across virtualenvs
+let g:python3_host_prog = expand("~/.pyenv/versions/3.9.0/bin/python")
 
 " Navigation to the last visited tab
 let g:lasttab = 1
@@ -407,76 +410,6 @@ let g:airline#extensions#tabline#excludes = ['term://']
 let g:ctrlp_max_height = 15
 set wildignore+=*.pyc
 
-" denite
-autocmd FileType denite call s:denite_settings()
-function! s:denite_settings() abort
-  nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> <tab> denite#do_map('choose_action')
-  nnoremap <silent><buffer><expr> o denite#do_map('do_action', 'open')
-  nnoremap <silent><buffer><expr> q denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> t denite#do_map('do_action', 'tabswitch')
-  nnoremap <silent><buffer><expr> v denite#do_map('do_action', 'vsplit')
-  nnoremap <silent><buffer><expr> s denite#do_map('do_action', 'split')
-  nnoremap <nowait> <silent><buffer><expr> y denite#do_map('do_action', 'yank')
-  nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
-endfunction
-
-autocmd FileType denite-filter call s:denite_filter_settings()
-function! s:denite_filter_settings() abort
-  imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
-  inoremap <silent><buffer><expr> <C-i> denite#do_map('do_action')
-
-  call deoplete#custom#buffer_option('auto_complete', v:false)
-endfunction
-
-call denite#custom#kind('file', 'default_action', 'tabopen')
-
-call denite#custom#var('grep', {
-  \ 'command': ['ag'],
-  \ 'default_opts': ['-i', '--vimgrep'],
-  \ 'recursive_opts': [],
-  \ 'pattern_opt': [],
-  \ 'separator': ['--'],
-  \ 'final_opts': [],
-  \ })
-
-call denite#custom#var('file/rec', 'command',
-  \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-
-call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
-  \ [ '.git/', '.ropeproject/', '__pycache__/*', '*.pyc', 'node_modules/',
-  \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/', '*.png'])
-
-call denite#custom#option('_',
-  \ {
-  \   'statusline': v:false,
-  \   'vertical_preview': v:true,
-  \   'direction': 'botright',
-  \   'split': 'floating_relative_cursor',
-  \   'winwidth': &columns / 1.5,
-  \   'prompt': '❯',
-  \ })
-
-nnoremap <silent><LocalLeader>r :<C-u>Denite -resume -refresh<CR>
-nnoremap <silent><LocalLeader>f :<C-u>Denite -start-filter file/rec file_mru<CR>
-nnoremap <silent><LocalLeader>h :<C-u>Denite -start-filter file/rec:~/devbench/<CR>
-nnoremap <silent><LocalLeader>b :<C-u>Denite -default_action=tabswitch buffer<CR>
-nnoremap <silent><LocalLeader>y :<C-u>Denite -default-action=append neoyank<CR>
-nnoremap <silent><LocalLeader>c :<C-u>Denite command_history<CR>
-nnoremap <silent><LocalLeader>g :<C-u>DeniteCursorWord -default_action=tabswitch grep:.<CR>
-
-function! g:GetVisualWord() abort
-  let word = getline("'<")[getpos("'<")[2] - 1:getpos("'>")[2] - 1]
-  return word
-endfunction
-function! g:GetVisualWordEscape() abort
-  let word = substitute(GetVisualWord(), '\\', '\\\\', 'g')
-  let word = substitute(word, '[.?*+^$|()[\]]', '\\\0', 'g')
-  return word
-endfunction
-xnoremap <silent> <LocalLeader>g :<C-u>Denite -default_action=tabswitch grep:.::`GetVisualWordEscape()`<CR>
-
 " deoplete
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('smart_case', v:true)
@@ -527,6 +460,90 @@ let g:sh_fold_enabled= 7
 let g:ruby_fold = 1
 let g:r_syntax_folding = 1
 nmap <F5> <Plug>(FastFoldUpdate)
+
+" fzf
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
+let g:fzf_buffers_jump = 1
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+"Get Files
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
+command! -bang AllDevFiles
+    \ call fzf#vim#files('~/devbench', fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
+" Get text in files with Rg
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
+
+" Ripgrep advanced
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+" Git grep
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+
+" Yank history
+function! s:get_registers() abort
+  redir => l:regs
+  silent registers
+  redir END
+
+  return split(l:regs, '\n')[1:]
+endfunction
+
+function! s:registers(...) abort
+  let l:opts = {
+        \ 'source': s:get_registers(),
+        \ 'sink': {x -> feedkeys(matchstr(x, '\v^\S+\ze.*') . (a:1 ? 'P' : 'p'), 'x')},
+        \ 'options': '--prompt="Reg> "'
+        \ }
+  call fzf#run(fzf#wrap(l:opts))
+endfunction
+
+command! -bang Registers call s:registers('<bang>' ==# '!')
+
+nnoremap <LocalLeader>f :Files<CR>
+nnoremap <LocalLeader>h :AllDevFiles<CR>
+" nnoremap <LocalLeader>b :Buffers<CR>
+nnoremap <LocalLeader>g :Rg<CR>
+nnoremap <LocalLeader>c :History:<CR>
+nnoremap <LocalLeader>b :GBranches<CR>
+" nnoremap <LocalLeader>y :Registers<CR>
+nnoremap <LocalLeader>y :FZFNeoyank<CR>
+" nnoremap <LocalLeader>s :call fzf#vim#tags(expand('<cword>'))<CR>
+nnoremap <silent> <LocalLeader>s :Ag <C-R><C-W><CR>
 
 " goyo
 let g:goyo_width = 100
@@ -636,6 +653,12 @@ xmap <silent> *                    <Plug>SearchPartyVisualFindNext
 xmap <silent> #                    <Plug>SearchPartyVisualFindPrev
 xmap          &                    <Plug>SearchPartyVisualSubstitute
 nmap          <leader>fow          <Plug>SearchPartyMashFOWToggle
+
+" which-key
+lua << EOF
+require("which-key").setup {
+}
+EOF
 
 
 " source local settings
