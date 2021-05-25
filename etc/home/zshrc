@@ -167,7 +167,7 @@ bindkey '^[^?' backward-kill-dir
 # select-word-style bash
 
 # custom sources
-#source "$HOME/.local/bin/powerline_binding_zsh.zsh"
+# source "$HOME/.local/bin/powerline_binding_zsh.zsh"
 # git@github.com:zsh-users/zsh-autosuggestions.git
 source "$HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # git@github.com:zsh-users/zsh-history-substring-search.git
@@ -187,6 +187,10 @@ source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # split2flac completion
 # git@github.com:ftrvxmtrx/split2flac.git
 source "$HOME/.local/bin/split2flac-bash-completion.sh"
+
+# other plugins
+# git@github.com:wfxr/forgit.git
+# git@github.com:Aloxaf/fzf-tab.git
 
 # history substring search keybindings
 bindkey -M emacs '^P' history-substring-search-up

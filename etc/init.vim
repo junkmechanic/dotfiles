@@ -534,7 +534,8 @@ endfunction
 
 command! -bang Registers call s:registers('<bang>' ==# '!')
 
-nnoremap <LocalLeader>f :Files<CR>
+" nnoremap <LocalLeader>f :Files<CR>
+nnoremap <LocalLeader>f :GFiles<CR>
 nnoremap <LocalLeader>h :AllDevFiles<CR>
 " nnoremap <LocalLeader>b :Buffers<CR>
 nnoremap <LocalLeader>g :Rg<CR>
@@ -653,13 +654,6 @@ xmap <silent> *                    <Plug>SearchPartyVisualFindNext
 xmap <silent> #                    <Plug>SearchPartyVisualFindPrev
 xmap          &                    <Plug>SearchPartyVisualSubstitute
 nmap          <leader>fow          <Plug>SearchPartyMashFOWToggle
-
-" which-key
-lua << EOF
-require("which-key").setup {
-}
-EOF
-
 
 " source local settings
 source ~/.config/nvim/local_config.vim
