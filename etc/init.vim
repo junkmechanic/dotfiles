@@ -540,16 +540,12 @@ endfunction
 
 command! -bang Registers call s:registers('<bang>' ==# '!')
 
-" nnoremap <LocalLeader>f :Files<CR>
 nnoremap <LocalLeader>f :GFiles<CR>
 nnoremap <LocalLeader>h :AllDevFiles<CR>
-" nnoremap <LocalLeader>b :Buffers<CR>
 nnoremap <LocalLeader>g :Rg<CR>
 nnoremap <LocalLeader>c :History:<CR>
 nnoremap <LocalLeader>b :GBranches<CR>
-" nnoremap <LocalLeader>y :Registers<CR>
 nnoremap <LocalLeader>y :FZFNeoyank<CR>
-" nnoremap <LocalLeader>s :call fzf#vim#tags(expand('<cword>'))<CR>
 nnoremap <silent> <LocalLeader>s :Ag <C-R><C-W><CR>
 vnoremap <silent> <LocalLeader>s "hy:Ag <C-r>h<Enter>
 
