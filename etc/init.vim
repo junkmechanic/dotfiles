@@ -157,6 +157,10 @@ set nofoldenable
 
 set relativenumber
 
+set inccommand=nosplit
+
+set fillchars=eob:\ ,
+
 " Colors
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
@@ -322,7 +326,8 @@ au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 "" Custom functionality
 
 " Python3 provider across virtualenvs
-let g:python3_host_prog = expand("~/.pyenv/versions/3.9.0/bin/python")
+let g:python3_host_prog = expand("~/.pyenv/versions/py3nvim/bin/python")
+let g:loaded_python_provider = 0
 
 " Navigation to the last visited tab
 let g:lasttab = 1

@@ -1,1 +1,0 @@
-notify-send -t 5000 "$(echo -e '\uf017') `date +'%H:%M'` `echo -e '\t\t'`  $(echo -e '\uf073') `date +' %a, %d %b %Y'`"
