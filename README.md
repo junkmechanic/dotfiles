@@ -11,5 +11,4 @@ Required Packages
   3. fzf [https://github.com/junegunn/fzf]
   4. tmux
   5. tpm [https://github.com/tmux-plugins/tpm]
-  6. conky
   7. karabiner
