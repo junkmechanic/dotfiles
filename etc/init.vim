@@ -282,7 +282,8 @@ nnoremap <Leader><Leader>t ciwTrue<Esc>
 nnoremap <Leader><Leader>f ciwFalse<Esc>
 
 " Terminal mode
-tnoremap <Esc> <C-\><C-n>
+" tnoremap <Esc> <C-\><C-n>
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<C-\><C-n>"
 tnoremap ,n <C-\><C-n>:tabprevious<CR>
 tnoremap ,m <C-\><C-n>:tabnext<CR>
 
@@ -545,6 +546,7 @@ nnoremap <LocalLeader>b :GBranches<CR>
 nnoremap <LocalLeader>y :FZFNeoyank<CR>
 " nnoremap <LocalLeader>s :call fzf#vim#tags(expand('<cword>'))<CR>
 nnoremap <silent> <LocalLeader>s :Ag <C-R><C-W><CR>
+vnoremap <silent> <LocalLeader>s "hy:Ag <C-r>h<Enter>
 
 " goyo
 let g:goyo_width = 100
