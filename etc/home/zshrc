@@ -295,6 +295,8 @@ bindkey '\ez' _git_diff_zle
 # git@github.com:junegunn/fzf.git
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+enable-fzf-tab
+
 # git commit browser
 function _git_log_zle {
   git rev-parse HEAD > /dev/null 2>&1 || return
