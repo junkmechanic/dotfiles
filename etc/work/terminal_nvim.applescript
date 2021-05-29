@@ -8,7 +8,7 @@ on run {input, parameters}
 	-- Set your editor here
 	set myEditor to "/usr/local/bin/nvim"
 	-- Open the file and auto exit after done
-	set myCmd to myEditor & " " & quote & filename & quote & " &&exit"
+	set myCmd to myEditor & " " & quote & filename & quote & " && exit"
 	-- I am using iTerm2
 	tell application "iTerm"
 		-- I would want my editor to be a new window, no new tab
