@@ -182,6 +182,8 @@ alias rsync="noglob rsync --human-readable --partial --progress --rsh=ssh"
 alias scp="noglob scp"
 alias sl="ls"
 alias tmat="tmux attach"
+alias tree1="tree -L 1"
+alias treed="tree -d"
 alias tmgn="tmux new-session -s SYS"
 alias vim="nvim"
 alias vimdiff="nvim -d"
@@ -227,7 +229,7 @@ export CPPFLAGS="-I/usr/local/opt/ruby/include"
 export DEVDIR="$HOME/devbench"
 export FRDDIR="$HOME/devbench/fraud"
 
-eval "$(pyenv init -)"
+eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
 source $(pyenv root)/completions/pyenv.zsh
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1

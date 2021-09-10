@@ -156,6 +156,8 @@ alias rsync="noglob rsync --human-readable --partial --progress --rsh=ssh"
 alias scp="noglob scp"
 alias sl="ls"
 alias tmat="tmux attach"
+alias tree1="tree -L 1"
+alias treed="tree -d"
 alias tmgn="tmux new-session -s SYS"
 alias vim="nvim"
 alias vimdiff="nvim -d"
@@ -190,13 +192,13 @@ znt_cd_hotlist=(
     ~/devbench
     ~/.files
     ~/Downloads
-    ~/devbench/fraud
-    ~/devbench/fraud/data-graph
-    ~/devbench/fraud/data-fraud
-    ~/devbench/fraud/data-products/fraud-detection
-    ~/devbench/fraud/data-ml-experiment-analysis
-    ~/devbench/fraud/data-ml-pipelines
-    ~/devbench/fraud/streaming
+    ~/devbench/main
+    ~/devbench/main/data-graph
+    ~/devbench/main/data-fraud
+    ~/devbench/main/data-products/fraud-detection
+    ~/devbench/main/data-ml-experiment-analysis
+    ~/devbench/main/data-ml-pipelines
+    ~/devbench/main/streaming
     ~/devbench/random/
 )
 
@@ -211,10 +213,19 @@ export CPPFLAGS="-I/usr/local/opt/ruby/include"
 export DEVDIR="$HOME/devbench"
 export FRDDIR="$HOME/devbench/fraud"
 
-eval "$(pyenv init -)"
+eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
 source $(pyenv root)/completions/pyenv.zsh
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
+# if not using sdk-man, set java version
+export JAVA_HOME=`/usr/libexec/java_home -v 11.0`
+
+# bat config
+export BAT_THEME="Nord"
+
+# k8s completion
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
 # collate k8s contexts [Start]
 collate_k8s_context() {
@@ -394,3 +405,14 @@ pyclean() {
         grep -E "(__pycache__|\.pyc$)" | \
         xargs rm -rf
 }
+
+kubectlgetall() {
+  for i in $(kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq); do
+    echo "Resource:" $i
+    kubectl -n ${1} get --ignore-not-found ${i}
+  done
+}
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

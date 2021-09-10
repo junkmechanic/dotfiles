@@ -26,7 +26,6 @@ if dein#load_state(s:dein_dir)
   call dein#add('zchee/deoplete-jedi', {'depends': 'deoplete'})
   call dein#add('tbodt/deoplete-tabnine', {'build': './install.sh'}, {'on_ft': 'python'})
   call dein#add('ryanoasis/vim-devicons')
-  call dein#add('dracula/vim', {'name': 'dracula'})
   call dein#add('Lokaltog/vim-easymotion', {'on_map': '<Plug>(easymotion'})
   call dein#add('tommcdo/vim-exchange', {'on_map' : {'n' : 'cx', 'x' : 'X'}})
   call dein#add('Konfekt/FastFold')
@@ -151,7 +150,7 @@ set showbreak=↪
 
 " Line numbers
 set number
-set tw=80
+set tw=120
 set nowrap
 set fo-=t
 
@@ -477,8 +476,11 @@ let g:fzf_action = {
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
 let g:fzf_history_dir = '~/.local/share/fzf-history'
-let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
+let $FZF_DEFAULT_OPTS = "--layout=reverse --info=inline --bind 'ctrl-f:page-down,ctrl-b:page-up'"
 let g:fzf_buffers_jump = 1
+
+" match the colorscheme with nvim
+" change bat config to match colors in the preview window
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -501,13 +503,18 @@ command! -bang -nargs=? -complete=dir Files
 command! -bang AllDevFiles
     \ call fzf#vim#files('~/devbench', fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
-" Get text in files with Rg
+" Fuzzy search your codebase
+" This presents the output of ripgrep for fuzzy search via fzf
+" Advantage : Fuzzy search across filenames and their content
+" Disadvantage : A long list of search results if the fuzzy match is for a filename
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
-" Ripgrep advanced
+" Run ripgrep on the entered query (re-run ripgrep at query update)
+" Advantage : Doesnt include filenames. Better for exact ripgrep query match for keyword/tag search
+" Disadvantage : fzf is just a selector and so no fuzzy search
 function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
@@ -547,6 +554,7 @@ command! -bang Registers call s:registers('<bang>' ==# '!')
 nnoremap <LocalLeader>f :GFiles<CR>
 nnoremap <LocalLeader>h :AllDevFiles<CR>
 nnoremap <LocalLeader>g :Rg<CR>
+nnoremap <LocalLeader>G :RG<CR>
 nnoremap <LocalLeader>c :History:<CR>
 nnoremap <LocalLeader>b :GBranches<CR>
 nnoremap <LocalLeader>y :FZFNeoyank<CR>
@@ -661,6 +669,12 @@ xmap <silent> *                    <Plug>SearchPartyVisualFindNext
 xmap <silent> #                    <Plug>SearchPartyVisualFindPrev
 xmap          &                    <Plug>SearchPartyVisualSubstitute
 nmap          <leader>fow          <Plug>SearchPartyMashFOWToggle
+
+" which-key
+lua << EOF
+  require("which-key").setup {
+  }
+EOF
 
 " source local settings
 source ~/.config/nvim/local_config.vim
