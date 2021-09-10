@@ -23,6 +23,7 @@ SPACESHIP_PROMPT_ORDER=(
   git           # Git section (git_branch + git_status)
   pyenv         # Pyenv section
   kubectl       # Kubectl context section
+  node
   terraform     # Terraform workspace section
   exec_time     # Execution time
   line_sep      # Line break
@@ -103,7 +104,7 @@ forgit_checkout_branch=gcbf
 # Keep zsh-syntax-highlighting as the last plugin
 plugins=(git gitfast docker colorize kubectl mosh pip ssh-agent sudo aws \
     history-substring-search zsh-navigation-tools git-extras pyenv \
-    zsh-interactive-cd \
+    zsh-interactive-cd nvm \
     # git@github.com:wfxr/forgit.git
     forgit \
     # git@github.com:hlissner/zsh-autopair.git
@@ -233,6 +234,10 @@ eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
 source $(pyenv root)/completions/pyenv.zsh
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # collate k8s contexts [Start]
 collate_k8s_context() {
