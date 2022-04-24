@@ -137,6 +137,8 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
+# use tmux popup
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -151,7 +153,7 @@ export LC_ALL=en_US.UTF-8
 export EDITOR='nvim'
 
 # use neovim as MANPAGER
-export MANPAGER="nvim -c 'set ft=man' -"
+export MANPAGER="nvim +Man!"
 
 # set highlighters
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
@@ -185,7 +187,7 @@ alias sl="ls"
 alias tmat="tmux attach"
 alias tree1="tree -L 1"
 alias treed="tree -d"
-alias tmgn="tmux new-session -s SYS"
+alias tmgn="tmux new-session -s JUNK"
 alias vim="nvim"
 alias vimdiff="nvim -d"
 alias vims="nvim -o"
@@ -267,17 +269,6 @@ path() {
     pth=($=PATH)
     printf "%s\n" $pth
     # IFS=$old
-}
-
-# This will create the directory passed and then change into it as well.
-mkcd() {
-    if [ ! -n "$1" ]; then
-        echo "Enter a directory name"
-    elif [ -d $1 ]; then
-        echo "$1 already exists"
-    else
-        mkdir -p $1 && cd $1
-    fi
 }
 
 # zle custom functions

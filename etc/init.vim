@@ -418,7 +418,13 @@ let g:airline#extensions#tabline#excludes = ['term://']
 
 " ctrlp
 let g:ctrlp_max_height = 15
+let g:ctrlp_working_path_mode = 'r'
 set wildignore+=*.pyc
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+\ }
+
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
@@ -554,6 +560,7 @@ command! -bang Registers call s:registers('<bang>' ==# '!')
 
 nnoremap <LocalLeader>f :GFiles<CR>
 nnoremap <LocalLeader>h :AllDevFiles<CR>
+nnoremap <LocalLeader>l :BLines<CR>
 nnoremap <LocalLeader>g :Rg<CR>
 nnoremap <LocalLeader>G :RG<CR>
 nnoremap <LocalLeader>c :History:<CR>
