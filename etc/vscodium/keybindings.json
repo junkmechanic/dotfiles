@@ -31,13 +31,12 @@
     {
         "key": "cmd+l",
         "when": "sideBarFocus",
-        "command": "workbench.action.focusActiveEditorGroup"
+        "command": "workbench.action.focusFirstEditorGroup"
     },
-    // in the sidebar, jump to the first editor group
     {
         "key": "cmd+h",
         "when": "sideBarFocus",
-        "command": "workbench.action.focusActiveEditorGroup"
+        "command": "workbench.action.focusLastEditorGroup"
     },
     // in the last editor group terminal, jump "forward" to the terminal (if there is a terminal open)
     {
@@ -48,13 +47,13 @@
     // in the terminal, jump "back" to the last editor group
     {
         "key": "cmd+h",
-        "command": "workbench.action.focusLastEditorGroup",
+        "command": "workbench.action.focusFirstEditorGroup",
         "when": "terminalFocus"
     },
     // in the terminal, jump "forward" to the last first group
     {
         "key": "cmd+l",
-        "command": "workbench.action.focusFirstEditorGroup",
+        "command": "workbench.action.focusLastEditorGroup",
         "when": "terminalFocus"
     },
 

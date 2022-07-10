@@ -12,7 +12,9 @@ if dein#load_state(s:dein_dir)
     call dein#begin(s:dein_dir)
 
     call dein#add('Shougo/dein.vim')
-    call dein#add('asvetliakov/vim-easymotion', {'on_map': '<Plug>(easymotion'})
+    call dein#add('asvetliakov/vim-easymotion')
+    call dein#add('rjayatilleka/vim-insert-char')
+    call dein#add('machakann/vim-highlightedyank')
 
     call dein#end()
 
