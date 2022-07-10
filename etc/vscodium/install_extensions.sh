@@ -1,0 +1,12 @@
+codium --install-extension asvetliakov.vscode-neovim
+codium --install-extension Equinusocio.vsc-material-theme
+codium --install-extension equinusocio.vsc-material-theme-icons
+codium --install-extension mechatroner.rainbow-csv
+codium --install-extension mhutchie.git-graph
+codium --install-extension ms-azuretools.vscode-docker
+codium --install-extension ms-python.python
+codium --install-extension ms-toolsai.jupyter
+codium --install-extension ms-toolsai.jupyter-keymap
+codium --install-extension ms-toolsai.jupyter-renderers
+codium --install-extension redhat.vscode-yaml
+codium --install-extension XadillaX.viml
