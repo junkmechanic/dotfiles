@@ -1,0 +1,21 @@
+{
+    "github.gitProtocol": "ssh",
+    "redhat.telemetry.enabled": false,
+    "workbench.colorTheme": "Material Theme Lighter",
+    "files.exclude": {
+        "**/__pycache__": true
+    },
+    "workbench.iconTheme": "eq-material-theme-icons-light",
+    "window.newWindowDimensions": "inherit",
+    "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+    "vscode-neovim.neovimInitVimPaths.darwin": "/Users/ankur/.config/vscodium-nvim/init.vim",
+    "window.openFoldersInNewWindow": "on",
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.fontFamily": "'agave Nerd Font', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 15,
+    "editor.guides.indentation": false,
+    "terminal.integrated.fontSize": 13,
+    "editor.lineNumbers": "relative",
+    "editor.scrollBeyondLastLine": false,
+    "workbench.editor.enablePreview": false
+}
