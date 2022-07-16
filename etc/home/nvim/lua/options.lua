@@ -1,5 +1,3 @@
-local local_conf = require('local-conf')
-local utils = require('utils')
 local set = vim.opt
 
 set.pastetoggle = "<F2>" -- toggle paste mode to maintain indentation
@@ -21,7 +19,7 @@ set.expandtab = true -- convert tabs to spaces
 -- set.hlsearch = true -- highlight all matches on previous search pattern
 -- set.incsearch = true -- highlight matches while typing the search pattern
 set.ignorecase = true -- ignore case when searching for patterns
-set.smartcase = true -- override 'ignorecase' option if the search pattern contains upper case characters
+set.smartcase = true -- override `ignorecase` option if the search pattern contains upper case characters
 
 set.backup = false -- dont create a backup file
 set.swapfile = false -- dont create a swapfile for buffers
@@ -41,10 +39,12 @@ set.completeopt = {"longest" , "menuone"} -- only insert the longest common text
 
 set.foldenable = false -- keep all folds open
 
-vim.cmd [[
-    set fillchars=eob:\ ,
-]] -- dont show any characters at the end of the buffer
+set.termguicolors = true -- enable 24-bit RGB colors in terminal UI
+set.colorcolumn = {"+1", "+2"} -- always highlight the two columns after `textwidth`
+vim.api.nvim_set_hl(0, "ColorColumn", { bg="#323642" }) -- change the backgroud of the colorcolumn
 
-if utils.isNotEmpty(local_conf.grepprg) then
-    set.grepprg = local_conf.grepprg -- use rg for grep
-end
+set.shortmess:append "sI" -- disable nvim intro
+
+set.fillchars = {eob = " "} -- dont show any characters at the end of the buffer
+
+set.grepprg = "rg --hidden --vimgrep --smart-case --"
