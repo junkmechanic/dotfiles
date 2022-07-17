@@ -4,55 +4,55 @@
     { "key": "ctrl+`", "command": "workbench.action.terminal.focus"},
     { "key": "ctrl+`", "command": "workbench.action.focusActiveEditorGroup", "when": "terminalFocus"},
     
-    // In an editor group, cmd+j and cmd+k jump between editor windows
-    { "key": "cmd+k", "command": "workbench.action.nextEditorInGroup" },
-    { "key": "cmd+j", "command": "workbench.action.previousEditorInGroup" },
-    // In the terminal, cmd+j and cmd+k jump between terminal windows
+    // In an editor group, ctrl+j and ctrl+k jump between editor windows
+    { "key": "ctrl+k", "command": "workbench.action.nextEditorInGroup" },
+    { "key": "ctrl+j", "command": "workbench.action.previousEditorInGroup" },
+    // In the terminal, ctrl+j and ctrl+k jump between terminal windows
     {
-        "key": "cmd+j",
+        "key": "ctrl+j",
         "command": "workbench.action.terminal.focusNext",
         "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
     },
     {
-        "key": "cmd+k",
+        "key": "ctrl+k",
         "command": "workbench.action.terminal.focusPrevious",
         "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
     },
-    // In the work area, cmd+j and cmd+k jump between editor groups
-    { "key": "cmd+h", "command": "workbench.action.focusPreviousGroup" },
-    { "key": "cmd+l", "command": "workbench.action.focusNextGroup" },
+    // In the work area, ctrl+j and ctrl+k jump between editor groups
+    { "key": "ctrl+h", "command": "workbench.action.focusPreviousGroup" },
+    { "key": "ctrl+l", "command": "workbench.action.focusNextGroup" },
     // in the first editor group, jump to the sidebar
     {
-        "key": "cmd+h",
+        "key": "ctrl+h",
         "when": "activeEditorGroupIndex == 1",
         "command": "workbench.action.focusSideBar"
     },
     // in the sidebar, jump to the first editor group
     {
-        "key": "cmd+l",
+        "key": "ctrl+l",
         "when": "sideBarFocus",
         "command": "workbench.action.focusFirstEditorGroup"
     },
     {
-        "key": "cmd+h",
+        "key": "ctrl+h",
         "when": "sideBarFocus",
         "command": "workbench.action.focusLastEditorGroup"
     },
     // in the last editor group terminal, jump "forward" to the terminal (if there is a terminal open)
     {
-        "key": "cmd+l",
+        "key": "ctrl+l",
         "when": "terminalHasBeenCreated && terminalIsOpen && activeEditorGroupLast",
         "command": "workbench.action.terminal.focus"
     },
     // in the terminal, jump "back" to the last editor group
     {
-        "key": "cmd+h",
+        "key": "ctrl+h",
         "command": "workbench.action.focusFirstEditorGroup",
         "when": "terminalFocus"
     },
     // in the terminal, jump "forward" to the last first group
     {
-        "key": "cmd+l",
+        "key": "ctrl+l",
         "command": "workbench.action.focusLastEditorGroup",
         "when": "terminalFocus"
     },

@@ -196,35 +196,10 @@ vnoremap ; :
 nnoremap : ;
 vnoremap : ;
 
-" Python specific mapping
-if system('uname -s') == "Darwin\n"
-  " OSX
-  " iterm2 cant capture control+enter
-  " so change the profile by adding a key mapping that would send `Alt/Meta + c`
-  " on pressing `Ctrl + Enter`
-  "inoremap <C-M> <Esc>o
-  inoremap <Leader><M-c> <Esc>A:<Esc>o
-  nnoremap <Leader><M-c> A:<Esc>o
-else
-  inoremap <C-J> <Esc>o
-  inoremap <Leader><C-J> <Esc>A:<Esc>o
-  nnoremap <Leader><C-J> A:<Esc>o
-endif
-" enter spaces after comma to avoid E231
-" %s/,\([^\s ]\)/, \1/g
-
-" Adding parameters to functions
-nnoremap <leader>i i,<space>
-nnoremap <leader>a a,<space>
-
 " Quicksave command
 noremap <C-Z> :update<CR>
 vnoremap <C-Z> <C-C>:update<CR>
 inoremap <C-Z> <C-O>:update<CR>
-
-" Paste the selected text after the last line of the selected text
-" This is useful in the visual line mode
-vnoremap <leader>p y`>p
 
 " Quick movements
 nnoremap H ^
@@ -244,12 +219,6 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
 
-" Now you can use Ctrl+w then h/j/k/l for shifting splits around
-nnoremap <c-w>j <c-w>J
-nnoremap <c-w>k <c-w>K
-nnoremap <c-w>l <c-w>L
-nnoremap <c-w>h <c-w>H
-
 " Open all buffers as tabs
 nnoremap <Leader>t :tab all<CR>
 
@@ -257,7 +226,7 @@ nnoremap <Leader>t :tab all<CR>
 nnoremap <Leader>v :vert ba<CR>
 
 " Jump to the next occurance of the character under the cursor
-nnoremap <Leader>f yl:normal f<C-r>"<CR>
+" nnoremap <Leader>f yl:normal f<C-r>"<CR>
 
 " A saner approach to horizontal scrolling
 nnoremap <A-l> zl
