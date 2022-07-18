@@ -14,12 +14,14 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Reload packer config when saving this file
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+augroup('PackerUserConfig', { clear = true })
+autocmd('BufWritePost', {
+  group = 'PackerUserConfig',
+  pattern = "plugins.lua",
+  command = "source <afile> | PackerCompile",
+})
 
 -- Protected call to load packer
 local status_ok, packer = pcall(require, 'packer')
@@ -46,9 +48,9 @@ packer.init({
 packer.startup(function()
   use "wbthomason/packer.nvim"
   use {
-    "shaunsingh/nord.nvim",
+    "EdenEast/nightfox.nvim",
     config = function()
-      require("config.nord")
+      require("config.nightfox")
     end
   }
   use "kyazdani42/nvim-web-devicons"
@@ -56,6 +58,24 @@ packer.startup(function()
     "kyazdani42/nvim-tree.lua",
     config = function()
       require("config.nvim-tree")
+    end
+  }
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
+    end
+  }
+  use {
+    'feline-nvim/feline.nvim',
+    config = function()
+      require("config.feline")
+    end
+  }
+  use {
+    "nanozuki/tabby.nvim",
+    config = function()
+      require("config.tabby")
     end
   }
 

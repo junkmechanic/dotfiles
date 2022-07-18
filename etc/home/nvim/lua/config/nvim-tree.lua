@@ -1,6 +1,7 @@
 -- NvimTree startup
 require("nvim-tree").setup({
   disable_netrw = true,
+  open_on_tab = true,
 })
 
 -- Invocation mapping
