@@ -3,7 +3,7 @@ local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({
+  PackerBootstrap = fn.system({
     'git',
     'clone',
     '--depth',
@@ -65,6 +65,12 @@ packer.startup(function()
     end
   }
   use {
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
+  }
+  use {
     'feline-nvim/feline.nvim',
     config = function()
       require("config.feline")
@@ -98,6 +104,7 @@ packer.startup(function()
   }
   use {
 	"windwp/nvim-autopairs",
+    -- TODO: include nvim-cmp config
     config = function()
       require("nvim-autopairs").setup()
     end
@@ -109,6 +116,22 @@ packer.startup(function()
       require("config.lsp")
     end
   }
+  use({
+    "hrsh7th/nvim-cmp",
+    requires = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "f3fora/cmp-spell",
+      "hrsh7th/cmp-calc",
+      "lukas-reineke/cmp-rg",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+    },
+    config = function()
+      require("config.completion")
+    end
+  })
   use {
     "folke/trouble.nvim",
     config = function()
@@ -118,7 +141,7 @@ packer.startup(function()
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
-  if packer_bootstrap then
+  if PackerBootstrap then
     require('packer').sync()
   end
 end)
