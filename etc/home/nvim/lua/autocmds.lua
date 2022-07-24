@@ -23,6 +23,12 @@ autocmd(
   { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] }
 )
 
+-- Open help in a vertical split
+autocmd("FileType", {
+  pattern = "help",
+  command = [[wincmd L]]
+})
+
 -- windows to close with "q"
 augroup("QuickFixSetup", { clear = true })
 autocmd("FileType", {

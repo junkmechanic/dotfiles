@@ -2,10 +2,11 @@ local cmp = require("cmp")
 
 cmp.setup({
   mapping = {
-    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-u>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.close(),
+    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-p>"] = cmp.mapping.select_prev_item(),
+    ["<C-n>"] = cmp.mapping.select_next_item(),
+    ["<C-c>"] = cmp.mapping.abort(),
     ["<CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,
@@ -39,6 +40,7 @@ cmp.setup.cmdline("/", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = "buffer" },
+    { name = 'cmdline_history' },
   },
 })
 
@@ -49,5 +51,6 @@ cmp.setup.cmdline(":", {
     { name = "path" },
   }, {
     { name = "cmdline" },
+    { name = 'cmdline_history' },
   }),
 })

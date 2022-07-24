@@ -127,6 +127,7 @@ packer.startup(function()
       "hrsh7th/cmp-calc",
       "lukas-reineke/cmp-rg",
       "hrsh7th/cmp-nvim-lsp-signature-help",
+      "dmitmel/cmp-cmdline-history",
     },
     config = function()
       require("config.completion")
