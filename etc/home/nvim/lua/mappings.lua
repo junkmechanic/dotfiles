@@ -38,10 +38,10 @@ map("n", "<C-k>", "<C-w>k")
 map("n", "<C-l>", "<C-w>l")
 
 -- Resizing panes
-map("n", "<C-Right>", ":vertical resize +1<CR>")
-map("n", "<C-Left>", ":vertical resize -1<CR>")
-map("n", "<C-Up>", ":resize -1<CR>")
-map("n", "<C-Down>", ":resize +1<CR>")
+map("n", "<C-S-Right>", ":vertical resize +1<CR>")
+map("n", "<C-S-Left>", ":vertical resize -1<CR>")
+map("n", "<C-S-Up>", ":resize -1<CR>")
+map("n", "<C-S-Down>", ":resize +1<CR>")
 
 -- Open all buffers as tabs
 map("n", "<Leader>t", ":tab all<CR>")
@@ -53,7 +53,7 @@ map("n", "<Leader>v", ":vert ba<CR>")
 map("n", "<A-l>", "zl")
 map("n", "<A-h>", "zh<C-h>")
 
--- Run macro in the `q` register 
+-- Run macro in the `q` register
 map("n", "Q", "@q")
 
 -- Stay in visual mode when indenting

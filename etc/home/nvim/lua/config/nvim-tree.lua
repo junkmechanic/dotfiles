@@ -2,6 +2,8 @@
 require("nvim-tree").setup({
   disable_netrw = true,
   open_on_tab = true,
+
+  -- TODO : ignore __pycache__
 })
 
 -- Invocation mapping

@@ -14,13 +14,11 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Reload packer config when saving this file
-local augroup = vim.api.nvim_create_augroup
-local autocmd = vim.api.nvim_create_autocmd
-augroup('PackerUserConfig', { clear = true })
-autocmd('BufWritePost', {
+vim.api.nvim_create_augroup('PackerUserConfig', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePost', {
   group = 'PackerUserConfig',
   pattern = "plugins.lua",
-  command = "source <afile> | PackerCompile",
+  command = "source <afile> | PackerSync",
 })
 
 -- Protected call to load packer
@@ -76,6 +74,45 @@ packer.startup(function()
     "nanozuki/tabby.nvim",
     config = function()
       require("config.tabby")
+    end
+  }
+  use {
+    "ellisonleao/glow.nvim",
+    ft = { "md", "markdown" }
+  }
+  use {
+    "kylechui/nvim-surround",
+    config = function()
+      require("nvim-surround").setup()
+    end,
+    keys = {
+      { "n", 'cs' },
+      { "n", "ds" },
+      { "n", "ys" },
+      { "x", 'S' },
+    }
+  }
+  use {
+    "rjayatilleka/vim-insert-char",
+    keys = { { "n", "<space>" } }
+  }
+  use {
+	"windwp/nvim-autopairs",
+    config = function()
+      require("nvim-autopairs").setup()
+    end
+  }
+  use {
+    "williamboman/nvim-lsp-installer",
+    requires = "neovim/nvim-lspconfig",
+    config = function()
+      require("config.lsp")
+    end
+  }
+  use {
+    "folke/trouble.nvim",
+    config = function()
+      require("trouble").setup { }
     end
   }
 
