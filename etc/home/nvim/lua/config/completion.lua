@@ -1,6 +1,14 @@
 local cmp = require("cmp")
+local lspkind = require("lspkind")
 
 cmp.setup({
+  formatting = {
+    format = lspkind.cmp_format({
+      with_text = true,
+      maxwidth = 50,
+      mode = "symbol",
+    }),
+  },
   mapping = {
     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),

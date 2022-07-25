@@ -68,8 +68,8 @@ map("n", "<Leader>n", "<esc>:tabprevious<CR>")
 map("n", "<Leader>m", "<esc>:tabnext<CR>")
 
 -- Swapping <c-p> with <up> in ex mode (and the companions)
-vim.keymap.set("c", "<C-p>", "<Up>", { noremap = true })
-vim.keymap.set("c", "<C-n>", "<Down>", { noremap = true })
+vim.keymap.set("c", "<C-k>", "<Up>", { noremap = true })
+vim.keymap.set("c", "<C-j>", "<Down>", { noremap = true })
 
 -- Switch from Terminal Insert mode to Normal mode
 vim.keymap.set("t", "<Esc>", "(&filetype == 'fzf') ? '<Esc>' : '<C-\\><C-n>'", { expr = true })

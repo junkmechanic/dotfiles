@@ -70,17 +70,29 @@ packer.startup(function()
         require('Comment').setup()
     end
   }
+  -- use {
+  --   'feline-nvim/feline.nvim',
+  --   config = function()
+  --     require("config.feline")
+  --   end
+  -- }
   use {
-    'feline-nvim/feline.nvim',
+    'nvim-lualine/lualine.nvim',
     config = function()
-      require("config.feline")
+      require("config.lualine")
     end
   }
+  -- use {
+  --   "nanozuki/tabby.nvim",
+  --   config = function()
+  --     require("config.tabby")
+  --   end
+  -- }
   use {
-    "nanozuki/tabby.nvim",
-    config = function()
-      require("config.tabby")
-    end
+      "rcarriga/nvim-notify",
+      config = function()
+        require('notify')
+      end
   }
   use {
     "ellisonleao/glow.nvim",
@@ -110,8 +122,11 @@ packer.startup(function()
     end
   }
   use {
-    "williamboman/nvim-lsp-installer",
-    requires = "neovim/nvim-lspconfig",
+    "neovim/nvim-lspconfig",
+    requires = {
+      "williamboman/nvim-lsp-installer",
+      "onsails/lspkind-nvim",
+    },
     config = function()
       require("config.lsp")
     end
@@ -136,7 +151,14 @@ packer.startup(function()
   use {
     "folke/trouble.nvim",
     config = function()
-      require("trouble").setup { }
+      require("trouble").setup {}
+    end
+  }
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+    config = function()
+      require("config.treesitter")
     end
   }
 
