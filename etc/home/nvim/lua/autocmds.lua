@@ -46,3 +46,30 @@ autocmd("FileType", {
   pattern = "qf",
   command = [[set switchbuf+=usetab,newtab]],
 })
+
+-- Terminal buffer settings
+augroup("TerminalBufferSetup", { clear = true })
+autocmd('BufEnter', {
+  group = "TerminalBufferSetup",
+  command = [[if &buftype == 'terminal' | :startinsert | endif]]
+})
+autocmd('TermOpen', {
+  group = "TerminalBufferSetup",
+  command = 'setlocal listchars= nonumber norelativenumber nocursorline',
+})
+
+-- Enable spell checking for certain file types
+autocmd(
+  { "BufRead", "BufNewFile" },
+  { pattern = { "*.txt", "*.md", "*.tex" }, command = "setlocal spell" }
+)
+
+-- Set indentation to 2 spaces
+augroup('IndentText', { clear = true })
+autocmd('Filetype', {
+  group = 'IndentText',
+  pattern = { 'xml', 'html', 'xhtml', 'css', 'scss', 'javascript', 'typescript',
+    'yaml', 'lua'
+  },
+  command = 'setlocal shiftwidth=2 tabstop=2'
+})

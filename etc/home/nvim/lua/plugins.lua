@@ -1,5 +1,7 @@
 -- Bootstrapping packer
 local fn = vim.fn
+
+-- stdpath('data') is `~/.local/share/nvim`
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -70,24 +72,12 @@ packer.startup(function()
         require('Comment').setup()
     end
   }
-  -- use {
-  --   'feline-nvim/feline.nvim',
-  --   config = function()
-  --     require("config.feline")
-  --   end
-  -- }
   use {
     'nvim-lualine/lualine.nvim',
     config = function()
       require("config.lualine")
     end
   }
-  -- use {
-  --   "nanozuki/tabby.nvim",
-  --   config = function()
-  --     require("config.tabby")
-  --   end
-  -- }
   use {
       "rcarriga/nvim-notify",
       config = function()
@@ -126,6 +116,7 @@ packer.startup(function()
     requires = {
       "williamboman/nvim-lsp-installer",
       "onsails/lspkind-nvim",
+      "SmiteshP/nvim-navic",
     },
     config = function()
       require("config.lsp")
