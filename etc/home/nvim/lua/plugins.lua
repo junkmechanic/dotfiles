@@ -47,13 +47,25 @@ packer.init({
 
 packer.startup(function()
   use "wbthomason/packer.nvim"
+  use "kyazdani42/nvim-web-devicons"
   use {
     "EdenEast/nightfox.nvim",
     config = function()
       require("config.nightfox")
     end
   }
-  use "kyazdani42/nvim-web-devicons"
+  use {
+    "petertriho/nvim-scrollbar",
+    config = function()
+      require("config.scrollbar")
+    end
+  }
+  use {
+    "kevinhwang91/nvim-hlslens",
+    config = function()
+      require("config.hlslens")
+    end
+  }
   use {
     "kyazdani42/nvim-tree.lua",
     config = function()
@@ -73,20 +85,24 @@ packer.startup(function()
     end
   }
   use {
+    'phaazon/hop.nvim',
+    branch = 'v2',
+    config = function()
+      require("config.hop")
+    end
+  }
+  use {
     'nvim-lualine/lualine.nvim',
     config = function()
       require("config.lualine")
     end
   }
   use {
-      "rcarriga/nvim-notify",
-      config = function()
-        require('notify')
-      end
-  }
-  use {
     "ellisonleao/glow.nvim",
-    ft = { "md", "markdown" }
+    ft = { "md", "markdown" },
+    config = function()
+      require('config.glow')
+    end
   }
   use {
     "kylechui/nvim-surround",
@@ -106,9 +122,8 @@ packer.startup(function()
   }
   use {
 	"windwp/nvim-autopairs",
-    -- TODO: include nvim-cmp config
     config = function()
-      require("nvim-autopairs").setup()
+      require("config.autopairs")
     end
   }
   use {
@@ -150,6 +165,13 @@ packer.startup(function()
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
     config = function()
       require("config.treesitter")
+    end
+  }
+  use {
+    'nvim-telescope/telescope.nvim', branch = '0.1.x',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require("config.telescope")
     end
   }
 

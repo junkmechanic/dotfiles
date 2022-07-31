@@ -370,7 +370,7 @@ vg() {
 }
 
 # change to directory under the given or current directory
-fd() {
+ccd() {
   local dir
   dir=$(find ${1:-.} -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf-tmux +m) &&

@@ -12,8 +12,8 @@ local navic = require("nvim-navic")
 local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gd', "<cmd>tab split | lua vim.lsp.buf.definition()<CR>", bufopts)
-  vim.keymap.set('n', '<LocalLeader>dt', "<cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>", bufopts)
+  vim.keymap.set('n', 'gd', "<Cmd>tab split | lua vim.lsp.buf.definition()<CR>", bufopts)
+  vim.keymap.set('n', '<LocalLeader>dt', "<Cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>", bufopts)
   vim.keymap.set('n', '<LocalLeader>di', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', '<LocalLeader>ds', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<LocalLeader>dr', vim.lsp.buf.references, bufopts)
