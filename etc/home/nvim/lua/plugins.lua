@@ -169,7 +169,21 @@ packer.startup(function()
   }
   use {
     'nvim-telescope/telescope.nvim', branch = '0.1.x',
-    requires = { 'nvim-lua/plenary.nvim' },
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'tami5/sqlite.lua',
+      "nvim-telescope/telescope-frecency.nvim",
+      {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+      {
+        "AckslD/nvim-neoclip.lua",
+        requires = {
+          {'kkharji/sqlite.lua', module = 'sqlite'},
+        },
+        config = function()
+          require('config.neoclip')
+        end,
+      }
+    },
     config = function()
       require("config.telescope")
     end
