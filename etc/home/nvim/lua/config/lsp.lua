@@ -16,7 +16,8 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<LocalLeader>dt', "<Cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>", bufopts)
   vim.keymap.set('n', '<LocalLeader>di', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', '<LocalLeader>ds', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<LocalLeader>dr', vim.lsp.buf.references, bufopts)
+  -- This is set in the `telescope` config
+  -- vim.keymap.set('n', '<LocalLeader>dr', vim.lsp.buf.references, bufopts)
   navic.attach(client, bufnr)
 end
 

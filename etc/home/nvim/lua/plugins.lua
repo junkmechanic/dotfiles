@@ -137,7 +137,7 @@ packer.startup(function()
       require("config.lsp")
     end
   }
-  use({
+  use {
     "hrsh7th/nvim-cmp",
     requires = {
       "hrsh7th/cmp-nvim-lsp",
@@ -153,7 +153,7 @@ packer.startup(function()
     config = function()
       require("config.completion")
     end
-  })
+  }
   use {
     "folke/trouble.nvim",
     config = function()
@@ -186,6 +186,19 @@ packer.startup(function()
     },
     config = function()
       require("config.telescope")
+    end
+  }
+  use {
+    'TimUntersberger/neogit',
+    requires = 'nvim-lua/plenary.nvim',
+    config = function()
+      require("config.neogit")
+    end
+  }
+  use {
+    "akinsho/toggleterm.nvim", tag = 'v2.*',
+    config = function()
+      require("config.toggleterm")
     end
   }
 

@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
-map("n", "<Leader>y", ":Telescope neoclip<CR>", opts)
+map("n", "<LocalLeader>y", ":Telescope neoclip<CR>", opts)
 
 require('neoclip').setup({
   enable_persistent_history = true,
