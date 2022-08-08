@@ -48,6 +48,13 @@ packer.init({
 packer.startup(function()
   use "wbthomason/packer.nvim"
   use "kyazdani42/nvim-web-devicons"
+  use "tpope/vim-unimpaired"
+  use {
+    "lewis6991/impatient.nvim",
+    config = function()
+      require("impatient")
+    end
+  }
   use {
     "EdenEast/nightfox.nvim",
     config = function()
@@ -162,7 +169,12 @@ packer.startup(function()
   }
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+    requires = {
+      'nvim-treesitter/nvim-treesitter-context',
+    },
+    run = function()
+      require('nvim-treesitter.install').update({ with_sync = true })
+    end,
     config = function()
       require("config.treesitter")
     end
@@ -199,6 +211,13 @@ packer.startup(function()
     "akinsho/toggleterm.nvim", tag = 'v2.*',
     config = function()
       require("config.toggleterm")
+    end
+  }
+  use {
+    'goolord/alpha-nvim',
+    config = function ()
+      require("config.alpha")
+      -- require'alpha'.setup(require'alpha.themes.dashboard'.config)
     end
   }
 
