@@ -2,29 +2,29 @@
 local fn = vim.fn
 
 -- stdpath('data') is `~/.local/share/nvim`
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 if fn.empty(fn.glob(install_path)) > 0 then
   PackerBootstrap = fn.system({
-    'git',
-    'clone',
-    '--depth',
-    '1',
-    'https://github.com/wbthomason/packer.nvim',
-    install_path
+    "git",
+    "clone",
+    "--depth",
+    "1",
+    "https://github.com/wbthomason/packer.nvim",
+    install_path,
   })
 end
 
 -- Reload packer config when saving this file
-vim.api.nvim_create_augroup('PackerUserConfig', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-  group = 'PackerUserConfig',
+vim.api.nvim_create_augroup("PackerUserConfig", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = "PackerUserConfig",
   pattern = "plugins.lua",
   command = "source <afile> | PackerSync",
 })
 
 -- Protected call to load packer
-local status_ok, packer = pcall(require, 'packer')
+local status_ok, packer = pcall(require, "packer")
 if not status_ok then
   return
 end
@@ -46,94 +46,94 @@ packer.init({
 })
 
 packer.startup(function()
-  use "wbthomason/packer.nvim"
-  use "kyazdani42/nvim-web-devicons"
-  use "tpope/vim-unimpaired"
-  use {
+  use("wbthomason/packer.nvim")
+  use("kyazdani42/nvim-web-devicons")
+  use("tpope/vim-unimpaired")
+  use({
     "lewis6991/impatient.nvim",
     config = function()
       require("impatient")
-    end
-  }
-  use {
+    end,
+  })
+  use({
     "EdenEast/nightfox.nvim",
     config = function()
       require("config.nightfox")
-    end
-  }
-  use {
+    end,
+  })
+  use({
     "petertriho/nvim-scrollbar",
     config = function()
       require("config.scrollbar")
-    end
-  }
-  use {
+    end,
+  })
+  use({
     "kevinhwang91/nvim-hlslens",
     config = function()
       require("config.hlslens")
-    end
-  }
-  use {
+    end,
+  })
+  use({
     "kyazdani42/nvim-tree.lua",
     config = function()
       require("config.nvim-tree")
-    end
-  }
-  use {
-    'lewis6991/gitsigns.nvim',
+    end,
+  })
+  use({
+    "lewis6991/gitsigns.nvim",
     config = function()
-      require('gitsigns').setup()
-    end
-  }
-  use {
-    'numToStr/Comment.nvim',
+      require("gitsigns").setup()
+    end,
+  })
+  use({
+    "numToStr/Comment.nvim",
     config = function()
-      require('Comment').setup()
-    end
-  }
-  use {
-    'phaazon/hop.nvim',
-    branch = 'v2',
+      require("Comment").setup()
+    end,
+  })
+  use({
+    "phaazon/hop.nvim",
+    branch = "v2",
     config = function()
       require("config.hop")
-    end
-  }
-  use {
-    'nvim-lualine/lualine.nvim',
+    end,
+  })
+  use({
+    "nvim-lualine/lualine.nvim",
     config = function()
       require("config.lualine")
-    end
-  }
-  use {
+    end,
+  })
+  use({
     "ellisonleao/glow.nvim",
     ft = { "md", "markdown" },
     config = function()
-      require('config.glow')
-    end
-  }
-  use {
+      require("config.glow")
+    end,
+  })
+  use({
     "kylechui/nvim-surround",
     config = function()
       require("nvim-surround").setup()
     end,
     keys = {
-      { "n", 'cs' },
+      { "n", "cs" },
       { "n", "ds" },
       { "n", "ys" },
-      { "x", 'S' },
-    }
-  }
-  use {
+      { "x", "S" },
+    },
+  })
+  use({
     "rjayatilleka/vim-insert-char",
-    keys = { { "n", "<space>" } }
-  }
-  use {
+    keys = { { "n", "<space>" } },
+  })
+  use({
     "windwp/nvim-autopairs",
     config = function()
       require("config.autopairs")
-    end
-  }
-  use {
+    end,
+  })
+  use({
     "neovim/nvim-lspconfig",
     requires = {
       "williamboman/nvim-lsp-installer",
@@ -143,9 +143,9 @@ packer.startup(function()
     },
     config = function()
       require("config.lsp")
-    end
-  }
-  use {
+    end,
+  })
+  use({
     "hrsh7th/nvim-cmp",
     requires = {
       "hrsh7th/cmp-nvim-lsp",
@@ -160,84 +160,87 @@ packer.startup(function()
     },
     config = function()
       require("config.completion")
-    end
-  }
-  use {
+    end,
+  })
+  use({
     "folke/trouble.nvim",
     config = function()
-      require("trouble").setup {}
-    end
-  }
-  use {
-    'nvim-treesitter/nvim-treesitter',
+      require("trouble").setup({})
+    end,
+  })
+  use({
+    "nvim-treesitter/nvim-treesitter",
     requires = {
-      'nvim-treesitter/nvim-treesitter-context',
-      'nvim-treesitter/nvim-treesitter-refactor',
+      "nvim-treesitter/nvim-treesitter-context",
+      "nvim-treesitter/nvim-treesitter-refactor",
     },
     run = function()
-      require('nvim-treesitter.install').update({ with_sync = true })
+      require("nvim-treesitter.install").update({ with_sync = true })
     end,
     config = function()
       require("config.treesitter")
-    end
-  }
-  use {
-    'nvim-telescope/telescope.nvim', branch = '0.1.x',
+    end,
+  })
+  use({
+    "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
     requires = {
-      'nvim-lua/plenary.nvim',
-      'tami5/sqlite.lua',
+      "nvim-lua/plenary.nvim",
+      "tami5/sqlite.lua",
       "nvim-telescope/telescope-frecency.nvim",
-      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
       {
         "AckslD/nvim-neoclip.lua",
         requires = {
-          { 'kkharji/sqlite.lua', module = 'sqlite' },
+          { "kkharji/sqlite.lua", module = "sqlite" },
         },
         config = function()
-          require('config.neoclip')
+          require("config.neoclip")
         end,
-      }
+      },
     },
     config = function()
       require("config.telescope")
-    end
-  }
-  use {
-    'TimUntersberger/neogit',
-    requires = 'nvim-lua/plenary.nvim',
+    end,
+  })
+  use({
+    "TimUntersberger/neogit",
+    requires = "nvim-lua/plenary.nvim",
     config = function()
       require("config.neogit")
-    end
-  }
-  use {
-    "akinsho/toggleterm.nvim", tag = 'v2.*',
+    end,
+  })
+  use({
+    "akinsho/toggleterm.nvim",
+    tag = "v2.*",
     config = function()
       require("config.toggleterm")
-    end
-  }
-  use {
-    "sunjon/shade.nvim",
-    config = function()
-      require("config.shade")
-    end
-  }
-  use {
+    end,
+  })
+  use({
     "mcauley-penney/tidy.nvim",
     config = function()
       require("config.tidy")
-    end
-  }
-  use {
-    'goolord/alpha-nvim',
+    end,
+  })
+  use({
+    "goolord/alpha-nvim",
     config = function()
       require("config.alpha")
       -- require'alpha'.setup(require'alpha.themes.dashboard'.config)
-    end
-  }
+    end,
+  })
+  use({
+    "jose-elias-alvarez/null-ls.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("config.null-ls")
+    end,
+  })
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PackerBootstrap then
-    require('packer').sync()
+    require("packer").sync()
   end
 end)

@@ -11,12 +11,10 @@ map("n", "<LocalLeader>r", ":Telescope resume<CR>", opts)
 map("n", "<LocalLeader>f", ":Telescope current_buffer_fuzzy_find<CR>", opts)
 map("n", "<LocalLeader>h", ":Telescope help_tags<CR>", opts)
 map("n", "<LocalLeader>dd", ":Telescope diagnostics<CR>", opts)
-map("n", "q:", ":Telescope command_history<CR>", opts)
-map("n", "q/", ":Telescope search_history<CR>", opts)
 
 local actions = require("telescope.actions")
 
-require('telescope').setup{
+require("telescope").setup({
   defaults = {
     mappings = {
       i = {
@@ -49,15 +47,15 @@ require('telescope').setup{
       case_mode = "smart_case",
     },
     frecency = {
-      ignore_patterns = {"*.git/*", "*/tmp/*", "*pycache*"},
+      ignore_patterns = { "*.git/*", "*/tmp/*", "*pycache*" },
       workspaces = {
-        ["conf"]    = "/Users/ankur/.config",
+        ["conf"] = "/Users/ankur/.config",
         ["df"] = "/Users/ankur/.files",
-      }
+      },
     },
-  }
-}
+  },
+})
 
-require('telescope').load_extension('fzf')
-require('telescope').load_extension("frecency")
-require('telescope').load_extension("neoclip")
+require("telescope").load_extension("fzf")
+require("telescope").load_extension("frecency")
+require("telescope").load_extension("neoclip")
