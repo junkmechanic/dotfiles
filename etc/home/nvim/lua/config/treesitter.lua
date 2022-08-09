@@ -1,17 +1,17 @@
-require 'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all"
   ensure_installed = {
-    "bash",
-    "dockerfile",
-    "hcl",
-    "json",
-    "lua",
-    "make",
-    "markdown",
-    "python",
-    "sql",
-    "vim",
-    "yaml",
+    'bash',
+    'dockerfile',
+    'hcl',
+    'json',
+    'lua',
+    'make',
+    'markdown',
+    'python',
+    'sql',
+    'vim',
+    'yaml',
   },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -33,10 +33,10 @@ require 'nvim-treesitter.configs'.setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = "<CR>",
-      scope_incremental = "<CR>",
-      node_incremental = "<TAB>",
-      node_decremental = "<S-TAB>",
+      init_selection = '<CR>',
+      scope_incremental = '<CR>',
+      node_incremental = '<TAB>',
+      node_decremental = '<S-TAB>',
     },
   },
   refactor = {
@@ -48,10 +48,10 @@ require 'nvim-treesitter.configs'.setup {
     smart_rename = {
       enable = true,
       keymaps = {
-        smart_rename = "gr",
+        smart_rename = 'gr',
       },
     },
   },
 }
 
-require 'treesitter-context'.setup {}
+require('treesitter-context').setup {}

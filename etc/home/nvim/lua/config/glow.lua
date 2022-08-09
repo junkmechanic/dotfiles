@@ -1,3 +1,3 @@
-require('glow').setup({
+require('glow').setup {
   width = 150,
-})
+}

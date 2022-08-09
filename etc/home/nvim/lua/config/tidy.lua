@@ -1,3 +1,3 @@
-require("tidy").setup {
-  filetype_exclude = { "markdown", "diff" },
+require('tidy').setup {
+  filetype_exclude = { 'markdown', 'diff' },
 }

@@ -1,11 +1,11 @@
 local set = vim.opt
 
-set.pastetoggle = "<F2>" -- toggle paste mode to maintain indentation
+set.pastetoggle = '<F2>' -- toggle paste mode to maintain indentation
 
 set.splitbelow = true -- force all horizontal splits to go below current window
 set.splitright = true -- force all vertical splits to go to the right of current window
 
-set.mouse = "a" -- activate mouse support in all modes
+set.mouse = 'a' -- activate mouse support in all modes
 
 -- set.wildmenu = true -- show completion options along the command line in command mode
 -- set.wildmode = "full" -- complete the next full match
@@ -26,25 +26,25 @@ set.swapfile = false -- dont create a swapfile for buffers
 
 set.updatetime = 500 -- number of milliseconds the cursor is held for in insert mode
 
-set.showbreak = "↪" -- display character for link continuation
+set.showbreak = '↪' -- display character for link continuation
 
 set.number = true -- show the line number (for the current line if relative number is set)
 set.relativenumber = true -- use relative line numbers
 
 set.textwidth = 120 -- maximum allowed characters in a line (a line break is inserted after space is pressed)
 set.wrap = false -- dont wrap text for lines extending beyond the display
-set.formatoptions = vim.opt.formatoptions - {"t"} -- dont auto-wrap text beyond textwidth
+set.formatoptions = vim.opt.formatoptions - { 't' } -- dont auto-wrap text beyond textwidth
 
-set.completeopt = {"longest" , "menuone"} -- only insert the longest common text, shop popup even for a single match
+set.completeopt = { 'longest', 'menuone' } -- only insert the longest common text, shop popup even for a single match
 
 set.foldenable = false -- keep all folds open
 
 set.termguicolors = true -- enable 24-bit RGB colors in terminal UI
-set.colorcolumn = {"+1", "+2"} -- always highlight the two columns after `textwidth`
-vim.api.nvim_set_hl(0, "ColorColumn", { bg="#323642" }) -- change the backgroud of the colorcolumn
+set.colorcolumn = { '+1', '+2' } -- always highlight the two columns after `textwidth`
+vim.api.nvim_set_hl(0, 'ColorColumn', { bg = '#323642' }) -- change the backgroud of the colorcolumn
 
-set.shortmess:append "sI" -- disable nvim intro
+set.shortmess:append 'sI' -- disable nvim intro
 
-set.fillchars = {eob = " "} -- dont show any characters at the end of the buffer
+set.fillchars = { eob = ' ' } -- dont show any characters at the end of the buffer
 
-set.grepprg = "rg --hidden --vimgrep --smart-case --"
+set.grepprg = 'rg --hidden --vimgrep --smart-case --'

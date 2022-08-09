@@ -1,4 +1,4 @@
-local navic = require("nvim-navic")
+local navic = require 'nvim-navic'
 
 require('lualine').setup {
   options = {
@@ -16,32 +16,32 @@ require('lualine').setup {
       statusline = 1000,
       tabline = 1000,
       winbar = 1000,
-    }
+    },
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'lsp_progress', 'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_a = { 'mode' },
+    lualine_b = { 'branch', 'diff', 'diagnostics' },
+    lualine_c = { 'filename' },
+    lualine_x = { 'lsp_progress', 'encoding', 'fileformat', 'filetype' },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' },
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_c = { 'filename' },
+    lualine_x = { 'location' },
     lualine_y = {},
-    lualine_z = {}
+    lualine_z = {},
   },
   tabline = {
-    lualine_a = {'filename'},
-    lualine_b = {{ navic.get_location, cond = navic.is_available }},
-    lualine_y = {'buffers'},
-    lualine_z = {'tabs'}
+    lualine_a = { 'filename' },
+    lualine_b = { { navic.get_location, cond = navic.is_available } },
+    lualine_y = { 'buffers' },
+    lualine_z = { 'tabs' },
   },
   extensions = {
     'quickfix',
     'nvim-tree',
-  }
+  },
 }
