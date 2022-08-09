@@ -88,7 +88,7 @@ packer.startup(function()
   use {
     'numToStr/Comment.nvim',
     config = function()
-        require('Comment').setup()
+      require('Comment').setup()
     end
   }
   use {
@@ -128,7 +128,7 @@ packer.startup(function()
     keys = { { "n", "<space>" } }
   }
   use {
-	"windwp/nvim-autopairs",
+    "windwp/nvim-autopairs",
     config = function()
       require("config.autopairs")
     end
@@ -139,6 +139,7 @@ packer.startup(function()
       "williamboman/nvim-lsp-installer",
       "onsails/lspkind-nvim",
       "SmiteshP/nvim-navic",
+      "arkav/lualine-lsp-progress",
     },
     config = function()
       require("config.lsp")
@@ -171,6 +172,7 @@ packer.startup(function()
     'nvim-treesitter/nvim-treesitter',
     requires = {
       'nvim-treesitter/nvim-treesitter-context',
+      'nvim-treesitter/nvim-treesitter-refactor',
     },
     run = function()
       require('nvim-treesitter.install').update({ with_sync = true })
@@ -185,11 +187,11 @@ packer.startup(function()
       'nvim-lua/plenary.nvim',
       'tami5/sqlite.lua',
       "nvim-telescope/telescope-frecency.nvim",
-      {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
       {
         "AckslD/nvim-neoclip.lua",
         requires = {
-          {'kkharji/sqlite.lua', module = 'sqlite'},
+          { 'kkharji/sqlite.lua', module = 'sqlite' },
         },
         config = function()
           require('config.neoclip')
@@ -214,8 +216,20 @@ packer.startup(function()
     end
   }
   use {
+    "sunjon/shade.nvim",
+    config = function()
+      require("config.shade")
+    end
+  }
+  use {
+    "mcauley-penney/tidy.nvim",
+    config = function()
+      require("config.tidy")
+    end
+  }
+  use {
     'goolord/alpha-nvim',
-    config = function ()
+    config = function()
       require("config.alpha")
       -- require'alpha'.setup(require'alpha.themes.dashboard'.config)
     end

@@ -16,7 +16,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<LocalLeader>dt', "<Cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>", bufopts)
   vim.keymap.set('n', '<LocalLeader>di', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', '<LocalLeader>ds', vim.lsp.buf.signature_help, bufopts)
-  -- This is set in the `telescope` config
+  -- The mapping for `references` is set in the `telescope` config
   -- vim.keymap.set('n', '<LocalLeader>dr', vim.lsp.buf.references, bufopts)
   navic.attach(client, bufnr)
 end
@@ -52,12 +52,12 @@ local servers = {
  "yamlls",
 }
 
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+for _, lsp_server in ipairs(servers) do
+  lspconfig[lsp_server].setup {
     on_attach = on_attach,
     capabilities = capabilities,
     before_init = function(_, config)
-      if lsp == "pyright" then
+      if lsp_server == "pyright" then
         config.settings.python.pythonPath = get_python_path()
       end
     end,

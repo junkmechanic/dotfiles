@@ -1,4 +1,4 @@
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = {
     "bash",
@@ -39,6 +39,19 @@ require'nvim-treesitter.configs'.setup {
       node_decremental = "<S-TAB>",
     },
   },
+  refactor = {
+    highlight_definitions = {
+      enable = true,
+      -- Set to false if you have an `updatetime` of ~100.
+      clear_on_cursor_move = true,
+    },
+    smart_rename = {
+      enable = true,
+      keymaps = {
+        smart_rename = "gr",
+      },
+    },
+  },
 }
 
-require'treesitter-context'.setup {}
+require 'treesitter-context'.setup {}

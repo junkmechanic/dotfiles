@@ -6,7 +6,7 @@ cmp.setup({
     format = lspkind.cmp_format({
       with_text = true,
       maxwidth = 50,
-      mode = "symbol",
+      mode = "symbol_text",
     }),
   },
   mapping = {
