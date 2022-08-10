@@ -68,3 +68,12 @@ autocmd('Filetype', {
   pattern = { 'xml', 'html', 'xhtml', 'css', 'scss', 'javascript', 'typescript', 'yaml', 'lua' },
   command = 'setlocal shiftwidth=2 tabstop=2',
 })
+
+-- Use nvr for git_editor
+vim.cmd [[let $GIT_EDITOR = 'nvr -cc tabnew --remote-wait']]
+augroup('GitCommitSetup', { clear = true })
+autocmd('Filetype', {
+  group = 'GitCommitSetup',
+  pattern = { 'gitcommit', 'gitrebase', 'gitconfig' },
+  command = 'set bufhidden=delete',
+})

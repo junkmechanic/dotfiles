@@ -5,7 +5,9 @@ require('nvim-lsp-installer').setup {
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<LocalLeader>dq', vim.diagnostic.setloclist, opts)
+
+-- The mapping for quickfix diagnostics is set in `trouble` config
+-- vim.keymap.set('n', '<LocalLeader>dq', vim.diagnostic.setloclist, opts)
 
 local navic = require 'nvim-navic'
 
@@ -17,9 +19,10 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<LocalLeader>dt', '<Cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>', bufopts)
   vim.keymap.set('n', '<LocalLeader>di', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', '<LocalLeader>ds', vim.lsp.buf.signature_help, bufopts)
-  -- The mapping for `references` is set in the `telescope` config
 
+  -- The mapping for `references` is set in the `telescope` config
   -- vim.keymap.set('n', '<LocalLeader>dr', vim.lsp.buf.references, bufopts)
+
   navic.attach(client, bufnr)
 
   -- Turn off formatting via `sumneko_lua` in favor of `stylua` via `null-ls`
@@ -57,6 +60,7 @@ local servers = {
   'sumneko_lua',
   'terraformls',
   'yamlls',
+  'vimls',
 }
 
 for _, lsp_server in ipairs(servers) do

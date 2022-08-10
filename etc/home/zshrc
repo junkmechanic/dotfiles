@@ -197,10 +197,11 @@ alias vimt="nvim -p"
 alias wget="noglob wget"
 
 # Neovim Remote Activation
-if [ -n "${NVIM_LISTEN_ADDRESS}" ]; then
+if [ -n "${NVIM}" ]; then
   alias vims='nvr -o'
   alias vimv='nvr -O'
   alias vim='nvr --remote-tab'
+  alias nvim='nvr --remote-tab'
 fi
 
 # keybindings for history-substring-search
