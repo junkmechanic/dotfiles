@@ -165,7 +165,7 @@ packer.startup(function()
   use {
     'folke/trouble.nvim',
     config = function()
-      require('trouble').setup {}
+      require 'config.trouble'
     end,
   }
   use {
