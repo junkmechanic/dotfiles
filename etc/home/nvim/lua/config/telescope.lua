@@ -1,7 +1,6 @@
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
--- map("n", "<C-p>", ":Telescope find_files<CR>", opts)
 map('n', '<C-p>', "<Cmd>lua require'config.telescope-ext'.project_files()<CR>", opts)
 map('n', '<C-n>', ':Telescope frecency<CR>', opts)
 map('n', '<Leader>r', ':Telescope lsp_references<CR>', opts)
@@ -53,9 +52,13 @@ require('telescope').setup {
         ['df'] = '/Users/ankur/.files',
       },
     },
+    ['ui-select'] = {
+      require('telescope.themes').get_dropdown {},
+    },
   },
 }
 
 require('telescope').load_extension 'fzf'
 require('telescope').load_extension 'frecency'
 require('telescope').load_extension 'neoclip'
+require('telescope').load_extension 'ui-select'

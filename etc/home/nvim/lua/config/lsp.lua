@@ -27,6 +27,7 @@ local on_attach = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gd', '<Cmd>tab split | lua vim.lsp.buf.definition()<CR>', bufopts)
   vim.keymap.set('n', 'gf', vim.lsp.buf.formatting, bufopts)
+  vim.keymap.set('n', 'gh', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', '<LocalLeader>dt', '<Cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>', bufopts)
   vim.keymap.set('n', '<LocalLeader>di', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', '<LocalLeader>ds', vim.lsp.buf.signature_help, bufopts)

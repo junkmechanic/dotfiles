@@ -1,3 +1,9 @@
+local keyopts = { noremap = true, silent = true }
+vim.keymap.set({ 'n', 'v', 'o' }, 'H', require('tree-climber').goto_parent, keyopts)
+vim.keymap.set({ 'n', 'v', 'o' }, 'L', require('tree-climber').goto_child, keyopts)
+vim.keymap.set({ 'n', 'v', 'o' }, 'J', require('tree-climber').goto_next, keyopts)
+vim.keymap.set({ 'n', 'v', 'o' }, 'K', require('tree-climber').goto_prev, keyopts)
+
 require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all"
   ensure_installed = {

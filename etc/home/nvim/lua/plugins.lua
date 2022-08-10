@@ -173,6 +173,7 @@ packer.startup(function()
     requires = {
       'nvim-treesitter/nvim-treesitter-context',
       'nvim-treesitter/nvim-treesitter-refactor',
+      'drybalka/tree-climber.nvim',
     },
     run = function()
       require('nvim-treesitter.install').update { with_sync = true }
@@ -188,6 +189,7 @@ packer.startup(function()
       'nvim-lua/plenary.nvim',
       'tami5/sqlite.lua',
       'nvim-telescope/telescope-frecency.nvim',
+      'nvim-telescope/telescope-ui-select.nvim',
       { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
       {
         'AckslD/nvim-neoclip.lua',
