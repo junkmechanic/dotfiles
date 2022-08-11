@@ -29,6 +29,8 @@ require('telescope').setup {
     },
     winblend = 10,
     dynamic_preview_title = true,
+    prompt_prefix = '  ',
+    selection_caret = ' ',
   },
   pickers = {
     git_files = {

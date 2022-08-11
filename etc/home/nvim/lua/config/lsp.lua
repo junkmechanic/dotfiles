@@ -35,7 +35,9 @@ local on_attach = function(client, bufnr)
   -- The mapping for `references` is set in the `telescope` config
   -- vim.keymap.set('n', '<LocalLeader>dr', vim.lsp.buf.references, bufopts)
 
-  navic.attach(client, bufnr)
+  if client.name ~= 'bashls' and client.name ~= 'dockerls' then
+    navic.attach(client, bufnr)
+  end
 
   -- Turn off formatting via `sumneko_lua` in favor of `stylua` via `null-ls`
   if client.name == 'sumneko_lua' then
@@ -88,8 +90,8 @@ for _, lsp_server in ipairs(servers) do
       Lua = {
         diagnostics = {
           -- Get the language server to recognize the `vim` global
-          -- Workaround for packer `use` keyword
-          globals = { 'vim', 'use' },
+          -- This should be maintained in `.luarc.json` in the project dir
+          -- globals = { 'vim', 'use' },
         },
         workspace = {
           -- Make the server aware of Neovim runtime files

@@ -32,10 +32,7 @@ end
 -- Custom packer initialisatioon
 packer.init {
 
-  -- Limit the number of simultaneous jobs. nil means no limit. Set to 20 in
-  -- order to prevent PackerSync form being "stuck" ->
-  -- https://github.com/wbthomason/packer.nvim/issues/746
-  max_jobs = 20,
+  max_jobs = 40,
 
   -- Have packer use a popup window
   display = {
@@ -48,6 +45,8 @@ packer.init {
 packer.startup(function()
   use 'wbthomason/packer.nvim'
   use 'kyazdani42/nvim-web-devicons'
+  use 'tpope/vim-fugitive'
+  use 'nvim-lua/plenary.nvim'
   use 'tpope/vim-unimpaired'
   use {
     'lewis6991/impatient.nvim',
@@ -139,7 +138,6 @@ packer.startup(function()
       'williamboman/nvim-lsp-installer',
       'onsails/lspkind-nvim',
       'SmiteshP/nvim-navic',
-      'arkav/lualine-lsp-progress',
     },
     config = function()
       require 'config.lsp'
@@ -186,7 +184,6 @@ packer.startup(function()
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
     requires = {
-      'nvim-lua/plenary.nvim',
       'tami5/sqlite.lua',
       'nvim-telescope/telescope-frecency.nvim',
       'nvim-telescope/telescope-ui-select.nvim',
@@ -207,9 +204,14 @@ packer.startup(function()
   }
   use {
     'TimUntersberger/neogit',
-    requires = 'nvim-lua/plenary.nvim',
     config = function()
       require 'config.neogit'
+    end,
+  }
+  use {
+    'sindrets/diffview.nvim',
+    config = function()
+      require 'config.diffview'
     end,
   }
   use {
@@ -229,14 +231,18 @@ packer.startup(function()
     'goolord/alpha-nvim',
     config = function()
       require 'config.alpha'
-      -- require'alpha'.setup(require'alpha.themes.dashboard'.config)
     end,
   }
   use {
     'jose-elias-alvarez/null-ls.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
     config = function()
       require 'config.null-ls'
+    end,
+  }
+  use {
+    'j-hui/fidget.nvim',
+    config = function()
+      require 'config.fidget'
     end,
   }
 

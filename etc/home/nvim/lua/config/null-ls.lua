@@ -12,7 +12,6 @@ nls.setup {
     formatting.beautysh,
     formatting.blue,
     formatting.isort,
-    formatting.shfmt,
     formatting.stylua,
     formatting.terraform_fmt,
 

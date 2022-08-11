@@ -3,6 +3,7 @@
     "Lua.diagnostics.globals": [
         "vim",
         "use",
-        "packer_plugins"
+        "packer_plugins",
+        "require"
     ]
 }

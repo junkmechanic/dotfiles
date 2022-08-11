@@ -29,7 +29,7 @@ autocmd('FileType', {
   command = [[wincmd L]],
 })
 
--- windows to close with "q"
+-- Windows to close with "q"
 augroup('QuickFixSetup', { clear = true })
 autocmd('FileType', {
   group = 'QuickFixSetup',
