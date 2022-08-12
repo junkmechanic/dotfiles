@@ -144,17 +144,25 @@ packer.startup(function()
     end,
   }
   use {
+    'simrat39/symbols-outline.nvim',
+    config = function()
+      require 'config.symbols-outline'
+    end,
+  }
+  use {
     'hrsh7th/nvim-cmp',
     requires = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
-      'f3fora/cmp-spell',
-      'hrsh7th/cmp-calc',
-      'lukas-reineke/cmp-rg',
-      'hrsh7th/cmp-nvim-lsp-signature-help',
       'dmitmel/cmp-cmdline-history',
+      'f3fora/cmp-spell',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-calc',
+      'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-path',
+      'lukas-reineke/cmp-rg',
+      'ray-x/cmp-treesitter',
     },
     config = function()
       require 'config.completion'

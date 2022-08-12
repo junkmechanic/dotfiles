@@ -12,6 +12,9 @@ nls.setup {
     formatting.beautysh,
     formatting.blue,
     formatting.isort,
+    formatting.sqlfluff.with {
+      extra_args = { '--dialect', 'redshift' },
+    },
     formatting.stylua,
     formatting.terraform_fmt,
 
@@ -19,6 +22,9 @@ nls.setup {
     diagnostics.hadolint,
     diagnostics.pylama,
     diagnostics.shellcheck,
+    diagnostics.sqlfluff.with {
+      extra_args = { '--dialect', 'redshift' },
+    },
     diagnostics.vint,
     diagnostics.zsh,
 
