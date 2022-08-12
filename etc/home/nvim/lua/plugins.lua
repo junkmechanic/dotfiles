@@ -219,7 +219,7 @@ packer.startup(function()
   use {
     'sindrets/diffview.nvim',
     config = function()
-      require 'config.diffview'
+      require('diffview').setup()
     end,
   }
   use {
