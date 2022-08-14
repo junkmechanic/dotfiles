@@ -47,6 +47,7 @@ packer.startup(function()
   use 'kyazdani42/nvim-web-devicons'
   use 'tpope/vim-fugitive'
   use 'nvim-lua/plenary.nvim'
+  use 'simnalamburt/vim-mundo'
   use 'tpope/vim-unimpaired'
   use {
     'lewis6991/impatient.nvim',
@@ -195,6 +196,7 @@ packer.startup(function()
       'tami5/sqlite.lua',
       'nvim-telescope/telescope-frecency.nvim',
       'nvim-telescope/telescope-ui-select.nvim',
+      'nvim-telescope/telescope-file-browser.nvim',
       { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
       {
         'AckslD/nvim-neoclip.lua',
@@ -252,6 +254,13 @@ packer.startup(function()
     config = function()
       require 'config.fidget'
     end,
+  }
+  use {
+    'iamcco/markdown-preview.nvim',
+    run = function()
+      vim.fn['mkdp#util#install']()
+    end,
+    cmd = 'MarkdownPreview',
   }
 
   -- Automatically set up your configuration after cloning packer.nvim

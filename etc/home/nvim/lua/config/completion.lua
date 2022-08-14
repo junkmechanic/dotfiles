@@ -34,14 +34,14 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp' },
+    { name = 'treesitter' },
+    { name = 'nvim_lua' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'buffer', keyword_length = 5 },
-    { name = 'calc' },
-    { name = 'nvim_lua' },
-    { name = 'treesitter' },
-    { name = 'spell', keyword_length = 5 },
-    { name = 'path' },
     { name = 'rg', keyword_length = 5 },
+    { name = 'path' },
+    { name = 'spell', keyword_length = 5 },
+    { name = 'calc' },
   },
 }
 

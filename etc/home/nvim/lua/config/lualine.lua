@@ -37,8 +37,8 @@ require('lualine').setup {
   tabline = {
     lualine_a = { 'filename' },
     lualine_b = { { navic.get_location, cond = navic.is_available } },
-    lualine_y = { 'buffers' },
-    lualine_z = { 'tabs' },
+    lualine_y = { 'windows' },
+    lualine_z = { { 'tabs', mode = 2 } },
   },
   extensions = {
     'quickfix',

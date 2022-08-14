@@ -1,3 +1,6 @@
+local actions = require 'telescope.actions'
+local fb_actions = require('telescope').extensions.file_browser.actions
+
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
@@ -7,11 +10,10 @@ map('n', '<Leader>r', ':Telescope lsp_references<CR>', opts)
 map('n', '<LocalLeader>g', ':Telescope live_grep<CR>', opts)
 map('n', '<LocalLeader>s', ':Telescope grep_string<CR>', opts)
 map('n', '<LocalLeader>r', ':Telescope resume<CR>', opts)
-map('n', '<LocalLeader>f', ':Telescope current_buffer_fuzzy_find<CR>', opts)
+map('n', '<LocalLeader>l', ':Telescope current_buffer_fuzzy_find<CR>', opts)
 map('n', '<LocalLeader>h', ':Telescope help_tags<CR>', opts)
+map('n', '<LocalLeader>f', ':Telescope file_browser<CR>', opts)
 map('n', '<LocalLeader>dd', ':Telescope diagnostics<CR>', opts)
-
-local actions = require 'telescope.actions'
 
 require('telescope').setup {
   defaults = {
@@ -57,6 +59,18 @@ require('telescope').setup {
     ['ui-select'] = {
       require('telescope.themes').get_dropdown {},
     },
+    file_browser = {
+      theme = 'ivy',
+      hidden = true,
+      mappings = {
+        ['i'] = {
+          ['<C-a>'] = fb_actions.create,
+          ['<A-h>'] = fb_actions.goto_home_dir,
+          ['<C-t>'] = actions.select_tab,
+          ['<A-t>'] = fb_actions.change_cwd,
+        },
+      },
+    },
   },
 }
 
@@ -64,3 +78,4 @@ require('telescope').load_extension 'fzf'
 require('telescope').load_extension 'frecency'
 require('telescope').load_extension 'neoclip'
 require('telescope').load_extension 'ui-select'
+require('telescope').load_extension 'file_browser'
