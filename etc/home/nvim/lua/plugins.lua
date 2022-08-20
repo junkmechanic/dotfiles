@@ -49,6 +49,7 @@ packer.startup(function()
   use 'nvim-lua/plenary.nvim'
   use 'simnalamburt/vim-mundo'
   use 'tpope/vim-unimpaired'
+  use 'rcarriga/nvim-notify'
   use {
     'lewis6991/impatient.nvim',
     config = function()

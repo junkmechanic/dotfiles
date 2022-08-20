@@ -4,6 +4,8 @@
         "vim",
         "use",
         "packer_plugins",
-        "require"
+        "require",
+        "pcall",
+        "pairs"
     ]
 }
