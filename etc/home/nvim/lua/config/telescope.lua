@@ -12,9 +12,14 @@ map('n', '<LocalLeader>s', ':Telescope grep_string<CR>', opts)
 map('n', '<LocalLeader>r', ':Telescope resume<CR>', opts)
 map('n', '<LocalLeader>l', ':Telescope current_buffer_fuzzy_find<CR>', opts)
 map('n', '<LocalLeader>h', ':Telescope help_tags<CR>', opts)
+
+-- Open file browser in `cwd`
 map('n', '<LocalLeader>ff', "<Cmd>lua require'config.telescope-ext'.file_browser()<CR>", opts)
-map('n', '<LocalLeader>fh', "<Cmd>lua require'config.telescope-ext'.file_explorer()<CR>", opts)
+-- Open file browser in the home dir
+map('n', '<LocalLeader>fh', "<Cmd>lua require'config.telescope-ext'.home_explorer()<CR>", opts)
+-- Open file browser in the current file's dir
 map('n', '<LocalLeader>fd', "<Cmd>lua require'config.telescope-ext'.browse_file_dir()<CR>", opts)
+
 map('n', '<LocalLeader>dd', ':Telescope diagnostics<CR>', opts)
 
 require('telescope').setup {

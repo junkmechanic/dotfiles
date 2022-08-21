@@ -1,12 +1,28 @@
 local cmp = require 'cmp'
 local lspkind = require 'lspkind'
+local luasnip = require 'luasnip'
 
 cmp.setup {
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
   formatting = {
     format = lspkind.cmp_format {
-      with_text = true,
       maxwidth = 50,
       mode = 'symbol',
+      menu = {
+        nvim_lsp = '',
+        nvim_lua = '',
+        treesitter = '',
+        path = 'ﱮ',
+        buffer = '﬘',
+        rg = '',
+        spell = '暈',
+        calc = '',
+        luasnip = '',
+      },
     },
   },
   mapping = {
@@ -22,17 +38,24 @@ cmp.setup {
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
       else
         fallback()
       end
     end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function()
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
       end
     end, { 'i', 's' }),
   },
   sources = {
+    { name = 'luasnip' },
     { name = 'nvim_lsp' },
     { name = 'treesitter' },
     { name = 'nvim_lua' },

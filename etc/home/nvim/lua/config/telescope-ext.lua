@@ -28,7 +28,7 @@ function M.file_browser()
   }
 end
 
-function M.file_explorer()
+function M.home_explorer()
   require('telescope').extensions.file_browser.file_browser {
     prompt_title = '',
     cwd = '~',
@@ -37,7 +37,7 @@ end
 
 function M.browse_file_dir()
   require('telescope').extensions.file_browser.file_browser {
-    prompt_title = '',
+    prompt_title = '' .. vim.fn.expand '%:p:h',
     path = '%:p:h',
   }
 end

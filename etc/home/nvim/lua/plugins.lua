@@ -146,6 +146,15 @@ packer.startup(function()
     end,
   }
   use {
+    'L3MON4D3/LuaSnip',
+    requires = {
+      'rafamadriz/friendly-snippets',
+    },
+    config = function()
+      require 'config.luasnip'
+    end,
+  }
+  use {
     'simrat39/symbols-outline.nvim',
     config = function()
       require 'config.symbols-outline'
@@ -165,6 +174,7 @@ packer.startup(function()
       'hrsh7th/cmp-path',
       'lukas-reineke/cmp-rg',
       'ray-x/cmp-treesitter',
+      'saadparwaiz1/cmp_luasnip',
     },
     config = function()
       require 'config.completion'
