@@ -1,7 +1,6 @@
 local ls = require 'luasnip'
 local vsc = require 'luasnip.loaders.from_vscode'
 local lua = require 'luasnip.loaders.from_lua'
-local types = require 'luasnip.util.types'
 
 SNIP_ENV = {
   s = require('luasnip.nodes.snippet').S,
@@ -29,18 +28,6 @@ SNIP_ENV = {
 
 ls.config.set_config {
   history = true,
-  ext_opts = {
-    [types.choiceNode] = {
-      active = {
-        virt_text = { { '●', 'Orange' } },
-      },
-    },
-    [types.insertNode] = {
-      active = {
-        virt_text = { { '●', 'Blue' } },
-      },
-    },
-  },
 }
 
 -- load friendly-snippets
@@ -66,7 +53,7 @@ vim.keymap.set({ 'i', 's' }, '<M-k>', function()
 end, { silent = true })
 
 -- selecting within a list of options.
-vim.keymap.set('i', '<M-h>', function()
+vim.keymap.set('i', '<M-n>', function()
   if ls.choice_active() then
     ls.change_choice(1)
   end

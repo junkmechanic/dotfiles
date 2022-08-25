@@ -31,7 +31,7 @@ set.showbreak = '↪' -- display character for link continuation
 set.number = true -- show the line number (for the current line if relative number is set)
 set.relativenumber = true -- use relative line numbers
 
-set.textwidth = 82 -- maximum allowed characters in a line (a line break is inserted after space is pressed)
+set.textwidth = 90 -- maximum allowed characters in a line (a line break is inserted after space is pressed)
 set.wrap = false -- dont wrap text for lines extending beyond the display
 set.formatoptions = vim.opt.formatoptions - { 't' } -- dont auto-wrap text beyond textwidth
 

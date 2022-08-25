@@ -37,21 +37,11 @@ map('n', '<C-j>', '<C-w>j')
 map('n', '<C-k>', '<C-w>k')
 map('n', '<C-l>', '<C-w>l')
 
--- Resizing panes
-map('n', '<C-S-Right>', ':vertical resize +1<CR>')
-map('n', '<C-S-Left>', ':vertical resize -1<CR>')
-map('n', '<C-S-Up>', ':resize -1<CR>')
-map('n', '<C-S-Down>', ':resize +1<CR>')
-
 -- Open all buffers as tabs
 map('n', '<Leader>t', ':tab all<CR>')
 
 -- Open all buffers as tabs
 map('n', '<Leader>v', ':vert ba<CR>')
-
--- Horizontal scrolling with Alt + {h,l}
-map('n', '<A-l>', 'zl')
-map('n', '<A-h>', 'zh<C-h>')
 
 -- Run macro in the `q` register
 map('n', 'Q', '@q')

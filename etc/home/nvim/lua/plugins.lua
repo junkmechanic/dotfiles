@@ -50,6 +50,7 @@ packer.startup(function()
   use 'simnalamburt/vim-mundo'
   use 'tpope/vim-unimpaired'
   use 'rcarriga/nvim-notify'
+  use 'mrjones2014/smart-splits.nvim'
   use {
     'lewis6991/impatient.nvim',
     config = function()
@@ -232,7 +233,7 @@ packer.startup(function()
   use {
     'sindrets/diffview.nvim',
     config = function()
-      require('diffview').setup()
+      require 'config.diffview'
     end,
   }
   use {
@@ -255,6 +256,12 @@ packer.startup(function()
     end,
   }
   use {
+    'anuvyklack/hydra.nvim',
+    config = function()
+      require 'config.hydra'
+    end,
+  }
+  use {
     'jose-elias-alvarez/null-ls.nvim',
     config = function()
       require 'config.null-ls'
@@ -264,6 +271,12 @@ packer.startup(function()
     'j-hui/fidget.nvim',
     config = function()
       require 'config.fidget'
+    end,
+  }
+  use {
+    'sindrets/winshift.nvim',
+    config = function()
+      require('winshift').setup()
     end,
   }
   use {

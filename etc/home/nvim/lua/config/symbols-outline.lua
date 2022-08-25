@@ -1,4 +1,4 @@
-vim.g.symbols_outline = {
+require('symbols-outline').setup {
   width = 20,
   winblend = 20,
 }
