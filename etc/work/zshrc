@@ -165,8 +165,8 @@ alias vims="nvim -o"
 alias vimv="nvim -O"
 alias vimt="nvim -p"
 alias wget="noglob wget"
-alias wr-data="awsExec wr-data"
-alias wr-dev="awsExec wr-dev"
+alias wr-data="awsExec wr-data-fraud"
+alias wr-dwh="awsExec wr-data-dwh"
 
 # Neovim Remote Activation
 if [ -n "${NVIM_LISTEN_ADDRESS}" ]; then
