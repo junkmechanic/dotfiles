@@ -6,25 +6,20 @@ require('lualine').setup {
     theme = 'auto',
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
-    disabled_filetypes = {
-      statusline = {},
-      winbar = {},
-    },
-    always_divide_middle = true,
-    globalstatus = false,
-    refresh = {
-      statusline = 1000,
-      tabline = 1000,
-      winbar = 1000,
-    },
   },
   sections = {
     lualine_a = { 'mode' },
-    lualine_b = { 'branch', 'diff', 'diagnostics' },
-    lualine_c = { 'filename' },
+    lualine_b = { 'branch', 'diff', 'diagnostics', 'filename' },
+    lualine_c = {},
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress' },
-    lualine_z = { 'location' },
+    lualine_z = {
+      'location',
+      function()
+        local space = vim.fn.search([[\s\+$]], 'nwc')
+        return space ~= 0 and 'TW:' .. space or ''
+      end,
+    },
   },
   inactive_sections = {
     lualine_a = { 'filename' },
@@ -37,8 +32,8 @@ require('lualine').setup {
   },
   tabline = {
     lualine_a = { { 'tabs', mode = 0 } },
-    lualine_c = { { navic.get_location, cond = navic.is_available } },
-    lualine_y = { 'windows' },
+    lualine_b = { 'windows' },
+    lualine_x = { { navic.get_location, cond = navic.is_available } },
   },
   extensions = {
     'quickfix',

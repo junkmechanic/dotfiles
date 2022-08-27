@@ -7,6 +7,11 @@ local pcmd = require('hydra.keymap-util').pcmd
 Hydra {
   name = 'Side scroll',
   mode = 'n',
+  config = {
+    exit = false,
+    invoke_on_body = true,
+    color = 'blue',
+  },
   body = 'z',
   heads = {
     { 'h', '5zh' },
@@ -20,12 +25,9 @@ Hydra {
 Hydra {
   name = 'Windows',
   config = {
+    exit = false,
     invoke_on_body = true,
     color = 'blue',
-    hint = {
-      border = 'rounded',
-      offset = -1,
-    },
   },
   mode = 'n',
   body = '<C-w>',

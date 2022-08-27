@@ -45,7 +45,6 @@ packer.init {
 packer.startup(function()
   use 'wbthomason/packer.nvim'
   use 'kyazdani42/nvim-web-devicons'
-  use 'tpope/vim-fugitive'
   use 'nvim-lua/plenary.nvim'
   use 'simnalamburt/vim-mundo'
   use 'tpope/vim-unimpaired'
@@ -88,6 +87,12 @@ packer.startup(function()
     end,
   }
   use {
+    'tpope/vim-fugitive',
+    config = function()
+      require 'config.fugitive'
+    end,
+  }
+  use {
     'numToStr/Comment.nvim',
     config = function()
       require('Comment').setup()
@@ -100,6 +105,7 @@ packer.startup(function()
       require 'config.hop'
     end,
   }
+  -- Load `lualine` after setting the colorscheme
   use {
     'nvim-lualine/lualine.nvim',
     config = function()
