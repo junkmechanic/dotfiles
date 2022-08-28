@@ -54,7 +54,7 @@ local function get_python_path()
   vim.cmd [[
     let g:python3_host_prog = "~/.pyenv/versions/py3nvim/bin/python"
   ]]
-  -- Use activated virtualenv.
+  -- Use activated virtualenv
   if vim.env.VIRTUAL_ENV then
     return path.join(vim.env.VIRTUAL_ENV, 'bin', 'python')
   end

@@ -4,9 +4,11 @@ local dashboard = require 'alpha.themes.dashboard'
 dashboard.section.buttons.val = {
   dashboard.button('e', '  New file', ':ene <BAR> startinsert <CR>'),
   dashboard.button('m', 'פּ  File Tree', ':NvimTreeOpen <CR>'),
+  dashboard.button('d', '  Diff View', ':DiffviewOpen <CR>'),
   dashboard.button('p', '  Open file', ':Telescope find_files <CR>'),
   dashboard.button('n', '  Recently used files', ':Telescope frecency <CR>'),
   dashboard.button('g', '  Search text', ':Telescope live_grep <CR>'),
+  dashboard.button('s', '  Open Session', ':SessionLoad <CR>'),
   dashboard.button('z', '  Shell Config', ':e ~/.zshrc<CR>'),
   dashboard.button('t', '  Tmux Config', ':e ~/.tmux.conf<CR>'),
   dashboard.button('q', '  Quit Neovim', ':qa<CR>'),

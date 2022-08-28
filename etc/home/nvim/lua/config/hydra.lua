@@ -5,7 +5,7 @@ local cmd = require('hydra.keymap-util').cmd
 local pcmd = require('hydra.keymap-util').pcmd
 
 Hydra {
-  name = 'Side scroll',
+  name = 'Side Scroll',
   config = {
     invoke_on_body = true,
   },
@@ -21,12 +21,27 @@ Hydra {
 }
 
 Hydra {
-  name = 'Windows',
+  name = 'Telescope Utils',
   config = {
     invoke_on_body = true,
   },
   mode = 'n',
-  body = '<C-w>',
+  body = '<Leader>y',
+  heads = {
+    { 'k', cmd 'Telescope keymaps', { desc = 'keymaps' } },
+    { 'p', cmd 'Telescope persisted', { desc = 'sessions' } },
+    { 'c', cmd 'Telescope commands', { desc = 'commands' } },
+    { '<Esc>', nil, { exit = true, desc = false } },
+  },
+}
+
+Hydra {
+  name = 'Window Management',
+  config = {
+    invoke_on_body = true,
+  },
+  mode = 'n',
+  body = '<Leader>w',
   heads = {
     { 'h', '<C-w>h' },
     { 'j', '<C-w>j' },
