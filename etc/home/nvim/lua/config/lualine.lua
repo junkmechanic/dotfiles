@@ -1,11 +1,12 @@
 local navic = require 'nvim-navic'
+local local_config = require 'config.local-config'
 
 require('lualine').setup {
   options = {
     icons_enabled = true,
     theme = 'auto',
-    component_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' },
+    component_separators = local_config.lualine_component_separators,
+    section_separators = local_config.lualine_section_separators,
   },
   sections = {
     lualine_a = { 'mode' },

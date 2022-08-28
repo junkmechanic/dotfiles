@@ -1,11 +1,6 @@
+local local_config = require 'config.local-config'
+
 require('persisted').setup {
   use_git_branch = true,
-  allowed_dirs = {
-    '~/.files',
-    '~/.files/etc/home/nvim',
-    '~/devbench/main/data-fraud/feature-store',
-    '~/devbench/main/data-transformations',
-    '~/devbench/main/data-ml-pipelines',
-    '~/devbench/main/data-ingestions',
-  },
+  allowed_dirs = local_config.persisted_allowed_dirs,
 }
