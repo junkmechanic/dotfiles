@@ -280,6 +280,12 @@ packer.startup(function()
     end,
   }
   use {
+    'olimorris/persisted.nvim',
+    config = function()
+      require 'config.persisted'
+    end,
+  }
+  use {
     'sindrets/winshift.nvim',
     config = function()
       require('winshift').setup()

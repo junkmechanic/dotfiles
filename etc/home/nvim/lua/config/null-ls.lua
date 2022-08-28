@@ -23,7 +23,7 @@ nls.setup {
     diagnostics.pylama,
     diagnostics.shellcheck,
     diagnostics.sqlfluff.with {
-      extra_args = { '--dialect', 'redshift' },
+      extra_args = { '--dialect', 'redshift', '--templater', 'dbt' },
     },
     diagnostics.vint,
     diagnostics.zsh,
@@ -32,6 +32,7 @@ nls.setup {
     code_actions.shellcheck,
   },
   on_attach = function(client, bufnr)
+    -- If formatter is available, then autoformat the file on save
     if client.supports_method 'textDocument/formatting' then
       vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
       vim.api.nvim_create_autocmd('BufWritePre', {
