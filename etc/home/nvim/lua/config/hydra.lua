@@ -4,6 +4,9 @@ local splits = require 'smart-splits'
 local cmd = require('hydra.keymap-util').cmd
 local pcmd = require('hydra.keymap-util').pcmd
 
+-- Set more pleasant colors
+vim.api.nvim_set_hl(0, 'HydraRed', { fg = '#519aba' })
+
 Hydra {
   name = 'Side Scroll',
   config = {
@@ -31,6 +34,11 @@ Hydra {
     { 'k', cmd 'Telescope keymaps', { desc = 'keymaps' } },
     { 'p', cmd 'Telescope persisted', { desc = 'sessions' } },
     { 'c', cmd 'Telescope commands', { desc = 'commands' } },
+    { 'g', cmd 'Telescope git_commits', { desc = 'commits' } },
+    { 'm', cmd 'Telescope git_bcommits', { desc = 'buffer commits' } },
+    { 'b', cmd 'Telescope git_branches', { desc = 'branches' } },
+    { 's', cmd 'Telescope git_status', { desc = 'branches' } },
+    { 'v', cmd 'Telescope vim_options', { desc = 'vim options' } },
     { '<Esc>', nil, { exit = true, desc = false } },
   },
 }

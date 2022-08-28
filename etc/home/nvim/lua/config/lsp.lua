@@ -32,10 +32,12 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<LocalLeader>di', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', '<LocalLeader>ds', vim.lsp.buf.signature_help, bufopts)
 
-  -- The mapping for `references` is set in the `telescope` config
+  -- The mapping for listing diagnostics is set in the `telescope` config to `<LocalLeader>dd`
+
+  -- The mapping for listing references is set in the `telescope` config to `<Leader>r`
   -- vim.keymap.set('n', '<LocalLeader>dr', vim.lsp.buf.references, bufopts)
 
-  if client.name ~= 'bashls' and client.name ~= 'dockerls' then
+  if client.name ~= 'bashls' and client.name ~= 'dockerls' and client.name ~= 'sqlls' then
     navic.attach(client, bufnr)
   end
 
@@ -86,6 +88,9 @@ for _, lsp_server in ipairs(servers) do
       if lsp_server == 'pyright' then
         config.settings.python.pythonPath = get_python_path()
       end
+    end,
+    root_dir = function(fname)
+      return util.find_git_ancestor(fname) or vim.fn.getcwd()
     end,
     settings = {
       Lua = {
