@@ -24,26 +24,6 @@ Hydra {
 }
 
 Hydra {
-  name = 'Telescope Utils',
-  config = {
-    invoke_on_body = true,
-  },
-  mode = 'n',
-  body = '<Leader>y',
-  heads = {
-    { 'k', cmd 'Telescope keymaps', { desc = 'keymaps' } },
-    { 'p', cmd 'Telescope persisted', { desc = 'sessions' } },
-    { 'c', cmd 'Telescope commands', { desc = 'commands' } },
-    { 'g', cmd 'Telescope git_commits', { desc = 'commits' } },
-    { 'm', cmd 'Telescope git_bcommits', { desc = 'buffer commits' } },
-    { 'b', cmd 'Telescope git_branches', { desc = 'branches' } },
-    { 's', cmd 'Telescope git_status', { desc = 'branches' } },
-    { 'v', cmd 'Telescope vim_options', { desc = 'vim options' } },
-    { '<Esc>', nil, { exit = true, desc = false } },
-  },
-}
-
-Hydra {
   name = 'Window Management',
   config = {
     invoke_on_body = true,
@@ -87,6 +67,8 @@ Hydra {
       { desc = 'resize' },
     },
     { '=', '<C-w>=', { desc = false } },
+
+    { 'z', cmd 'ZenMode', { desc = 'zen' } },
 
     { 's', pcmd('split', 'E36'), { desc = 'hsplit' } },
     { '<C-s>', pcmd('split', 'E36'), { desc = false } },

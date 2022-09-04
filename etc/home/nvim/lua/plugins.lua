@@ -190,7 +190,7 @@ packer.startup(function()
   use {
     'folke/trouble.nvim',
     config = function()
-      require 'config.trouble'
+      require('trouble').setup()
     end,
   }
   use {
@@ -280,9 +280,21 @@ packer.startup(function()
     end,
   }
   use {
+    'folke/zen-mode.nvim',
+    config = function()
+      require 'config.zen-mode'
+    end,
+  }
+  use {
     'olimorris/persisted.nvim',
     config = function()
       require 'config.persisted'
+    end,
+  }
+  use {
+    'folke/which-key.nvim',
+    config = function()
+      require 'config.which-key'
     end,
   }
   use {

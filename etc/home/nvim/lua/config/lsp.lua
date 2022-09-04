@@ -2,6 +2,8 @@ require('nvim-lsp-installer').setup {
   automatic_installation = true,
 }
 
+local wk = require 'which-key'
+
 -- global diagnostics options
 vim.diagnostic.config { virtual_text = false }
 
@@ -23,16 +25,27 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 local navic = require 'nvim-navic'
 
 local on_attach = function(client, bufnr)
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set('n', 'gd', '<Cmd>tab split | lua vim.lsp.buf.definition()<CR>', bufopts)
-  vim.keymap.set('n', 'gf', vim.lsp.buf.formatting, bufopts)
-  vim.keymap.set('n', 'gh', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', '<LocalLeader>dt', '<Cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>', bufopts)
-  vim.keymap.set('n', '<LocalLeader>di', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', '<LocalLeader>ds', vim.lsp.buf.signature_help, bufopts)
+  local options = {
+    mode = 'n',
+    prefix = '<LocalLeader>',
+  }
+  local mappings = {
+    d = {
+      name = ' LSP + Diagnostics',
+      -- See `:help vim.lsp.*` for documentation on any of the below functions
+      f = { vim.lsp.buf.formatting, 'Format Buffer' },
+      a = { vim.lsp.buf.code_action, 'Buffer Code Actions' },
+      i = { vim.lsp.buf.hover, 'LSP Info for Cursor-word' },
+      s = { vim.lsp.buf.signature_help, 'Signature Display' },
+      d = { '<Cmd>Telescope diagnostics<CR>', 'Search Diagnostics' },
+      j = { '<Cmd>vsplit | lua vim.lsp.buf.definition()<CR>', 'Goto Definition' },
+      t = { '<Cmd>tab split | lua vim.lsp.buf.type_definition()<CR>', 'Goto Type Definition' },
+      q = { '<Cmd>Trouble document_diagnostics<CR>', 'List Document Diagnostics' },
+    },
 
-  -- The mapping for listing diagnostics is set in the `telescope` config to `<LocalLeader>dd`
+    t = { '<Cmd>Trouble workspace_diagnostics<CR>', 'List Workspace Diagnostics' },
+  }
+  wk.register(mappings, options)
 
   -- The mapping for listing references is set in the `telescope` config to `<Leader>r`
   -- vim.keymap.set('n', '<LocalLeader>dr', vim.lsp.buf.references, bufopts)
