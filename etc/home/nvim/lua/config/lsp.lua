@@ -34,7 +34,7 @@ local on_attach = function(client, bufnr)
       name = ' LSP + Diagnostics',
       -- See `:help vim.lsp.*` for documentation on any of the below functions
       f = { vim.lsp.buf.formatting, 'Format Buffer' },
-      a = { vim.lsp.buf.code_action, 'Buffer Code Actions' },
+      a = { vim.lsp.buf.code_action, 'Code Actions' },
       i = { vim.lsp.buf.hover, 'LSP Info for Cursor-word' },
       s = { vim.lsp.buf.signature_help, 'Signature Display' },
       d = { '<Cmd>Telescope diagnostics<CR>', 'Search Diagnostics' },

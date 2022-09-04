@@ -29,6 +29,15 @@ autocmd('FileType', {
   command = [[wincmd L]],
 })
 
+-- Turn on spelling correction and wrap where necessary
+autocmd('FileType', {
+  pattern = { 'gitcommit', 'markdown', 'rst' },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
+  end,
+})
+
 -- Windows to close with "q"
 augroup('QuickFixSetup', { clear = true })
 autocmd('FileType', {

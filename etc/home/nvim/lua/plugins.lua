@@ -65,7 +65,7 @@ packer.startup(function()
   use {
     'petertriho/nvim-scrollbar',
     config = function()
-      require 'config.scrollbar'
+      require('scrollbar').setup()
     end,
   }
   use {
@@ -253,6 +253,14 @@ packer.startup(function()
     'mcauley-penney/tidy.nvim',
     config = function()
       require 'config.tidy'
+    end,
+  }
+  use {
+    'abecodes/tabout.nvim',
+    wants = { 'nvim-treesitter' },
+    after = { 'nvim-cmp' },
+    config = function()
+      require 'config.tabout'
     end,
   }
   use {
