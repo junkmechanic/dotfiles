@@ -23,7 +23,7 @@ nls.setup {
     diagnostics.pylama,
     diagnostics.shellcheck,
     diagnostics.sqlfluff.with {
-      extra_args = { '--dialect', 'redshift', '--templater', 'dbt' },
+      extra_args = { '--dialect', 'redshift', '--templater', 'jinja' },
     },
     diagnostics.vint,
     diagnostics.zsh,

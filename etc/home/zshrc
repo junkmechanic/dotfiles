@@ -102,20 +102,21 @@ forgit_checkout_branch=gcbf
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # Keep zsh-syntax-highlighting as the last plugin
-plugins=(git gitfast docker colorize kubectl mosh pip ssh-agent sudo aws \
-        history-substring-search zsh-navigation-tools git-extras pyenv \
-        zsh-interactive-cd nvm \
-        # git@github.com:wfxr/forgit.git
+plugins=( \
+    git gitfast docker colorize kubectl mosh pip ssh-agent sudo aws \
+    history-substring-search zsh-navigation-tools git-extras pyenv \
+    zsh-interactive-cd nvm \
+    # git@github.com:wfxr/forgit.git
     forgit \
-        # git@github.com:hlissner/zsh-autopair.git
+    # git@github.com:hlissner/zsh-autopair.git
     zsh-autopair \
-        # git@github.com:Aloxaf/fzf-tab.git
+    # git@github.com:Aloxaf/fzf-tab.git
     fzf-tab \
-        # add plugins above this line
+    # add plugins above this line
     # git@github.com:zsh-users/zsh-autosuggestions.git
     zsh-autosuggestions \
-        # git@github.com:zsh-users/zsh-syntax-highlighting.git
-zsh-syntax-highlighting )
+    # git@github.com:zsh-users/zsh-syntax-highlighting.git
+    zsh-syntax-highlighting )
 
 source $ZSH/oh-my-zsh.sh
 

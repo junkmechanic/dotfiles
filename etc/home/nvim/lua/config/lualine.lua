@@ -40,6 +40,13 @@ local function show_persisted()
   end
 end
 
+local symbols = {
+  modified = ' ',
+  readonly = ' ',
+  unnamed = ' ',
+  newfile = ' ',
+}
+
 require('lualine').setup {
   options = {
     icons_enabled = true,
@@ -50,18 +57,18 @@ require('lualine').setup {
   sections = {
     lualine_a = { 'mode' },
     lualine_b = { 'branch', 'diff', 'diagnostics' },
-    lualine_c = { 'filename' },
+    lualine_c = { { 'filename', symbols = symbols } },
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress' },
     lualine_z = { 'location', show_trailing_whitespace, show_mixed_indent },
   },
   inactive_sections = {
-    lualine_c = { 'filename' },
+    lualine_c = { { 'filename', symbols = symbols } },
     lualine_x = {},
   },
   tabline = {
     lualine_a = { { 'tabs', mode = 0 } },
-    lualine_b = { 'windows' },
+    lualine_b = { { 'windows', symbols = symbols } },
     lualine_x = { { navic.get_location, cond = navic.is_available } },
     lualine_y = { show_persisted },
   },

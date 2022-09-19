@@ -69,12 +69,6 @@ packer.startup(function()
     end,
   }
   use {
-    'kevinhwang91/nvim-hlslens',
-    config = function()
-      require 'config.hlslens'
-    end,
-  }
-  use {
     'kyazdani42/nvim-tree.lua',
     config = function()
       require 'config.nvim-tree'
@@ -316,7 +310,6 @@ packer.startup(function()
     run = function()
       vim.fn['mkdp#util#install']()
     end,
-    cmd = 'MarkdownPreview',
   }
 
   -- Automatically set up your configuration after cloning packer.nvim
