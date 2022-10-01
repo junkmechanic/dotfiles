@@ -14,10 +14,17 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-local opts = { noremap = true, silent = true }
-vim.keymap.set('n', 'gt', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+local options = {
+  mode = 'n',
+}
+
+local mappings = {
+  ['gt'] = { vim.diagnostic.open_float, 'Show LSP Diagnostics' },
+  ['[d'] = { vim.diagnostic.goto_prev, 'Previous LSP Diagnostics Hunk' },
+  [']d'] = { vim.diagnostic.goto_next, 'Next LSP Diagnostics Hunk' },
+}
+
+wk.register(mappings, options)
 
 -- The mapping for quickfix diagnostics is set in `trouble` config
 -- vim.keymap.set('n', '<LocalLeader>dq', vim.diagnostic.setloclist, opts)
@@ -25,11 +32,11 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 local navic = require 'nvim-navic'
 
 local on_attach = function(client, bufnr)
-  local options = {
+  local a_options = {
     mode = 'n',
     prefix = '<LocalLeader>',
   }
-  local mappings = {
+  local a_mappings = {
     d = {
       name = ' LSP + Diagnostics',
       -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -45,7 +52,7 @@ local on_attach = function(client, bufnr)
 
     t = { '<Cmd>Trouble workspace_diagnostics<CR>', 'List Workspace Diagnostics' },
   }
-  wk.register(mappings, options)
+  wk.register(a_mappings, a_options)
 
   -- The mapping for listing references is set in the `telescope` config to `<Leader>r`
   -- vim.keymap.set('n', '<LocalLeader>dr', vim.lsp.buf.references, bufopts)
