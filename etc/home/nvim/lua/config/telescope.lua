@@ -76,50 +76,44 @@ require('telescope').load_extension 'persisted'
 map('n', '<C-p>', "<Cmd>lua require'config.telescope-ext'.project_files()<CR>", opts)
 map('n', '<C-n>', ':Telescope frecency<CR>', opts)
 
-local local_leader_options = {
+local options = {
   mode = 'n',
-  prefix = '<LocalLeader>',
 }
 
-local local_leader_mappings = {
-  g = { '<Cmd>Telescope live_grep<CR>', 'Search Codebase' },
-  s = { '<Cmd>Telescope grep_string<CR>', 'Search Cursor-word' },
-  l = { '<Cmd>Telescope current_buffer_fuzzy_find<CR>', 'Search in file' },
-  h = { '<Cmd>Telescope help_tags<CR>', 'Search Help Tags' },
-  r = { '<Cmd>Telescope resume<CR>', 'Resume Search' },
+local mappings = {
+  ['<LocalLeader>'] = {
+    g = { '<Cmd>Telescope live_grep<CR>', 'Search Codebase' },
+    s = { '<Cmd>Telescope grep_string<CR>', 'Search Cursor-word' },
+    l = { '<Cmd>Telescope current_buffer_fuzzy_find<CR>', 'Search in file' },
+    h = { '<Cmd>Telescope help_tags<CR>', 'Search Help Tags' },
+    r = { '<Cmd>Telescope resume<CR>', 'Resume Search' },
 
-  -- The mapping for searching diagnostics is maintained is `lsp` config
-  -- ['dd'] = { '<Cmd>Telescope diagnostics<CR>', 'Search Diagnostics' },
+    -- The mapping for searching diagnostics is maintained is `lsp` config
+    -- ['dd'] = { '<Cmd>Telescope diagnostics<CR>', 'Search Diagnostics' },
 
-  f = {
-    name = ' File Browser',
-    f = { "<Cmd>lua require'config.telescope-ext'.file_browser()<CR>", 'File Browser in $CWD' },
-    h = { "<Cmd>lua require'config.telescope-ext'.home_explorer()<CR>", 'File Browser in $HOME' },
-    d = { "<Cmd>lua require'config.telescope-ext'.browse_file_dir()<CR>", 'File Browser in File Dir' },
+    f = {
+      name = ' File Browser',
+      f = { "<Cmd>lua require'config.telescope-ext'.file_browser()<CR>", 'File Browser in $CWD' },
+      h = { "<Cmd>lua require'config.telescope-ext'.home_explorer()<CR>", 'File Browser in $HOME' },
+      d = { "<Cmd>lua require'config.telescope-ext'.browse_file_dir()<CR>", 'File Browser in File Dir' },
+    },
+  },
+
+  ['<Leader>'] = {
+    r = { '<Cmd>Telescope lsp_references<CR>', 'File References via LSP' },
+
+    f = {
+      name = ' Telescope',
+      k = { '<Cmd>Telescope keymaps<CR>', 'Search Mappings' },
+      p = { '<Cmd>Telescope persisted<CR>', 'Search Sessions' },
+      c = { '<Cmd>Telescope commands<CR>', 'Search Commands' },
+      g = { '<Cmd>Telescope git_commits<CR>', 'Search Commits' },
+      m = { '<Cmd>Telescope git_bcommits<CR>', 'Search Buffer Commits' },
+      b = { '<Cmd>Telescope git_branches<CR>', 'Search Branches' },
+      s = { '<Cmd>Telescope git_status<CR>', 'Search Git Status' },
+      v = { '<Cmd>Telescope vim_options<CR>', 'Search Nvim Options' },
+    },
   },
 }
 
-wk.register(local_leader_mappings, local_leader_options)
-
-local leader_options = {
-  mode = 'n',
-  prefix = '<Leader>',
-}
-
-local leader_mappings = {
-  r = { '<Cmd>Telescope lsp_references<CR>', 'File References via LSP' },
-
-  f = {
-    name = ' Telescope',
-    k = { '<Cmd>Telescope keymaps<CR>', 'Search Mappings' },
-    p = { '<Cmd>Telescope persisted<CR>', 'Search Sessions' },
-    c = { '<Cmd>Telescope commands<CR>', 'Search Commands' },
-    g = { '<Cmd>Telescope git_commits<CR>', 'Search Commits' },
-    m = { '<Cmd>Telescope git_bcommits<CR>', 'Search Buffer Commits' },
-    b = { '<Cmd>Telescope git_branches<CR>', 'Search Branches' },
-    s = { '<Cmd>Telescope git_status<CR>', 'Search Git Status' },
-    v = { '<Cmd>Telescope vim_options<CR>', 'Search Nvim Options' },
-  },
-}
-
-wk.register(leader_mappings, leader_options)
+wk.register(mappings, options)

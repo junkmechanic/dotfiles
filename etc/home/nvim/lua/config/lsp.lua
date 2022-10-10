@@ -22,21 +22,7 @@ local mappings = {
   ['gt'] = { vim.diagnostic.open_float, 'Show LSP Diagnostics' },
   ['[d'] = { vim.diagnostic.goto_prev, 'Previous LSP Diagnostics Hunk' },
   [']d'] = { vim.diagnostic.goto_next, 'Next LSP Diagnostics Hunk' },
-}
-
-wk.register(mappings, options)
-
--- The mapping for quickfix diagnostics is set in `trouble` config
--- vim.keymap.set('n', '<LocalLeader>dq', vim.diagnostic.setloclist, opts)
-
-local navic = require 'nvim-navic'
-
-local on_attach = function(client, bufnr)
-  local a_options = {
-    mode = 'n',
-    prefix = '<LocalLeader>',
-  }
-  local a_mappings = {
+  ['<LocalLeader>'] = {
     d = {
       name = ' LSP + Diagnostics',
       -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -51,12 +37,20 @@ local on_attach = function(client, bufnr)
     },
 
     t = { '<Cmd>Trouble workspace_diagnostics<CR>', 'List Workspace Diagnostics' },
-  }
-  wk.register(a_mappings, a_options)
+  },
+}
 
-  -- The mapping for listing references is set in the `telescope` config to `<Leader>r`
-  -- vim.keymap.set('n', '<LocalLeader>dr', vim.lsp.buf.references, bufopts)
+wk.register(mappings, options)
 
+-- The mapping for listing references is set in the `telescope` config to `<Leader>r`
+-- vim.keymap.set('n', '<LocalLeader>dr', vim.lsp.buf.references, bufopts)
+
+-- The mapping for quickfix diagnostics is set in `trouble` config
+-- vim.keymap.set('n', '<LocalLeader>dq', vim.diagnostic.setloclist, opts)
+
+local navic = require 'nvim-navic'
+
+local on_attach = function(client, bufnr)
   if client.name ~= 'bashls' and client.name ~= 'dockerls' and client.name ~= 'sqlls' then
     navic.attach(client, bufnr)
   end

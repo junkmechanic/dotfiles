@@ -184,6 +184,7 @@ alias pipgrep="pip freeze | grep"
 alias psgrep="ps aux | grep -v grep | grep"
 alias rsync="noglob rsync --human-readable --partial --progress --rsh=ssh"
 alias scp="noglob scp"
+alias ls="lsd"
 alias sl="ls"
 alias tmat="tmux attach"
 alias tree="exa --long --tree"
@@ -381,7 +382,7 @@ ccd() {
 # homebrew with fzf
 bip() {
     local to_install=$( { brew formulae; brew casks; } | \
-            fzf-tmux ${FZF_DEFAULT_OPTS} \
+        fzf-tmux ${FZF_DEFAULT_OPTS} \
         -m --header='[brew:search]' --preview 'brew info {}')
 
     if [[ $to_install ]]; then

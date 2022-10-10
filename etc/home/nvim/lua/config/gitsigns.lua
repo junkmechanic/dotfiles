@@ -1,12 +1,14 @@
 require('gitsigns').setup()
 
+local wk = require 'which-key'
+
 local options = {
   mode = 'n',
 }
 
 local mappings = {
-  ['[g'] = { vim.diagnostic.goto_prev, 'Previous LSP Diagnostics Hunk' },
-  [']g'] = { vim.diagnostic.goto_next, 'Next LSP Diagnostics Hunk' },
+  ['[g'] = { '<Cmd>Gitsigns prev_hunk<CR>', 'Previous Git Hunk' },
+  [']g'] = { '<Cmd>Gitsigns next_hunk<CR>', 'Next Git Hunk' },
 }
 
 wk.register(mappings, options)

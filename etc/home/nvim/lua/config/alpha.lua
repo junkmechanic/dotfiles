@@ -1,17 +1,45 @@
 local alpha = require 'alpha'
 local dashboard = require 'alpha.themes.dashboard'
 
+local function button(shortcut, txt, keybind, keybind_opts)
+  local opts = {
+    position = 'center',
+    shortcut = shortcut,
+    cursor = 5,
+    width = 50,
+    align_shortcut = 'right',
+    hl_shortcut = 'Keyword',
+  }
+  if keybind then
+    keybind_opts = vim.F.if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
+    opts.keymap = { 'n', shortcut, keybind, keybind_opts }
+  end
+
+  local function on_press()
+    local key = vim.api.nvim_replace_termcodes(shortcut, true, false, true)
+    vim.api.nvim_feedkeys(key, 't', false)
+  end
+
+  return {
+    type = 'button',
+    val = txt,
+    on_press = on_press,
+    opts = opts,
+  }
+end
+
 dashboard.section.buttons.val = {
-  dashboard.button('e', '  New file', ':ene <BAR> startinsert <CR>'),
-  dashboard.button('m', 'פּ  File Tree', ':NvimTreeOpen <CR>'),
-  dashboard.button('d', '  Diff View', ':DiffviewOpen <CR>'),
-  dashboard.button('p', '  Open file', ':Telescope find_files <CR>'),
-  dashboard.button('n', '  Recently used files', ':Telescope frecency <CR>'),
-  dashboard.button('g', '  Search text', ':Telescope live_grep <CR>'),
-  dashboard.button('s', '  Open Session', ':SessionLoad <CR>'),
-  dashboard.button('z', '  Shell Config', ':e ~/.zshrc<CR>'),
-  dashboard.button('t', '  Tmux Config', ':e ~/.tmux.conf<CR>'),
-  dashboard.button('q', '  Quit Neovim', ':qa<CR>'),
+  button('e', '  New file', ':ene <CR>'),
+  button('i', '  Insert new', ':ene <BAR> startinsert <CR>'),
+  button('m', 'פּ  File Tree', ':NvimTreeOpen <CR>'),
+  button('d', '  Diff View', ':DiffviewOpen <CR>'),
+  button('p', '  Open file', ':Telescope find_files <CR>'),
+  button('n', '  Recent files', ':Telescope frecency <CR>'),
+  button('g', '  Search text', ':Telescope live_grep <CR>'),
+  button('s', '  Open Session', ':SessionLoad <CR>'),
+  button('z', '  Shell Config', ':e ~/.zshrc<CR>'),
+  button('t', '  Tmux Config', ':e ~/.tmux.conf<CR>'),
+  button('q', '  Quit Neovim', ':qa<CR>'),
 }
 
 local function footer()
@@ -39,7 +67,5 @@ dashboard.section.footer.val = footer()
 dashboard.section.footer.opts.hl = 'Type'
 dashboard.section.header.opts.hl = 'Include'
 dashboard.section.buttons.opts.hl = 'Keyword'
-
--- dashboard.opts.opts.noautocmd = true
 
 alpha.setup(dashboard.opts)

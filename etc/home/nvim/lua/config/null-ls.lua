@@ -13,7 +13,7 @@ nls.setup {
     formatting.blue,
     formatting.deno_fmt,
     formatting.isort,
-    formatting.json_tool,
+    -- formatting.json_tool,
     formatting.sqlfluff.with {
       extra_args = { '--dialect', 'redshift' },
     },
@@ -22,7 +22,7 @@ nls.setup {
 
     diagnostics.cfn_lint,
     diagnostics.hadolint,
-    diagnostics.jsonlint,
+    -- diagnostics.jsonlint,
     diagnostics.pylama,
     diagnostics.shellcheck,
     diagnostics.sqlfluff.with {
