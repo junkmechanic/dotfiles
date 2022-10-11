@@ -1,7 +1,11 @@
--- NvimTree startup
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
+
 require('nvim-tree').setup {
   disable_netrw = true,
+  open_on_setup = true,
   view = {
+    adaptive_size = true,
     mappings = {
       list = {
         -- Convenience mappings
@@ -13,8 +17,11 @@ require('nvim-tree').setup {
       },
     },
   },
-
-  -- TODO : ignore __pycache__
+  filters = {
+    custom = {
+      '__pycache__',
+    },
+  },
 }
 
 -- Invocation mapping

@@ -34,6 +34,10 @@ local mappings = {
     m = 'Next Tab',
     n = 'Previous Tab',
   },
+  ['<LocalLeader>'] = {
+    n = 'File Browser',
+    m = 'Current File in Browser',
+  },
 }
 
 wk.register(mappings, options)
