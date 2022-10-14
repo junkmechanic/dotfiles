@@ -6,6 +6,7 @@
         "packer_plugins",
         "require",
         "pcall",
-        "pairs"
+        "pairs",
+        "ipairs"
     ]
 }

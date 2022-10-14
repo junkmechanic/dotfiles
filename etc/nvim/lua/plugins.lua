@@ -136,14 +136,28 @@ packer.startup(function()
     end,
   }
   use {
+    'williamboman/mason.nvim',
+    config = function()
+      require 'config.mason'
+    end,
+  }
+  -- mason-lspconfig will be setup with lsp
+  use { 'williamboman/mason-lspconfig.nvim' }
+  -- mason and its extensions should be setup before lsp
+  use {
     'neovim/nvim-lspconfig',
     requires = {
-      'williamboman/nvim-lsp-installer',
       'onsails/lspkind-nvim',
       'SmiteshP/nvim-navic',
     },
     config = function()
       require 'config.lsp'
+    end,
+  }
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function()
+      require 'config.null-ls'
     end,
   }
   use {
@@ -267,12 +281,6 @@ packer.startup(function()
     'anuvyklack/hydra.nvim',
     config = function()
       require 'config.hydra'
-    end,
-  }
-  use {
-    'jose-elias-alvarez/null-ls.nvim',
-    config = function()
-      require 'config.null-ls'
     end,
   }
   use {

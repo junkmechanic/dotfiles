@@ -1,5 +1,18 @@
-require('nvim-lsp-installer').setup {
-  automatic_installation = true,
+local servers = {
+  'bashls',
+  'dockerls',
+  'jsonls',
+  'pyright',
+  'sumneko_lua',
+  'sqlls',
+  'terraformls',
+  'yamlls',
+  'vimls',
+}
+
+-- Set up mason-lspconfig before lsp itself
+require('mason-lspconfig').setup {
+  ensure_installed = servers,
 }
 
 local wk = require 'which-key'
@@ -57,7 +70,7 @@ local on_attach = function(client, bufnr)
 
   -- Turn off formatting via `sumneko_lua` in favor of `stylua` via `null-ls`
   if client.name == 'sumneko_lua' then
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
   end
 end
 
@@ -81,18 +94,6 @@ end
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
-local servers = {
-  'bashls',
-  'dockerls',
-  'jsonls',
-  'pyright',
-  'sumneko_lua',
-  'sqlls',
-  'terraformls',
-  'yamlls',
-  'vimls',
-}
 
 for _, lsp_server in ipairs(servers) do
   lspconfig[lsp_server].setup {
