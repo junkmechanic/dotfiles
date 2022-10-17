@@ -1,7 +1,7 @@
-local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
-
-map('n', '<LocalLeader>y', ':Telescope neoclip<CR>', opts)
+require('which-key').register(
+  { ['<LocalLeader>y'] = { '<Cmd>Telescope neoclip<CR>', 'Search Clipboard' } },
+  { mode = 'n' }
+)
 
 require('neoclip').setup {
   enable_persistent_history = true,

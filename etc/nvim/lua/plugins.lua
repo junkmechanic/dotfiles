@@ -99,9 +99,9 @@ packer.startup(function()
       require 'config.hop'
     end,
   }
-  -- Load `lualine` after setting the colorscheme
   use {
     'nvim-lualine/lualine.nvim',
+    after = 'nightfox.nvim',
     config = function()
       require 'config.lualine'
     end,
@@ -141,11 +141,11 @@ packer.startup(function()
       require 'config.mason'
     end,
   }
-  -- mason-lspconfig will be setup with lsp
+  use { 'WhoIsSethDaniel/mason-tool-installer.nvim' }
   use { 'williamboman/mason-lspconfig.nvim' }
-  -- mason and its extensions should be setup before lsp
   use {
     'neovim/nvim-lspconfig',
+    after = { 'mason.nvim', 'mason-lspconfig.nvim' },
     requires = {
       'onsails/lspkind-nvim',
       'SmiteshP/nvim-navic',
@@ -156,10 +156,12 @@ packer.startup(function()
   }
   use {
     'jose-elias-alvarez/null-ls.nvim',
+    after = 'mason.nvim',
     config = function()
       require 'config.null-ls'
     end,
   }
+  use { 'jayp0521/mason-null-ls.nvim' }
   use {
     'L3MON4D3/LuaSnip',
     requires = {

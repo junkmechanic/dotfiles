@@ -88,8 +88,9 @@ local mappings = {
     h = { '<Cmd>Telescope help_tags<CR>', 'Search Help Tags' },
     r = { '<Cmd>Telescope resume<CR>', 'Resume Search' },
 
-    -- The mapping for searching diagnostics is maintained is `lsp` config
+    -- LSP specific mappings are maintained with the rest of the lsp config
     -- ['dd'] = { '<Cmd>Telescope diagnostics<CR>', 'Search Diagnostics' },
+    -- ['dr'] = { '<Cmd>Telescope lsp_references<CR>', 'Search LSP References' },
 
     f = {
       name = ' File Browser',
@@ -97,12 +98,8 @@ local mappings = {
       h = { "<Cmd>lua require'config.telescope-ext'.home_explorer()<CR>", 'File Browser in $HOME' },
       d = { "<Cmd>lua require'config.telescope-ext'.browse_file_dir()<CR>", 'File Browser in File Dir' },
     },
-  },
 
-  ['<Leader>'] = {
-    r = { '<Cmd>Telescope lsp_references<CR>', 'File References via LSP' },
-
-    f = {
+    t = {
       name = ' Telescope',
       k = { '<Cmd>Telescope keymaps<CR>', 'Search Mappings' },
       p = { '<Cmd>Telescope persisted<CR>', 'Search Sessions' },

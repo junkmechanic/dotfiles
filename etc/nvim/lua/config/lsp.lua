@@ -1,7 +1,9 @@
 local servers = {
   'bashls',
+  'cmake',
   'dockerls',
   'jsonls',
+  'marksman',
   'pyright',
   'sumneko_lua',
   'sqlls',
@@ -35,21 +37,23 @@ local mappings = {
   ['gt'] = { vim.diagnostic.open_float, 'Show LSP Diagnostics' },
   ['[d'] = { vim.diagnostic.goto_prev, 'Previous LSP Diagnostics Hunk' },
   [']d'] = { vim.diagnostic.goto_next, 'Next LSP Diagnostics Hunk' },
+
   ['<LocalLeader>'] = {
     d = {
       name = ' LSP + Diagnostics',
+
       -- See `:help vim.lsp.*` for documentation on any of the below functions
       f = { vim.lsp.buf.formatting, 'Format Buffer' },
       a = { vim.lsp.buf.code_action, 'Code Actions' },
       i = { vim.lsp.buf.hover, 'LSP Info for Cursor-word' },
       s = { vim.lsp.buf.signature_help, 'Signature Display' },
-      d = { '<Cmd>Telescope diagnostics<CR>', 'Search Diagnostics' },
-      j = { '<Cmd>vsplit | lua vim.lsp.buf.definition()<CR>', 'Goto Definition' },
+      j = { '<Cmd>tab split | lua vim.lsp.buf.definition()<CR>', 'Goto Definition' },
       t = { '<Cmd>tab split | lua vim.lsp.buf.type_definition()<CR>', 'Goto Type Definition' },
+      d = { '<Cmd>Telescope diagnostics<CR>', 'Search Project Diagnostics' },
+      r = { '<Cmd>Telescope lsp_references<CR>', 'Search LSP References' },
       q = { '<Cmd>Trouble document_diagnostics<CR>', 'List Document Diagnostics' },
+      w = { '<Cmd>Trouble workspace_diagnostics<CR>', 'List Workspace Diagnostics' },
     },
-
-    t = { '<Cmd>Trouble workspace_diagnostics<CR>', 'List Workspace Diagnostics' },
   },
 }
 
@@ -64,13 +68,9 @@ wk.register(mappings, options)
 local navic = require 'nvim-navic'
 
 local on_attach = function(client, bufnr)
+  -- initiate navic for supported lsp servers
   if client.name ~= 'bashls' and client.name ~= 'dockerls' and client.name ~= 'sqlls' then
     navic.attach(client, bufnr)
-  end
-
-  -- Turn off formatting via `sumneko_lua` in favor of `stylua` via `null-ls`
-  if client.name == 'sumneko_lua' then
-    client.server_capabilities.documentFormattingProvider = false
   end
 end
 
@@ -92,8 +92,7 @@ local function get_python_path()
 end
 
 -- Add additional capabilities supported by nvim-cmp
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 for _, lsp_server in ipairs(servers) do
   lspconfig[lsp_server].setup {
