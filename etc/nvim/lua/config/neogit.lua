@@ -1,7 +1,7 @@
-local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
-
-map('n', '<Leader>g', ':Neogit<CR>', opts)
+require('which-key').register(
+  { ['<LocalLeader>x'] = { '<Cmd>Neogit<CR>', 'Launch Neogit' } },
+  { mode = 'n' }
+)
 
 require('neogit').setup {
   signs = {

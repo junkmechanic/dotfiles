@@ -2,7 +2,8 @@
     "global": {
         "check_for_updates_on_startup": true,
         "show_in_menu_bar": true,
-        "show_profile_name_in_menu_bar": false
+        "show_profile_name_in_menu_bar": false,
+        "unsafe_ui": false
     },
     "profiles": [
         {
@@ -174,10 +175,10 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "^com\\.google\\.Chrome$",
-                                            "^org\\.torproject\\.torbrowser$",
-                                            "^com\\.brave\\.Browser$",
-                                            "^org\\.mozilla\\.firefox$"
+                                            "^com.google.Chrome$",
+                                            "^org.torproject.torbrowser$",
+                                            "^com.brave.Browser$",
+                                            "^org.mozilla.firefox$"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -207,10 +208,10 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "^com\\.google\\.Chrome$",
-                                            "^org\\.torproject\\.torbrowser$",
-                                            "^com\\.brave\\.Browser$",
-                                            "^org\\.mozilla\\.firefox$"
+                                            "^com.google.Chrome$",
+                                            "^org.torproject.torbrowser$",
+                                            "^com.brave.Browser$",
+                                            "^org.mozilla.firefox$"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -232,6 +233,65 @@
                                         "modifiers": [
                                             "left_command"
                                         ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Map Alt+Click to MiddleClick in Browsers",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.google.Chrome$",
+                                            "^org.torproject.torbrowser$",
+                                            "^com.brave.Browser$",
+                                            "^org.mozilla.firefox$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_option"
+                                        ]
+                                    },
+                                    "pointing_button": "button1"
+                                },
+                                "to": [
+                                    {
+                                        "pointing_button": "button3"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.google.Chrome$",
+                                            "^org.torproject.torbrowser$",
+                                            "^com.brave.Browser$",
+                                            "^org.mozilla.firefox$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_option"
+                                        ]
+                                    },
+                                    "pointing_button": "button1"
+                                },
+                                "to": [
+                                    {
+                                        "pointing_button": "button3"
                                     }
                                 ],
                                 "type": "basic"
@@ -573,7 +633,7 @@
             "parameters": {
                 "delay_milliseconds_before_open_device": 1000
             },
-            "selected": false,
+            "selected": true,
             "simple_modifications": [
                 {
                     "from": {
@@ -771,10 +831,10 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "^com\\.google\\.Chrome$",
-                                            "^org\\.torproject\\.torbrowser$",
-                                            "^com\\.brave\\.Browser$",
-                                            "^org\\.mozilla\\.firefox$"
+                                            "^com.google.Chrome$",
+                                            "^org.torproject.torbrowser$",
+                                            "^com.brave.Browser$",
+                                            "^org.mozilla.firefox$"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -804,10 +864,10 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "^com\\.google\\.Chrome$",
-                                            "^org\\.torproject\\.torbrowser$",
-                                            "^com\\.brave\\.Browser$",
-                                            "^org\\.mozilla\\.firefox$"
+                                            "^com.google.Chrome$",
+                                            "^org.torproject.torbrowser$",
+                                            "^com.brave.Browser$",
+                                            "^org.mozilla.firefox$"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -829,6 +889,65 @@
                                         "modifiers": [
                                             "left_command"
                                         ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Map Alt+Click to MiddleClick in Browsers",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.google.Chrome$",
+                                            "^org.torproject.torbrowser$",
+                                            "^com.brave.Browser$",
+                                            "^org.mozilla.firefox$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_option"
+                                        ]
+                                    },
+                                    "pointing_button": "button1"
+                                },
+                                "to": [
+                                    {
+                                        "pointing_button": "button3"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.google.Chrome$",
+                                            "^org.torproject.torbrowser$",
+                                            "^com.brave.Browser$",
+                                            "^org.mozilla.firefox$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_option"
+                                        ]
+                                    },
+                                    "pointing_button": "button1"
+                                },
+                                "to": [
+                                    {
+                                        "pointing_button": "button3"
                                     }
                                 ],
                                 "type": "basic"
@@ -930,7 +1049,8 @@
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": true,
-                    "simple_modifications": []
+                    "simple_modifications": [],
+                    "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -943,7 +1063,8 @@
                     },
                     "ignore": true,
                     "manipulate_caps_lock_led": false,
-                    "simple_modifications": []
+                    "simple_modifications": [],
+                    "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -956,7 +1077,8 @@
                     },
                     "ignore": true,
                     "manipulate_caps_lock_led": true,
-                    "simple_modifications": []
+                    "simple_modifications": [],
+                    "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -969,7 +1091,22 @@
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": true,
-                    "simple_modifications": []
+                    "simple_modifications": [],
+                    "treat_as_built_in_keyboard": false
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 45087,
+                        "vendor_id": 1133
+                    },
+                    "ignore": true,
+                    "manipulate_caps_lock_led": true,
+                    "simple_modifications": [],
+                    "treat_as_built_in_keyboard": false
                 }
             ],
             "fn_function_keys": [
@@ -1098,7 +1235,7 @@
             "parameters": {
                 "delay_milliseconds_before_open_device": 1000
             },
-            "selected": true,
+            "selected": false,
             "simple_modifications": [
                 {
                     "from": {

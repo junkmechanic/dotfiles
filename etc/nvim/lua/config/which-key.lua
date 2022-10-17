@@ -28,15 +28,18 @@ local options = {
 }
 
 local mappings = {
+  g = {
+    r = 'Smart Rename',
+  },
   ['<Leader>'] = {
-    w = 'Window Management',
-    z = 'Horizontal Scrolling',
     m = 'Next Tab',
     n = 'Previous Tab',
   },
   ['<LocalLeader>'] = {
     n = 'File Browser',
     m = 'Current File in Browser',
+    w = 'Window Management',
+    z = 'Horizontal Scrolling',
   },
 }
 

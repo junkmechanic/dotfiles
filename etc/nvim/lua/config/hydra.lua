@@ -13,7 +13,7 @@ Hydra {
     invoke_on_body = true,
   },
   mode = 'n',
-  body = '<Leader>z',
+  body = '<LocalLeader>z',
   heads = {
     { 'h', '5zh' },
     { 'l', '5zl', { desc = '←/→' } },
@@ -29,7 +29,7 @@ Hydra {
     invoke_on_body = true,
   },
   mode = 'n',
-  body = '<Leader>w',
+  body = '<LocalLeader>w',
   heads = {
     { 'h', '<C-w>h' },
     { 'j', '<C-w>j' },

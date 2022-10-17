@@ -43,10 +43,10 @@ local mappings = {
       name = ' LSP + Diagnostics',
 
       -- See `:help vim.lsp.*` for documentation on any of the below functions
-      f = { vim.lsp.buf.formatting, 'Format Buffer' },
       a = { vim.lsp.buf.code_action, 'Code Actions' },
       i = { vim.lsp.buf.hover, 'LSP Info for Cursor-word' },
       s = { vim.lsp.buf.signature_help, 'Signature Display' },
+      f = { '<Cmd>lua vim.lsp.buf.format({async=true})<CR>', 'Format Buffer' },
       j = { '<Cmd>tab split | lua vim.lsp.buf.definition()<CR>', 'Goto Definition' },
       t = { '<Cmd>tab split | lua vim.lsp.buf.type_definition()<CR>', 'Goto Type Definition' },
       d = { '<Cmd>Telescope diagnostics<CR>', 'Search Project Diagnostics' },

@@ -163,6 +163,13 @@ packer.startup(function()
   }
   use { 'jayp0521/mason-null-ls.nvim' }
   use {
+    'amrbashir/nvim-docs-view',
+    cmd = { 'DocsViewToggle' },
+    config = function()
+      require 'config.docs-view'
+    end,
+  }
+  use {
     'L3MON4D3/LuaSnip',
     requires = {
       'rafamadriz/friendly-snippets',
