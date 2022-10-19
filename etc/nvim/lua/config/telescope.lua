@@ -20,6 +20,10 @@ require('telescope').setup {
         ['<C-u>'] = false,
       },
     },
+    layout_config = {
+      prompt_position = 'top',
+    },
+    sorting_strategy = 'ascending',
     winblend = 10,
     dynamic_preview_title = true,
     prompt_prefix = '  ',
@@ -114,3 +118,28 @@ local mappings = {
 }
 
 wk.register(mappings, options)
+
+-- Theme
+local function get_hl_group(name)
+  local hl = vim.api.nvim_get_hl_by_name(name, vim.o.termguicolors)
+  return { fg = hl.foreground, bg = hl.background, sp = hl.special }
+end
+
+local normal = get_hl_group 'Normal'
+local fg, bg = normal.fg, normal.bg
+local bg_alt = get_hl_group('Visual').bg
+local green = get_hl_group('String').fg
+local red = get_hl_group('Error').fg
+
+vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = bg_alt, bg = bg })
+vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = bg })
+vim.api.nvim_set_hl(0, 'TelescopePreviewBorder', { fg = bg, bg = bg })
+vim.api.nvim_set_hl(0, 'TelescopePreviewNormal', { bg = bg })
+vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = bg, bg = green })
+vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = bg_alt, bg = bg_alt })
+vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = fg, bg = bg_alt })
+vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = red, bg = bg_alt })
+vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = bg, bg = red })
+vim.api.nvim_set_hl(0, 'TelescopeResultsBorder', { fg = bg, bg = bg })
+vim.api.nvim_set_hl(0, 'TelescopeResultsNormal', { bg = bg })
+vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = bg, bg = bg })
