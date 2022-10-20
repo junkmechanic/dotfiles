@@ -86,3 +86,16 @@ autocmd('Filetype', {
   pattern = { 'gitcommit', 'gitrebase', 'gitconfig' },
   command = 'set bufhidden=delete',
 })
+
+-- Watch for file changes
+-- `autoread` must be set (it is by default)
+augroup('WatchFileChange', { clear = true })
+autocmd({ 'FocusGained', 'BufEnter' }, {
+  group = 'WatchFileChange',
+  command = [[if mode() != 'c' | checktime | endif]],
+})
+-- notify of file change
+autocmd('FileChangedShellPost', {
+  group = 'WatchFileChange',
+  command = [[echohl WarningMsg | echo " ! File changed on disk. Buffer reloaded. !" | echohl None]],
+})

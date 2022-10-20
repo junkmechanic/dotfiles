@@ -40,7 +40,7 @@ local mappings = {
 
   ['<LocalLeader>'] = {
     d = {
-      name = ' LSP + Diagnostics',
+      name = ' LSP Diagnostics',
 
       -- See `:help vim.lsp.*` for documentation on any of the below functions
       a = { vim.lsp.buf.code_action, 'Code Actions' },
@@ -60,12 +60,6 @@ local mappings = {
 }
 
 wk.register(mappings, options)
-
--- The mapping for listing references is set in the `telescope` config to `<Leader>r`
--- vim.keymap.set('n', '<LocalLeader>dr', vim.lsp.buf.references, bufopts)
-
--- The mapping for quickfix diagnostics is set in `trouble` config
--- vim.keymap.set('n', '<LocalLeader>dq', vim.diagnostic.setloclist, opts)
 
 local navic = require 'nvim-navic'
 

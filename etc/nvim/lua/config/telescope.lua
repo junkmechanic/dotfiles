@@ -92,10 +92,6 @@ local mappings = {
     h = { '<Cmd>Telescope help_tags<CR>', 'Search Help Tags' },
     r = { '<Cmd>Telescope resume<CR>', 'Resume Search' },
 
-    -- LSP specific mappings are maintained with the rest of the lsp config
-    -- ['dd'] = { '<Cmd>Telescope diagnostics<CR>', 'Search Diagnostics' },
-    -- ['dr'] = { '<Cmd>Telescope lsp_references<CR>', 'Search LSP References' },
-
     f = {
       name = ' File Browser',
       f = { "<Cmd>lua require'config.telescope-ext'.file_browser()<CR>", 'File Browser in $CWD' },
