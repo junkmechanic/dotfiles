@@ -30,15 +30,22 @@ end
 
 function M.home_explorer()
   require('telescope').extensions.file_browser.file_browser {
-    prompt_title = '',
+    prompt_title = ' Home',
     cwd = '~',
   }
 end
 
 function M.browse_file_dir()
   require('telescope').extensions.file_browser.file_browser {
-    prompt_title = '' .. vim.fn.expand '%:p:h',
+    prompt_title = ' ' .. vim.fn.expand '%:p:h',
     path = '%:p:h',
+  }
+end
+
+function M.browse_plugin_dir()
+  require('telescope').extensions.file_browser.file_browser {
+    prompt_title = ' ' .. '~/.local/share/nvim/site/pack/packer',
+    path = '~/.local/share/nvim/site/pack/packer',
   }
 end
 

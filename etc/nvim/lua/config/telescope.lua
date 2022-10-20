@@ -94,9 +94,22 @@ local mappings = {
 
     f = {
       name = ' File Browser',
-      f = { "<Cmd>lua require'config.telescope-ext'.file_browser()<CR>", 'File Browser in $CWD' },
-      h = { "<Cmd>lua require'config.telescope-ext'.home_explorer()<CR>", 'File Browser in $HOME' },
-      d = { "<Cmd>lua require'config.telescope-ext'.browse_file_dir()<CR>", 'File Browser in File Dir' },
+      f = {
+        "<Cmd>lua require'config.telescope-ext'.file_browser()<CR>",
+        'File Browser in $CWD',
+      },
+      h = {
+        "<Cmd>lua require'config.telescope-ext'.home_explorer()<CR>",
+        'File Browser in $HOME',
+      },
+      d = {
+        "<Cmd>lua require'config.telescope-ext'.browse_file_dir()<CR>",
+        'File Browser in File Dir',
+      },
+      p = {
+        "<Cmd>lua require'config.telescope-ext'.browse_plugin_dir()<CR>",
+        'File Browser in Neovim Plugin Dir',
+      },
     },
 
     t = {
