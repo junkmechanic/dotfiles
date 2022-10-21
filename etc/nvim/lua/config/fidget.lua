@@ -1,8 +1,11 @@
 require('fidget').setup {
   text = {
-    spinner = 'dots_ellipsis',
+    spinner = 'star',
     done = '✔',
     commenced = '',
     completed = '',
+  },
+  window = {
+    blend = 70,
   },
 }

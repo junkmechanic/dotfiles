@@ -247,6 +247,7 @@ packer.startup(function()
       require 'config.telescope'
     end,
   }
+  use { 'LukasPietzschmann/telescope-tabs' }
   use {
     'TimUntersberger/neogit',
     config = function()
@@ -305,6 +306,14 @@ packer.startup(function()
     end,
   }
   use {
+    'folke/twilight.nvim',
+    config = function()
+      require('twilight').setup {
+        context = 20,
+      }
+    end,
+  }
+  use {
     'olimorris/persisted.nvim',
     config = function()
       require 'config.persisted'
@@ -326,6 +335,14 @@ packer.startup(function()
     'iamcco/markdown-preview.nvim',
     run = function()
       vim.fn['mkdp#util#install']()
+    end,
+  }
+  use {
+    'ziontee113/icon-picker.nvim',
+    config = function()
+      require('icon-picker').setup {
+        disable_legacy_commands = true,
+      }
     end,
   }
 

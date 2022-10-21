@@ -200,6 +200,7 @@ znt_cd_hotlist=(
     ~/devbench/main
     ~/devbench/main/data-graph
     ~/devbench/main/data-fraud
+    ~/devbench/main/data-transformations
     ~/devbench/main/data-products/fraud-detection
     ~/devbench/main/data-ml-experiment-analysis
     ~/devbench/main/data-ml-pipelines

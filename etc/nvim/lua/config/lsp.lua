@@ -65,7 +65,8 @@ local navic = require 'nvim-navic'
 
 local on_attach = function(client, bufnr)
   -- initiate navic for supported lsp servers
-  if client.name ~= 'bashls' and client.name ~= 'dockerls' and client.name ~= 'sqlls' then
+  local unsupported_servers = { 'bashls', 'dockerls', 'sqlls' }
+  if not vim.tbl_contains(unsupported_servers, client.name) then
     navic.attach(client, bufnr)
   end
 end

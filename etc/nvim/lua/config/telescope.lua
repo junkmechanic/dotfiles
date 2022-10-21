@@ -77,6 +77,10 @@ require('telescope').load_extension 'ui-select'
 require('telescope').load_extension 'file_browser'
 require('telescope').load_extension 'persisted'
 
+require('telescope-tabs').setup {
+  show_preview = false,
+}
+
 map('n', '<C-p>', "<Cmd>lua require'config.telescope-ext'.project_files()<CR>", opts)
 map('n', '<C-n>', ':Telescope frecency<CR>', opts)
 
@@ -124,6 +128,8 @@ local mappings = {
       v = { '<Cmd>Telescope vim_options<CR>', 'Search Nvim Options' },
     },
   },
+
+  ['<C-s>'] = { "<Cmd>lua require'telescope-tabs'.list_tabs()<CR>", 'Search Tabs' },
 }
 
 wk.register(mappings, options)
