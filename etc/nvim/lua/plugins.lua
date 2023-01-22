@@ -342,12 +342,6 @@ packer.startup(function()
     end,
   }
   use {
-    'pwntester/octo.nvim',
-    config = function()
-      require('octo').setup()
-    end,
-  }
-  use {
     'iamcco/markdown-preview.nvim',
     run = function()
       vim.fn['mkdp#util#install']()

@@ -9,10 +9,10 @@ require('nightfox').setup {
 
 vim.cmd 'colorscheme nordfox'
 
--- Telescope Theme
-
 local nordfox = require 'nightfox.palette.nordfox'
 local palette = nordfox.palette
+
+-- Telescope Theme
 
 vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = palette.black.base, bg = palette.black.base })
 vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = palette.black.base })

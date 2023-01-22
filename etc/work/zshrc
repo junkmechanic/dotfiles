@@ -98,11 +98,12 @@ forgit_checkout_branch=gcbf
 # Add wisely, as too many plugins slow down shell startup.
 # Keep zsh-syntax-highlighting as the last plugin
 plugins=( \
-    git gitfast docker colorize kubectl mosh pip ssh-agent sudo aws \
-    history-substring-search zsh-navigation-tools git-extras pyenv \
-    zsh-autopair forgit nvm \
-    # add plugins above this line
-    zsh-interactive-cd zsh-autosuggestions zsh-syntax-highlighting )
+        git gitfast docker colorize kubectl mosh pip ssh-agent sudo aws \
+        history-substring-search zsh-navigation-tools git-extras pyenv \
+        zsh-autopair forgit nvm \
+        # add plugins above this line
+    zsh-interactive-cd zsh-autosuggestions zsh-syntax-highlighting \
+    )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -368,7 +369,7 @@ ccd() {
 # homebrew with fzf
 bip() {
     local to_install=$( { brew formulae; brew casks; } | \
-        fzf-tmux ${FZF_DEFAULT_OPTS} \
+            fzf-tmux ${FZF_DEFAULT_OPTS} \
         -m --header='[brew:search]' --preview 'brew info {}')
 
     if [[ $to_install ]]; then
@@ -382,14 +383,14 @@ bip() {
 
 # aws-okta wrapper
 awsExec() {
-  local profile="$1"
-  shift
+    local profile="$1"
+    shift
 
-  if [[ -n "${DEBUG}" ]]; then
-      aws-okta --debug exec "${profile}" -- $@
-  else
-      aws-okta exec "${profile}" -- $@
-  fi
+    if [[ -n "${DEBUG}" ]]; then
+        aws-okta --debug exec "${profile}" -- $@
+    else
+        aws-okta exec "${profile}" -- $@
+    fi
 }
 
 # clean python cache files
@@ -400,11 +401,28 @@ pyclean() {
 }
 
 kubectlgetall() {
-  for i in $(kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq); do
-    echo "Resource:" $i
-    kubectl -n ${1} get --ignore-not-found ${i}
-  done
+    for i in $(kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq); do
+        echo "Resource:" $i
+        kubectl -n ${1} get --ignore-not-found ${i}
+    done
 }
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/usr/local/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/usr/local/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+        . "/usr/local/Caskroom/miniconda/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/usr/local/Caskroom/miniconda/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
