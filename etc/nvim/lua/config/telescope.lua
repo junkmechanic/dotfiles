@@ -70,6 +70,7 @@ require('telescope').setup {
   },
 }
 
+require('telescope').load_extension 'dap'
 require('telescope').load_extension 'fzf'
 require('telescope').load_extension 'frecency'
 require('telescope').load_extension 'neoclip'
@@ -117,15 +118,24 @@ local mappings = {
     },
 
     t = {
-      name = ' Telescope',
-      k = { '<Cmd>Telescope keymaps<CR>', 'Search Mappings' },
-      p = { '<Cmd>Telescope persisted<CR>', 'Search Sessions' },
-      c = { '<Cmd>Telescope commands<CR>', 'Search Commands' },
-      g = { '<Cmd>Telescope git_commits<CR>', 'Search Commits' },
-      m = { '<Cmd>Telescope git_bcommits<CR>', 'Search Buffer Commits' },
-      b = { '<Cmd>Telescope git_branches<CR>', 'Search Branches' },
-      s = { '<Cmd>Telescope git_status<CR>', 'Search Git Status' },
-      v = { '<Cmd>Telescope vim_options<CR>', 'Search Nvim Options' },
+      name = ' Telescope Built-ins',
+      b = { '<Cmd>Telescope git_branches<CR>', 'Branches' },
+      c = { '<Cmd>Telescope commands<CR>', 'Commands' },
+      d = {
+        name = ' DAP',
+        b = { '<Cmd>Telescope dap list_breakpoints<CR>', 'Breakpoints' },
+        c = { '<Cmd>Telescope dap commands<CR>', 'Commands' },
+        f = { '<Cmd>Telescope dap frames<CR>', 'Frames' },
+        g = { '<Cmd>Telescope dap configurations<CR>', 'Configurations' },
+        v = { '<Cmd>Telescope dap variables<CR>', 'Variables' },
+      },
+      g = { '<Cmd>Telescope git_commits<CR>', 'Commits' },
+      h = { '<Cmd>Telescope highlights<CR>', 'Highlights' },
+      k = { '<Cmd>Telescope keymaps<CR>', 'Mappings' },
+      m = { '<Cmd>Telescope git_bcommits<CR>', 'Buffer Commits' },
+      p = { '<Cmd>Telescope persisted<CR>', 'Sessions' },
+      s = { '<Cmd>Telescope git_status<CR>', 'Git Status' },
+      v = { '<Cmd>Telescope vim_options<CR>', 'Nvim Options' },
     },
   },
 
@@ -133,28 +143,3 @@ local mappings = {
 }
 
 wk.register(mappings, options)
-
--- Theme
-local function get_hl_group(name)
-  local hl = vim.api.nvim_get_hl_by_name(name, vim.o.termguicolors)
-  return { fg = hl.foreground, bg = hl.background, sp = hl.special }
-end
-
-local normal = get_hl_group 'Normal'
-local fg, bg = normal.fg, normal.bg
-local bg_alt = get_hl_group('Visual').bg
-local green = get_hl_group('String').fg
-local red = get_hl_group('Error').fg
-
-vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = bg_alt, bg = bg })
-vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = bg })
-vim.api.nvim_set_hl(0, 'TelescopePreviewBorder', { fg = bg, bg = bg })
-vim.api.nvim_set_hl(0, 'TelescopePreviewNormal', { bg = bg })
-vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = bg, bg = green })
-vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = bg_alt, bg = bg_alt })
-vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = fg, bg = bg_alt })
-vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = red, bg = bg_alt })
-vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = bg, bg = red })
-vim.api.nvim_set_hl(0, 'TelescopeResultsBorder', { fg = bg, bg = bg })
-vim.api.nvim_set_hl(0, 'TelescopeResultsNormal', { bg = bg })
-vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = bg, bg = bg })

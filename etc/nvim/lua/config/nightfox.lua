@@ -8,3 +8,17 @@ require('nightfox').setup {
 }
 
 vim.cmd 'colorscheme nordfox'
+
+-- Telescope Theme
+
+local nordfox = require 'nightfox.palette.nordfox'
+local palette = nordfox.palette
+
+vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = palette.black.base, bg = palette.black.base })
+vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = palette.black.base })
+vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { bg = palette.black.base })
+vim.api.nvim_set_hl(0, 'TelescopePromptPrefix', { fg = palette.red.base, bg = palette.black.base })
+vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = palette.black.base, bg = palette.red.base })
+vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = palette.black.base, bg = palette.green.base })
+vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = palette.black.base, bg = palette.blue.base })
+vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = palette.blue.base, bg = palette.bg2 })

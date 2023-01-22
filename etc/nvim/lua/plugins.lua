@@ -179,6 +179,15 @@ packer.startup(function()
     end,
   }
   use {
+    'mfussenegger/nvim-dap',
+    requires = {
+      'mfussenegger/nvim-dap-python',
+    },
+    config = function()
+      require 'config.dap'
+    end,
+  }
+  use {
     'simrat39/symbols-outline.nvim',
     config = function()
       require 'config.symbols-outline'
@@ -232,6 +241,8 @@ packer.startup(function()
       'nvim-telescope/telescope-frecency.nvim',
       'nvim-telescope/telescope-ui-select.nvim',
       'nvim-telescope/telescope-file-browser.nvim',
+      'nvim-telescope/telescope-dap.nvim',
+      'LukasPietzschmann/telescope-tabs',
       { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
       {
         'AckslD/nvim-neoclip.lua',
@@ -247,7 +258,6 @@ packer.startup(function()
       require 'config.telescope'
     end,
   }
-  use { 'LukasPietzschmann/telescope-tabs' }
   use {
     'TimUntersberger/neogit',
     config = function()
@@ -329,6 +339,12 @@ packer.startup(function()
     'sindrets/winshift.nvim',
     config = function()
       require('winshift').setup()
+    end,
+  }
+  use {
+    'pwntester/octo.nvim',
+    config = function()
+      require('octo').setup()
     end,
   }
   use {
