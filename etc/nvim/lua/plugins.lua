@@ -182,6 +182,7 @@ packer.startup(function()
     'mfussenegger/nvim-dap',
     requires = {
       'mfussenegger/nvim-dap-python',
+      'rcarriga/nvim-dap-ui',
     },
     config = function()
       require 'config.dap'
