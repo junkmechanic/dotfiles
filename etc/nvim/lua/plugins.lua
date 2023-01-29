@@ -183,6 +183,7 @@ packer.startup(function()
     requires = {
       'mfussenegger/nvim-dap-python',
       'rcarriga/nvim-dap-ui',
+      'jayp0521/mason-nvim-dap.nvim',
     },
     config = function()
       require 'config.dap'
@@ -244,6 +245,7 @@ packer.startup(function()
       'nvim-telescope/telescope-file-browser.nvim',
       'nvim-telescope/telescope-dap.nvim',
       'LukasPietzschmann/telescope-tabs',
+      'paopaol/telescope-git-diffs.nvim',
       { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
       {
         'AckslD/nvim-neoclip.lua',
@@ -319,9 +321,7 @@ packer.startup(function()
   use {
     'folke/twilight.nvim',
     config = function()
-      require('twilight').setup {
-        context = 20,
-      }
+      require 'config.twilight'
     end,
   }
   use {

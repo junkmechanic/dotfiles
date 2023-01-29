@@ -4,11 +4,8 @@ local splits = require 'smart-splits'
 local cmd = require('hydra.keymap-util').cmd
 local pcmd = require('hydra.keymap-util').pcmd
 
--- Set more pleasant colors
-vim.api.nvim_set_hl(0, 'HydraRed', { fg = '#519aba' })
-
 Hydra {
-  name = 'Side Scroll',
+  name = 'Horizontal Scrolling',
   config = {
     invoke_on_body = true,
   },

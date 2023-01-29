@@ -49,4 +49,4 @@ set.fillchars = { eob = ' ' } -- dont show any characters at the end of the buff
 
 set.grepprg = 'rg --hidden --vimgrep --smart-case --' -- use rg for grep
 
-set.switchbuf = 'useopen,usetab' -- switch to open tab when using qf oro :sbuffer
+set.switchbuf = 'useopen,usetab,newtab' -- switch to open tab when using qf oro :sbuffer

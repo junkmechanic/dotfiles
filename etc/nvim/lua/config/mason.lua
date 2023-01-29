@@ -10,3 +10,7 @@ require('mason-tool-installer').setup {
     'deno',
   },
 }
+
+require('mason-nvim-dap').setup {
+  ensure_installed = { 'bash' },
+}

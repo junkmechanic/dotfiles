@@ -71,12 +71,13 @@ require('telescope').setup {
 }
 
 require('telescope').load_extension 'dap'
-require('telescope').load_extension 'fzf'
-require('telescope').load_extension 'frecency'
-require('telescope').load_extension 'neoclip'
-require('telescope').load_extension 'ui-select'
 require('telescope').load_extension 'file_browser'
+require('telescope').load_extension 'frecency'
+require('telescope').load_extension 'fzf'
+require('telescope').load_extension 'git_diffs'
+require('telescope').load_extension 'neoclip'
 require('telescope').load_extension 'persisted'
+require('telescope').load_extension 'ui-select'
 
 require('telescope-tabs').setup {
   show_preview = false,
@@ -121,14 +122,6 @@ local mappings = {
       name = ' Telescope Built-ins',
       b = { '<Cmd>Telescope git_branches<CR>', 'Branches' },
       c = { '<Cmd>Telescope commands<CR>', 'Commands' },
-      d = {
-        name = ' DAP',
-        b = { '<Cmd>Telescope dap list_breakpoints<CR>', 'Breakpoints' },
-        c = { '<Cmd>Telescope dap commands<CR>', 'Commands' },
-        f = { '<Cmd>Telescope dap frames<CR>', 'Frames' },
-        g = { '<Cmd>Telescope dap configurations<CR>', 'Configurations' },
-        v = { '<Cmd>Telescope dap variables<CR>', 'Variables' },
-      },
       g = { '<Cmd>Telescope git_commits<CR>', 'Commits' },
       h = { '<Cmd>Telescope highlights<CR>', 'Highlights' },
       k = { '<Cmd>Telescope keymaps<CR>', 'Mappings' },

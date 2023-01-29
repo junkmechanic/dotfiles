@@ -32,12 +32,13 @@ local mappings = {
     r = 'Smart Rename',
   },
   ['<Leader>'] = {
+    b = 'DAP Controls',
     m = 'Next Tab',
     n = 'Previous Tab',
   },
   ['<LocalLeader>'] = {
-    n = 'File Browser',
-    m = 'Current File in Browser',
+    n = 'File Tree',
+    m = 'Current File in Tree',
     w = 'Window Management',
     z = 'Horizontal Scrolling',
   },
