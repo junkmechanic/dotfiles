@@ -3,7 +3,6 @@ vim.g.loaded_netrwPlugin = 1
 
 require('nvim-tree').setup {
   disable_netrw = true,
-  open_on_setup = true,
   view = {
     adaptive_size = true,
     mappings = {

@@ -122,6 +122,7 @@ local mappings = {
       name = ' Telescope Built-ins',
       b = { '<Cmd>Telescope git_branches<CR>', 'Branches' },
       c = { '<Cmd>Telescope commands<CR>', 'Commands' },
+      f = { '<Cmd>Telescope buffers<CR>', 'Buffers' },
       g = { '<Cmd>Telescope git_commits<CR>', 'Commits' },
       h = { '<Cmd>Telescope highlights<CR>', 'Highlights' },
       k = { '<Cmd>Telescope keymaps<CR>', 'Mappings' },

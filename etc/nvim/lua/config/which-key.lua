@@ -32,7 +32,6 @@ local mappings = {
     r = 'Smart Rename',
   },
   ['<Leader>'] = {
-    b = 'DAP Controls',
     m = 'Next Tab',
     n = 'Previous Tab',
   },

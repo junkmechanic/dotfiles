@@ -61,11 +61,13 @@ local mappings = {
   ['<LocalLeader>'] = {
     b = {
       name = ' DAP',
+
       c = { '<Cmd>Telescope dap commands<CR>', 'Commands' },
       f = { '<Cmd>Telescope dap frames<CR>', 'Frames' },
       g = { '<Cmd>Telescope dap configurations<CR>', 'Configurations' },
       l = { '<Cmd>Telescope dap list_breakpoints<CR>', 'Breakpoints' },
       v = { '<Cmd>Telescope dap variables<CR>', 'Variables' },
+
       b = { dap.toggle_breakpoint, 'Toggle Breakpoint' },
       d = { dapui.toggle, 'Toggle DAP-UI' },
       e = { dapui.eval, 'Eval' },
@@ -77,6 +79,11 @@ local mappings = {
       r = { dap.run_to_cursor, 'Run to Cursor' },
       s = { dap.continue, 'Continue' },
       x = { dap.terminate, 'Close Debugger' },
+
+      B = {
+        "<Cmd>lua require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')<CR>",
+        'Breakpoint condition',
+      },
     },
   },
 }

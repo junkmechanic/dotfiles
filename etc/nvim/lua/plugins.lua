@@ -4,8 +4,11 @@ local fn = vim.fn
 -- stdpath('data') is `~/.local/share/nvim`
 local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 
+local is_bootstrap = false
+
 if fn.empty(fn.glob(install_path)) > 0 then
-  PackerBootstrap = fn.system {
+  is_bootstrap = true
+  fn.system {
     'git',
     'clone',
     '--depth',
@@ -13,15 +16,8 @@ if fn.empty(fn.glob(install_path)) > 0 then
     'https://github.com/wbthomason/packer.nvim',
     install_path,
   }
+  vim.cmd [[packadd packer.nvim]]
 end
-
--- Reload packer config when saving this file
-vim.api.nvim_create_augroup('PackerUserConfig', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-  group = 'PackerUserConfig',
-  pattern = 'plugins.lua',
-  command = 'source <afile> | PackerSync',
-})
 
 -- Protected call to load packer
 local status_ok, packer = pcall(require, 'packer')
@@ -32,7 +28,7 @@ end
 -- Custom packer initialisatioon
 packer.init {
 
-  max_jobs = 40,
+  max_jobs = 10,
 
   -- Have packer use a popup window
   display = {
@@ -42,7 +38,7 @@ packer.init {
   },
 }
 
-packer.startup(function()
+packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'kyazdani42/nvim-web-devicons'
   use 'nvim-lua/plenary.nvim'
@@ -149,6 +145,7 @@ packer.startup(function()
     requires = {
       'onsails/lspkind-nvim',
       'SmiteshP/nvim-navic',
+      'rmagatti/goto-preview',
     },
     config = function()
       require 'config.lsp'
@@ -359,7 +356,28 @@ packer.startup(function()
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
-  if PackerBootstrap then
-    require('packer').sync()
+  if is_bootstrap then
+    packer.sync()
   end
 end)
+
+-- When we are bootstrapping a configuration, it doesn't
+-- make sense to execute the rest of the init.lua.
+--
+-- You'll need to restart nvim, and then it will work.
+if is_bootstrap then
+  print '=================================='
+  print '    Plugins are being installed'
+  print '    Wait until Packer completes,'
+  print '       then restart nvim'
+  print '=================================='
+  return
+end
+
+-- Reload packer config when saving this file
+local packer_group = vim.api.nvim_create_augroup('PackerUserConfig', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePost', {
+  group = packer_group,
+  pattern = 'plugins.lua',
+  command = 'source <afile> | silent! LspStop | silent! LspStart | PackerCompile',
+})
