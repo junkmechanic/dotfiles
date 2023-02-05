@@ -181,6 +181,7 @@ packer.startup(function(use)
       'mfussenegger/nvim-dap-python',
       'rcarriga/nvim-dap-ui',
       'jayp0521/mason-nvim-dap.nvim',
+      'jbyuki/one-small-step-for-vimkind',
     },
     config = function()
       require 'config.dap'

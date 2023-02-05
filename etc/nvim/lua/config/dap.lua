@@ -6,7 +6,7 @@ local wk = require 'which-key'
 
 require('dap-python').setup '~/.pyenv/versions/3.9.0/envs/py3nvim/bin/python'
 
--- bash adapter config
+-- bash adapter setup
 
 dap.adapters.bashdb = {
   type = 'executable',
@@ -35,6 +35,20 @@ dap.configurations.sh = {
     terminalKind = 'integrated',
   },
 }
+
+-- nvim lua adapter setup
+
+dap.configurations.lua = {
+  {
+    type = 'nlua',
+    request = 'attach',
+    name = 'Attach to running Neovim instance',
+  },
+}
+
+dap.adapters.nlua = function(callback, config)
+  callback { type = 'server', host = config.host or '127.0.0.1', port = config.port or 8086 }
+end
 
 -- DAP-UI Setup
 
@@ -66,7 +80,7 @@ local mappings = {
       f = { '<Cmd>Telescope dap frames<CR>', 'Frames' },
       g = { '<Cmd>Telescope dap configurations<CR>', 'Configurations' },
       l = { '<Cmd>Telescope dap list_breakpoints<CR>', 'Breakpoints' },
-      v = { '<Cmd>Telescope dap variables<CR>', 'Variables' },
+      V = { '<Cmd>Telescope dap variables<CR>', 'Variables' },
 
       b = { dap.toggle_breakpoint, 'Toggle Breakpoint' },
       d = { dapui.toggle, 'Toggle DAP-UI' },
@@ -80,8 +94,9 @@ local mappings = {
       s = { dap.continue, 'Continue' },
       x = { dap.terminate, 'Close Debugger' },
 
+      v = { '<Cmd>lua require("osv").launch({port = 8086})<CR>', 'Start OSV' },
       B = {
-        "<Cmd>lua require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')<CR>",
+        '<Cmd>lua require("dap").set_breakpoint(vim.fn.input "Breakpoint condition: ")<CR>',
         'Breakpoint condition',
       },
     },

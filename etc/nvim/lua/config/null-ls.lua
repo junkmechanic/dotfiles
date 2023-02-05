@@ -38,6 +38,7 @@ nls.setup {
   },
   on_attach = function(client, bufnr)
     -- If formatter is available, then autoformat the file on save
+    -- To disable format-on-save temporarily, use ` :noautocmd w `
     if client.server_capabilities.documentFormattingProvider then
       vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
       vim.api.nvim_create_autocmd('BufWritePre', {
