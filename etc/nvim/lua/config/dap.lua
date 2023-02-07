@@ -4,7 +4,14 @@ local widgets = require 'dap.ui.widgets'
 
 local wk = require 'which-key'
 
+-- python adapter setup
+
 require('dap-python').setup '~/.pyenv/versions/3.9.0/envs/py3nvim/bin/python'
+
+local configurations = require('dap').configurations.python
+-- `justMyCode` is valid for launch confgiurations only
+configurations[1].justMyCode = false
+configurations[2].justMyCode = false
 
 -- bash adapter setup
 

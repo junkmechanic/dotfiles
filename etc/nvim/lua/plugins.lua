@@ -72,6 +72,9 @@ packer.startup(function(use)
   }
   use {
     'lewis6991/gitsigns.nvim',
+    requires = {
+      'rbong/vim-flog',
+    },
     config = function()
       require 'config.gitsigns'
     end,

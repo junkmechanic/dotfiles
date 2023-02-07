@@ -123,6 +123,7 @@ local mappings = {
       b = { '<Cmd>Telescope git_branches<CR>', 'Branches' },
       c = { '<Cmd>Telescope commands<CR>', 'Commands' },
       C = { '<Cmd>Telescope command_history<CR>', 'Command History' },
+      d = { '<Cmd>Telescope git_diffs diff_commits<CR>', 'Commit Diffs' },
       f = { '<Cmd>Telescope buffers<CR>', 'Buffers' },
       g = { '<Cmd>Telescope git_commits<CR>', 'Commits' },
       h = { '<Cmd>Telescope highlights<CR>', 'Highlights' },
