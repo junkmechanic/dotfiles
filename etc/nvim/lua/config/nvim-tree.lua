@@ -24,7 +24,17 @@ require('nvim-tree').setup {
 }
 
 -- Invocation mapping
-vim.keymap.set('n', '<LocalLeader>n', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+vim.keymap.set(
+  'n',
+  '<LocalLeader>n',
+  ':NvimTreeToggle<CR>',
+  { noremap = true, silent = true, desc = 'nvim-tree' }
+)
 
 -- Locate the current file in the tree
-vim.keymap.set('n', '<LocalLeader>m', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
+vim.keymap.set(
+  'n',
+  '<LocalLeader>m',
+  ':NvimTreeFindFileToggle<CR>',
+  { noremap = true, silent = true, desc = 'Current file in nvim-tree' }
+)

@@ -31,13 +31,7 @@ local mappings = {
   g = {
     r = 'Smart Rename',
   },
-  ['<Leader>'] = {
-    m = 'Next Tab',
-    n = 'Previous Tab',
-  },
   ['<LocalLeader>'] = {
-    n = 'File Tree',
-    m = 'Current File in Tree',
     w = 'Window Management',
     z = 'Horizontal Scrolling',
   },

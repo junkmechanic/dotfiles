@@ -1,20 +1,17 @@
-local keyopts = { noremap = true, silent = true }
-vim.keymap.set({ 'n', 'v', 'o' }, 'H', require('tree-climber').goto_parent, keyopts)
-vim.keymap.set({ 'n', 'v', 'o' }, 'L', require('tree-climber').goto_child, keyopts)
-vim.keymap.set({ 'n', 'v', 'o' }, 'J', require('tree-climber').goto_next, keyopts)
-vim.keymap.set({ 'n', 'v', 'o' }, 'K', require('tree-climber').goto_prev, keyopts)
-
 require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all"
   ensure_installed = {
     'bash',
+    'c',
     'dockerfile',
     'hcl',
+    'help',
     'json',
     'lua',
     'make',
     'markdown',
     'python',
+    'query',
     'sql',
     'vim',
     'yaml',
@@ -62,6 +59,32 @@ require('nvim-treesitter.configs').setup {
         smart_rename = 'gr',
       },
     },
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = {
+        ['al'] = '@loop.outer',
+        ['il'] = '@loop.inner',
+        ['ac'] = '@conditional.outer',
+        ['ic'] = '@conditional.inner',
+        ['a,'] = '@parameter.outer',
+        ['i,'] = '@parameter.inner',
+      },
+    },
+    swap = {
+      enable = true,
+      swap_next = {
+        ['<Leader>w'] = '@parameter.inner',
+      },
+      swap_previous = {
+        ['<Leader>W'] = '@parameter.inner',
+      },
+    },
+  },
+  playground = {
+    enable = true,
   },
 }
 

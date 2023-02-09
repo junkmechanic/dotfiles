@@ -54,8 +54,8 @@ map('v', '>', '>gv')
 map('n', 'gV', '`[v`]')
 
 -- Tab navigation
-map('n', '<Leader>n', '<Esc>:tabprevious<CR>')
-map('n', '<Leader>m', '<Esc>:tabnext<CR>')
+map('n', '<Leader>n', '<Esc>:tabprevious<CR>', { desc = 'Previous Tab' })
+map('n', '<Leader>m', '<Esc>:tabnext<CR>', { desc = 'Next Tab' })
 
 -- Swapping <c-p> with <up> in ex mode (and the companions)
 vim.keymap.set('c', '<C-k>', '<Up>', { noremap = true })

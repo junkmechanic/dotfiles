@@ -227,7 +227,8 @@ packer.startup(function(use)
     requires = {
       'nvim-treesitter/nvim-treesitter-context',
       'nvim-treesitter/nvim-treesitter-refactor',
-      'drybalka/tree-climber.nvim',
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      'nvim-treesitter/playground',
     },
     run = function()
       require('nvim-treesitter.install').update { with_sync = true }
