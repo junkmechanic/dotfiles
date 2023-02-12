@@ -31,6 +31,12 @@ local mappings = {
   g = {
     r = 'Smart Rename',
   },
+  ['<Leader>'] = {
+    b = 'Swap Master Node with next',
+    B = 'Swap Master Node with previous',
+    w = 'Swap Current Node with next',
+    W = 'Swap Current Node with previous',
+  },
   ['<LocalLeader>'] = {
     w = 'Window Management',
     z = 'Horizontal Scrolling',

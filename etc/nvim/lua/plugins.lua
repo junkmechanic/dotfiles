@@ -228,6 +228,7 @@ packer.startup(function(use)
       'nvim-treesitter/nvim-treesitter-context',
       'nvim-treesitter/nvim-treesitter-refactor',
       'nvim-treesitter/nvim-treesitter-textobjects',
+      'ziontee113/syntax-tree-surfer',
       'nvim-treesitter/playground',
     },
     run = function()

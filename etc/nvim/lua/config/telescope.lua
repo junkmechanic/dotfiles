@@ -131,6 +131,7 @@ local mappings = {
       m = { '<Cmd>Telescope git_bcommits<CR>', 'Buffer Commits' },
       p = { '<Cmd>Telescope persisted<CR>', 'Sessions' },
       s = { '<Cmd>Telescope git_status<CR>', 'Git Status' },
+      t = { '<Cmd>Telescope builtin<CR>', 'Builtin Pickers' },
       v = { '<Cmd>Telescope vim_options<CR>', 'Nvim Options' },
     },
   },

@@ -1,5 +1,4 @@
 require('nvim-treesitter.configs').setup {
-  -- A list of parser names, or "all"
   ensure_installed = {
     'bash',
     'c',
@@ -65,6 +64,8 @@ require('nvim-treesitter.configs').setup {
       enable = true,
       lookahead = true,
       keymaps = {
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
         ['al'] = '@loop.outer',
         ['il'] = '@loop.inner',
         ['ac'] = '@conditional.outer',
@@ -73,15 +74,16 @@ require('nvim-treesitter.configs').setup {
         ['i,'] = '@parameter.inner',
       },
     },
-    swap = {
-      enable = true,
-      swap_next = {
-        ['<Leader>w'] = '@parameter.inner',
-      },
-      swap_previous = {
-        ['<Leader>W'] = '@parameter.inner',
-      },
-    },
+    -- Swapping functionality is provided by syntax-tree-surfer
+    -- swap = {
+    --   enable = true,
+    --   swap_next = {
+    --     ['<Leader>w'] = '@parameter.inner',
+    --   },
+    --   swap_previous = {
+    --     ['<Leader>W'] = '@parameter.inner',
+    --   },
+    -- },
   },
   playground = {
     enable = true,
@@ -89,3 +91,41 @@ require('nvim-treesitter.configs').setup {
 }
 
 require('treesitter-context').setup {}
+
+require('syntax-tree-surfer').setup {}
+
+local opts = { noremap = true, silent = true }
+
+-- Swap The Master Node relative to the cursor with it's siblings, Dot Repeatable
+vim.keymap.set('n', '<Leader>B', function()
+  vim.opt.opfunc = 'v:lua.STSSwapUpNormal_Dot'
+  return 'g@l'
+end, { silent = true, expr = true })
+vim.keymap.set('n', '<Leader>b', function()
+  vim.opt.opfunc = 'v:lua.STSSwapDownNormal_Dot'
+  return 'g@l'
+end, { silent = true, expr = true })
+
+-- Swap Current Node at the Cursor with it's siblings
+vim.keymap.set('n', '<Leader>w', function()
+  vim.opt.opfunc = 'v:lua.STSSwapCurrentNodeNextNormal_Dot'
+  return 'g@l'
+end, { silent = true, expr = true })
+vim.keymap.set('n', '<Leader>W', function()
+  vim.opt.opfunc = 'v:lua.STSSwapCurrentNodePrevNormal_Dot'
+  return 'g@l'
+end, { silent = true, expr = true })
+
+-- Swapping Nodes in Visual Mode
+vim.keymap.set('x', '<Leader>w', '<Cmd>STSSwapNextVisual<CR>', opts)
+vim.keymap.set('x', '<Leader>W', '<Cmd>STSSwapPrevVisual<CR>', opts)
+
+-- Visual Selection from Normal Mode
+vim.keymap.set('n', 'vx', '<Cmd>STSSelectMasterNode<CR>', opts)
+vim.keymap.set('n', 'vn', '<Cmd>STSSelectCurrentNode<CR>', opts)
+
+-- Select Nodes in Visual Mode
+vim.keymap.set('x', 'J', '<Cmd>STSSelectNextSiblingNode<CR>', opts)
+vim.keymap.set('x', 'K', '<Cmd>STSSelectPrevSiblingNode<CR>', opts)
+vim.keymap.set('x', 'H', '<Cmd>STSSelectParentNode<CR>', opts)
+vim.keymap.set('x', 'L', '<Cmd>STSSelectChildNode<CR>', opts)
