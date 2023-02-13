@@ -96,7 +96,7 @@ require('syntax-tree-surfer').setup {}
 
 local opts = { noremap = true, silent = true }
 
--- Swap The Master Node relative to the cursor with it's siblings, Dot Repeatable
+-- Swap The Master Node relative to the cursor with it's siblings
 vim.keymap.set('n', '<Leader>B', function()
   vim.opt.opfunc = 'v:lua.STSSwapUpNormal_Dot'
   return 'g@l'

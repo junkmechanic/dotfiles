@@ -23,7 +23,8 @@ local function show_mixed_indent()
   if mixed_same_line ~= nil and mixed_same_line > 0 then
     return 'MI:' .. mixed_same_line
   end
-  local space_indent_cnt = vim.fn.searchcount({ pattern = space_pat, max_count = 1e3 }).total
+  local space_indent_cnt =
+    vim.fn.searchcount({ pattern = space_pat, max_count = 1e3 }).total
   local tab_indent_cnt = vim.fn.searchcount({ pattern = tab_pat, max_count = 1e3 }).total
   if space_indent_cnt > tab_indent_cnt then
     return 'MI:' .. tab_indent
@@ -37,6 +38,24 @@ local function show_persisted()
     return ''
   elseif not vim.g.persisting then
     return ''
+  end
+end
+
+local function split(input, delimiter)
+  local arr = {}
+  local _ = string.gsub(input, '[^' .. delimiter .. ']+', function(w)
+    table.insert(arr, w)
+  end)
+  return arr
+end
+
+local function get_python_venv()
+  local venv = vim.env.VIRTUAL_ENV
+  if venv then
+    local params = split(venv, '/')
+    return '  ' .. params[table.getn(params)]
+  else
+    return ''
   end
 end
 
@@ -58,9 +77,9 @@ require('lualine').setup {
     lualine_a = { 'mode' },
     lualine_b = { 'branch', 'diff', 'diagnostics' },
     lualine_c = { { 'filename', symbols = symbols } },
-    lualine_x = { 'encoding', 'fileformat', 'filetype' },
-    lualine_y = { 'progress' },
-    lualine_z = { 'location', show_trailing_whitespace, show_mixed_indent },
+    lualine_x = { get_python_venv, 'encoding', 'fileformat', 'filetype' },
+    lualine_y = { 'progress', 'location' },
+    lualine_z = { show_trailing_whitespace, show_mixed_indent },
   },
   inactive_sections = {
     lualine_c = { { 'filename', symbols = symbols } },
