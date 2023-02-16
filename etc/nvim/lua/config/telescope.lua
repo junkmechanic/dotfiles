@@ -76,7 +76,7 @@ require('telescope').load_extension 'frecency'
 require('telescope').load_extension 'fzf'
 require('telescope').load_extension 'git_diffs'
 require('telescope').load_extension 'neoclip'
-require('telescope').load_extension 'persisted'
+require('telescope').load_extension 'possession'
 require('telescope').load_extension 'ui-select'
 
 require('telescope-tabs').setup {
@@ -129,9 +129,9 @@ local mappings = {
       h = { '<Cmd>Telescope highlights<CR>', 'Highlights' },
       k = { '<Cmd>Telescope keymaps<CR>', 'Mappings' },
       m = { '<Cmd>Telescope git_bcommits<CR>', 'Buffer Commits' },
-      p = { '<Cmd>Telescope persisted<CR>', 'Sessions' },
-      s = { '<Cmd>Telescope git_status<CR>', 'Git Status' },
-      t = { '<Cmd>Telescope builtin<CR>', 'Builtin Pickers' },
+      p = { '<Cmd>Telescope builtin<CR>', 'Builtin Pickers' },
+      s = { '<Cmd>Telescope possession list<CR>', 'Sessions' },
+      t = { '<Cmd>Telescope git_status<CR>', 'Git Status' },
       v = { '<Cmd>Telescope vim_options<CR>', 'Nvim Options' },
     },
   },

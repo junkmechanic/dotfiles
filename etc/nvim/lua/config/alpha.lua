@@ -11,7 +11,8 @@ local function button(shortcut, txt, keybind, keybind_opts)
     hl_shortcut = 'Keyword',
   }
   if keybind then
-    keybind_opts = vim.F.if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
+    keybind_opts =
+      vim.F.if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
     opts.keymap = { 'n', shortcut, keybind, keybind_opts }
   end
 
@@ -36,7 +37,7 @@ dashboard.section.buttons.val = {
   button('p', '  Open file', ':Telescope find_files <CR>'),
   button('n', '  Recent files', ':Telescope frecency <CR>'),
   button('g', '  Search text', ':Telescope live_grep <CR>'),
-  button('s', '  Open Session', ':SessionLoad <CR>'),
+  button('s', '  Open Session', ':PossessionLoad <CR>'),
   button('z', '  Shell Config', ':e ~/.zshrc<CR>'),
   button('t', '  Tmux Config', ':e ~/.tmux.conf<CR>'),
   button('q', '  Quit Neovim', ':qa<CR>'),

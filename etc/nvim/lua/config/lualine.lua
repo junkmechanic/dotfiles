@@ -1,5 +1,6 @@
 local navic = require 'nvim-navic'
 local local_config = require 'config.local-config'
+local possession = require 'possession.session'
 
 local function show_trailing_whitespace()
   local space = vim.fn.search([[\s\+$]], 'nwc')
@@ -33,11 +34,11 @@ local function show_mixed_indent()
   end
 end
 
-local function show_persisted()
-  if vim.g.persisting then
-    return ''
-  elseif not vim.g.persisting then
-    return ''
+local function show_possession()
+  if possession.session_name then
+    return ''
+  else
+    return ''
   end
 end
 
@@ -89,7 +90,7 @@ require('lualine').setup {
     lualine_a = { { 'tabs', mode = 0 } },
     lualine_b = { { 'windows', symbols = symbols } },
     lualine_x = { { navic.get_location, cond = navic.is_available } },
-    lualine_y = { show_persisted },
+    lualine_y = { show_possession },
   },
   extensions = {
     'fugitive',

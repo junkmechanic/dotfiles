@@ -328,9 +328,9 @@ packer.startup(function(use)
     end,
   }
   use {
-    'olimorris/persisted.nvim',
+    'jedrzejboczar/possession.nvim',
     config = function()
-      require 'config.persisted'
+      require 'config.possession'
     end,
   }
   use {
