@@ -1,3 +1,9 @@
+vim.filetype.add {
+  pattern = {
+    ['requirements*.txt'] = 'config',
+  },
+}
+
 function _G.dd(arg)
   local res = vim.inspect(arg)
   local ok = pcall(require 'notify', res, 'debug')
