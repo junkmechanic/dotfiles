@@ -36,6 +36,7 @@ SPACESHIP_PYTHON_SYMBOL=" "
 SPACESHIP_PYTHON_COLOR="yellow"
 SPACESHIP_VENV_SYMBOL=" "
 SPACESHIP_VENV_COLOR="blue"
+SPACESHIP_LUA_SYMBOL=" "
 SPACESHIP_CHAR_SYMBOL="❯ "
 
 # Set list of themes to pick from when loading at random

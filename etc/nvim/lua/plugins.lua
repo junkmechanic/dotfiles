@@ -328,9 +328,10 @@ packer.startup(function(use)
     end,
   }
   use {
-    'jedrzejboczar/possession.nvim',
+    'rmagatti/auto-session',
+    requires = { 'rmagatti/session-lens' },
     config = function()
-      require 'config.possession'
+      require 'config.auto-session'
     end,
   }
   use {
