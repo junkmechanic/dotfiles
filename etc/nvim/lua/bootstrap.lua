@@ -4,10 +4,10 @@ vim.filetype.add {
   },
 }
 
-function _G.dd(arg)
+function _G.debug_notif(arg)
   local res = vim.inspect(arg)
-  local ok = pcall(require 'notify', res, 'debug')
+  local ok = pcall(require 'notify', res)
   if not ok then
-    print(res)
+    vim.notify(res)
   end
 end

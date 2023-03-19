@@ -328,10 +328,9 @@ packer.startup(function(use)
     end,
   }
   use {
-    'rmagatti/auto-session',
-    requires = { 'rmagatti/session-lens' },
+    'olimorris/persisted.nvim',
     config = function()
-      require 'config.auto-session'
+      require 'config.persisted'
     end,
   }
   use {
