@@ -42,7 +42,6 @@ packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'kyazdani42/nvim-web-devicons'
   use 'nvim-lua/plenary.nvim'
-  use 'simnalamburt/vim-mundo'
   use 'tpope/vim-unimpaired'
   use 'rcarriga/nvim-notify'
   use 'mrjones2014/smart-splits.nvim'
@@ -217,6 +216,21 @@ packer.startup(function(use)
     end,
   }
   use {
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    event = 'InsertEnter',
+    config = function()
+      require 'config.copilot'
+    end,
+  }
+  use {
+    'zbirenbaum/copilot-cmp',
+    after = { 'copilot.lua' },
+    config = function()
+      require('copilot_cmp').setup()
+    end,
+  }
+  use {
     'folke/trouble.nvim',
     config = function()
       require('trouble').setup()
@@ -249,6 +263,7 @@ packer.startup(function(use)
       'nvim-telescope/telescope-dap.nvim',
       'LukasPietzschmann/telescope-tabs',
       'paopaol/telescope-git-diffs.nvim',
+      'debugloop/telescope-undo.nvim',
       { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
       {
         'AckslD/nvim-neoclip.lua',

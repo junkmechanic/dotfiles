@@ -21,6 +21,7 @@ SPACESHIP_PROMPT_ORDER=(
     kubectl       # Kubectl context section
     node
     lua
+    ruby
     terraform     # Terraform workspace section
     exec_time     # Execution time
     line_sep      # Line break
@@ -37,6 +38,7 @@ SPACESHIP_PYTHON_COLOR="yellow"
 SPACESHIP_VENV_SYMBOL=" "
 SPACESHIP_VENV_COLOR="blue"
 SPACESHIP_LUA_SYMBOL=" "
+SPACESHIP_RUBY_SYMBOL=" "
 SPACESHIP_CHAR_SYMBOL="❯ "
 
 # Set list of themes to pick from when loading at random
@@ -209,48 +211,11 @@ znt_cd_hotlist=(
 # accept and execute the current suggestion with ctrl+space
 bindkey '^ ' autosuggest-execute
 
-# ruby (brew version)
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/ruby/lib"
-export CPPFLAGS="-I/usr/local/opt/ruby/include"
-
-export DEVDIR="$HOME/devbench"
-export FRDDIR="$HOME/devbench/fraud"
-
-eval "$(pyenv init --path)"
-eval "$(pyenv virtualenv-init -)"
-source $(pyenv root)/completions/pyenv.zsh
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-
-# if not using sdk-man, set java version
-# export JAVA_HOME=`/usr/libexec/java_home -v 11.0`
-
 # bat config
 export BAT_THEME="Nord"
 
 # k8s completion
-# [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
-
-# collate k8s contexts [Start]
-# collate_k8s_context() {
-#     DEFAULT_KUBE_CONTEXTS="$HOME/.kube/config"
-#     if test -f "${DEFAULT_KUBE_CONTEXTS}"
-#     then
-#         export KUBECONFIG="$DEFAULT_KUBE_CONTEXTS"
-#     fi
-#
-#     CUSTOM_KUBE_CONTEXTS="$HOME/.kube/custom-contexts"
-#     mkdir -p "${CUSTOM_KUBE_CONTEXTS}"
-#
-#     OIFS="$IFS"
-#     IFS=$'\n'
-#     for contextFile in `find "${CUSTOM_KUBE_CONTEXTS}" -type f -name "*.yaml"`
-#     do
-#         export KUBECONFIG="$contextFile:$KUBECONFIG"
-#     done
-#     IFS="$OIFS"
-# }
-# collate_k8s_context
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
 # to view path in readable format
 path() {
@@ -378,18 +343,6 @@ bip() {
     fi
 }
 
-# aws-okta wrapper
-# awsExec() {
-#     local profile="$1"
-#     shift
-#
-#     if [[ -n "${DEBUG}" ]]; then
-#         aws-okta --debug exec "${profile}" -- $@
-#     else
-#         aws-okta exec "${profile}" -- $@
-#     fi
-# }
-
 # clean python cache files
 pyclean() {
     find . | \
@@ -397,30 +350,9 @@ pyclean() {
         xargs rm -rf
 }
 
-# kubectlgetall() {
-#     for i in $(kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq); do
-#         echo "Resource:" $i
-#         kubectl -n ${1} get --ignore-not-found ${i}
-#     done
-# }
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/usr/local/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/usr/local/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
-#         . "/usr/local/Caskroom/miniconda/base/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/usr/local/Caskroom/miniconda/base/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# <<< conda initialize <<<
-
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-# export SDKMAN_DIR="$HOME/.sdkman"
-# [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+kubectlgetall() {
+    for i in $(kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq); do
+        echo "Resource:" $i
+        kubectl -n ${1} get --ignore-not-found ${i}
+    done
+}

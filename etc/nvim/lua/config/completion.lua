@@ -23,6 +23,7 @@ cmp.setup {
         spell = '暈',
         calc = '',
         luasnip = '',
+        Copilot = "",
       },
     },
   },
@@ -56,6 +57,7 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
+    { name = 'copilot' },
     { name = 'luasnip' },
     { name = 'nvim_lsp' },
     { name = 'treesitter' },

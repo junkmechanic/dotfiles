@@ -78,6 +78,7 @@ require('telescope').load_extension 'git_diffs'
 require('telescope').load_extension 'neoclip'
 require('telescope').load_extension 'persisted'
 require('telescope').load_extension 'ui-select'
+require('telescope').load_extension 'undo'
 
 require('telescope-tabs').setup {
   show_preview = false,
@@ -132,6 +133,7 @@ local mappings = {
       p = { '<Cmd>Telescope builtin<CR>', 'Builtin Pickers' },
       s = { '<Cmd>Telescope persisted<CR>', 'Sessions' },
       t = { '<Cmd>Telescope git_status<CR>', 'Git Status' },
+      u = { '<Cmd>Telescope undo<CR>', 'Undo Tree' },
       v = { '<Cmd>Telescope vim_options<CR>', 'Nvim Options' },
     },
   },
