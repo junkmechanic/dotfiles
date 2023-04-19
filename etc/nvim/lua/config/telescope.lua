@@ -58,6 +58,7 @@ require('telescope').setup {
     file_browser = {
       theme = 'ivy',
       hidden = true,
+      respect_gitignore = false,
       mappings = {
         ['i'] = {
           ['<C-a>'] = fb_actions.create,
@@ -120,21 +121,27 @@ local mappings = {
     },
 
     t = {
-      name = ' Telescope Built-ins',
-      b = { '<Cmd>Telescope git_branches<CR>', 'Branches' },
+      name = ' Telescope',
       c = { '<Cmd>Telescope commands<CR>', 'Commands' },
       C = { '<Cmd>Telescope command_history<CR>', 'Command History' },
-      d = { '<Cmd>Telescope git_diffs diff_commits<CR>', 'Commit Diffs' },
       f = { '<Cmd>Telescope buffers<CR>', 'Buffers' },
-      g = { '<Cmd>Telescope git_commits<CR>', 'Commits' },
       h = { '<Cmd>Telescope highlights<CR>', 'Highlights' },
       k = { '<Cmd>Telescope keymaps<CR>', 'Mappings' },
-      m = { '<Cmd>Telescope git_bcommits<CR>', 'Buffer Commits' },
       p = { '<Cmd>Telescope builtin<CR>', 'Builtin Pickers' },
       s = { '<Cmd>Telescope persisted<CR>', 'Sessions' },
-      t = { '<Cmd>Telescope git_status<CR>', 'Git Status' },
       u = { '<Cmd>Telescope undo<CR>', 'Undo Tree' },
       v = { '<Cmd>Telescope vim_options<CR>', 'Nvim Options' },
+
+      g = {
+        name = ' Version Control',
+        b = { '<Cmd>Telescope git_branches<CR>', 'Branches' },
+        c = { '<Cmd>Telescope git_commits<CR>', 'Commits' },
+        d = { '<Cmd>Telescope git_diffs diff_commits<CR>', 'Commit Diffs' },
+        m = { '<Cmd>Telescope git_bcommits<CR>', 'Buffer Commits' },
+        s = { '<Cmd>Telescope git_status<CR>', 'Git Status' },
+        v = { '<Cmd>DiffviewOpen<CR>', 'Diffview' },
+        w = { '<Cmd>DiffviewFileHistory %<CR>', 'Diffview Current File' },
+      },
     },
   },
 

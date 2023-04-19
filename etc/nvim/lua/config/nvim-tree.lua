@@ -21,6 +21,9 @@ require('nvim-tree').setup {
       '__pycache__',
     },
   },
+  git = {
+    ignore = false,
+  },
 }
 
 -- Invocation mapping
