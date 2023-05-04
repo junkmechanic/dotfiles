@@ -27,6 +27,8 @@ nls.setup {
     formatting.cmake_format,
     formatting.deno_fmt.with {
       filetypes = { 'markdown' },
+      -- to match the value of `textwidth` set in options.lua
+      extra_args = { '--line-width', 90 },
     },
     formatting.isort,
     formatting.json_tool,

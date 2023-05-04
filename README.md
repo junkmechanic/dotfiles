@@ -1,14 +1,19 @@
-dotfiles for setups at home, work and beyond.
+dotfiles for home, work and beyond.
 
-Setup:
-=====
+## Pre-requisites
 
-Required Packages
----
+- [neovim](https://neovim.io/)
+- [zsh](https://ohmyz.sh/)
+- [fzf](https://github.com/junegunn/fzf)
+- [tmux](https://github.com/tmux/tmux)
+- [tpm](https://github.com/tmux-plugins/tpm)
+- [karabiner](https://github.com/pqrs-org/Karabiner-Elements)
 
-  1. vim/neovim
-  2. zsh (check rc for custom sources)
-  3. fzf [https://github.com/junegunn/fzf]
-  4. tmux
-  5. tpm [https://github.com/tmux-plugins/tpm]
-  7. karabiner
+## Usage
+
+- `./dev/ds_jupyter` is a docker image for running a jupyter notebook server with standard
+  data science libraries.
+- `./dev/output_toggle.tpl` can be placed in the jupyter slides dir.
+- `./etc/nvim` is a pure lua neovim config.
+- `./etc/init.vim` is a non-lua neovim config.
+- `./etc/vimrc` is for a clean ubuntu / debian installation.
