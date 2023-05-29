@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:bionic
 
 # Export env settings
 ENV TERM=xterm
@@ -27,7 +27,6 @@ RUN /opt/ds/bin/pip3 install -r /tmp/requirements/pre-requirements.txt
 RUN /opt/ds/bin/pip3 install -r /tmp/requirements/requirements.txt
 
 RUN useradd --create-home --home-dir /home/ankur --shell /bin/bash ankur
-# RUN useradd --create-home --home-dir /home/ankur -u 1002 --shell /bin/bash ankur
 RUN adduser ankur sudo
 RUN echo "ankur ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN chown -R ankur /opt/ds
@@ -48,7 +47,6 @@ RUN mkdir -p /home/ankur/notebooks
 ENV HOME=/home/ankur
 ENV SHELL=/bin/bash
 ENV USER=ankur
-# VOLUME /home/ankur/notebooks
 WORKDIR /home/ankur/notebooks
 ADD BoilerplateInit.ipynb /home/ankur/notebooks/BoilerplateInit.ipynb
 
@@ -73,7 +71,7 @@ RUN git clone https://github.com/lambdalisue/jupyter-vim-binding /opt/ds/share/j
 RUN mkdir -p /home/ankur/.jupyter/custom
 ADD jupyter_custom.js /home/ankur/.jupyter/custom/custom.js
 ADD jupyter_custom.css /home/ankur/.jupyter/custom/custom.css
-ADD jupyter_notebook_config.py /home/ankur/.jupyter/jupyter_notebook_config.py
+# ADD jupyter_notebook_config.py /home/ankur/.jupyter/jupyter_notebook_config.py
 
 USER root
 RUN chown ankur /home/ankur/.jupyter/custom/custom.js
