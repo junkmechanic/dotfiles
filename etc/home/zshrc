@@ -103,20 +103,20 @@ forgit_checkout_branch=gcbf
 # Add wisely, as too many plugins slow down shell startup.
 # Keep zsh-syntax-highlighting as the last plugin
 plugins=( \
-    git gitfast docker colorize kubectl mosh pip ssh-agent sudo aws \
-    history-substring-search zsh-navigation-tools git-extras pyenv \
-    zsh-interactive-cd nvm \
-    # git@github.com:wfxr/forgit.git
+        git gitfast docker colorize kubectl mosh pip ssh-agent sudo aws \
+        history-substring-search zsh-navigation-tools git-extras pyenv \
+        zsh-interactive-cd nvm \
+        # git@github.com:wfxr/forgit.git
     forgit \
-    # git@github.com:hlissner/zsh-autopair.git
+        # git@github.com:hlissner/zsh-autopair.git
     zsh-autopair \
-    # git@github.com:Aloxaf/fzf-tab.git
+        # git@github.com:Aloxaf/fzf-tab.git
     fzf-tab \
-    # add plugins above this line
+        # add plugins above this line
     # git@github.com:zsh-users/zsh-autosuggestions.git
     zsh-autosuggestions \
-    # git@github.com:zsh-users/zsh-syntax-highlighting.git
-    zsh-syntax-highlighting )
+        # git@github.com:zsh-users/zsh-syntax-highlighting.git
+zsh-syntax-highlighting )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -220,8 +220,10 @@ bindkey -r '^[r'
 zle -N znt-cd-widget
 bindkey '^[w' znt-cd-widget
 znt_cd_hotlist=(
-    ~/devbench
     ~/.files
+    ~/.config/nvim/
+    ~/.local/share/nvim/site/pack/packer/start/
+    ~/devbench
     ~/Downloads
 )
 
@@ -244,27 +246,6 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# collate k8s contexts [Start]
-collate_k8s_context() {
-    DEFAULT_KUBE_CONTEXTS="$HOME/.kube/config"
-    if test -f "${DEFAULT_KUBE_CONTEXTS}"
-    then
-        export KUBECONFIG="$DEFAULT_KUBE_CONTEXTS"
-    fi
-
-    CUSTOM_KUBE_CONTEXTS="$HOME/.kube/custom-contexts"
-    mkdir -p "${CUSTOM_KUBE_CONTEXTS}"
-
-    OIFS="$IFS"
-    IFS=$'\n'
-    for contextFile in `find "${CUSTOM_KUBE_CONTEXTS}" -type f -name "*.yaml"`
-    do
-        export KUBECONFIG="$contextFile:$KUBECONFIG"
-    done
-    IFS="$OIFS"
-}
-collate_k8s_context
 
 # to view path in readable format
 path() {
@@ -382,7 +363,7 @@ ccd() {
 # homebrew with fzf
 bip() {
     local to_install=$( { brew formulae; brew casks; } | \
-        fzf-tmux ${FZF_DEFAULT_OPTS} \
+            fzf-tmux ${FZF_DEFAULT_OPTS} \
         -m --header='[brew:search]' --preview 'brew info {}')
 
     if [[ $to_install ]]; then

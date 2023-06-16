@@ -98,6 +98,12 @@ packer.startup(function(use)
     end,
   }
   use {
+    'kevinhwang91/nvim-hlslens',
+    config = function()
+      require 'config.hlslens'
+    end,
+  }
+  use {
     'nvim-lualine/lualine.nvim',
     after = 'nightfox.nvim',
     config = function()
@@ -326,6 +332,7 @@ packer.startup(function(use)
   }
   use {
     'j-hui/fidget.nvim',
+    branch = 'legacy',
     config = function()
       require 'config.fidget'
     end,

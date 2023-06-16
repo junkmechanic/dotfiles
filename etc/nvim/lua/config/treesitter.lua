@@ -3,6 +3,8 @@ require('nvim-treesitter.configs').setup {
     'bash',
     'c',
     'dockerfile',
+    'gitcommit',
+    'gitignore',
     'hcl',
     'help',
     'json',

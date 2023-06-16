@@ -31,22 +31,22 @@ end
 
 dashboard.section.buttons.val = {
   button('e', '  New file', ':ene <CR>'),
-  button('i', '  Insert new', ':ene <BAR> startinsert <CR>'),
-  button('m', 'פּ  File Tree', ':NvimTreeOpen <CR>'),
+  button('i', '  Insert new', ':ene <BAR> startinsert <CR>'),
+  button('m', '󰙅  File Tree', ':NvimTreeOpen <CR>'),
   button('d', '  Diff View', ':DiffviewOpen <CR>'),
-  button('p', '  Open file', ':Telescope find_files <CR>'),
-  button('n', '  Recent files', ':Telescope frecency <CR>'),
-  button('g', '  Search text', ':Telescope live_grep <CR>'),
+  button('p', '󰍉  Open file', ':Telescope find_files <CR>'),
+  button('n', '󰄉  Recent files', ':Telescope frecency <CR>'),
+  button('g', '󰈞  Search text', ':Telescope live_grep <CR>'),
   button('s', '  Open Session', ':SessionLoad <CR>'),
   button('z', '  Shell Config', ':e ~/.zshrc<CR>'),
   button('t', '  Tmux Config', ':e ~/.tmux.conf<CR>'),
-  button('q', '  Quit Neovim', ':qa<CR>'),
+  button('q', '󰅚  Quit Neovim', ':qa<CR>'),
 }
 
 local function footer()
   -- Number of plugins
   local total_plugins = #vim.tbl_keys(packer_plugins)
-  local plugins_text = '   '
+  local plugins_text = '  󰩦 '
     .. total_plugins
     .. ' plugins'
     .. '   v'

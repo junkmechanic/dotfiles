@@ -200,8 +200,10 @@ bindkey -r '^[r'
 zle -N znt-cd-widget
 bindkey '^[w' znt-cd-widget
 znt_cd_hotlist=(
+    ~/.files/
+    ~/.config/nvim/
+    ~/.local/share/nvim/site/pack/packer/start/
     ~/devbench
-    ~/.files
     ~/Downloads
     ~/devbench/main
     ~/devbench/random/

@@ -18,6 +18,9 @@ require('telescope').setup {
         ['<C-p>'] = actions.preview_scrolling_up,
         ['<C-n>'] = actions.preview_scrolling_down,
         ['<C-u>'] = false,
+        ['<CR>'] = function(bufnr)
+          require('telescope.actions.set').edit(bufnr, 'tab drop')
+        end,
       },
     },
     layout_config = {
@@ -26,7 +29,7 @@ require('telescope').setup {
     sorting_strategy = 'ascending',
     winblend = 10,
     dynamic_preview_title = true,
-    prompt_prefix = '  ',
+    prompt_prefix = ' 󰍉 ',
     selection_caret = ' ',
   },
   pickers = {

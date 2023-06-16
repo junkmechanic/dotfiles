@@ -56,13 +56,13 @@ vim.api.nvim_set_hl(0, 'DapLogPoint', { fg = palette.blue.base })
 vim.api.nvim_set_hl(0, 'DapStopped', { fg = palette.green.base })
 
 vim.fn.sign_define('DapBreakpoint', {
-  text = '',
+  text = '󰝥',
   texthl = 'DapBreakpoint',
   linehl = 'DapBreakpoint',
   numhl = 'DapBreakpoint',
 })
 vim.fn.sign_define('DapBreakpointCondition', {
-  text = 'ﳁ',
+  text = '󰟃',
   texthl = 'DapBreakpoint',
   linehl = 'DapBreakpoint',
   numhl = 'DapBreakpoint',
