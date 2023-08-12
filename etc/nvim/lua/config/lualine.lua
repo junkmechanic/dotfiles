@@ -35,9 +35,9 @@ end
 
 local function show_persisted()
   if vim.g.persisting then
-    return ''
+    return '󰒓'
   elseif not vim.g.persisting then
-    return ''
+    return ''
   end
 end
 

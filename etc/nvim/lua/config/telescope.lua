@@ -2,7 +2,6 @@ local actions = require 'telescope.actions'
 local fb_actions = require('telescope').extensions.file_browser.actions
 
 local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
 
 local wk = require 'which-key'
 
@@ -18,9 +17,6 @@ require('telescope').setup {
         ['<C-p>'] = actions.preview_scrolling_up,
         ['<C-n>'] = actions.preview_scrolling_down,
         ['<C-u>'] = false,
-        ['<CR>'] = function(bufnr)
-          require('telescope.actions.set').edit(bufnr, 'tab drop')
-        end,
       },
     },
     layout_config = {
@@ -35,9 +31,25 @@ require('telescope').setup {
   pickers = {
     git_files = {
       show_untracked = true,
+      mappings = {
+        i = {
+          ['<CR>'] = function(bufnr)
+            require('telescope.actions.set').edit(bufnr, 'tab drop')
+          end,
+        },
+      },
     },
     current_buffer_fuzzy_find = {
       skip_empty_lines = true,
+    },
+    find_files = {
+      mappings = {
+        i = {
+          ['<CR>'] = function(bufnr)
+            require('telescope.actions.set').edit(bufnr, 'tab drop')
+          end,
+        },
+      },
     },
   },
   extensions = {
@@ -88,8 +100,15 @@ require('telescope-tabs').setup {
   show_preview = false,
 }
 
+local opts = { noremap = true, silent = true }
+
 map('n', '<C-p>', "<Cmd>lua require'config.telescope-ext'.project_files()<CR>", opts)
-map('n', '<C-n>', ':Telescope frecency<CR>', opts)
+map(
+  'n',
+  '<C-n>',
+  "<Cmd>lua require('telescope').extensions.frecency.frecency({ workspace = 'CWD' })<CR>",
+  opts
+)
 
 local options = {
   mode = 'n',
@@ -134,6 +153,7 @@ local mappings = {
       s = { '<Cmd>Telescope persisted<CR>', 'Sessions' },
       u = { '<Cmd>Telescope undo<CR>', 'Undo Tree' },
       v = { '<Cmd>Telescope vim_options<CR>', 'Nvim Options' },
+      ['/'] = { '<Cmd>Telescope search_history<CR>', 'Search History' },
 
       g = {
         name = ' Version Control',

@@ -63,7 +63,7 @@ vim.keymap.set(
 -- Locate the current file in the tree
 vim.keymap.set(
   'n',
-  '<LocalLeader>m',
+  '<LocalLeader>N',
   ':NvimTreeFindFileToggle<CR>',
   { noremap = true, silent = true, desc = 'Current file in nvim-tree' }
 )

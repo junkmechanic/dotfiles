@@ -6,7 +6,7 @@ local wk = require 'which-key'
 
 -- python adapter setup
 
-require('dap-python').setup '~/.pyenv/versions/3.9.0/envs/py3nvim/bin/python'
+require('dap-python').setup '~/.pyenv/versions/py3nvim/bin/python'
 
 local configurations = require('dap').configurations.python
 -- `justMyCode` is valid for launch confgiurations only
@@ -17,7 +17,8 @@ configurations[2].justMyCode = false
 
 dap.adapters.bashdb = {
   type = 'executable',
-  command = vim.fn.stdpath 'data' .. '/mason/packages/bash-debug-adapter/bash-debug-adapter',
+  command = vim.fn.stdpath 'data'
+    .. '/mason/packages/bash-debug-adapter/bash-debug-adapter',
   name = 'bashdb',
 }
 
@@ -27,8 +28,10 @@ dap.configurations.sh = {
     request = 'launch',
     name = 'Launch file',
     showDebugOutput = true,
-    pathBashdb = vim.fn.stdpath 'data' .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb',
-    pathBashdbLib = vim.fn.stdpath 'data' .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir',
+    pathBashdb = vim.fn.stdpath 'data'
+      .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb',
+    pathBashdbLib = vim.fn.stdpath 'data'
+      .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir',
     trace = true,
     file = '${file}',
     program = '${file}',
@@ -54,7 +57,11 @@ dap.configurations.lua = {
 }
 
 dap.adapters.nlua = function(callback, config)
-  callback { type = 'server', host = config.host or '127.0.0.1', port = config.port or 8086 }
+  callback {
+    type = 'server',
+    host = config.host or '127.0.0.1',
+    port = config.port or 8086,
+  }
 end
 
 -- DAP-UI Setup

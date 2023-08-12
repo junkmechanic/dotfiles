@@ -362,6 +362,12 @@ packer.startup(function(use)
     end,
   }
   use {
+    'gorbit99/codewindow.nvim',
+    config = function()
+      require 'config.codewindow'
+    end,
+  }
+  use {
     'sindrets/winshift.nvim',
     config = function()
       require('winshift').setup()
