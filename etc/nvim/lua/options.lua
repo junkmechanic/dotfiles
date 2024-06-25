@@ -1,7 +1,5 @@
 local set = vim.opt
 
-set.pastetoggle = '<F2>' -- toggle paste mode to maintain indentation
-
 set.splitbelow = true -- force all horizontal splits to go below current window
 set.splitright = true -- force all vertical splits to go to the right of current window
 

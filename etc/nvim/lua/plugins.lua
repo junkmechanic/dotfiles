@@ -188,6 +188,7 @@ packer.startup(function(use)
     requires = {
       'mfussenegger/nvim-dap-python',
       'rcarriga/nvim-dap-ui',
+      'nvim-neotest/nvim-nio',
       'jayp0521/mason-nvim-dap.nvim',
       'jbyuki/one-small-step-for-vimkind',
     },
@@ -221,21 +222,21 @@ packer.startup(function(use)
       require 'config.completion'
     end,
   }
-  use {
-    'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
-    event = 'InsertEnter',
-    config = function()
-      require 'config.copilot'
-    end,
-  }
-  use {
-    'zbirenbaum/copilot-cmp',
-    after = { 'copilot.lua' },
-    config = function()
-      require('copilot_cmp').setup()
-    end,
-  }
+  -- use {
+  --   'zbirenbaum/copilot.lua',
+  --   cmd = 'Copilot',
+  --   event = 'InsertEnter',
+  --   config = function()
+  --     require 'config.copilot'
+  --   end,
+  -- }
+  -- use {
+  --   'zbirenbaum/copilot-cmp',
+  --   after = { 'copilot.lua' },
+  --   config = function()
+  --     require('copilot_cmp').setup()
+  --   end,
+  -- }
   use {
     'folke/trouble.nvim',
     config = function()
