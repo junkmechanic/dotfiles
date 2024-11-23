@@ -1,7 +1,6 @@
-require('which-key').register(
-  { ['<LocalLeader>x'] = { '<Cmd>Neogit<CR>', 'Launch Neogit' } },
-  { mode = 'n' }
-)
+require('which-key').add {
+  { '<LocalLeader>x', '<Cmd>Neogit<CR>', desc = 'Launch Neogit' },
+}
 
 require('neogit').setup {
   signs = {

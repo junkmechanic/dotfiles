@@ -93,57 +93,77 @@ end
 
 -- goto-preview
 local goto_preview = require 'goto-preview'
-
 goto_preview.setup {}
 
 -- LSP Mappings
+wk.add {
+  { '[d', vim.diagnostic.goto_prev, desc = 'Previous LSP Diagnostics Hunk' },
+  { ']d', vim.diagnostic.goto_next, desc = 'Next LSP Diagnostics Hunk' },
+  { 'gt', vim.diagnostic.open_float, desc = 'Show LSP Diagnostics' },
 
-local options = {
-  mode = 'n',
-}
-
-local mappings = {
-  ['gt'] = { vim.diagnostic.open_float, 'Show LSP Diagnostics' },
-  ['[d'] = { vim.diagnostic.goto_prev, 'Previous LSP Diagnostics Hunk' },
-  [']d'] = { vim.diagnostic.goto_next, 'Next LSP Diagnostics Hunk' },
-
-  ['<LocalLeader>'] = {
-    d = {
-      name = ' LSP Diagnostics',
-
-      -- See `:help vim.lsp.*` for documentation on any of the below functions
-      a = { vim.lsp.buf.code_action, 'Code Actions' },
-      i = { vim.lsp.buf.hover, 'LSP Info for Cursor-word' },
-      s = { vim.lsp.buf.signature_help, 'Signature Display' },
-      f = { '<Cmd>lua vim.lsp.buf.format({async=true})<CR>', 'Format Buffer' },
-      g = { '<Cmd>vsplit | lua vim.lsp.buf.definition()<CR>', 'Goto Definition (vsplit)' },
-      G = {
-        '<Cmd>tab split | lua vim.lsp.buf.definition()<CR>',
-        'Goto Definition (tabnew)',
-      },
-      t = {
-        '<Cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>',
-        'Goto Type Definition (vsplit)',
-      },
-      T = {
-        '<Cmd>tab split | lua vim.lsp.buf.type_definition()<CR>',
-        'Goto Type Definition (tabnew)',
-      },
-      d = { '<Cmd>Telescope diagnostics<CR>', 'Search Project Diagnostics' },
-      r = { '<Cmd>Telescope lsp_references<CR>', 'Search LSP References' },
-      q = { '<Cmd>Trouble document_diagnostics<CR>', 'List Document Diagnostics' },
-      w = { '<Cmd>Trouble workspace_diagnostics<CR>', 'List Workspace Diagnostics' },
-
-      p = {
-        name = ' Preview',
-        d = { goto_preview.goto_preview_definition, 'Definition' },
-        t = { goto_preview.goto_preview_type_definition, 'Type Definition' },
-        i = { goto_preview.goto_preview_implementation, 'Implementation' },
-        r = { goto_preview.goto_preview_references, 'References' },
-        x = { goto_preview.close_all_win, 'Close All Windows' },
-      },
-    },
+  { '<LocalLeader>d', group = ' LSP Diagnostics' },
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  {
+    '<LocalLeader>dG',
+    '<Cmd>tab split | lua vim.lsp.buf.definition()<CR>',
+    desc = 'Goto Definition (tabnew)',
   },
-}
+  {
+    '<LocalLeader>dT',
+    '<Cmd>tab split | lua vim.lsp.buf.type_definition()<CR>',
+    desc = 'Goto Type Definition (tabnew)',
+  },
+  { '<LocalLeader>da', vim.lsp.buf.code_action, desc = 'Code Actions' },
+  {
+    '<LocalLeader>dd',
+    '<Cmd>Telescope diagnostics<CR>',
+    desc = 'Search Project Diagnostics',
+  },
+  {
+    '<LocalLeader>df',
+    '<Cmd>lua vim.lsp.buf.format({async=true})<CR>',
+    desc = 'Format Buffer',
+  },
+  {
+    '<LocalLeader>dg',
+    '<Cmd>vsplit | lua vim.lsp.buf.definition()<CR>',
+    desc = 'Goto Definition (vsplit)',
+  },
+  { '<LocalLeader>di', vim.lsp.buf.hover, desc = 'LSP Info for Cursor-word' },
+  {
+    '<LocalLeader>dq',
+    '<Cmd>Trouble document_diagnostics<CR>',
+    desc = 'List Document Diagnostics',
+  },
+  {
+    '<LocalLeader>dr',
+    '<Cmd>Telescope lsp_references<CR>',
+    desc = 'Search LSP References',
+  },
+  { '<LocalLeader>ds', vim.lsp.buf.signature_help, desc = 'Signature Display' },
+  {
+    '<LocalLeader>dt',
+    '<Cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>',
+    desc = 'Goto Type Definition (vsplit)',
+  },
+  {
+    '<LocalLeader>dw',
+    '<Cmd>Trouble workspace_diagnostics<CR>',
+    desc = 'List Workspace Diagnostics',
+  },
 
-wk.register(mappings, options)
+  { '<LocalLeader>dp', group = ' Preview' },
+  { '<LocalLeader>dpd', goto_preview.goto_preview_definition, desc = 'Definition' },
+  {
+    '<LocalLeader>dpi',
+    goto_preview.goto_preview_implementation,
+    desc = 'Implementation',
+  },
+  { '<LocalLeader>dpr', goto_preview.goto_preview_references, desc = 'References' },
+  {
+    '<LocalLeader>dpt',
+    goto_preview.goto_preview_type_definition,
+    desc = 'Type Definition',
+  },
+  { '<LocalLeader>dpx', goto_preview.close_all_win, desc = 'Close All Windows' },
+}

@@ -1,3 +1,6 @@
 if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
-  source "${VIRTUAL_ENV}/bin/activate"
+    source "${VIRTUAL_ENV}/bin/activate"
 fi
+
+# set up kubeconfig
+source ~/.kube/ekscfg/ekscfg_source

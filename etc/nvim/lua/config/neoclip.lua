@@ -1,7 +1,6 @@
-require('which-key').register(
-  { ['<LocalLeader>y'] = { '<Cmd>Telescope neoclip<CR>', 'Search Clipboard' } },
-  { mode = 'n' }
-)
+require('which-key').add {
+  { '<LocalLeader>y', '<Cmd>Telescope neoclip<CR>', desc = 'Search Clipboard' },
+}
 
 require('neoclip').setup {
   enable_persistent_history = true,

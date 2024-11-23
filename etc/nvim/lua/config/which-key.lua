@@ -1,20 +1,29 @@
 local wk = require 'which-key'
 
 wk.setup {
+  preset = 'classic',
   plugins = {
     marks = false,
     spelling = {
       enabled = true,
     },
   },
-  key_labels = {
-    ['`'] = '<LocalLeader>',
-    ['<leader>'] = '<Leader>',
-    ['<cr>'] = '<CR>',
-    ['<tab>'] = '<Tab>',
+  replace = {
+    key = {
+      { '`', '<LocalLeader>' },
+      { '<leader>', '<Leader>' },
+      { '<cr>', '<CR>' },
+      { '<tab>', '<Tab>' },
+    },
+    desc = {
+      { '<[cC]md>', '' },
+      { '<[cC][rR]>', '' },
+    },
   },
-  window = {
-    winblend = 20,
+  win = {
+    wo = {
+      winblend = 20,
+    },
   },
   layout = {
     height = { min = 5, max = 25 },
@@ -23,24 +32,12 @@ wk.setup {
   },
 }
 
-local options = {
-  mode = 'n',
+wk.add {
+  { '<Leader>B', desc = 'Swap Master Node with previous' },
+  { '<Leader>W', desc = 'Swap Current Node with previous' },
+  { '<Leader>b', desc = 'Swap Master Node with next' },
+  { '<Leader>w', desc = 'Swap Current Node with next' },
+  { '<LocalLeader>w', desc = 'Window Management' },
+  { '<LocalLeader>z', desc = 'Horizontal Scrolling' },
+  { 'gr', desc = 'Smart Rename' },
 }
-
-local mappings = {
-  g = {
-    r = 'Smart Rename',
-  },
-  ['<Leader>'] = {
-    b = 'Swap Master Node with next',
-    B = 'Swap Master Node with previous',
-    w = 'Swap Current Node with next',
-    W = 'Swap Current Node with previous',
-  },
-  ['<LocalLeader>'] = {
-    w = 'Window Management',
-    z = 'Horizontal Scrolling',
-  },
-}
-
-wk.register(mappings, options)

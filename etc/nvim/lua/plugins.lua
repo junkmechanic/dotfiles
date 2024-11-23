@@ -358,6 +358,9 @@ packer.startup(function(use)
   }
   use {
     'folke/which-key.nvim',
+    requires = {
+      'echasnovski/mini.icons',
+    },
     config = function()
       require 'config.which-key'
     end,

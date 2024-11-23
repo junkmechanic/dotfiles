@@ -8,12 +8,6 @@ codewindow.setup {
 
 vim.api.nvim_set_hl(0, 'CodewindowBorder', { fg = '#323642' })
 
-local options = {
-  mode = 'n',
+wk.add {
+  { '<LocalLeader>m', codewindow.toggle_minimap, desc = 'Toggle Minimap' },
 }
-
-local mappings = {
-  ['<LocalLeader>m'] = { codewindow.toggle_minimap, 'Toggle Minimap' },
-}
-
-wk.register(mappings, options)

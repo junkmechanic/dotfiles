@@ -109,66 +109,67 @@ map(
   "<Cmd>lua require('telescope').extensions.frecency.frecency({ workspace = 'CWD' })<CR>",
   opts
 )
+map('n', '<C-s>', "<Cmd>lua require'telescope-tabs'.list_tabs()<CR>", opts)
 
-local options = {
-  mode = 'n',
-}
+wk.add {
+  { '<LocalLeader>g', '<Cmd>Telescope live_grep<CR>', desc = 'Search Codebase' },
+  { '<LocalLeader>h', '<Cmd>Telescope help_tags<CR>', desc = 'Search Help Tags' },
+  {
+    '<LocalLeader>l',
+    '<Cmd>Telescope current_buffer_fuzzy_find<CR>',
+    desc = 'Search in file',
+  },
+  { '<LocalLeader>r', '<Cmd>Telescope resume<CR>', desc = 'Resume Search' },
+  { '<LocalLeader>s', '<Cmd>Telescope grep_string<CR>', desc = 'Search Cursor-word' },
 
-local mappings = {
-  ['<LocalLeader>'] = {
-    g = { '<Cmd>Telescope live_grep<CR>', 'Search Codebase' },
-    s = { '<Cmd>Telescope grep_string<CR>', 'Search Cursor-word' },
-    l = { '<Cmd>Telescope current_buffer_fuzzy_find<CR>', 'Search in file' },
-    h = { '<Cmd>Telescope help_tags<CR>', 'Search Help Tags' },
-    r = { '<Cmd>Telescope resume<CR>', 'Resume Search' },
-
-    f = {
-      name = ' File Browser',
-      f = {
-        "<Cmd>lua require'config.telescope-ext'.file_browser()<CR>",
-        'File Browser in $CWD',
-      },
-      h = {
-        "<Cmd>lua require'config.telescope-ext'.home_explorer()<CR>",
-        'File Browser in $HOME',
-      },
-      d = {
-        "<Cmd>lua require'config.telescope-ext'.browse_file_dir()<CR>",
-        'File Browser in File Dir',
-      },
-      p = {
-        "<Cmd>lua require'config.telescope-ext'.browse_plugin_dir()<CR>",
-        'File Browser in Neovim Plugin Dir',
-      },
-    },
-
-    t = {
-      name = ' Telescope',
-      c = { '<Cmd>Telescope commands<CR>', 'Commands' },
-      C = { '<Cmd>Telescope command_history<CR>', 'Command History' },
-      f = { '<Cmd>Telescope buffers<CR>', 'Buffers' },
-      h = { '<Cmd>Telescope highlights<CR>', 'Highlights' },
-      k = { '<Cmd>Telescope keymaps<CR>', 'Mappings' },
-      p = { '<Cmd>Telescope builtin<CR>', 'Builtin Pickers' },
-      s = { '<Cmd>Telescope persisted<CR>', 'Sessions' },
-      u = { '<Cmd>Telescope undo<CR>', 'Undo Tree' },
-      v = { '<Cmd>Telescope vim_options<CR>', 'Nvim Options' },
-      ['/'] = { '<Cmd>Telescope search_history<CR>', 'Search History' },
-
-      g = {
-        name = ' Version Control',
-        b = { '<Cmd>Telescope git_branches<CR>', 'Branches' },
-        c = { '<Cmd>Telescope git_commits<CR>', 'Commits' },
-        d = { '<Cmd>Telescope git_diffs diff_commits<CR>', 'Commit Diffs' },
-        m = { '<Cmd>Telescope git_bcommits<CR>', 'Buffer Commits' },
-        s = { '<Cmd>Telescope git_status<CR>', 'Git Status' },
-        v = { '<Cmd>DiffviewOpen<CR>', 'Diffview' },
-        w = { '<Cmd>DiffviewFileHistory %<CR>', 'Diffview Current File' },
-      },
-    },
+  { '<LocalLeader>f', group = ' File Browser' },
+  {
+    '<LocalLeader>fd',
+    "<Cmd>lua require'config.telescope-ext'.browse_file_dir()<CR>",
+    desc = 'File Browser in File Dir',
+  },
+  {
+    '<LocalLeader>ff',
+    "<Cmd>lua require'config.telescope-ext'.file_browser()<CR>",
+    desc = 'File Browser in $CWD',
+  },
+  {
+    '<LocalLeader>fh',
+    "<Cmd>lua require'config.telescope-ext'.home_explorer()<CR>",
+    desc = 'File Browser in $HOME',
+  },
+  {
+    '<LocalLeader>fp',
+    "<Cmd>lua require'config.telescope-ext'.browse_plugin_dir()<CR>",
+    desc = 'File Browser in Neovim Plugin Dir',
   },
 
-  ['<C-s>'] = { "<Cmd>lua require'telescope-tabs'.list_tabs()<CR>", 'Search Tabs' },
-}
+  { '<LocalLeader>t', group = ' Telescope' },
+  { '<LocalLeader>t/', '<Cmd>Telescope search_history<CR>', desc = 'Search History' },
+  { '<LocalLeader>tC', '<Cmd>Telescope command_history<CR>', desc = 'Command History' },
+  { '<LocalLeader>tc', '<Cmd>Telescope commands<CR>', desc = 'Commands' },
+  { '<LocalLeader>tf', '<Cmd>Telescope buffers<CR>', desc = 'Buffers' },
+  { '<LocalLeader>th', '<Cmd>Telescope highlights<CR>', desc = 'Highlights' },
+  { '<LocalLeader>tk', '<Cmd>Telescope keymaps<CR>', desc = 'Mappings' },
+  { '<LocalLeader>tp', '<Cmd>Telescope builtin<CR>', desc = 'Builtin Pickers' },
+  { '<LocalLeader>ts', '<Cmd>Telescope persisted<CR>', desc = 'Sessions' },
+  { '<LocalLeader>tu', '<Cmd>Telescope undo<CR>', desc = 'Undo Tree' },
+  { '<LocalLeader>tv', '<Cmd>Telescope vim_options<CR>', desc = 'Nvim Options' },
 
-wk.register(mappings, options)
+  { '<LocalLeader>tg', group = ' Version Control' },
+  { '<LocalLeader>tgb', '<Cmd>Telescope git_branches<CR>', desc = 'Branches' },
+  { '<LocalLeader>tgc', '<Cmd>Telescope git_commits<CR>', desc = 'Commits' },
+  {
+    '<LocalLeader>tgd',
+    '<Cmd>Telescope git_diffs diff_commits<CR>',
+    desc = 'Commit Diffs',
+  },
+  { '<LocalLeader>tgm', '<Cmd>Telescope git_bcommits<CR>', desc = 'Buffer Commits' },
+  { '<LocalLeader>tgs', '<Cmd>Telescope git_status<CR>', desc = 'Git Status' },
+  { '<LocalLeader>tgv', '<Cmd>DiffviewOpen<CR>', desc = 'Diffview' },
+  {
+    '<LocalLeader>tgw',
+    '<Cmd>DiffviewFileHistory %<CR>',
+    desc = 'Diffview Current File',
+  },
+}

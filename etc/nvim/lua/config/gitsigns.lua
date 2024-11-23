@@ -4,34 +4,29 @@ local wk = require 'which-key'
 
 gitsigns.setup()
 
-local options = {
-  mode = 'n',
-}
+wk.add {
+  { '[g', '<Cmd>Gitsigns prev_hunk<CR>', desc = 'Previous Git Hunk' },
+  { ']g', '<Cmd>Gitsigns next_hunk<CR>', desc = 'Next Git Hunk' },
+  { 'gz', '<Cmd>Gitsigns preview_hunk<CR>', desc = 'Preview Hunk' },
 
-local mappings = {
-  ['[g'] = { '<Cmd>Gitsigns prev_hunk<CR>', 'Previous Git Hunk' },
-  [']g'] = { '<Cmd>Gitsigns next_hunk<CR>', 'Next Git Hunk' },
-  ['gz'] = { '<Cmd>Gitsigns preview_hunk<CR>', 'Preview Hunk' },
-
-  ['<LocalLeader>'] = {
-    v = {
-      name = ' VCS Actions',
-      b = { gitsigns.blame_line, 'Blame Line' },
-      d = { gitsigns.toggle_deleted, 'Toggle Deleted' },
-      l = { gitsigns.toggle_current_line_blame, 'Toggle Current Line Blame' },
-      p = { gitsigns.preview_hunk, 'Preview Hunk' },
-      P = { gitsigns.preview_hunk_inline, 'Preview Hunk Inline' },
-      s = { gitsigns.stage_hunk, 'Stage Hunk' },
-      S = { gitsigns.stage_buffer, 'Stage Buffer' },
-      u = { gitsigns.undo_stage_hunk, 'Undo Stage' },
-      B = {
-        function()
-          gitsigns.blame_line { full = true }
-        end,
-        'Full Blame Line',
-      },
-    },
+  { '<LocalLeader>v', group = ' VCS Actions' },
+  {
+    '<LocalLeader>vB',
+    function()
+      gitsigns.blame_line { full = true }
+    end,
+    desc = 'Full Blame Line',
   },
+  { '<LocalLeader>vP', gitsigns.preview_hunk_inline, desc = 'Preview Hunk Inline' },
+  { '<LocalLeader>vS', gitsigns.stage_buffer, desc = 'Stage Buffer' },
+  { '<LocalLeader>vb', gitsigns.blame_line, desc = 'Blame Line' },
+  { '<LocalLeader>vd', gitsigns.toggle_deleted, desc = 'Toggle Deleted' },
+  {
+    '<LocalLeader>vl',
+    gitsigns.toggle_current_line_blame,
+    desc = 'Toggle Current Line Blame',
+  },
+  { '<LocalLeader>vp', gitsigns.preview_hunk, desc = 'Preview Hunk' },
+  { '<LocalLeader>vs', gitsigns.stage_hunk, desc = 'Stage Hunk' },
+  { '<LocalLeader>vu', gitsigns.undo_stage_hunk, desc = 'Undo Stage' },
 }
-
-wk.register(mappings, options)
