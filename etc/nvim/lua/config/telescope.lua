@@ -4,6 +4,7 @@ local fb_actions = require('telescope').extensions.file_browser.actions
 local map = vim.keymap.set
 
 local wk = require 'which-key'
+local devicons = require 'nvim-web-devicons'
 
 require('telescope').setup {
   defaults = {
@@ -32,24 +33,17 @@ require('telescope').setup {
     git_files = {
       show_untracked = true,
       mappings = {
-        i = {
-          ['<CR>'] = function(bufnr)
-            require('telescope.actions.set').edit(bufnr, 'tab drop')
-          end,
-        },
+        -- this will always open a new tab on hitting enter
+        -- you might want to add this mapping to `find_files` and any other relevant pickers
+        -- i = {
+        --   ['<CR>'] = function(bufnr)
+        --     require('telescope.actions.set').edit(bufnr, 'tab drop')
+        --   end,
+        -- },
       },
     },
     current_buffer_fuzzy_find = {
       skip_empty_lines = true,
-    },
-    find_files = {
-      mappings = {
-        i = {
-          ['<CR>'] = function(bufnr)
-            require('telescope.actions.set').edit(bufnr, 'tab drop')
-          end,
-        },
-      },
     },
   },
   extensions = {
@@ -156,7 +150,11 @@ wk.add {
   { '<LocalLeader>tu', '<Cmd>Telescope undo<CR>', desc = 'Undo Tree' },
   { '<LocalLeader>tv', '<Cmd>Telescope vim_options<CR>', desc = 'Nvim Options' },
 
-  { '<LocalLeader>tg', group = ' Version Control' },
+  {
+    '<LocalLeader>tg',
+    group = ' Version Control',
+    icon = devicons.get_icons_by_extension()['git']['icon'],
+  },
   { '<LocalLeader>tgb', '<Cmd>Telescope git_branches<CR>', desc = 'Branches' },
   { '<LocalLeader>tgc', '<Cmd>Telescope git_commits<CR>', desc = 'Commits' },
   {

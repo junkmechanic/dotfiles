@@ -1,6 +1,7 @@
 local gitsigns = require 'gitsigns'
 
 local wk = require 'which-key'
+local devicons = require 'nvim-web-devicons'
 
 gitsigns.setup()
 
@@ -9,7 +10,11 @@ wk.add {
   { ']g', '<Cmd>Gitsigns next_hunk<CR>', desc = 'Next Git Hunk' },
   { 'gz', '<Cmd>Gitsigns preview_hunk<CR>', desc = 'Preview Hunk' },
 
-  { '<LocalLeader>v', group = ' VCS Actions' },
+  {
+    '<LocalLeader>v',
+    group = ' VCS Actions',
+    icon = devicons.get_icons_by_extension()['git']['icon'],
+  },
   {
     '<LocalLeader>vB',
     function()

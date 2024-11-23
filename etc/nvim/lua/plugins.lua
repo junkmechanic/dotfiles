@@ -196,6 +196,7 @@ packer.startup(function(use)
       require 'config.dap'
     end,
   }
+  use { 'rafcamlet/nvim-luapad' }
   use {
     'simrat39/symbols-outline.nvim',
     config = function()
@@ -222,21 +223,6 @@ packer.startup(function(use)
       require 'config.completion'
     end,
   }
-  -- use {
-  --   'zbirenbaum/copilot.lua',
-  --   cmd = 'Copilot',
-  --   event = 'InsertEnter',
-  --   config = function()
-  --     require 'config.copilot'
-  --   end,
-  -- }
-  -- use {
-  --   'zbirenbaum/copilot-cmp',
-  --   after = { 'copilot.lua' },
-  --   config = function()
-  --     require('copilot_cmp').setup()
-  --   end,
-  -- }
   use {
     'folke/trouble.nvim',
     config = function()
