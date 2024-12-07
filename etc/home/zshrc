@@ -187,9 +187,9 @@ alias scp="noglob scp"
 alias ls="lsd"
 alias sl="ls"
 alias tmat="tmux attach"
-alias tree="exa --long --tree"
-alias tree1="exa --long --tree --level=1"
-alias treed="exa --long --tree --only-dirs"
+alias tree="eza --long --tree"
+alias tree1="eza --long --tree --level=1"
+alias treed="eza --long --tree --only-dirs"
 alias tmgn="tmux new-session -s JUNK"
 alias vim="nvim"
 alias vimdiff="nvim -d"
@@ -301,30 +301,6 @@ function _git_log_zsh_wrapper {
 zle -N _git_log_zsh_wrapper
 bindkey '\ea' _git_log_zsh_wrapper
 
-# command history search
-__fzfcmd() {
-    [ -n "$TMUX_PANE" ] && { [ "${FZF_TMUX:-0}" != 0 ] || [ -n "$FZF_TMUX_OPTS" ]; } &&
-    echo "fzf-tmux ${FZF_TMUX_OPTS:--d${FZF_TMUX_HEIGHT:-40%}} -- " || echo "fzf"
-}
-
-fzf-history-widget() {
-    local selected num
-    setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
-    selected=( $(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |
-    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS --query=${(qqq)LBUFFER} +m" $(__fzfcmd)) )
-    local ret=$?
-    if [ -n "$selected" ]; then
-        num=$selected[1]
-        if [ -n "$num" ]; then
-            zle vi-fetch-history -n $num
-        fi
-    fi
-    zle reset-prompt
-    return $ret
-}
-zle     -N   fzf-history-widget
-bindkey '^R' fzf-history-widget
-
 # edit a file under the current dir tree
 ve() {
     local files
@@ -350,14 +326,6 @@ vg() {
         vim "$file" +"$line"
         print "$file" at "$line"
     fi
-}
-
-# change to directory under the given or current directory
-ccd() {
-    local dir
-    dir=$(find ${1:-.} -path '*/\.*' -prune \
-        -o -type d -print 2> /dev/null | fzf-tmux +m) &&
-    cd "$dir"
 }
 
 # homebrew with fzf

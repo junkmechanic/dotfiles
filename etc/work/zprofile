@@ -1,5 +1,5 @@
 # local machine name
-export MACHINE="home"
+export MACHINE="work"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
