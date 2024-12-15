@@ -6,9 +6,6 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
-vim.g.mapleader = ','
-vim.g.maplocalleader = '`'
-
 -- Switch command mode trigger for easy access
 map({ 'n', 'v' }, ';', ':')
 map({ 'n', 'v' }, ':', ';')
