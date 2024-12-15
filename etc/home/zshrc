@@ -21,22 +21,29 @@ SPACESHIP_PROMPT_ORDER=(
     dir           # Current directory section
     host          # Hostname section
     git           # Git section (git_branch + git_status)
-    pyenv         # Pyenv section
+    python
+    venv
     kubectl       # Kubectl context section
     node
+    lua
+    ruby
     terraform     # Terraform workspace section
     exec_time     # Execution time
     line_sep      # Line break
-    vi_mode       # Vi-mode indicator
     jobs          # Background jobs indicator
     exit_code     # Exit code section
+    sudo
     char          # Prompt character
 )
 SPACESHIP_TIME_SHOW=true
 SPACESHIP_TIME_COLOR="blue"
 SPACESHIP_PROMPT_PREFIXES_SHOW=false
-SPACESHIP_PYENV_COLOR="blue"
-SPACESHIP_PYENV_SYMBOL=" "
+SPACESHIP_PYTHON_SYMBOL=" "
+SPACESHIP_PYTHON_COLOR="yellow"
+SPACESHIP_VENV_SYMBOL=" "
+SPACESHIP_VENV_COLOR="blue"
+SPACESHIP_LUA_SYMBOL=" "
+SPACESHIP_RUBY_SYMBOL=" "
 SPACESHIP_CHAR_SYMBOL="❯ "
 
 # Set list of themes to pick from when loading at random
@@ -134,8 +141,8 @@ zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':completion:*:descriptions' format '[%d]'
 # set list-colors to enable filename colorizing
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# preview directory's content with exa when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
 # use tmux popup
@@ -220,7 +227,7 @@ bindkey -r '^[r'
 zle -N znt-cd-widget
 bindkey '^[w' znt-cd-widget
 znt_cd_hotlist=(
-    ~/.files
+    ~/.files/
     ~/.config/nvim/
     ~/.local/share/nvim/site/pack/packer/start/
     ~/devbench
@@ -236,12 +243,6 @@ export LDFLAGS="-L/usr/local/opt/ruby/lib"
 export CPPFLAGS="-I/usr/local/opt/ruby/include"
 
 export DEVDIR="$HOME/devbench"
-export FRDDIR="$HOME/devbench/fraud"
-
-eval "$(pyenv init --path)"
-eval "$(pyenv virtualenv-init -)"
-source $(pyenv root)/completions/pyenv.zsh
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -329,6 +330,7 @@ vg() {
 }
 
 # homebrew with fzf
+# Install a brew package
 bip() {
     local to_install=$( { brew formulae; brew casks; } | \
             fzf-tmux ${FZF_DEFAULT_OPTS} \
@@ -338,8 +340,32 @@ bip() {
         for prog in $(echo $to_install)
         do
             echo "Installing $prog"
-            brew install $prog && brew upgrade $prog
+            brew install $prog
         done
+    fi
+}
+
+# Update a brew package
+bup() {
+    local to_update=$({ brew leaves; brew ls --casks; } | \
+            fzf-tmux ${FZF_DEFAULT_OPTS} \
+        -m --header='[brew:upgrade]')
+
+    if [[ $to_update ]]; then
+        for prog in $(echo $to_update);
+        do; brew upgrade $prog; done;
+    fi
+}
+
+# Delete a package
+bdp() {
+    local to_uninstall=$({ brew leaves; brew ls --casks; } | \
+            fzf-tmux ${FZF_DEFAULT_OPTS} \
+        -m --header='[brew:delete]')
+
+    if [[ $to_uninstall ]]; then
+        for prog in $(echo $to_uninstall);
+        do; brew uninstall $prog; done;
     fi
 }
 

@@ -219,6 +219,9 @@ export BAT_THEME="Nord"
 # k8s completion
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
+# set up kubeconfig
+source ~/.kube/ekscfg/ekscfg_source
+
 # to view path in readable format
 path() {
     local IFS=:
@@ -316,7 +319,9 @@ bip() {
 
 # Update a brew package
 bup() {
-    local to_update=$(brew leaves | fzf -m)
+    local to_update=$({ brew leaves; brew ls --casks; } | \
+            fzf-tmux ${FZF_DEFAULT_OPTS} \
+        -m --header='[brew:upgrade]')
 
     if [[ $to_update ]]; then
         for prog in $(echo $to_update);
@@ -326,7 +331,9 @@ bup() {
 
 # Delete a package
 bdp() {
-    local to_uninstall=$(brew leaves | fzf -m)
+    local to_uninstall=$({ brew leaves; brew ls --casks; } | \
+            fzf-tmux ${FZF_DEFAULT_OPTS} \
+        -m --header='[brew:delete]')
 
     if [[ $to_uninstall ]]; then
         for prog in $(echo $to_uninstall);

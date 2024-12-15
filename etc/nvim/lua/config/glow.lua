@@ -3,4 +3,5 @@ require('glow').setup {
   height = 120,
   width_ratio = 0.8,
   height_ratio = 0.8,
+  border = 'solid',
 }
