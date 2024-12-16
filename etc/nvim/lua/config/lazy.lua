@@ -1,14 +1,13 @@
 -- Setup lazy.nvim
-require("lazy").setup({
+require 'lazy'.setup {
     spec = {
-        { import = "plugins" },
+        { import = 'plugins' },
     },
-    install = { colorscheme = { "nordfox" } },
+    install = { colorscheme = { 'nordfox' } },
     -- automatically check for plugin updates
     checker = { enabled = true },
-})
+}
 
--- Remove everything after this line in due course
 --[[
 packer.startup(function(use)
     use 'wbthomason/packer.nvim'
@@ -21,12 +20,6 @@ packer.startup(function(use)
         'lewis6991/impatient.nvim',
         config = function()
             require 'impatient'
-        end,
-    }
-    use {
-        'EdenEast/nightfox.nvim',
-        config = function()
-            require 'config.nightfox'
         end,
     }
     use {

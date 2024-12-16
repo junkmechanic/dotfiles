@@ -26,7 +26,7 @@
   // this is for the terminal
   "font_family": "Hack Nerd Font Mono",
   "relative_line_numbers": true,
-  "preferred_line_length": 90,
-  "soft_wrap": "preferred_line_length",
+  // "preferred_line_length": 90,
+  "soft_wrap": "editor_width",
   "vim_mode": true
 }

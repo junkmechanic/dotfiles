@@ -7,8 +7,10 @@
 // from the command palette.
 [
   {
-    "context": "Workspace",
-    "bindings": {}
+    "context": "Pane",
+    "bindings": {
+      ", e": "pane::CloseActiveItem"
+    }
   },
   {
     "context": "Editor",
@@ -20,7 +22,8 @@
       //     "select_last": true
       //   }
       // ],
-      "ctrl-z": "workspace::Save"
+      "ctrl-z": "workspace::Save",
+      "ctrl-shift-z": "workspace::SaveWithoutFormat"
     }
   }
 ]

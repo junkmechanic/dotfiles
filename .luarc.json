@@ -1,6 +1,7 @@
 {
     "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
-    "Lua.diagnostics.globals": [
+    "runtime.version": "Lua 5.4",
+    "diagnostics.globals": [
         "vim",
         "use",
         "packer_plugins",
@@ -8,5 +9,11 @@
         "pcall",
         "pairs",
         "ipairs"
-    ]
+    ],
+    "format.defaultConfig": {
+        "call_arg_parentheses": "remove",
+        "quote_style": "single",
+        "indent_style": "space",
+        "indent_size": "4"
+    }
 }

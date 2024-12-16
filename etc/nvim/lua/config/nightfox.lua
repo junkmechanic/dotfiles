@@ -7,7 +7,7 @@ require('nightfox').setup {
   },
 }
 
-vim.cmd 'colorscheme nordfox'
+vim.cmd.colorscheme 'nordfox'
 
 local nordfox = require 'nightfox.palette.nordfox'
 local palette = nordfox.palette
