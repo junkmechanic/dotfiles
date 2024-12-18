@@ -1,6 +1,3 @@
-vim.g.loaded = 1
-vim.g.loaded_netrwPlugin = 1
-
 local function on_attach(bufnr)
   local api = require 'nvim-tree.api'
 
@@ -50,6 +47,14 @@ require('nvim-tree').setup {
   git = {
     ignore = false,
   },
+  update_focused_file = {
+    enable = true,
+  },
+  tab = {
+    sync = {
+      open = true,
+    }
+  },
 }
 
 -- Invocation mapping
@@ -57,13 +62,5 @@ vim.keymap.set(
   'n',
   '<LocalLeader>n',
   ':NvimTreeToggle<CR>',
-  { noremap = true, silent = true, desc = 'nvim-tree' }
-)
-
--- Locate the current file in the tree
-vim.keymap.set(
-  'n',
-  '<LocalLeader>N',
-  ':NvimTreeFindFileToggle<CR>',
-  { noremap = true, silent = true, desc = 'Current file in nvim-tree' }
+  { noremap = true, silent = true, desc = 'File Tree' }
 )

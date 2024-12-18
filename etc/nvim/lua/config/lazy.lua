@@ -10,8 +10,6 @@ require 'lazy'.setup {
 
 --[[
 packer.startup(function(use)
-    use 'wbthomason/packer.nvim'
-    use 'kyazdani42/nvim-web-devicons'
     use 'nvim-lua/plenary.nvim'
     use 'tpope/vim-unimpaired'
     use 'rcarriga/nvim-notify'
@@ -26,12 +24,6 @@ packer.startup(function(use)
         'petertriho/nvim-scrollbar',
         config = function()
             require('scrollbar').setup()
-        end,
-    }
-    use {
-        'kyazdani42/nvim-tree.lua',
-        config = function()
-            require 'config.nvim-tree'
         end,
     }
     use {
@@ -53,13 +45,6 @@ packer.startup(function(use)
         'numToStr/Comment.nvim',
         config = function()
             require('Comment').setup()
-        end,
-    }
-    use {
-        'phaazon/hop.nvim',
-        branch = 'v2',
-        config = function()
-            require 'config.hop'
         end,
     }
     use {

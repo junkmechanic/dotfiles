@@ -58,9 +58,13 @@ autocmd('FileType', {
 
 -- Terminal buffer settings
 augroup('TerminalBufferSetup', { clear = true })
-autocmd('BufEnter', {
+autocmd({ 'BufEnter', 'TermOpen' }, {
   group = 'TerminalBufferSetup',
-  command = [[if &buftype == 'terminal' | :startinsert | endif]],
+  callback = function()
+    if vim.opt.buftype:get() == "terminal" then
+      vim.cmd(':startinsert')
+    end
+  end
 })
 autocmd('TermOpen', {
   group = 'TerminalBufferSetup',

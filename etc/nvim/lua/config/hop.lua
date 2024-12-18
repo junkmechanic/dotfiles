@@ -1,12 +1,18 @@
-local map = vim.keymap.set
+local hop = require 'hop'
 
-map('n', '<Leader>s', '<Cmd>HopChar2<CR>', {})
-map('v', '<Leader>s', '<Cmd>HopChar2<CR>', {})
-map('n', '<LocalLeader>j', '<Cmd>HopLineStart<CR>', {})
-map('v', '<LocalLeader>j', '<Cmd>HopLineStart<CR>', {})
-map('n', '<LocalLeader>k', '<Cmd>HopVertical<CR>', {})
-map('v', '<LocalLeader>k', '<Cmd>HopVertical<CR>', {})
-map('n', '<LocalLeader>/', '<Cmd>HopPattern<CR>', {})
-map('v', '<LocalLeader>/', '<Cmd>HopPattern<CR>', {})
+hop.setup()
 
-require('hop').setup()
+local function map(mode, lhs, rhs, desc)
+  vim.keymap.set(mode, lhs, rhs, { desc = desc })
+end
+
+map({ 'n', 'v' }, '<Leader>s', function() hop.hint_char2() end, 'Hop with 2 chars')
+map({ 'n', 'v' },
+  '<LocalLeader>j',
+  function()
+    hop.hint_lines_skip_whitespace()
+  end,
+  'Hop to line start'
+)
+map({ 'n', 'v' }, '<LocalLeader>k', function() hop.hint_vertical() end, 'Hop vertically')
+map({ 'n', 'v' }, '<LocalLeader>/', function() hop.hint_patterns() end, 'Hop to pattern')
