@@ -26,6 +26,8 @@ local function on_attach(bufnr)
 
   api.config.mappings.default_on_attach(bufnr)
 
+  vim.keymap.del("n", "<C-e>", { buffer = bufnr })
+
   vim.keymap.set('n', 's', api.node.open.horizontal, opts 'Open: Horizontal Split')
   vim.keymap.set('n', 'v', api.node.open.vertical, opts 'Open: Vertical Split')
   vim.keymap.set('n', 't', swap_then_open_tab, opts 'Open: New Tab')
@@ -53,6 +55,7 @@ require('nvim-tree').setup {
   tab = {
     sync = {
       open = true,
+      close = true,
     }
   },
 }

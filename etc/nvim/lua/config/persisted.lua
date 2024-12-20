@@ -3,9 +3,9 @@ local local_config = require 'config.local-config'
 vim.o.sessionoptions = 'buffers,curdir,folds,globals,tabpages,winpos,winsize'
 
 require('persisted').setup {
+  autostart = true,
   use_git_branch = true,
   allowed_dirs = local_config.persisted_allowed_dirs,
-  autosave = true,
   should_autosave = function()
     if vim.bo.filetype == 'alpha' then
       return false

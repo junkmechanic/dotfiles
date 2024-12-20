@@ -11,10 +11,26 @@ return {
     end,
   },
   {
-    'smoka7/hop.nvim',
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {
+      check_ts = true,
+      fast_wrap = {
+        map = '<M-e>',
+      },
+    }
+  },
+  {
+    'tummetott/unimpaired.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
+  {
+    'kylechui/nvim-surround',
     version = "*",
+    event = "VeryLazy",
     config = function()
-      require 'config.hop'
+      require('nvim-surround').setup()
     end,
   },
 }

@@ -1,12 +1,10 @@
+local telescope = require 'telescope'
 local actions = require 'telescope.actions'
-local fb_actions = require('telescope').extensions.file_browser.actions
+local builtin = require 'telescope.builtin'
+local utils = require 'telescope.utils'
+local fb_actions = telescope.extensions.file_browser.actions
 
-local map = vim.keymap.set
-
-local wk = require 'which-key'
-local devicons = require 'nvim-web-devicons'
-
-require('telescope').setup {
+telescope.setup {
   defaults = {
     mappings = {
       i = {
@@ -34,7 +32,7 @@ require('telescope').setup {
       show_untracked = true,
       mappings = {
         -- this will always open a new tab on hitting enter
-        -- you might want to add this mapping to `find_files` and any other relevant pickers
+        -- you might want to add this mapping to `find_files` and other relevant pickers
         -- i = {
         --   ['<CR>'] = function(bufnr)
         --     require('telescope.actions.set').edit(bufnr, 'tab drop')
@@ -70,104 +68,165 @@ require('telescope').setup {
       respect_gitignore = false,
       mappings = {
         ['i'] = {
-          ['<C-a>'] = fb_actions.create,
-          ['<A-h>'] = fb_actions.goto_home_dir,
           ['<C-t>'] = actions.select_tab,
-          ['<A-t>'] = fb_actions.change_cwd,
         },
       },
     },
   },
 }
 
-require('telescope').load_extension 'dap'
-require('telescope').load_extension 'file_browser'
-require('telescope').load_extension 'frecency'
-require('telescope').load_extension 'fzf'
-require('telescope').load_extension 'git_diffs'
-require('telescope').load_extension 'neoclip'
-require('telescope').load_extension 'persisted'
-require('telescope').load_extension 'ui-select'
-require('telescope').load_extension 'undo'
+-- telescope.load_extension 'dap'
+telescope.load_extension 'file_browser'
+telescope.load_extension 'frecency'
+telescope.load_extension 'fzf'
+-- telescope.load_extension 'git_diffs'
+telescope.load_extension 'lazy_plugins'
+telescope.load_extension 'neoclip'
+telescope.load_extension 'persisted'
+telescope.load_extension 'ui-select'
+telescope.load_extension 'undo'
 
 require('telescope-tabs').setup {
   show_preview = false,
 }
 
-local opts = { noremap = true, silent = true }
+-- Mappings
 
-map('n', '<C-p>', "<Cmd>lua require'config.telescope-ext'.project_files()<CR>", opts)
+local function map(mode, lhs, rhs, desc)
+  vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
+end
+
+map('n', '<LocalLeader>t/', function() builtin.search_history() end, 'Search History')
+map('n', '<LocalLeader>tC', function() builtin.command_history() end, 'Command History')
+map('n', '<LocalLeader>tc', function() builtin.commands() end, 'Commands')
+map('n', '<LocalLeader>tf', function() builtin.buffers() end, 'Buffers')
+map('n', '<LocalLeader>th', function() builtin.highlights() end, 'Highlights')
+map('n', '<LocalLeader>tk', function() builtin.keymaps() end, 'Mappings')
+map('n', '<LocalLeader>tp', function() builtin.builtin() end, 'Builtin Pickers')
+map('n', '<LocalLeader>ts', function() builtin.persisted() end, 'Sessions')
+map('n', '<LocalLeader>tu', function() builtin.undo() end, 'Undo Tree')
+map('n', '<LocalLeader>tv', function() builtin.vim_options() end, 'Nvim Options')
+map(
+  'n',
+  '<LocalLeader>tl',
+  function() telescope.extensions.lazy_plugins.lazy_plugins() end,
+  'Lazy Config'
+)
+
+map('n', '<LocalLeader>tgb', function() builtin.git_branches() end, 'Branches')
+map('n', '<LocalLeader>tgc', function() builtin.git_commits() end, 'Commits')
+-- map(
+--   'n',
+--   '<LocalLeader>tgd',
+--   function() telescope.extensions.git_diffs.diff_commits() end,
+--   'Commit Diffs'
+-- )
+map('n', '<LocalLeader>tgm', function() builtin.git_bcommits() end, 'Buffer Commits')
+map('n', '<LocalLeader>tgs', function() builtin.git_status() end, 'Git Status')
+-- map('n', '<LocalLeader>tgv', '<Cmd>DiffviewOpen<CR>', 'Diffview')
+-- map(
+--   'n',
+--   '<LocalLeader>tgw',
+--   '<Cmd>DiffviewFileHistory %<CR>',
+--   'Diffview Current File'
+-- )
+
+map('n', '<LocalLeader>g', function() builtin.live_grep() end, 'Search Codebase')
+map('n', '<LocalLeader>h', function() builtin.help_tags() end, 'Search Help Tags')
+map('n', '<LocalLeader>r', function() builtin.resume() end, 'Resume Search')
+map('n', '<LocalLeader>s', function() builtin.grep_string() end, 'Search Cursor-word')
+map('n', '<C-s>', function() require'telescope-tabs'.list_tabs() end, 'Search for Tabs')
+map(
+  'n',
+  '<LocalLeader>l',
+  function() builtin.current_buffer_fuzzy_find() end,
+  'Search in Current File'
+)
 map(
   'n',
   '<C-n>',
-  "<Cmd>lua require('telescope').extensions.frecency.frecency({ workspace = 'CWD' })<CR>",
-  opts
+  function()
+    telescope.extensions.frecency.frecency({
+      workspace = 'CWD',
+      prompt_title = 'Frecency'
+    })
+  end,
+  'Search for Frequent Files'
 )
-map('n', '<C-s>', "<Cmd>lua require'telescope-tabs'.list_tabs()<CR>", opts)
 
-wk.add {
-  { '<LocalLeader>g', '<Cmd>Telescope live_grep<CR>', desc = 'Search Codebase' },
-  { '<LocalLeader>h', '<Cmd>Telescope help_tags<CR>', desc = 'Search Help Tags' },
-  {
-    '<LocalLeader>l',
-    '<Cmd>Telescope current_buffer_fuzzy_find<CR>',
-    desc = 'Search in file',
-  },
-  { '<LocalLeader>r', '<Cmd>Telescope resume<CR>', desc = 'Resume Search' },
-  { '<LocalLeader>s', '<Cmd>Telescope grep_string<CR>', desc = 'Search Cursor-word' },
+local function project_files()
+  local opts = {}
 
-  { '<LocalLeader>f', group = ' File Browser' },
-  {
-    '<LocalLeader>fd',
-    "<Cmd>lua require'config.telescope-ext'.browse_file_dir()<CR>",
-    desc = 'File Browser in File Dir',
-  },
-  {
-    '<LocalLeader>ff',
-    "<Cmd>lua require'config.telescope-ext'.file_browser()<CR>",
-    desc = 'File Browser in $CWD',
-  },
-  {
-    '<LocalLeader>fh',
-    "<Cmd>lua require'config.telescope-ext'.home_explorer()<CR>",
-    desc = 'File Browser in $HOME',
-  },
-  {
-    '<LocalLeader>fp',
-    "<Cmd>lua require'config.telescope-ext'.browse_plugin_dir()<CR>",
-    desc = 'File Browser in Neovim Plugin Dir',
-  },
+  local _, ret, _ = utils.get_os_command_output {
+    'git',
+    'rev-parse',
+    '--is-inside-work-tree',
+  }
 
-  { '<LocalLeader>t', group = ' Telescope' },
-  { '<LocalLeader>t/', '<Cmd>Telescope search_history<CR>', desc = 'Search History' },
-  { '<LocalLeader>tC', '<Cmd>Telescope command_history<CR>', desc = 'Command History' },
-  { '<LocalLeader>tc', '<Cmd>Telescope commands<CR>', desc = 'Commands' },
-  { '<LocalLeader>tf', '<Cmd>Telescope buffers<CR>', desc = 'Buffers' },
-  { '<LocalLeader>th', '<Cmd>Telescope highlights<CR>', desc = 'Highlights' },
-  { '<LocalLeader>tk', '<Cmd>Telescope keymaps<CR>', desc = 'Mappings' },
-  { '<LocalLeader>tp', '<Cmd>Telescope builtin<CR>', desc = 'Builtin Pickers' },
-  { '<LocalLeader>ts', '<Cmd>Telescope persisted<CR>', desc = 'Sessions' },
-  { '<LocalLeader>tu', '<Cmd>Telescope undo<CR>', desc = 'Undo Tree' },
-  { '<LocalLeader>tv', '<Cmd>Telescope vim_options<CR>', desc = 'Nvim Options' },
+  if ret == 0 then
+    opts.prompt_title = ' ' .. vim.fn.getcwd()
+    opts.results_title = ''
+    require('telescope.builtin').git_files(opts)
+  else
+    opts.prompt_title = ' ' .. vim.fn.getcwd()
+    opts.results_title = ''
+    require('telescope.builtin').find_files(opts)
+  end
+end
 
-  {
-    '<LocalLeader>tg',
-    group = ' Version Control',
-    icon = devicons.get_icons_by_extension()['git']['icon'],
-  },
-  { '<LocalLeader>tgb', '<Cmd>Telescope git_branches<CR>', desc = 'Branches' },
-  { '<LocalLeader>tgc', '<Cmd>Telescope git_commits<CR>', desc = 'Commits' },
-  {
-    '<LocalLeader>tgd',
-    '<Cmd>Telescope git_diffs diff_commits<CR>',
-    desc = 'Commit Diffs',
-  },
-  { '<LocalLeader>tgm', '<Cmd>Telescope git_bcommits<CR>', desc = 'Buffer Commits' },
-  { '<LocalLeader>tgs', '<Cmd>Telescope git_status<CR>', desc = 'Git Status' },
-  { '<LocalLeader>tgv', '<Cmd>DiffviewOpen<CR>', desc = 'Diffview' },
-  {
-    '<LocalLeader>tgw',
-    '<Cmd>DiffviewFileHistory %<CR>',
-    desc = 'Diffview Current File',
-  },
-}
+map('n', '<C-p>', function() project_files() end, 'Search for Project Files')
+
+local function file_browser()
+  telescope.extensions.file_browser.file_browser {
+    prompt_title = ' ' .. vim.fn.getcwd(),
+  }
+end
+
+map(
+  'n',
+  '<LocalLeader>ff',
+  function() file_browser() end,
+  'File Browser in $CWD'
+)
+
+local function browse_file_dir()
+  telescope.extensions.file_browser.file_browser {
+    prompt_title = ' ' .. vim.fn.expand '%:p:h',
+    path = '%:p:h',
+  }
+end
+
+map(
+  'n',
+  '<LocalLeader>fd',
+  function() browse_file_dir() end,
+  'File Browser in File Dir'
+)
+
+local function home_explorer()
+  telescope.extensions.file_browser.file_browser {
+    prompt_title = ' Home',
+    cwd = '~',
+  }
+end
+
+map(
+  'n',
+  '<LocalLeader>fh',
+  function() home_explorer() end,
+  'File Browser in $HOME'
+)
+
+local function browse_plugin_dir()
+  telescope.extensions.file_browser.file_browser {
+    prompt_title = ' ' .. '~/.local/share/nvim/lazy',
+    path = '~/.local/share/nvim/lazy',
+  }
+end
+
+map(
+  'n',
+  '<LocalLeader>fp',
+  function() browse_plugin_dir() end,
+  'File Browser in Neovim Plugin Dir'
+)

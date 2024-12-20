@@ -1,31 +1,19 @@
 -- Setup lazy.nvim
 require 'lazy'.setup {
-    spec = {
-        { import = 'plugins' },
-    },
-    install = { colorscheme = { 'nordfox' } },
-    -- automatically check for plugin updates
-    checker = { enabled = true },
+  spec = {
+    { import = 'plugins' },
+  },
+  install = { colorscheme = { 'nordfox' } },
+  checker = { enabled = true },
+  change_detection = {
+    notify = false
+  }
 }
 
 --[[
 packer.startup(function(use)
-    use 'nvim-lua/plenary.nvim'
-    use 'tpope/vim-unimpaired'
     use 'rcarriga/nvim-notify'
     use 'mrjones2014/smart-splits.nvim'
-    use {
-        'lewis6991/impatient.nvim',
-        config = function()
-            require 'impatient'
-        end,
-    }
-    use {
-        'petertriho/nvim-scrollbar',
-        config = function()
-            require('scrollbar').setup()
-        end,
-    }
     use {
         'lewis6991/gitsigns.nvim',
         requires = {
@@ -68,26 +56,8 @@ packer.startup(function(use)
         end,
     }
     use {
-        'kylechui/nvim-surround',
-        config = function()
-            require('nvim-surround').setup()
-        end,
-        keys = {
-            { 'n', 'cs' },
-            { 'n', 'ds' },
-            { 'n', 'ys' },
-            { 'x', 'S' },
-        },
-    }
-    use {
         'rjayatilleka/vim-insert-char',
         keys = { { 'n', '<space>' } },
-    }
-    use {
-        'windwp/nvim-autopairs',
-        config = function()
-            require 'config.autopairs'
-        end,
     }
     use {
         'williamboman/mason.nvim',
@@ -196,33 +166,6 @@ packer.startup(function(use)
         end,
     }
     use {
-        'nvim-telescope/telescope.nvim',
-        branch = '0.1.x',
-        requires = {
-            'tami5/sqlite.lua',
-            'nvim-telescope/telescope-frecency.nvim',
-            'nvim-telescope/telescope-ui-select.nvim',
-            'nvim-telescope/telescope-file-browser.nvim',
-            'nvim-telescope/telescope-dap.nvim',
-            'LukasPietzschmann/telescope-tabs',
-            'paopaol/telescope-git-diffs.nvim',
-            'debugloop/telescope-undo.nvim',
-            { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-            {
-                'AckslD/nvim-neoclip.lua',
-                requires = {
-                    { 'kkharji/sqlite.lua', module = 'sqlite' },
-                },
-                config = function()
-                    require 'config.neoclip'
-                end,
-            },
-        },
-        config = function()
-            require 'config.telescope'
-        end,
-    }
-    use {
         'TimUntersberger/neogit',
         config = function()
             require 'config.neogit'
@@ -290,15 +233,6 @@ packer.startup(function(use)
         'olimorris/persisted.nvim',
         config = function()
             require 'config.persisted'
-        end,
-    }
-    use {
-        'folke/which-key.nvim',
-        requires = {
-            'echasnovski/mini.icons',
-        },
-        config = function()
-            require 'config.which-key'
         end,
     }
     use {
