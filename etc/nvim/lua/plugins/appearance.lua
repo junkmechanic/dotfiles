@@ -10,4 +10,10 @@ return {
       require 'config.lualine'
     end,
   },
+  {
+    "rcarriga/nvim-notify",
+    config = function()
+      vim.notify = require 'notify'
+    end,
+  },
 }

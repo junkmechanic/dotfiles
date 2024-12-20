@@ -1,37 +1,35 @@
 local gitsigns = require 'gitsigns'
 
-local wk = require 'which-key'
-local devicons = require 'nvim-web-devicons'
-
 gitsigns.setup()
 
-wk.add {
-  { '[g', '<Cmd>Gitsigns prev_hunk<CR>', desc = 'Previous Git Hunk' },
-  { ']g', '<Cmd>Gitsigns next_hunk<CR>', desc = 'Next Git Hunk' },
-  { 'gz', '<Cmd>Gitsigns preview_hunk<CR>', desc = 'Preview Hunk' },
+-- Mappings
 
-  {
-    '<LocalLeader>v',
-    group = ' VCS Actions',
-    icon = devicons.get_icons_by_extension()['git']['icon'],
-  },
-  {
-    '<LocalLeader>vB',
-    function()
-      gitsigns.blame_line { full = true }
-    end,
-    desc = 'Full Blame Line',
-  },
-  { '<LocalLeader>vP', gitsigns.preview_hunk_inline, desc = 'Preview Hunk Inline' },
-  { '<LocalLeader>vS', gitsigns.stage_buffer, desc = 'Stage Buffer' },
-  { '<LocalLeader>vb', gitsigns.blame_line, desc = 'Blame Line' },
-  { '<LocalLeader>vd', gitsigns.toggle_deleted, desc = 'Toggle Deleted' },
-  {
-    '<LocalLeader>vl',
-    gitsigns.toggle_current_line_blame,
-    desc = 'Toggle Current Line Blame',
-  },
-  { '<LocalLeader>vp', gitsigns.preview_hunk, desc = 'Preview Hunk' },
-  { '<LocalLeader>vs', gitsigns.stage_hunk, desc = 'Stage Hunk' },
-  { '<LocalLeader>vu', gitsigns.undo_stage_hunk, desc = 'Undo Stage' },
-}
+local function map(mode, lhs, rhs, desc)
+  vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
+end
+
+map('n', '[g', function() gitsigns.nav_hunk('prev') end, 'Previous Git Hunk')
+map('n', ']g', function() gitsigns.nav_hunk('next') end, 'Next Git Hunk')
+map('n', 'gz', gitsigns.preview_hunk, 'Preview Hunk')
+
+map(
+  'n',
+  '<LocalLeader>vB',
+  function()
+    gitsigns.blame_line { full = true }
+  end,
+  'Full Blame Line'
+)
+map('n', '<LocalLeader>vP', gitsigns.preview_hunk_inline, 'Preview Hunk Inline')
+map('n', '<LocalLeader>vS', gitsigns.stage_buffer, 'Stage Buffer')
+map('n', '<LocalLeader>vb', gitsigns.blame_line, 'Blame Line')
+map('n', '<LocalLeader>vd', gitsigns.toggle_deleted, 'Toggle Deleted')
+map(
+  'n',
+  '<LocalLeader>vl',
+  gitsigns.toggle_current_line_blame,
+  'Toggle Current Line Blame'
+)
+map('n', '<LocalLeader>vp', gitsigns.preview_hunk, 'Preview Hunk')
+map('n', '<LocalLeader>vs', gitsigns.stage_hunk, 'Stage Hunk')
+map('n', '<LocalLeader>vu', gitsigns.undo_stage_hunk, 'Undo Stage')

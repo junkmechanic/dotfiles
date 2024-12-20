@@ -12,23 +12,7 @@ require 'lazy'.setup {
 
 --[[
 packer.startup(function(use)
-    use 'rcarriga/nvim-notify'
     use 'mrjones2014/smart-splits.nvim'
-    use {
-        'lewis6991/gitsigns.nvim',
-        requires = {
-            'rbong/vim-flog',
-        },
-        config = function()
-            require 'config.gitsigns'
-        end,
-    }
-    use {
-        'tpope/vim-fugitive',
-        config = function()
-            require 'config.fugitive'
-        end,
-    }
     use {
         'numToStr/Comment.nvim',
         config = function()
@@ -152,18 +136,6 @@ packer.startup(function(use)
         end,
         config = function()
             require 'config.treesitter'
-        end,
-    }
-    use {
-        'TimUntersberger/neogit',
-        config = function()
-            require 'config.neogit'
-        end,
-    }
-    use {
-        'sindrets/diffview.nvim',
-        config = function()
-            require 'config.diffview'
         end,
     }
     use {

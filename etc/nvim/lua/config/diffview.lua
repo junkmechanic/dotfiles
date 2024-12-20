@@ -13,3 +13,17 @@ require('diffview').setup {
     DiffviewFileHistory = { '%' },
   },
 }
+
+-- Mappings
+
+local function map(mode, lhs, rhs, desc)
+  vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
+end
+
+map('n', '<LocalLeader>x', '<Cmd>DiffviewOpen<CR>', 'Diffview')
+map(
+  'n',
+  '<LocalLeader>X',
+  '<Cmd>DiffviewFileHistory %<CR>',
+  'Diffview Current File'
+)

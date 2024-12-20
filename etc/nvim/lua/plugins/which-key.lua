@@ -49,6 +49,11 @@ return {
         group = ' Version Control',
         icon = devicons.get_icons_by_extension()['git']['icon'],
       },
+      {
+        '<LocalLeader>v',
+        group = ' VCS Actions',
+        icon = devicons.get_icons_by_extension()['git']['icon'],
+      },
     }
   },
   keys = {

@@ -92,7 +92,7 @@ require('lualine').setup {
     lualine_y = { show_persisted },
   },
   extensions = {
-    -- 'fugitive',
+    'fugitive',
     'man',
     -- 'mason',
     -- 'mundo',

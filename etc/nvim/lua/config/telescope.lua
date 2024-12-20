@@ -122,21 +122,14 @@ map(
 
 map('n', '<LocalLeader>tgb', function() builtin.git_branches() end, 'Branches')
 map('n', '<LocalLeader>tgc', function() builtin.git_commits() end, 'Commits')
--- map(
---   'n',
---   '<LocalLeader>tgd',
---   function() telescope.extensions.git_diffs.diff_commits() end,
---   'Commit Diffs'
--- )
+map(
+  'n',
+  '<LocalLeader>tgd',
+  function() telescope.extensions.git_diffs.diff_commits() end,
+  'Commit Diffs'
+)
 map('n', '<LocalLeader>tgm', function() builtin.git_bcommits() end, 'Buffer Commits')
 map('n', '<LocalLeader>tgs', function() builtin.git_status() end, 'Git Status')
--- map('n', '<LocalLeader>tgv', '<Cmd>DiffviewOpen<CR>', 'Diffview')
--- map(
---   'n',
---   '<LocalLeader>tgw',
---   '<Cmd>DiffviewFileHistory %<CR>',
---   'Diffview Current File'
--- )
 
 map('n', '<LocalLeader>g', function() builtin.live_grep() end, 'Search Codebase')
 map('n', '<LocalLeader>h', function() builtin.help_tags() end, 'Search Help Tags')
