@@ -106,6 +106,13 @@ map('n', '<LocalLeader>tp', function() builtin.builtin() end, 'Builtin Pickers')
 map('n', '<LocalLeader>ts', function() builtin.persisted() end, 'Sessions')
 map('n', '<LocalLeader>tu', function() builtin.undo() end, 'Undo Tree')
 map('n', '<LocalLeader>tv', function() builtin.vim_options() end, 'Nvim Options')
+map('n', '<LocalLeader>tz', function() require'lazy'.home() end, 'Lazy Home')
+map(
+  'n',
+  '<LocalLeader>tn',
+  function() require('telescope').extensions.notify.notify() end,
+  'Notify History'
+)
 map(
   'n',
   '<LocalLeader>tl',

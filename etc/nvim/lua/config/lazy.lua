@@ -42,22 +42,11 @@ packer.startup(function(use)
         end,
     }
     use {
-        'nvim-lualine/lualine.nvim',
-        after = 'nightfox.nvim',
-        config = function()
-            require 'config.lualine'
-        end,
-    }
-    use {
         'ellisonleao/glow.nvim',
         ft = { 'md', 'markdown' },
         config = function()
             require 'config.glow'
         end,
-    }
-    use {
-        'rjayatilleka/vim-insert-char',
-        keys = { { 'n', '<space>' } },
     }
     use {
         'williamboman/mason.nvim',
@@ -227,12 +216,6 @@ packer.startup(function(use)
         'folke/twilight.nvim',
         config = function()
             require 'config.twilight'
-        end,
-    }
-    use {
-        'olimorris/persisted.nvim',
-        config = function()
-            require 'config.persisted'
         end,
     }
     use {

@@ -1,20 +1,23 @@
--- require('which-key').add {
---   { '<LocalLeader>y', '<Cmd>Telescope neoclip<CR>', desc = 'Search Clipboard' },
--- }
-
 require('neoclip').setup {
   enable_persistent_history = true,
   continuous_sync = true,
   keys = {
     telescope = {
       i = {
-        select = '<cr>',
-        paste = '<c-p>',
-        paste_behind = '<c-n>',
+        select = '<CR>',
+        paste = '<C-p>',
+        paste_behind = '<C-n>',
         -- macro replay
-        replay = '<c-q>',
-        delete = '<c-d>',
+        replay = '<C-q>',
+        delete = '<C-d>',
       },
     },
   },
 }
+
+vim.keymap.set(
+  'n',
+  '<LocalLeader>y',
+  '<Cmd>Telescope neoclip<CR>',
+  { noremap = true, silent = true, desc = 'Search Clipboard'}
+)

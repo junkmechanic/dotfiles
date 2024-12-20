@@ -33,4 +33,8 @@ return {
       require('nvim-surround').setup()
     end,
   },
+  {
+    'rjayatilleka/vim-insert-char',
+    keys = { { '<space>', mode = 'n' } },
+  },
 }
