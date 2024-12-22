@@ -1,16 +1,5 @@
 return {
   {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
-    lazy = false,
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = function()
-      require 'config.nvim-tree'
-    end,
-  },
-  {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     opts = {
@@ -36,5 +25,11 @@ return {
   {
     'rjayatilleka/vim-insert-char',
     keys = { { '<space>', mode = 'n' } },
+  },
+  {
+    "mcauley-penney/tidy.nvim",
+    opts = {
+        filetype_exclude = { "markdown", "diff" }
+    },
   },
 }

@@ -35,6 +35,7 @@ return {
       wo = {
         winblend = 20,
       },
+      padding = { 1, 1 },
     },
     layout = {
       height = { min = 5, max = 25 },

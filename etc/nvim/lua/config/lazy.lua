@@ -20,12 +20,6 @@ packer.startup(function(use)
         end,
     }
     use {
-        'kevinhwang91/nvim-hlslens',
-        config = function()
-            require 'config.hlslens'
-        end,
-    }
-    use {
         'ellisonleao/glow.nvim',
         ft = { 'md', 'markdown' },
         config = function()
@@ -139,19 +133,6 @@ packer.startup(function(use)
         end,
     }
     use {
-        'akinsho/toggleterm.nvim',
-        tag = 'v2.*',
-        config = function()
-            require 'config.toggleterm'
-        end,
-    }
-    use {
-        'mcauley-penney/tidy.nvim',
-        config = function()
-            require 'config.tidy'
-        end,
-    }
-    use {
         'abecodes/tabout.nvim',
         wants = { 'nvim-treesitter' },
         after = { 'nvim-cmp' },
@@ -176,12 +157,6 @@ packer.startup(function(use)
         branch = 'legacy',
         config = function()
             require 'config.fidget'
-        end,
-    }
-    use {
-        'folke/zen-mode.nvim',
-        config = function()
-            require 'config.zen-mode'
         end,
     }
     use {

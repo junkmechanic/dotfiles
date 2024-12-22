@@ -15,6 +15,7 @@ telescope.setup {
         ['<C-f>'] = actions.results_scrolling_down,
         ['<C-p>'] = actions.preview_scrolling_up,
         ['<C-n>'] = actions.preview_scrolling_down,
+        ["<C-s>"] = actions.select_horizontal,
         ['<C-u>'] = false,
       },
     },
@@ -79,7 +80,7 @@ telescope.setup {
 telescope.load_extension 'file_browser'
 telescope.load_extension 'frecency'
 telescope.load_extension 'fzf'
--- telescope.load_extension 'git_diffs'
+telescope.load_extension 'git_diffs'
 telescope.load_extension 'lazy_plugins'
 telescope.load_extension 'neoclip'
 telescope.load_extension 'persisted'

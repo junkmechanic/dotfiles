@@ -17,7 +17,7 @@ return {
       'nvim-telescope/telescope-file-browser.nvim',
       -- 'nvim-telescope/telescope-dap.nvim',
       'LukasPietzschmann/telescope-tabs',
-      -- 'paopaol/telescope-git-diffs.nvim',
+      'paopaol/telescope-git-diffs.nvim',
       'debugloop/telescope-undo.nvim',
       'polirritmico/telescope-lazy-plugins.nvim',
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
