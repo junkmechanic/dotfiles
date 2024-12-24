@@ -19,5 +19,5 @@ vim.keymap.set(
   'n',
   '<LocalLeader>y',
   '<Cmd>Telescope neoclip<CR>',
-  { noremap = true, silent = true, desc = 'Search Clipboard'}
+  { noremap = true, silent = true, desc = 'Search Clipboard' }
 )

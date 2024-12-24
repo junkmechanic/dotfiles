@@ -34,7 +34,7 @@ ls.config.set_config {
 vsc.lazy_load()
 
 -- load lua snippets
-lua.load { paths = os.getenv 'HOME' .. '/.config/nvim/snippets/' }
+lua.load { paths = os.getenv 'HOME' .. '/.config/nvim/lua/snippets/' }
 
 -- expansion key
 -- this will expand the current item or jump to the next item within the snippet.
@@ -42,7 +42,7 @@ vim.keymap.set({ 'i', 's' }, '<M-j>', function()
   if ls.expand_or_jumpable() then
     ls.expand_or_jump()
   end
-end, { silent = true })
+end, { silent = true, desc = 'Jump to next snippet item' })
 
 -- jump backwards key.
 -- this always moves to the previous item within the snippet
@@ -50,11 +50,11 @@ vim.keymap.set({ 'i', 's' }, '<M-k>', function()
   if ls.jumpable(-1) then
     ls.jump(-1)
   end
-end, { silent = true })
+end, { silent = true, desc = 'Jump to prev snippet item' })
 
 -- selecting within a list of options.
 vim.keymap.set('i', '<M-n>', function()
   if ls.choice_active() then
     ls.change_choice(1)
   end
-end)
+end, { silent = true, desc = 'Select next snippet' })

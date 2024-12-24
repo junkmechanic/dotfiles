@@ -16,4 +16,4 @@ dotfiles for home, work and beyond.
 - `./dev/output_toggle.tpl` can be placed in the jupyter slides dir.
 - `./etc/nvim` is a pure lua neovim config.
 - `./etc/init.vim` is a non-lua neovim config.
-- `./etc/vimrc` is for a clean ubuntu / debian installation.
+- `./etc/vimrc` is for a clean debian installation.

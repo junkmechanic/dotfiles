@@ -11,7 +11,6 @@ return {
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'tami5/sqlite.lua',
       'nvim-telescope/telescope-frecency.nvim',
       'nvim-telescope/telescope-ui-select.nvim',
       'nvim-telescope/telescope-file-browser.nvim',
@@ -23,7 +22,7 @@ return {
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
       {
         'AckslD/nvim-neoclip.lua',
-        requires = {
+        dependencies = {
           { 'kkharji/sqlite.lua', module = 'sqlite' },
         },
         config = function()

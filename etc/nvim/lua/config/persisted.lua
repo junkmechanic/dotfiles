@@ -4,6 +4,7 @@ vim.o.sessionoptions = 'buffers,curdir,folds,globals,tabpages,winpos,winsize'
 
 require('persisted').setup {
   autostart = true,
+  autoload = true,
   use_git_branch = true,
   allowed_dirs = local_config.persisted_allowed_dirs,
   should_autosave = function()

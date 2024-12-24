@@ -10,20 +10,19 @@ require 'lazy'.setup {
   }
 }
 
+vim.keymap.set(
+  'n',
+  '<LocalLeader>a',
+  function() require'lazy'.home() end,
+  { noremap = true, silent = true, desc =  'Lazy Home' }
+)
+
 --[[
 packer.startup(function(use)
-    use 'mrjones2014/smart-splits.nvim'
     use {
         'numToStr/Comment.nvim',
         config = function()
             require('Comment').setup()
-        end,
-    }
-    use {
-        'ellisonleao/glow.nvim',
-        ft = { 'md', 'markdown' },
-        config = function()
-            require 'config.glow'
         end,
     }
     use {
@@ -38,7 +37,6 @@ packer.startup(function(use)
         'neovim/nvim-lspconfig',
         after = { 'mason.nvim', 'mason-lspconfig.nvim' },
         requires = {
-            'onsails/lspkind-nvim',
             'SmiteshP/nvim-navic',
             'rmagatti/goto-preview',
         },
@@ -62,15 +60,6 @@ packer.startup(function(use)
         end,
     }
     use {
-        'L3MON4D3/LuaSnip',
-        requires = {
-            'rafamadriz/friendly-snippets',
-        },
-        config = function()
-            require 'config.luasnip'
-        end,
-    }
-    use {
         'mfussenegger/nvim-dap',
         requires = {
             'mfussenegger/nvim-dap-python',
@@ -83,31 +72,10 @@ packer.startup(function(use)
             require 'config.dap'
         end,
     }
-    use { 'rafcamlet/nvim-luapad' }
     use {
         'simrat39/symbols-outline.nvim',
         config = function()
             require 'config.symbols-outline'
-        end,
-    }
-    use {
-        'hrsh7th/nvim-cmp',
-        requires = {
-            'dmitmel/cmp-cmdline-history',
-            'f3fora/cmp-spell',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-calc',
-            'hrsh7th/cmp-cmdline',
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-nvim-lsp-signature-help',
-            'hrsh7th/cmp-nvim-lua',
-            'hrsh7th/cmp-path',
-            'lukas-reineke/cmp-rg',
-            'ray-x/cmp-treesitter',
-            'saadparwaiz1/cmp_luasnip',
-        },
-        config = function()
-            require 'config.completion'
         end,
     }
     use {
@@ -147,12 +115,6 @@ packer.startup(function(use)
         end,
     }
     use {
-        'anuvyklack/hydra.nvim',
-        config = function()
-            require 'config.hydra'
-        end,
-    }
-    use {
         'j-hui/fidget.nvim',
         branch = 'legacy',
         config = function()
@@ -169,26 +131,6 @@ packer.startup(function(use)
         'gorbit99/codewindow.nvim',
         config = function()
             require 'config.codewindow'
-        end,
-    }
-    use {
-        'sindrets/winshift.nvim',
-        config = function()
-            require('winshift').setup()
-        end,
-    }
-    use {
-        'iamcco/markdown-preview.nvim',
-        run = function()
-            vim.fn['mkdp#util#install']()
-        end,
-    }
-    use {
-        'ziontee113/icon-picker.nvim',
-        config = function()
-            require('icon-picker').setup {
-                disable_legacy_commands = true,
-            }
         end,
     }
 end)
