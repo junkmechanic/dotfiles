@@ -1,17 +1,28 @@
+local devicons = require 'nvim-web-devicons'
+
+-- to be added to which-key
+-- { '<Leader>B', desc = 'Swap Master Node with previous' },
+-- { '<Leader>W', desc = 'Swap Current Node with previous' },
+-- { '<Leader>b', desc = 'Swap Master Node with next' },
+-- { '<Leader>w', desc = 'Swap Current Node with next' },
+-- { '<LocalLeader>w', desc = 'Window Management' },
+-- { '<LocalLeader>z', desc = 'Horizontal Scrolling' },
+-- { 'gr', desc = 'Smart Rename' },
+
 return {
   {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
+    'nvim-tree/nvim-tree.lua',
+    version = '*',
     lazy = false,
     dependencies = {
-      "nvim-tree/nvim-web-devicons",
+      'nvim-tree/nvim-web-devicons',
     },
     config = function()
       require 'config.nvim-tree'
     end,
   },
   {
-    "olimorris/persisted.nvim",
+    'olimorris/persisted.nvim',
     lazy = false,
     priority = 100,
     config = function()
@@ -43,7 +54,7 @@ return {
     }
   },
   {
-    "folke/zen-mode.nvim",
+    'folke/zen-mode.nvim',
     opts = {
       window = {
         backdrop = 1,
@@ -53,7 +64,7 @@ return {
     }
   },
   {
-    "nvimtools/hydra.nvim",
+    'nvimtools/hydra.nvim',
     dependencies = {
       'sindrets/winshift.nvim',
       'mrjones2014/smart-splits.nvim',
@@ -63,17 +74,17 @@ return {
     end
   },
   {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    ft = { 'markdown' },
     build = function()
-      require("lazy").load { plugins = { "markdown-preview.nvim" } }
-      vim.fn["mkdp#util#install"]()
+      require 'lazy'.load { plugins = { 'markdown-preview.nvim' } }
+      vim.fn['mkdp#util#install']()
     end,
   },
   {
-    "jiaoshijie/undotree",
-    dependencies = "nvim-lua/plenary.nvim",
+    'jiaoshijie/undotree',
+    dependencies = 'nvim-lua/plenary.nvim',
     opts = {
       window = {
         winblend = 10,
@@ -84,8 +95,8 @@ return {
     },
   },
   {
-    "ellisonleao/glow.nvim",
-    cmd = "Glow",
+    'ellisonleao/glow.nvim',
+    cmd = 'Glow',
     opts = {
       width = 160,
       height = 120,
@@ -95,11 +106,64 @@ return {
     }
   },
   {
-    'rafcamlet/nvim-luapad',
-    ft = { "lua" },
-    cmd = { "Laupad", "LuaRun" },
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
+    opts = {
+      preset = 'classic',
+      plugins = {
+        marks = false,
+        spelling = {
+          enabled = true,
+        },
+      },
+      replace = {
+        key = {
+          { '`',        '<LocalLeader>' },
+          { '<leader>', '<Leader>' },
+          { '<cr>',     '<CR>' },
+          { '<tab>',    '<Tab>' },
+        },
+        desc = {
+          { '<[cC]md>',   '' },
+          { '<[cC][rR]>', '' },
+        },
+      },
+      win = {
+        wo = {
+          winblend = 20,
+        },
+        padding = { 1, 1 },
+      },
+      layout = {
+        height = { min = 5, max = 25 },
+        spacing = 5,
+        align = 'center',
+      },
+      spec = {
+        { '<LocalLeader>f',  group = ' File Browser' },
+        { '<LocalLeader>t',  group = ' Telescope' },
+        { '<LocalLeader>d',  group = ' LSP Diagnostics' },
+        { '<LocalLeader>dp', group = ' Preview' },
+        {
+          '<LocalLeader>tg',
+          group = ' Version Control',
+          icon = devicons.get_icons_by_extension()['git']['icon'],
+        },
+        {
+          '<LocalLeader>v',
+          group = ' VCS Actions',
+          icon = devicons.get_icons_by_extension()['git']['icon'],
+        },
+      }
+    },
     keys = {
-      { '<LocalLeader>q', "<Cmd>lua require('luapad').init()<CR>", desc = 'Luapad' },
+      {
+        '<LocalLeader>?',
+        function()
+          require 'which-key'.show { global = true }
+        end,
+        desc = 'All Keymaps',
+      },
     },
   },
 }

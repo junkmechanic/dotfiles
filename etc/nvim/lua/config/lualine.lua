@@ -1,4 +1,4 @@
--- local navic = require 'nvim-navic'
+local navic = require 'nvim-navic'
 local local_config = require 'config.local-config'
 
 local function show_trailing_whitespace()
@@ -88,20 +88,19 @@ require('lualine').setup {
   tabline = {
     lualine_a = { { 'tabs', mode = 0 } },
     lualine_b = { { 'windows', symbols = symbols } },
-    -- lualine_x = { { navic.get_location, cond = navic.is_available } },
+    lualine_x = { { navic.get_location, cond = navic.is_available } },
     lualine_y = { show_persisted },
   },
   extensions = {
     'fugitive',
     'man',
-    -- 'mason',
-    -- 'mundo',
+    'mason',
     -- 'nvim-dap-ui',
     'nvim-tree',
     -- 'oil',
     'quickfix',
     -- 'symbols-outline',
-    -- 'toggleterm',
+    'toggleterm',
     -- 'trouble',
   },
 }

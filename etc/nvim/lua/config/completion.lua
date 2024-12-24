@@ -67,6 +67,17 @@ cmp.setup {
     { name = 'spell', keyword_length = 5 },
     { name = 'calc' },
   },
+  window = {
+    completion = {
+      winblend = 10
+    },
+    documentation = {
+      winblend = 15
+    },
+  },
+  experimental = {
+    ghost_text = true,
+  }
 }
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).

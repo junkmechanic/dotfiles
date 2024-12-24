@@ -1,7 +1,7 @@
 return {
   {
     'windwp/nvim-autopairs',
-    event = "InsertEnter",
+    event = 'InsertEnter',
     opts = {
       check_ts = true,
       fast_wrap = {
@@ -16,10 +16,10 @@ return {
   },
   {
     'kylechui/nvim-surround',
-    version = "*",
-    event = "VeryLazy",
+    version = '*',
+    event = 'VeryLazy',
     config = function()
-      require('nvim-surround').setup()
+      require 'nvim-surround'.setup()
     end,
   },
   {
@@ -27,9 +27,9 @@ return {
     keys = { { '<space>', mode = 'n' } },
   },
   {
-    "mcauley-penney/tidy.nvim",
+    'mcauley-penney/tidy.nvim',
     opts = {
-        filetype_exclude = { "markdown", "diff" }
+      filetype_exclude = { 'markdown', 'diff' }
     },
   },
 }

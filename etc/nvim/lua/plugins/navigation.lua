@@ -1,7 +1,7 @@
 return {
   {
     'smoka7/hop.nvim',
-    version = "*",
+    version = '*',
     config = function()
       require 'config.hop'
     end,

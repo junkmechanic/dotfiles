@@ -23,7 +23,7 @@ map(
 map('n', '<LocalLeader>vP', gitsigns.preview_hunk_inline, 'Preview Hunk Inline')
 map('n', '<LocalLeader>vS', gitsigns.stage_buffer, 'Stage Buffer')
 map('n', '<LocalLeader>vb', gitsigns.blame_line, 'Blame Line')
-map('n', '<LocalLeader>vd', gitsigns.toggle_deleted, 'Toggle Deleted')
+map('n', '<LocalLeader>vd', gitsigns.toggle_deleted, 'Inline Diff')
 map(
   'n',
   '<LocalLeader>vl',

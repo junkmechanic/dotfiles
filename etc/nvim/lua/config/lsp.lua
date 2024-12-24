@@ -1,3 +1,7 @@
+local goto_preview = require 'goto-preview'
+local navic = require 'nvim-navic'
+local builtin = require 'telescope.builtin'
+
 local servers = {
   'bashls',
   'cmake',
@@ -16,10 +20,6 @@ local servers = {
 require('mason-lspconfig').setup {
   ensure_installed = servers,
 }
-
-local navic = require 'nvim-navic'
-
-local wk = require 'which-key'
 
 -- global diagnostics options
 vim.diagnostic.config { virtual_text = false }
@@ -91,79 +91,95 @@ for _, lsp_server in ipairs(servers) do
   }
 end
 
--- goto-preview
-local goto_preview = require 'goto-preview'
-goto_preview.setup {}
-
 -- LSP Mappings
-wk.add {
-  { '[d', vim.diagnostic.goto_prev, desc = 'Previous LSP Diagnostics Hunk' },
-  { ']d', vim.diagnostic.goto_next, desc = 'Next LSP Diagnostics Hunk' },
-  { 'gt', vim.diagnostic.open_float, desc = 'Show LSP Diagnostics' },
 
-  { '<LocalLeader>d', group = ' LSP Diagnostics' },
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  {
-    '<LocalLeader>dG',
-    '<Cmd>tab split | lua vim.lsp.buf.definition()<CR>',
-    desc = 'Goto Definition (tabnew)',
-  },
-  {
-    '<LocalLeader>dT',
-    '<Cmd>tab split | lua vim.lsp.buf.type_definition()<CR>',
-    desc = 'Goto Type Definition (tabnew)',
-  },
-  { '<LocalLeader>da', vim.lsp.buf.code_action, desc = 'Code Actions' },
-  {
-    '<LocalLeader>dd',
-    '<Cmd>Telescope diagnostics<CR>',
-    desc = 'Search Project Diagnostics',
-  },
-  {
-    '<LocalLeader>df',
-    '<Cmd>lua vim.lsp.buf.format({async=true})<CR>',
-    desc = 'Format Buffer',
-  },
-  {
-    '<LocalLeader>dg',
-    '<Cmd>vsplit | lua vim.lsp.buf.definition()<CR>',
-    desc = 'Goto Definition (vsplit)',
-  },
-  { '<LocalLeader>di', vim.lsp.buf.hover, desc = 'LSP Info for Cursor-word' },
-  {
-    '<LocalLeader>dq',
-    '<Cmd>Trouble document_diagnostics<CR>',
-    desc = 'List Document Diagnostics',
-  },
-  {
-    '<LocalLeader>dr',
-    '<Cmd>Telescope lsp_references<CR>',
-    desc = 'Search LSP References',
-  },
-  { '<LocalLeader>ds', vim.lsp.buf.signature_help, desc = 'Signature Display' },
-  {
-    '<LocalLeader>dt',
-    '<Cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>',
-    desc = 'Goto Type Definition (vsplit)',
-  },
-  {
-    '<LocalLeader>dw',
-    '<Cmd>Trouble workspace_diagnostics<CR>',
-    desc = 'List Workspace Diagnostics',
-  },
+local function map(mode, lhs, rhs, desc)
+  vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
+end
 
-  { '<LocalLeader>dp', group = ' Preview' },
-  { '<LocalLeader>dpd', goto_preview.goto_preview_definition, desc = 'Definition' },
-  {
-    '<LocalLeader>dpi',
-    goto_preview.goto_preview_implementation,
-    desc = 'Implementation',
-  },
-  { '<LocalLeader>dpr', goto_preview.goto_preview_references, desc = 'References' },
-  {
-    '<LocalLeader>dpt',
-    goto_preview.goto_preview_type_definition,
-    desc = 'Type Definition',
-  },
-  { '<LocalLeader>dpx', goto_preview.close_all_win, desc = 'Close All Windows' },
-}
+map ('n', '[d', vim.diagnostic.goto_prev, 'Previous LSP Diagnostics Hunk')
+map ('n', ']d', vim.diagnostic.goto_next, 'Next LSP Diagnostics Hunk')
+map ('n', 'gt', vim.diagnostic.open_float, 'Show LSP Diagnostics')
+
+-- See `:help vim.lsp.*` for documentation on any of the below functions
+
+map('n', '<LocalLeader>da', vim.lsp.buf.code_action, 'Code Actions')
+map('n', '<LocalLeader>di', vim.lsp.buf.hover, 'LSP Info for Cursor-word')
+map('n', '<LocalLeader>ds', vim.lsp.buf.signature_help, 'Signature Display')
+
+map(
+  'n',
+  '<LocalLeader>dG',
+  '<Cmd>tab split | lua vim.lsp.buf.definition()<CR>',
+  'Goto Definition (tabnew)'
+)
+map(
+  'n',
+  '<LocalLeader>dg',
+  '<Cmd>vsplit | lua vim.lsp.buf.definition()<CR>',
+  'Goto Definition (vsplit)'
+)
+
+map(
+  'n',
+  '<LocalLeader>dT',
+  '<Cmd>tab split | lua vim.lsp.buf.type_definition()<CR>',
+  'Goto Type Definition (tabnew)'
+)
+map(
+  'n',
+  '<LocalLeader>dt',
+  '<Cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>',
+  'Goto Type Definition (vsplit)'
+)
+map(
+  'n',
+  '<LocalLeader>df',
+  function() vim.lsp.buf.format({async=true}) end,
+  'Format Buffer'
+)
+
+-- telescope specific mappings
+map(
+  'n',
+  '<LocalLeader>dd',
+  function() builtin.diagnostics() end,
+  'Search Project Diagnostics'
+)
+map(
+  'n',
+  '<LocalLeader>dr',
+  function() builtin.lsp_references() end,
+  'Search LSP References'
+)
+
+-- trouble mappings
+map(
+  'n',
+  '<LocalLeader>dq',
+  '<Cmd>Trouble diagnostics toggle filter.buf=0<CR>',
+  'List Document Diagnostics'
+)
+map(
+  'n',
+  '<LocalLeader>dw',
+  '<Cmd>Trouble diagnostics toggle<CR>',
+  'List Workspace Diagnostics'
+)
+
+-- goto-preview mappings
+map('n', '<LocalLeader>dpd', goto_preview.goto_preview_definition, 'Definition')
+map('n', '<LocalLeader>dpr', goto_preview.goto_preview_references, 'References')
+map('n', '<LocalLeader>dpx', goto_preview.close_all_win, 'Close All Windows')
+map(
+  'n',
+  '<LocalLeader>dpi',
+  goto_preview.goto_preview_implementation,
+  'Implementation'
+)
+map(
+  'n',
+  '<LocalLeader>dpt',
+  goto_preview.goto_preview_type_definition,
+  'Type Definition'
+)
