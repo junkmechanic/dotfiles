@@ -7,7 +7,7 @@ return {
       fast_wrap = {
         map = '<M-e>',
       },
-    }
+    },
   },
   {
     'tummetott/unimpaired.nvim',
@@ -19,7 +19,7 @@ return {
     version = '*',
     event = 'VeryLazy',
     config = function()
-      require 'nvim-surround'.setup()
+      require('nvim-surround').setup()
     end,
   },
   {
@@ -29,7 +29,17 @@ return {
   {
     'mcauley-penney/tidy.nvim',
     opts = {
-      filetype_exclude = { 'markdown', 'diff' }
+      filetype_exclude = { 'markdown', 'diff' },
     },
+  },
+  {
+    'abecodes/tabout.nvim',
+    opts = {
+      act_as_shift_tab = true,
+    },
+  },
+  {
+    'numToStr/Comment.nvim',
+    config = true,
   },
 }

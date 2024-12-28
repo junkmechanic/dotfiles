@@ -97,9 +97,9 @@ local function map(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
 end
 
-map ('n', '[d', vim.diagnostic.goto_prev, 'Previous LSP Diagnostics Hunk')
-map ('n', ']d', vim.diagnostic.goto_next, 'Next LSP Diagnostics Hunk')
-map ('n', 'gt', vim.diagnostic.open_float, 'Show LSP Diagnostics')
+map('n', '[d', vim.diagnostic.goto_prev, 'Previous LSP Diagnostics Hunk')
+map('n', ']d', vim.diagnostic.goto_next, 'Next LSP Diagnostics Hunk')
+map('n', 'gt', vim.diagnostic.open_float, 'Show LSP Diagnostics')
 
 -- See `:help vim.lsp.*` for documentation on any of the below functions
 
@@ -132,26 +132,17 @@ map(
   '<Cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>',
   'Goto Type Definition (vsplit)'
 )
-map(
-  'n',
-  '<LocalLeader>df',
-  function() vim.lsp.buf.format({async=true}) end,
-  'Format Buffer'
-)
+map('n', '<LocalLeader>df', function()
+  vim.lsp.buf.format { async = true }
+end, 'Format Buffer')
 
 -- telescope specific mappings
-map(
-  'n',
-  '<LocalLeader>dd',
-  function() builtin.diagnostics() end,
-  'Search Project Diagnostics'
-)
-map(
-  'n',
-  '<LocalLeader>dr',
-  function() builtin.lsp_references() end,
-  'Search LSP References'
-)
+map('n', '<LocalLeader>dd', function()
+  builtin.diagnostics()
+end, 'Search Project Diagnostics')
+map('n', '<LocalLeader>dr', function()
+  builtin.lsp_references()
+end, 'Search LSP References')
 
 -- trouble mappings
 map(
@@ -171,15 +162,5 @@ map(
 map('n', '<LocalLeader>dpd', goto_preview.goto_preview_definition, 'Definition')
 map('n', '<LocalLeader>dpr', goto_preview.goto_preview_references, 'References')
 map('n', '<LocalLeader>dpx', goto_preview.close_all_win, 'Close All Windows')
-map(
-  'n',
-  '<LocalLeader>dpi',
-  goto_preview.goto_preview_implementation,
-  'Implementation'
-)
-map(
-  'n',
-  '<LocalLeader>dpt',
-  goto_preview.goto_preview_type_definition,
-  'Type Definition'
-)
+map('n', '<LocalLeader>dpi', goto_preview.goto_preview_implementation, 'Implementation')
+map('n', '<LocalLeader>dpt', goto_preview.goto_preview_type_definition, 'Type Definition')

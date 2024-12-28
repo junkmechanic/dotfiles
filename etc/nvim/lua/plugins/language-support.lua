@@ -57,4 +57,38 @@ return {
       require 'config.lsp'
     end,
   },
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function()
+      require 'config.null-ls'
+    end,
+  },
+  {
+    'amrbashir/nvim-docs-view',
+    cmd = { 'DocsViewToggle' },
+    config = function()
+      require 'config.docs-view'
+    end,
+  },
+  {
+    'j-hui/fidget.nvim',
+    version = '*',
+    config = true,
+  },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-context',
+      'nvim-treesitter/nvim-treesitter-refactor',
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      'ziontee113/syntax-tree-surfer',
+      'nvim-treesitter/playground',
+    },
+    build = function()
+      require('nvim-treesitter.install').update { with_sync = true }
+    end,
+    config = function()
+      require 'config.treesitter'
+    end,
+  },
 }

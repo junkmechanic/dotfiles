@@ -7,7 +7,6 @@ require('nvim-treesitter.configs').setup {
     'gitcommit',
     'gitignore',
     'hcl',
-    'help',
     'json',
     'lua',
     'make',
@@ -97,38 +96,40 @@ require('treesitter-context').setup {}
 
 require('syntax-tree-surfer').setup {}
 
-local opts = { noremap = true, silent = true }
+local function map(mode, lhs, rhs, desc)
+  vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
+end
 
 -- Swap The Master Node relative to the cursor with it's siblings
-vim.keymap.set('n', '<Leader>B', function()
+map('n', '<LocalLeader>bB', function()
   vim.opt.opfunc = 'v:lua.STSSwapUpNormal_Dot'
   return 'g@l'
-end, { silent = true, expr = true })
-vim.keymap.set('n', '<Leader>b', function()
+end, 'Swap Master Node with previous')
+map('n', '<LocalLeader>bb', function()
   vim.opt.opfunc = 'v:lua.STSSwapDownNormal_Dot'
   return 'g@l'
-end, { silent = true, expr = true })
+end, 'Swap Master Node with next')
 
 -- Swap Current Node at the Cursor with it's siblings
-vim.keymap.set('n', '<Leader>w', function()
+map('n', '<Leader>w', function()
   vim.opt.opfunc = 'v:lua.STSSwapCurrentNodeNextNormal_Dot'
   return 'g@l'
-end, { silent = true, expr = true })
-vim.keymap.set('n', '<Leader>W', function()
+end, 'Swap Current Node with next')
+map('n', '<Leader>W', function()
   vim.opt.opfunc = 'v:lua.STSSwapCurrentNodePrevNormal_Dot'
   return 'g@l'
-end, { silent = true, expr = true })
+end, 'Swap Current Node with previous')
 
 -- Swapping Nodes in Visual Mode
-vim.keymap.set('x', '<Leader>w', '<Cmd>STSSwapNextVisual<CR>', opts)
-vim.keymap.set('x', '<Leader>W', '<Cmd>STSSwapPrevVisual<CR>', opts)
+map('x', '<Leader>w', '<Cmd>STSSwapNextVisual<CR>', 'Swap Current Node with next')
+map('x', '<Leader>W', '<Cmd>STSSwapPrevVisual<CR>', 'Swap Current Node with previous')
 
 -- Visual Selection from Normal Mode
-vim.keymap.set('n', 'vx', '<Cmd>STSSelectMasterNode<CR>', opts)
-vim.keymap.set('n', 'vn', '<Cmd>STSSelectCurrentNode<CR>', opts)
+map('n', 'vx', '<Cmd>STSSelectMasterNode<CR>', 'Select Master Node')
+map('n', 'vn', '<Cmd>STSSelectCurrentNode<CR>', 'Select Current Node')
 
 -- Select Nodes in Visual Mode
-vim.keymap.set('x', 'J', '<Cmd>STSSelectNextSiblingNode<CR>', opts)
-vim.keymap.set('x', 'K', '<Cmd>STSSelectPrevSiblingNode<CR>', opts)
-vim.keymap.set('x', 'H', '<Cmd>STSSelectParentNode<CR>', opts)
-vim.keymap.set('x', 'L', '<Cmd>STSSelectChildNode<CR>', opts)
+map('x', 'J', '<Cmd>STSSelectNextSiblingNode<CR>', 'Select Next Sibling Node')
+map('x', 'K', '<Cmd>STSSelectPrevSiblingNode<CR>', 'Select Prev Sibling Node')
+map('x', 'H', '<Cmd>STSSelectParentNode<CR>', 'Select Parent Node')
+map('x', 'L', '<Cmd>STSSelectChildNode<CR>', 'Select Child Node')

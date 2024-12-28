@@ -1,14 +1,5 @@
 local devicons = require 'nvim-web-devicons'
 
--- to be added to which-key
--- { '<Leader>B', desc = 'Swap Master Node with previous' },
--- { '<Leader>W', desc = 'Swap Current Node with previous' },
--- { '<Leader>b', desc = 'Swap Master Node with next' },
--- { '<Leader>w', desc = 'Swap Current Node with next' },
--- { '<LocalLeader>w', desc = 'Window Management' },
--- { '<LocalLeader>z', desc = 'Horizontal Scrolling' },
--- { 'gr', desc = 'Smart Rename' },
-
 return {
   {
     'nvim-tree/nvim-tree.lua',
@@ -51,7 +42,7 @@ return {
       winbar = {
         enabled = false,
       },
-    }
+    },
   },
   {
     'folke/zen-mode.nvim',
@@ -61,7 +52,7 @@ return {
         width = 0.85,
         height = 0.98,
       },
-    }
+    },
   },
   {
     'nvimtools/hydra.nvim',
@@ -71,14 +62,14 @@ return {
     },
     config = function()
       require 'config.hydra'
-    end
+    end,
   },
   {
     'iamcco/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
     ft = { 'markdown' },
     build = function()
-      require 'lazy'.load { plugins = { 'markdown-preview.nvim' } }
+      require('lazy').load { plugins = { 'markdown-preview.nvim' } }
       vim.fn['mkdp#util#install']()
     end,
   },
@@ -91,7 +82,11 @@ return {
       },
     },
     keys = {
-      { '<LocalLeader>u', "<Cmd>lua require('undotree').toggle()<CR>", desc = 'Undo Tree' },
+      {
+        '<LocalLeader>u',
+        "<Cmd>lua require('undotree').toggle()<CR>",
+        desc = 'Undo Tree',
+      },
     },
   },
   {
@@ -103,7 +98,7 @@ return {
       width_ratio = 0.8,
       height_ratio = 0.8,
       border = 'solid',
-    }
+    },
   },
   {
     'folke/which-key.nvim',
@@ -118,13 +113,13 @@ return {
       },
       replace = {
         key = {
-          { '`',        '<LocalLeader>' },
+          { '`', '<LocalLeader>' },
           { '<leader>', '<Leader>' },
-          { '<cr>',     '<CR>' },
-          { '<tab>',    '<Tab>' },
+          { '<cr>', '<CR>' },
+          { '<tab>', '<Tab>' },
         },
         desc = {
-          { '<[cC]md>',   '' },
+          { '<[cC]md>', '' },
           { '<[cC][rR]>', '' },
         },
       },
@@ -140,9 +135,10 @@ return {
         align = 'center',
       },
       spec = {
-        { '<LocalLeader>f',  group = ' File Browser' },
-        { '<LocalLeader>t',  group = ' Telescope' },
-        { '<LocalLeader>d',  group = ' LSP Diagnostics' },
+        { '<LocalLeader>f', group = ' File Browser' },
+        { '<LocalLeader>t', group = ' Telescope' },
+        { '<LocalLeader>b', group = ' Swap AST Nodes' },
+        { '<LocalLeader>d', group = ' LSP Diagnostics' },
         { '<LocalLeader>dp', group = ' Preview' },
         {
           '<LocalLeader>tg',
@@ -154,16 +150,38 @@ return {
           group = ' VCS Actions',
           icon = devicons.get_icons_by_extension()['git']['icon'],
         },
-      }
+        { 'gr', desc = 'Smart Rename' },
+        { '<LocalLeader>u', icon = '' },
+        { '<LocalLeader>n', icon = '󰙅' },
+      },
     },
     keys = {
       {
         '<LocalLeader>?',
         function()
-          require 'which-key'.show { global = true }
+          require('which-key').show { global = true }
         end,
         desc = 'All Keymaps',
       },
+    },
+  },
+  {
+    'gorbit99/codewindow.nvim',
+    config = function()
+      require 'config.codewindow'
+    end,
+  },
+  {
+    'folke/twilight.nvim',
+    opts = {
+      context = 20,
+    },
+  },
+  {
+    'simrat39/symbols-outline.nvim',
+    opts = {
+      width = 20,
+      winblend = 20,
     },
   },
 }

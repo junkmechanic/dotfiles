@@ -202,7 +202,7 @@ bindkey '^[w' znt-cd-widget
 znt_cd_hotlist=(
     ~/.files/
     ~/.config/nvim/
-    ~/.local/share/nvim/site/pack/packer/start/
+    ~/.local/share/nvim/
     ~/devbench
     ~/Downloads
     ~/devbench/main
@@ -215,6 +215,12 @@ bindkey '^ ' autosuggest-execute
 
 # bat config
 export BAT_THEME="Nord"
+
+# pyenv init follow up after init in zprofile
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+source $(pyenv root)/completions/pyenv.zsh
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # k8s completion
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)

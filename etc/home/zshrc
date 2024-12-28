@@ -237,6 +237,12 @@ znt_cd_hotlist=(
 # accept and execute the current suggestion with ctrl+space
 bindkey '^ ' autosuggest-execute
 
+# pyenv init follow up after init in zprofile
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+source $(pyenv root)/completions/pyenv.zsh
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
 # ruby (brew version)
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/ruby/lib"
