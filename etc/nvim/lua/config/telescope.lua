@@ -2,7 +2,6 @@ local telescope = require 'telescope'
 local actions = require 'telescope.actions'
 local builtin = require 'telescope.builtin'
 local utils = require 'telescope.utils'
-local fb_actions = telescope.extensions.file_browser.actions
 
 telescope.setup {
   defaults = {
@@ -15,7 +14,7 @@ telescope.setup {
         ['<C-f>'] = actions.results_scrolling_down,
         ['<C-p>'] = actions.preview_scrolling_up,
         ['<C-n>'] = actions.preview_scrolling_down,
-        ["<C-s>"] = actions.select_horizontal,
+        ['<C-s>'] = actions.select_horizontal,
         ['<C-u>'] = false,
       },
     },
@@ -76,7 +75,7 @@ telescope.setup {
   },
 }
 
--- telescope.load_extension 'dap'
+telescope.load_extension 'dap'
 telescope.load_extension 'file_browser'
 telescope.load_extension 'frecency'
 telescope.load_extension 'fzf'
@@ -97,62 +96,104 @@ local function map(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
 end
 
-map('n', '<LocalLeader>t/', function() builtin.search_history() end, 'Search History')
-map('n', '<LocalLeader>tC', function() builtin.command_history() end, 'Command History')
-map('n', '<LocalLeader>tc', function() builtin.commands() end, 'Commands')
-map('n', '<LocalLeader>tf', function() builtin.buffers() end, 'Buffers')
-map('n', '<LocalLeader>th', function() builtin.highlights() end, 'Highlights')
-map('n', '<LocalLeader>tk', function() builtin.keymaps() end, 'Mappings')
-map('n', '<LocalLeader>tp', function() builtin.builtin() end, 'Builtin Pickers')
-map('n', '<LocalLeader>ts', function() builtin.persisted() end, 'Sessions')
-map('n', '<LocalLeader>tu', function() telescope.extensions.undo.undo() end, 'Undo Tree')
-map('n', '<LocalLeader>tv', function() builtin.vim_options() end, 'Nvim Options')
-map(
-  'n',
-  '<LocalLeader>tn',
-  function() require('telescope').extensions.notify.notify() end,
-  'Notify History'
-)
-map(
-  'n',
-  '<LocalLeader>tl',
-  function() telescope.extensions.lazy_plugins.lazy_plugins() end,
-  'Lazy Config'
-)
+map('n', '<LocalLeader>t/', function()
+  builtin.search_history()
+end, 'Search History')
 
-map('n', '<LocalLeader>tgb', function() builtin.git_branches() end, 'Branches')
-map('n', '<LocalLeader>tgc', function() builtin.git_commits() end, 'Commits')
-map(
-  'n',
-  '<LocalLeader>tgd',
-  function() telescope.extensions.git_diffs.diff_commits() end,
-  'Commit Diffs'
-)
-map('n', '<LocalLeader>tgm', function() builtin.git_bcommits() end, 'Buffer Commits')
-map('n', '<LocalLeader>tgs', function() builtin.git_status() end, 'Git Status')
+map('n', '<LocalLeader>tC', function()
+  builtin.command_history()
+end, 'Command History')
 
-map('n', '<LocalLeader>g', function() builtin.live_grep() end, 'Search Codebase')
-map('n', '<LocalLeader>h', function() builtin.help_tags() end, 'Search Help Tags')
-map('n', '<LocalLeader>r', function() builtin.resume() end, 'Resume Search')
-map('n', '<LocalLeader>s', function() builtin.grep_string() end, 'Search Cursor-word')
-map('n', '<C-s>', function() require'telescope-tabs'.list_tabs() end, 'Search for Tabs')
-map(
-  'n',
-  '<LocalLeader>l',
-  function() builtin.current_buffer_fuzzy_find() end,
-  'Search in Current File'
-)
-map(
-  'n',
-  '<C-n>',
-  function()
-    telescope.extensions.frecency.frecency({
-      workspace = 'CWD',
-      prompt_title = 'Frecency'
-    })
-  end,
-  'Search for Frequent Files'
-)
+map('n', '<LocalLeader>tc', function()
+  builtin.commands()
+end, 'Commands')
+
+map('n', '<LocalLeader>tf', function()
+  builtin.buffers()
+end, 'Buffers')
+
+map('n', '<LocalLeader>th', function()
+  builtin.highlights()
+end, 'Highlights')
+
+map('n', '<LocalLeader>tk', function()
+  builtin.keymaps()
+end, 'Mappings')
+
+map('n', '<LocalLeader>tp', function()
+  builtin.builtin()
+end, 'Builtin Pickers')
+
+map('n', '<LocalLeader>ts', function()
+  builtin.persisted()
+end, 'Sessions')
+
+map('n', '<LocalLeader>tu', function()
+  telescope.extensions.undo.undo()
+end, 'Undo Tree')
+
+map('n', '<LocalLeader>tv', function()
+  builtin.vim_options()
+end, 'Nvim Options')
+
+map('n', '<LocalLeader>tn', function()
+  require('telescope').extensions.notify.notify()
+end, 'Notify History')
+
+map('n', '<LocalLeader>tl', function()
+  telescope.extensions.lazy_plugins.lazy_plugins()
+end, 'Lazy Config')
+
+map('n', '<LocalLeader>tgb', function()
+  builtin.git_branches()
+end, 'Branches')
+
+map('n', '<LocalLeader>tgc', function()
+  builtin.git_commits()
+end, 'Commits')
+
+map('n', '<LocalLeader>tgd', function()
+  telescope.extensions.git_diffs.diff_commits()
+end, 'Commit Diffs')
+
+map('n', '<LocalLeader>tgm', function()
+  builtin.git_bcommits()
+end, 'Buffer Commits')
+
+map('n', '<LocalLeader>tgs', function()
+  builtin.git_status()
+end, 'Git Status')
+
+map('n', '<LocalLeader>g', function()
+  builtin.live_grep()
+end, 'Search Codebase')
+
+map('n', '<LocalLeader>h', function()
+  builtin.help_tags()
+end, 'Search Help Tags')
+
+map('n', '<LocalLeader>r', function()
+  builtin.resume()
+end, 'Resume Search')
+
+map('n', '<LocalLeader>s', function()
+  builtin.grep_string()
+end, 'Search Cursor-word')
+
+map('n', '<C-s>', function()
+  require('telescope-tabs').list_tabs()
+end, 'Search for Tabs')
+
+map('n', '<LocalLeader>l', function()
+  builtin.current_buffer_fuzzy_find()
+end, 'Search in Current File')
+
+map('n', '<C-n>', function()
+  telescope.extensions.frecency.frecency {
+    workspace = 'CWD',
+    prompt_title = 'Frecency',
+  }
+end, 'Search for Frequent Files')
 
 local function project_files()
   local opts = {}
@@ -174,7 +215,9 @@ local function project_files()
   end
 end
 
-map('n', '<C-p>', function() project_files() end, 'Search for Project Files')
+map('n', '<C-p>', function()
+  project_files()
+end, 'Search for Project Files')
 
 local function file_browser()
   telescope.extensions.file_browser.file_browser {
@@ -182,12 +225,9 @@ local function file_browser()
   }
 end
 
-map(
-  'n',
-  '<LocalLeader>ff',
-  function() file_browser() end,
-  'File Browser in $CWD'
-)
+map('n', '<LocalLeader>ff', function()
+  file_browser()
+end, 'File Browser in $CWD')
 
 local function browse_file_dir()
   telescope.extensions.file_browser.file_browser {
@@ -196,12 +236,9 @@ local function browse_file_dir()
   }
 end
 
-map(
-  'n',
-  '<LocalLeader>fd',
-  function() browse_file_dir() end,
-  'File Browser in File Dir'
-)
+map('n', '<LocalLeader>fd', function()
+  browse_file_dir()
+end, 'File Browser in File Dir')
 
 local function home_explorer()
   telescope.extensions.file_browser.file_browser {
@@ -210,12 +247,9 @@ local function home_explorer()
   }
 end
 
-map(
-  'n',
-  '<LocalLeader>fh',
-  function() home_explorer() end,
-  'File Browser in $HOME'
-)
+map('n', '<LocalLeader>fh', function()
+  home_explorer()
+end, 'File Browser in $HOME')
 
 local function browse_plugin_dir()
   telescope.extensions.file_browser.file_browser {
@@ -224,9 +258,6 @@ local function browse_plugin_dir()
   }
 end
 
-map(
-  'n',
-  '<LocalLeader>fp',
-  function() browse_plugin_dir() end,
-  'File Browser in Neovim Plugin Dir'
-)
+map('n', '<LocalLeader>fp', function()
+  browse_plugin_dir()
+end, 'File Browser in Neovim Plugin Dir')

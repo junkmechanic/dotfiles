@@ -20,12 +20,12 @@ return {
       },
       'williamboman/mason-lspconfig.nvim',
       'jayp0521/mason-null-ls.nvim',
-      -- {
-      --   'jayp0521/mason-nvim-dap.nvim',
-      --   opts = {
-      --     ensure_installed = { 'bash' },
-      --   },
-      -- },
+      {
+        'jayp0521/mason-nvim-dap.nvim',
+        opts = {
+          ensure_installed = { 'bash' },
+        },
+      },
     },
     opts = {
       ui = {
@@ -89,6 +89,18 @@ return {
     end,
     config = function()
       require 'config.treesitter'
+    end,
+  },
+  {
+    'mfussenegger/nvim-dap',
+    dependencies = {
+      'mfussenegger/nvim-dap-python',
+      'rcarriga/nvim-dap-ui',
+      'nvim-neotest/nvim-nio',
+      'jbyuki/one-small-step-for-vimkind',
+    },
+    config = function()
+      require 'config.dap'
     end,
   },
 }

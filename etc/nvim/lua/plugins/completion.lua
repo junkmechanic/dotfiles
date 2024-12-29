@@ -14,7 +14,7 @@ return {
       'hrsh7th/cmp-path',
       'lukas-reineke/cmp-rg',
       'f3fora/cmp-spell',
-      -- 'ray-x/cmp-treesitter',
+      'ray-x/cmp-treesitter',
       'onsails/lspkind-nvim',
     },
     config = function()

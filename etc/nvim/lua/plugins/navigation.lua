@@ -14,7 +14,7 @@ return {
       'nvim-telescope/telescope-frecency.nvim',
       'nvim-telescope/telescope-ui-select.nvim',
       'nvim-telescope/telescope-file-browser.nvim',
-      -- 'nvim-telescope/telescope-dap.nvim',
+      'nvim-telescope/telescope-dap.nvim',
       'LukasPietzschmann/telescope-tabs',
       'paopaol/telescope-git-diffs.nvim',
       'debugloop/telescope-undo.nvim',

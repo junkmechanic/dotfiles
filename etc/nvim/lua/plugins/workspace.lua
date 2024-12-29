@@ -135,9 +135,10 @@ return {
         align = 'center',
       },
       spec = {
+        { '<LocalLeader>b', group = ' DAP' },
         { '<LocalLeader>f', group = ' File Browser' },
         { '<LocalLeader>t', group = ' Telescope' },
-        { '<LocalLeader>b', group = ' Swap AST Nodes' },
+        { '<LocalLeader>p', group = ' Swap AST Nodes' },
         { '<LocalLeader>d', group = ' LSP Diagnostics' },
         { '<LocalLeader>dp', group = ' Preview' },
         {

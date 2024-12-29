@@ -2,8 +2,6 @@ local dap = require 'dap'
 local dapui = require 'dapui'
 local widgets = require 'dap.ui.widgets'
 
-local wk = require 'which-key'
-
 -- python adapter setup
 
 require('dap-python').setup '~/.pyenv/versions/py3nvim/bin/python'
@@ -81,32 +79,35 @@ end
 
 -- Mappings
 
-wk.add {
-  { '<LocalLeader>b', group = ' DAP' },
-  {
-    '<LocalLeader>bB',
-    '<Cmd>lua require("dap").set_breakpoint(vim.fn.input "Breakpoint condition: ")<CR>',
-    desc = 'Breakpoint condition',
-  },
-  { '<LocalLeader>bV', '<Cmd>Telescope dap variables<CR>', desc = 'Variables' },
-  { '<LocalLeader>bb', dap.toggle_breakpoint, desc = 'Toggle Breakpoint' },
-  { '<LocalLeader>bc', '<Cmd>Telescope dap commands<CR>', desc = 'Commands' },
-  { '<LocalLeader>bd', dapui.toggle, desc = 'Toggle DAP-UI' },
-  { '<LocalLeader>be', dapui.eval, desc = 'Eval' },
-  { '<LocalLeader>bf', '<Cmd>Telescope dap frames<CR>', desc = 'Frames' },
-  { '<LocalLeader>bg', '<Cmd>Telescope dap configurations<CR>', desc = 'Configurations' },
-  { '<LocalLeader>bh', widgets.hover, desc = 'Hover' },
-  { '<LocalLeader>bi', dap.step_into, desc = 'Step Into' },
-  { '<LocalLeader>bl', '<Cmd>Telescope dap list_breakpoints<CR>', desc = 'Breakpoints' },
-  { '<LocalLeader>bn', dap.step_over, desc = 'Step Over' },
-  { '<LocalLeader>bo', dap.step_out, desc = 'Step Out' },
-  { '<LocalLeader>bp', dap.repl.toggle, desc = 'Toggle REPL' },
-  { '<LocalLeader>br', dap.run_to_cursor, desc = 'Run to Cursor' },
-  { '<LocalLeader>bs', dap.continue, desc = 'Continue' },
-  {
-    '<LocalLeader>bv',
-    '<Cmd>lua require("osv").launch({port = 8086})<CR>',
-    desc = 'Start OSV',
-  },
-  { '<LocalLeader>bx', dap.terminate, desc = 'Close Debugger' },
-}
+local function map(mode, lhs, rhs, desc)
+  vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
+end
+
+map(
+  'n',
+  '<LocalLeader>bB',
+  '<Cmd>lua require("dap").set_breakpoint(vim.fn.input "Breakpoint condition: ")<CR>',
+  'Breakpoint condition'
+)
+map('n', '<LocalLeader>bV', '<Cmd>Telescope dap variables<CR>', 'Variables')
+map('n', '<LocalLeader>bb', dap.toggle_breakpoint, 'Toggle Breakpoint')
+map('n', '<LocalLeader>bc', '<Cmd>Telescope dap commands<CR>', 'Commands')
+map('n', '<LocalLeader>bd', dapui.toggle, 'Toggle DAP-UI')
+map('n', '<LocalLeader>be', dapui.eval, 'Eval')
+map('n', '<LocalLeader>bf', '<Cmd>Telescope dap frames<CR>', 'Frames')
+map('n', '<LocalLeader>bg', '<Cmd>Telescope dap configurations<CR>', 'Configurations')
+map('n', '<LocalLeader>bh', widgets.hover, 'Hover')
+map('n', '<LocalLeader>bi', dap.step_into, 'Step Into')
+map('n', '<LocalLeader>bl', '<Cmd>Telescope dap list_breakpoints<CR>', 'Breakpoints')
+map('n', '<LocalLeader>bn', dap.step_over, 'Step Over')
+map('n', '<LocalLeader>bo', dap.step_out, 'Step Out')
+map('n', '<LocalLeader>bp', dap.repl.toggle, 'Toggle REPL')
+map('n', '<LocalLeader>br', dap.run_to_cursor, 'Run to Cursor')
+map('n', '<LocalLeader>bs', dap.continue, 'Continue')
+map(
+  'n',
+  '<LocalLeader>bv',
+  '<Cmd>lua require("osv").launch({port = 8086})<CR>',
+  'Start OSV'
+)
+map('n', '<LocalLeader>bx', dap.terminate, 'Close Debugger')

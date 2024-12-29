@@ -30,7 +30,7 @@ require('nvim-treesitter.configs').setup {
     -- want to disable highlighting for the `tex` filetype, you need to include `latex` in
     -- this list as this is the name of the parser)
     -- list of language that will be disabled
-    disable = { 'sql' },
+    disable = { 'sql', 'gitcommit' },
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time. Set
     -- this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -101,28 +101,28 @@ local function map(mode, lhs, rhs, desc)
 end
 
 -- Swap The Master Node relative to the cursor with it's siblings
-map('n', '<LocalLeader>bB', function()
+map('n', '<LocalLeader>pB', function()
   vim.opt.opfunc = 'v:lua.STSSwapUpNormal_Dot'
   return 'g@l'
 end, 'Swap Master Node with previous')
-map('n', '<LocalLeader>bb', function()
+map('n', '<LocalLeader>pb', function()
   vim.opt.opfunc = 'v:lua.STSSwapDownNormal_Dot'
   return 'g@l'
 end, 'Swap Master Node with next')
 
 -- Swap Current Node at the Cursor with it's siblings
-map('n', '<Leader>w', function()
+map('n', '<LocalLeader>pw', function()
   vim.opt.opfunc = 'v:lua.STSSwapCurrentNodeNextNormal_Dot'
   return 'g@l'
-end, 'Swap Current Node with next')
-map('n', '<Leader>W', function()
+end, 'Swap Node with next')
+map('n', '<LocalLeader>pW', function()
   vim.opt.opfunc = 'v:lua.STSSwapCurrentNodePrevNormal_Dot'
   return 'g@l'
-end, 'Swap Current Node with previous')
+end, 'Swap Node with previous')
 
 -- Swapping Nodes in Visual Mode
-map('x', '<Leader>w', '<Cmd>STSSwapNextVisual<CR>', 'Swap Current Node with next')
-map('x', '<Leader>W', '<Cmd>STSSwapPrevVisual<CR>', 'Swap Current Node with previous')
+map('x', '<LocalLeader>pw', '<Cmd>STSSwapNextVisual<CR>', 'Swap Node with next')
+map('x', '<LocalLeader>pW', '<Cmd>STSSwapPrevVisual<CR>', 'Swap Node with previous')
 
 -- Visual Selection from Normal Mode
 map('n', 'vx', '<Cmd>STSSelectMasterNode<CR>', 'Select Master Node')
