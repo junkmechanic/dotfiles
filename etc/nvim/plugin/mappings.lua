@@ -19,8 +19,9 @@ map('i', '<C-z>', '<C-o>:update<CR>')
 map('n', '<Esc>', ':nohlsearch<Bar>:echo<CR>')
 
 -- Make H and L more useful
-map({ 'n', 'v' }, 'H', '^')
-map({ 'n', 'v' }, 'L', 'g_')
+-- Clashes with syntax-tree-surfer bindings
+-- map({ 'n', 'v' }, 'H', '^')
+-- map({ 'n', 'v' }, 'L', 'g_')
 
 -- Quick exits
 map('n', '<Leader>e', ':quit<CR>')
@@ -59,7 +60,12 @@ vim.keymap.set('c', '<C-k>', '<Up>', { noremap = true })
 vim.keymap.set('c', '<C-j>', '<Down>', { noremap = true })
 
 -- Switch from Terminal Insert mode to Normal mode
-vim.keymap.set('t', '<Esc>', "(&filetype == 'fzf') ? '<Esc>' : '<C-\\><C-n>'", { expr = true })
+vim.keymap.set(
+  't',
+  '<Esc>',
+  "(&filetype == 'fzf') ? '<Esc>' : '<C-\\><C-n>'",
+  { expr = true }
+)
 
 -- Switch tabs while in Terminal Insert mode
 map('t', '<Leader>n', '<C-\\><C-n>:tabprevious<CR>')

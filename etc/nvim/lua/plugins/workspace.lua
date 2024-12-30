@@ -13,6 +13,13 @@ return {
     end,
   },
   {
+    'stevearc/oil.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require 'config.oil'
+    end,
+  },
+  {
     'olimorris/persisted.nvim',
     lazy = false,
     priority = 100,

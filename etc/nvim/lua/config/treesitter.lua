@@ -100,16 +100,6 @@ local function map(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
 end
 
--- Swap The Master Node relative to the cursor with it's siblings
-map('n', '<LocalLeader>pB', function()
-  vim.opt.opfunc = 'v:lua.STSSwapUpNormal_Dot'
-  return 'g@l'
-end, 'Swap Master Node with previous')
-map('n', '<LocalLeader>pb', function()
-  vim.opt.opfunc = 'v:lua.STSSwapDownNormal_Dot'
-  return 'g@l'
-end, 'Swap Master Node with next')
-
 -- Swap Current Node at the Cursor with it's siblings
 map('n', '<LocalLeader>pw', function()
   vim.opt.opfunc = 'v:lua.STSSwapCurrentNodeNextNormal_Dot'
