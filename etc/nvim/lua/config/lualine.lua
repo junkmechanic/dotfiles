@@ -1,5 +1,6 @@
 local navic = require 'nvim-navic'
 local local_config = require 'config.local-config'
+local noice = require 'noice'
 
 local function show_trailing_whitespace()
   local space = vim.fn.search([[\s\+$]], 'nwc')
@@ -75,7 +76,17 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = { 'mode' },
-    lualine_b = { 'branch', 'diff', 'diagnostics' },
+    lualine_b = {
+      'branch',
+      'diff',
+      'diagnostics',
+      {
+        noice.api.statusline.mode.get,
+        cond = function()
+          return vim.fn.reg_recording() ~= ''
+        end,
+      },
+    },
     lualine_c = { { 'filename', symbols = symbols } },
     lualine_x = { get_python_venv, 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress', 'location' },
@@ -95,12 +106,12 @@ require('lualine').setup {
     'fugitive',
     'man',
     'mason',
-    -- 'nvim-dap-ui',
+    'nvim-dap-ui',
     'nvim-tree',
-    -- 'oil',
+    'oil',
     'quickfix',
-    -- 'symbols-outline',
+    'symbols-outline',
     'toggleterm',
-    -- 'trouble',
+    'trouble',
   },
 }

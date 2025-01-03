@@ -12,10 +12,7 @@ return {
       {
         'WhoIsSethDaniel/mason-tool-installer.nvim',
         opts = {
-          ensure_installed = {
-            -- Install packages not supported by `mason-null-ls` yet
-            'deno',
-          },
+          ensure_installed = {},
         },
       },
       'williamboman/mason-lspconfig.nvim',
@@ -58,7 +55,11 @@ return {
     end,
   },
   {
-    'jose-elias-alvarez/null-ls.nvim',
+    'nvimtools/none-ls.nvim',
+    dependencies = {
+      'nvimtools/none-ls-extras.nvim',
+      'gbprod/none-ls-shellcheck.nvim',
+    },
     config = function()
       require 'config.null-ls'
     end,

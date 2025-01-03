@@ -35,7 +35,9 @@ local on_attach = function(client, bufnr)
   -- initiate navic for supported lsp servers
   local unsupported_servers = { 'bashls', 'dockerls', 'sqlls' }
   if not vim.tbl_contains(unsupported_servers, client.name) then
-    navic.attach(client, bufnr)
+    if client.server_capabilities.documentSymbolProvider then
+      navic.attach(client, bufnr)
+    end
   end
 end
 

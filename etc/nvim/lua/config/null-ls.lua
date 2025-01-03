@@ -10,33 +10,37 @@ nls.setup {
   diagnostics_format = '[#{c}] #{m} (#{s})',
   sources = {
     code_actions.gitsigns,
-    code_actions.shellcheck,
 
     diagnostics.cfn_lint,
     diagnostics.hadolint,
-    diagnostics.pylama,
-    diagnostics.shellcheck,
+    diagnostics.mypy,
+
+    -- Cant be used until this issue is resolved
+    -- https://github.com/williamboman/mason.nvim/issues/1693
+    -- diagnostics.selene,
+
     diagnostics.sqlfluff.with {
       extra_args = { '--dialect', 'redshift', '--templater', 'jinja' },
     },
     diagnostics.vint,
     diagnostics.zsh,
 
-    formatting.beautysh,
-    formatting.blue,
     formatting.cmake_format,
-    formatting.deno_fmt.with {
-      filetypes = { 'markdown' },
-      -- to match the value of `textwidth` set in options.lua
-      extra_args = { '--line-width', 90 },
-    },
     formatting.isort,
-    formatting.json_tool,
+    formatting.prettier,
+    formatting.shfmt,
     formatting.sqlfluff.with {
       extra_args = { '--dialect', 'redshift' },
     },
     formatting.stylua,
     formatting.terraform_fmt,
+    formatting.yapf,
+
+    require 'none-ls.formatting.beautysh',
+    require 'none-ls.formatting.blue',
+
+    require 'none-ls-shellcheck.diagnostics',
+    require 'none-ls-shellcheck.code_actions',
   },
   on_attach = function(client, bufnr)
     -- If formatter is available, then autoformat the file on save
