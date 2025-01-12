@@ -1,5 +1,4 @@
 local goto_preview = require 'goto-preview'
-local navic = require 'nvim-navic'
 local builtin = require 'telescope.builtin'
 
 local servers = {
@@ -31,31 +30,25 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-local on_attach = function(client, bufnr)
-  -- initiate navic for supported lsp servers
-  local unsupported_servers = { 'bashls', 'dockerls', 'sqlls' }
-  if not vim.tbl_contains(unsupported_servers, client.name) then
-    if client.server_capabilities.documentSymbolProvider then
-      navic.attach(client, bufnr)
-    end
-  end
-end
-
 local lspconfig = require 'lspconfig'
-local util = require 'lspconfig.util'
-local path = util.path
 
-local function get_python_path()
+local function get_python_path(config)
+  local Path = require 'plenary.path'
+  local venv = Path:new((config.root_dir:gsub('/', Path.path.sep)), '.venv')
+
   -- Set python provider virtualenv
   vim.cmd [[
-    let g:python3_host_prog = "~/.pyenv/versions/py3nvim/bin/python"
+    let g:python3_host_prog = '~/.pyenv/versions/py3nvim/bin/python'
   ]]
+
   -- Use activated virtualenv
   if vim.env.VIRTUAL_ENV then
-    return path.join(vim.env.VIRTUAL_ENV, 'bin', 'python')
+    return tostring(Path:new(vim.env.VIRTUAL_ENV):joinpath('bin', 'python'))
+  elseif venv:joinpath('bin'):is_dir() then
+    return tostring(venv:joinpath('bin', 'python'))
   end
   -- Fallback to system Python.
-  return vim.fn.exepath 'python3' or vim.fn.exepath 'python' or 'python'
+  return vim.fn.exepath 'python3' or vim.fn.exepath 'python'
 end
 
 -- Add additional capabilities supported by nvim-cmp
@@ -63,15 +56,14 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 for _, lsp_server in ipairs(servers) do
   lspconfig[lsp_server].setup {
-    on_attach = on_attach,
     capabilities = capabilities,
     before_init = function(_, config)
       if lsp_server == 'pyright' then
-        config.settings.python.pythonPath = get_python_path()
+        config.settings.python.pythonPath = get_python_path(config)
       end
     end,
     root_dir = function(fname)
-      return util.find_git_ancestor(fname) or vim.fn.getcwd()
+      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
     end,
     settings = {
       Lua = {

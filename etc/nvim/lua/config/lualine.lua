@@ -1,4 +1,3 @@
-local navic = require 'nvim-navic'
 local local_config = require 'config.local-config'
 local noice = require 'noice'
 
@@ -99,7 +98,6 @@ require('lualine').setup {
   tabline = {
     lualine_a = { { 'tabs', mode = 0 } },
     lualine_b = { { 'windows', symbols = symbols } },
-    lualine_x = { { navic.get_location, cond = navic.is_available } },
     lualine_y = { show_persisted },
   },
   extensions = {

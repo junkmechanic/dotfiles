@@ -33,7 +33,6 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      'SmiteshP/nvim-navic',
       {
         'rmagatti/goto-preview',
         event = 'BufEnter',

@@ -29,6 +29,12 @@ return {
   },
   {
     'kevinhwang91/nvim-hlslens',
+    dependencies = {
+      {
+        'petertriho/nvim-scrollbar',
+        opts = {},
+      },
+    },
     config = function()
       require 'config.hlslens'
     end,

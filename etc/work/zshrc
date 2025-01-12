@@ -107,7 +107,7 @@ forgit_checkout_branch=gcbf
 plugins=( \
         git gitfast docker colorize kubectl mosh pip ssh-agent sudo aws \
         history-substring-search zsh-navigation-tools git-extras pyenv \
-        zsh-autopair forgit nvm \
+        zsh-autopair forgit nvm poetry poetry-env \
         # add plugins above this line
     zsh-interactive-cd zsh-autosuggestions zsh-syntax-highlighting \
     )
@@ -160,7 +160,7 @@ alias gitrpo="git remote prune origin"
 alias gitrso="git remote show origin"
 alias gt='cd $(git rev-parse --show-toplevel 2>/dev/null || (echo "."; echo "Not within a git repository" >&2))'
 alias ll="eza -al"
-alias pipgrep="pip freeze | grep"
+alias pipgrep="pip freeze | grep -i"
 alias psgrep="ps aux | grep -v grep | grep"
 alias rsync="noglob rsync --human-readable --partial --progress --rsh=ssh"
 alias scp="noglob scp"

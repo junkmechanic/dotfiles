@@ -8,6 +8,9 @@ Hydra {
   name = 'Horizontal Scrolling',
   config = {
     invoke_on_body = true,
+    hint = {
+      type = 'window',
+    },
   },
   mode = 'n',
   body = '<LocalLeader>z',
@@ -24,6 +27,9 @@ Hydra {
   name = 'Window Management',
   config = {
     invoke_on_body = true,
+    hint = {
+      type = 'window',
+    },
   },
   mode = 'n',
   body = '<LocalLeader>w',

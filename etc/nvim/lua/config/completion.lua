@@ -69,15 +69,15 @@ cmp.setup {
   },
   window = {
     completion = {
-      winblend = 10
+      winblend = 10,
     },
     documentation = {
-      winblend = 15
+      winblend = 15,
     },
   },
   experimental = {
-    ghost_text = true,
-  }
+    ghost_text = false,
+  },
 }
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
