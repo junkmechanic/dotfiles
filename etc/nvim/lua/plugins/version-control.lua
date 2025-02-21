@@ -65,10 +65,10 @@ return {
       {
         '<LocalLeader>vg',
         function()
-          vim.cmd(':tabnew')
+          vim.cmd ':tabnew'
           require('gitgraph').draw({}, { all = true, max_count = 5000 })
         end,
-        desc = 'GitGraph - Draw',
+        desc = 'GitGraph',
       },
     },
   },
