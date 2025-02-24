@@ -219,14 +219,13 @@ export BAT_THEME="Nord"
 # pyenv init follow up after init in zprofile
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-source $(pyenv root)/completions/pyenv.zsh
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # k8s completion
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
 # set up kubeconfig
-source ~/.kube/ekscfg/ekscfg_source
+# source ~/.kube/ekscfg/ekscfg_source
 
 # to view path in readable format
 path() {

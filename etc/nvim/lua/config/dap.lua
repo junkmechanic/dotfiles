@@ -4,7 +4,7 @@ local widgets = require 'dap.ui.widgets'
 
 -- python adapter setup
 
-require('dap-python').setup '~/.pyenv/versions/py3nvim/bin/python'
+require('dap-python').setup '~/.pyenv/versions/pyglobal/bin/python'
 
 local configurations = require('dap').configurations.python
 -- `justMyCode` is valid for launch confgiurations only

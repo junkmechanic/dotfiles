@@ -38,7 +38,7 @@ local function get_python_path(config)
 
   -- Set python provider virtualenv
   vim.cmd [[
-    let g:python3_host_prog = '~/.pyenv/versions/py3nvim/bin/python'
+    let g:python3_host_prog = '~/.pyenv/versions/pyglobal/bin/python'
   ]]
 
   -- Use activated virtualenv

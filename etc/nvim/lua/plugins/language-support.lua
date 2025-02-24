@@ -16,11 +16,11 @@ return {
         },
       },
       'williamboman/mason-lspconfig.nvim',
-      'jayp0521/mason-null-ls.nvim',
+      'jay-babu/mason-null-ls.nvim',
       {
-        'jayp0521/mason-nvim-dap.nvim',
+        'jay-babu/mason-nvim-dap.nvim',
         opts = {
-          ensure_installed = { 'bash' },
+          ensure_installed = { 'python', 'bash' },
         },
       },
     },

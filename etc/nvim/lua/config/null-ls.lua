@@ -88,9 +88,9 @@ nls.setup {
   end,
 }
 
----@diagnostic disable-next-line: missing-fields
 require('mason-null-ls').setup {
   automatic_installation = true,
+  ensure_installed = { 'beautysh', 'blue', 'shellcheck' },
 }
 
 augroup('DisableNull-ls', { clear = true })

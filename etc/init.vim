@@ -304,7 +304,7 @@ au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 "" Custom functionality
 
 " Python3 provider across virtualenvs
-let g:python3_host_prog = expand("~/.pyenv/versions/py3nvim/bin/python")
+let g:python3_host_prog = expand("~/.pyenv/versions/pyglobal/bin/python")
 let g:loaded_python_provider = 0
 
 " Navigation to the last visited tab
