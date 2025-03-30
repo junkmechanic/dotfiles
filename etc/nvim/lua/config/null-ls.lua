@@ -28,10 +28,9 @@ nls.setup {
         if vim.env.VIRTUAL_ENV then
           pythonPath = Path:new(vim.env.VIRTUAL_ENV):joinpath('bin', 'python')
         elseif venv_dir:joinpath('bin'):is_dir() then
-          -- Although this works as expected, if the project uses mypy plugins like
-          -- pydantic.mypy, the you will have to pip install the library (pydantic in this
-          -- case) in the python env set up by mason for mypy. That is just how mypy
-          -- works.
+          -- Although this works as expected, if the project uses mypy plugins (like
+          -- pydantic.mypy), then you will have to pip install the library (pydantic here)
+          -- in the python env set up by mason for mypy. That is just how mypy works.
           pythonPath = venv_dir:joinpath('bin', 'python')
         else
           pythonPath = vim.fn.exepath 'python'

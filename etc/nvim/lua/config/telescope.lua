@@ -184,9 +184,9 @@ map('n', '<C-s>', function()
   require('telescope-tabs').list_tabs()
 end, 'Search for Tabs')
 
-map('n', '<LocalLeader>l', function()
-  builtin.current_buffer_fuzzy_find()
-end, 'Search in Current File')
+-- map('n', '<LocalLeader>l', function()
+--   builtin.current_buffer_fuzzy_find()
+-- end, 'Search in Current File')
 
 map('n', '<C-n>', function()
   telescope.extensions.frecency.frecency {

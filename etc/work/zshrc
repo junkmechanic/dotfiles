@@ -171,6 +171,7 @@ alias tree="eza --long --tree"
 alias tree1="eza --long --tree --level=1"
 alias treed="eza --long --tree --only-dirs"
 alias tmgn="tmux new-session -s SYS"
+alias update-brew="brew update && brew upgrade && brew cleanup -s"
 alias vim="nvim"
 alias vimdiff="nvim -d"
 alias vims="nvim -o"
@@ -223,9 +224,6 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # k8s completion
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
-
-# set up kubeconfig
-# source ~/.kube/ekscfg/ekscfg_source
 
 # to view path in readable format
 path() {
