@@ -17,11 +17,17 @@ autocmd('BufWritePre', {
   command = [[:%s/\s\+$//e]],
 })
 
+--- Resize windows when the terminal window gets resized
+augroup('AutoAdjustResize', { clear = true })
+autocmd('VimResized', {
+  group = 'AutoAdjustResize',
+  command = [[tabdo wincmd =]],
+})
+
 -- Place the cursor at the same position where it was at before the previous exit
-autocmd(
-  'BufReadPost',
-  { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] }
-)
+autocmd('BufReadPost', {
+  command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]],
+})
 
 -- Open help in a vertical split
 autocmd('FileType', {
@@ -61,10 +67,10 @@ augroup('TerminalBufferSetup', { clear = true })
 autocmd({ 'BufEnter', 'TermOpen' }, {
   group = 'TerminalBufferSetup',
   callback = function()
-    if vim.opt.buftype:get() == "terminal" then
-      vim.cmd(':startinsert')
+    if vim.opt.buftype:get() == 'terminal' then
+      vim.cmd ':startinsert'
     end
-  end
+  end,
 })
 autocmd('TermOpen', {
   group = 'TerminalBufferSetup',
@@ -72,13 +78,26 @@ autocmd('TermOpen', {
 })
 
 -- Enable spell checking for certain file types
-autocmd({ 'BufRead', 'BufNewFile' }, { pattern = { '*.txt', '*.md', '*.tex' }, command = 'setlocal spell' })
+autocmd(
+  { 'BufRead', 'BufNewFile' },
+  { pattern = { '*.txt', '*.md', '*.tex' }, command = 'setlocal spell' }
+)
 
 -- Set indentation to 2 spaces
 augroup('IndentText', { clear = true })
 autocmd('Filetype', {
   group = 'IndentText',
-  pattern = { 'xml', 'html', 'xhtml', 'css', 'scss', 'javascript', 'typescript', 'yaml', 'lua' },
+  pattern = {
+    'xml',
+    'html',
+    'xhtml',
+    'css',
+    'scss',
+    'javascript',
+    'typescript',
+    'yaml',
+    'lua',
+  },
   command = 'setlocal shiftwidth=2 tabstop=2',
 })
 

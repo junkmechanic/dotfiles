@@ -27,3 +27,6 @@ export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
 
 # CA EKS k8s config
 source ~/.kube/ekscfg/bin/ekscfg_source
+
+# CA Gemini Code Assist Project
+export GOOGLE_CLOUD_PROJECT="ca-gcp-gemini-code-assist-prod"
