@@ -110,6 +110,18 @@ autocmd('Filetype', {
   command = 'set bufhidden=delete',
 })
 
+-- Dump messages to log file on exit
+augroup('DumpMessages', { clear = true })
+autocmd('VimLeave', {
+  group = 'DumpMessages',
+  callback = function()
+    local msgs = vim.fn.execute 'messages'
+    if msgs ~= '' then
+      vim.fn.writefile(vim.split(msgs, '\n'), vim.fn.stdpath 'log' .. '/nvim_messages.log')
+    end
+  end,
+})
+
 -- Watch for file changes
 -- `autoread` must be set (it is by default)
 augroup('WatchFileChange', { clear = true })
