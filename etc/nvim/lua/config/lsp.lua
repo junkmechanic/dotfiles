@@ -30,8 +30,6 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-local lspconfig = require 'lspconfig'
-
 local function get_python_path(config)
   local Path = require 'plenary.path'
   local venv = Path:new((config.root_dir:gsub('/', Path.path.sep)), '.venv')
@@ -54,36 +52,44 @@ end
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-for _, lsp_server in ipairs(servers) do
-  lspconfig[lsp_server].setup {
-    capabilities = capabilities,
-    before_init = function(_, config)
-      if lsp_server == 'pyright' then
-        config.settings.python.pythonPath = get_python_path(config)
-      end
-    end,
-    root_dir = function(fname)
-      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
-    end,
-    settings = {
-      Lua = {
-        diagnostics = {
-          -- Get the language server to recognize the `vim` global
-          -- This should be maintained in `.luarc.json` in the project dir
-          -- globals = { 'vim', 'use' },
-        },
-        workspace = {
-          -- Make the server aware of Neovim runtime files
-          library = vim.api.nvim_get_runtime_file('', true),
-        },
-        -- Do not send telemetry data containing a randomized but unique identifier
-        telemetry = {
-          enable = false,
-        },
+-- Global config for all servers
+vim.lsp.config('*', {
+  capabilities = capabilities,
+  root_dir = function(bufnr, on_dir)
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+    on_dir(vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1]))
+  end,
+})
+
+-- pyright-specific config
+vim.lsp.config('pyright', {
+  before_init = function(_, config)
+    config.settings.python.pythonPath = get_python_path(config)
+  end,
+})
+
+-- lua_ls-specific config
+vim.lsp.config('lua_ls', {
+  settings = {
+    Lua = {
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        -- This should be maintained in `.luarc.json` in the project dir
+        -- globals = { 'vim', 'use' },
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file('', true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
       },
     },
-  }
-end
+  },
+})
+
+vim.lsp.enable(servers)
 
 -- LSP Mappings
 
