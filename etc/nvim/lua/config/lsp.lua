@@ -91,6 +91,23 @@ vim.lsp.config('lua_ls', {
 
 vim.lsp.enable(servers)
 
+-- Highlight symbol under cursor and clear on move
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client.supports_method('textDocument/documentHighlight') then
+      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+        buffer = args.buf,
+        callback = vim.lsp.buf.document_highlight,
+      })
+      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+        buffer = args.buf,
+        callback = vim.lsp.buf.clear_references,
+      })
+    end
+  end,
+})
+
 -- LSP Mappings
 
 local function map(mode, lhs, rhs, desc)
@@ -100,6 +117,7 @@ end
 map('n', '[d', vim.diagnostic.goto_prev, 'Previous LSP Diagnostics Hunk')
 map('n', ']d', vim.diagnostic.goto_next, 'Next LSP Diagnostics Hunk')
 map('n', 'gt', vim.diagnostic.open_float, 'Show LSP Diagnostics')
+map('n', 'gr', vim.lsp.buf.rename, 'LSP Rename')
 
 -- See `:help vim.lsp.*` for documentation on any of the below functions
 
