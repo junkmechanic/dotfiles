@@ -13,6 +13,7 @@ nls.setup {
     code_actions.gitsigns,
 
     diagnostics.cfn_lint,
+    diagnostics.ktlint,
     diagnostics.hadolint,
     diagnostics.mypy.with {
       extra_args = function()
@@ -50,6 +51,7 @@ nls.setup {
     diagnostics.zsh,
 
     formatting.cmake_format,
+    formatting.ktlint,
     formatting.isort,
     formatting.prettier,
     formatting.shfmt,

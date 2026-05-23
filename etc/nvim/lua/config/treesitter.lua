@@ -8,6 +8,7 @@ require('nvim-treesitter.configs').setup {
     'gitignore',
     'hcl',
     'json',
+    'kotlin',
     'lua',
     'make',
     'markdown',
