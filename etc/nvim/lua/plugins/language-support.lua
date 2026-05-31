@@ -77,15 +77,14 @@ return {
   },
   {
     'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-context',
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      'ziontee113/syntax-tree-surfer',
-      'nvim-treesitter/playground',
+      { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
+      -- playground is archived; use :InspectTree and :EditQuery (built-in since 0.10)
+      -- syntax-tree-surfer removed: unmaintained, depends on ts_utils which was removed in nvim-treesitter main
     },
-    build = function()
-      require('nvim-treesitter.install').update { with_sync = true }
-    end,
+    build = ':TSUpdate',
     config = function()
       require 'config.treesitter'
     end,

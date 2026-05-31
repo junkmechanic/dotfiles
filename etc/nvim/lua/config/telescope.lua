@@ -24,6 +24,9 @@ telescope.setup {
     sorting_strategy = 'ascending',
     winblend = 10,
     dynamic_preview_title = true,
+    preview = {
+      treesitter = false,
+    },
     prompt_prefix = ' 󰍉 ',
     selection_caret = ' ',
   },

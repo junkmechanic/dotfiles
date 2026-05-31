@@ -180,12 +180,6 @@ return {
     },
   },
   {
-    'gorbit99/codewindow.nvim',
-    config = function()
-      require 'config.codewindow'
-    end,
-  },
-  {
     'folke/twilight.nvim',
     opts = {
       context = 20,
