@@ -40,13 +40,9 @@ return {
       },
       {
         'folke/trouble.nvim',
-        opts = {
-          win = {
-            wo = {
-              colorcolumn = '',
-            },
-          },
-        },
+        config = function()
+          require 'config.trouble'
+        end,
       },
     },
     config = function()

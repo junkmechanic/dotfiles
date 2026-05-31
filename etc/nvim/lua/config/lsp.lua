@@ -90,13 +90,39 @@ vim.lsp.config('lua_ls', {
   },
 })
 
+-- kotlin_language_server needs to find Gradle/Maven build files to sync the classpath;
+-- the global root_dir (which only looks for .git) is too coarse for multi-module repos.
+vim.lsp.config('kotlin_language_server', {
+  root_dir = function(bufnr, on_dir)
+    local fname = vim.api.nvim_buf_get_name(bufnr)
+    local root = vim.fs.dirname(vim.fs.find({
+      'settings.gradle.kts',
+      'settings.gradle',
+      'build.gradle.kts',
+      'build.gradle',
+      'pom.xml',
+    }, { path = fname, upward = true })[1])
+    if not root then
+      root = vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+    end
+    on_dir(root)
+  end,
+  -- Give the JVM more heap; the default is too small for large multi-module projects.
+  cmd_env = { KOTLIN_LANGUAGE_SERVER_OPTS = '-Xmx4g' },
+  init_options = {
+    storagePath = vim.fn.expand '~/.cache/kotlin-language-server',
+  },
+})
+
 vim.lsp.enable(servers)
 
 -- Highlight symbol under cursor and clear on move
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client and client:supports_method('textDocument/documentHighlight') then
+    -- kotlin_language_server crashes (upstream bug) when documentHighlight is called on
+    -- files containing local class definitions; skip to avoid JVM OOM cascade.
+    if client and client.name ~= 'kotlin_language_server' and client:supports_method 'textDocument/documentHighlight' then
       vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
         buffer = args.buf,
         callback = vim.lsp.buf.document_highlight,
@@ -162,20 +188,6 @@ end, 'Search Project Diagnostics')
 map('n', '<LocalLeader>dr', function()
   builtin.lsp_references()
 end, 'Search LSP References')
-
--- trouble mappings
-map(
-  'n',
-  '<LocalLeader>dq',
-  '<Cmd>Trouble diagnostics toggle filter.buf=0<CR>',
-  'List Document Diagnostics'
-)
-map(
-  'n',
-  '<LocalLeader>dw',
-  '<Cmd>Trouble diagnostics toggle<CR>',
-  'List Workspace Diagnostics'
-)
 
 -- goto-preview mappings
 map('n', '<LocalLeader>dpd', goto_preview.goto_preview_definition, 'Definition')

@@ -66,6 +66,45 @@ local symbols = {
   newfile = ' ',
 }
 
+-- Patch: when the active window is in disabled_filetypes, buffers/init.lua's
+-- update_status injects it back as a fallback "current" entry (current == -2
+-- branch), bypassing should_hide. Override update_status on the Windows class
+-- to short-circuit that path and render all visible non-hidden windows as inactive.
+local Windows = require 'lualine.components.windows'
+local Buffers = require 'lualine.components.buffers'
+function Windows:update_status()
+  if self:should_hide(vim.api.nvim_get_current_win()) then
+    local bufs = self:buffers()
+    if #bufs == 0 then
+      return ''
+    end
+    local max_length = self.options.max_length
+    if type(max_length) == 'function' then
+      max_length = max_length(self)
+    end
+    if max_length == 0 then
+      max_length = math.floor(2 * vim.o.columns / 3)
+    end
+    if bufs[1] then
+      bufs[1].first = true
+    end
+    if bufs[#bufs] then
+      bufs[#bufs].last = true
+    end
+    local data, total_length = {}, 0
+    for _, buf in ipairs(bufs) do
+      local rendered = buf:render()
+      total_length = total_length + buf.len
+      if total_length > max_length then
+        break
+      end
+      data[#data + 1] = rendered
+    end
+    return table.concat(data)
+  end
+  return Buffers.update_status(self)
+end
+
 require('lualine').setup {
   options = {
     icons_enabled = true,
@@ -97,7 +136,7 @@ require('lualine').setup {
   },
   tabline = {
     lualine_a = { { 'tabs', mode = 0 } },
-    lualine_b = { { 'windows', symbols = symbols } },
+    lualine_b = { { 'windows', symbols = symbols, disabled_filetypes = { 'NvimTree' } } },
     lualine_y = { show_persisted },
   },
   extensions = {
