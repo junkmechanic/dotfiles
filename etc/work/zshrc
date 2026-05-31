@@ -201,14 +201,13 @@ bindkey -r '^[r'
 zle -N znt-cd-widget
 bindkey '^[w' znt-cd-widget
 znt_cd_hotlist=(
-    ~/.files/
-    ~/.config/nvim/
-    ~/.local/share/nvim/
+    ~/.files
+    ~/.config/nvim
     ~/devbench
     ~/Downloads
     ~/devbench/main
-    ~/devbench/random/
-    ~/devbench/util/
+    ~/devbench/main/fraud
+    ~/devbench/main/fraud/transaction-monitoring
 )
 
 # accept and execute the current suggestion with ctrl+space

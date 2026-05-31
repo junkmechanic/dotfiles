@@ -62,7 +62,9 @@ nls.setup {
     formatting.terraform_fmt,
     formatting.yapf,
 
-    require 'none-ls.formatting.beautysh',
+    require('none-ls.formatting.beautysh').with {
+      filetypes = { 'bash', 'csh', 'ksh', 'sh' },
+    },
     require 'none-ls.formatting.blue',
 
     require 'none-ls-shellcheck.diagnostics',

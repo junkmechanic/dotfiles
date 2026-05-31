@@ -18,7 +18,10 @@ require('nvim-treesitter').install {
   'yaml',
 }
 
-local ts_hl_disabled = { sql = true, gitcommit = true }
+local ts_hl_disabled = {
+  sql = true,
+  -- gitcommit = true
+}
 
 vim.api.nvim_create_autocmd('FileType', {
   callback = function(args)
