@@ -19,9 +19,8 @@ map('i', '<C-z>', '<C-o>:update<CR>')
 map('n', '<Esc>', ':nohlsearch<Bar>:echo<CR>')
 
 -- Make H and L more useful
--- Clashes with syntax-tree-surfer bindings
--- map({ 'n', 'v' }, 'H', '^')
--- map({ 'n', 'v' }, 'L', 'g_')
+map({ 'n', 'v' }, 'H', '^')
+map({ 'n', 'v' }, 'L', 'g_')
 
 -- Quick exits
 map('n', '<Leader>e', ':quit<CR>')

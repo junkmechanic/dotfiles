@@ -136,7 +136,7 @@ require('lualine').setup {
   },
   tabline = {
     lualine_a = { { 'tabs', mode = 0 } },
-    lualine_b = { { 'windows', symbols = symbols, disabled_filetypes = { 'NvimTree' } } },
+    lualine_b = { { 'windows', symbols = symbols, disabled_filetypes = { 'neo-tree' } } },
     lualine_y = { show_persisted },
   },
   extensions = {
@@ -144,10 +144,9 @@ require('lualine').setup {
     'man',
     'mason',
     'nvim-dap-ui',
-    'nvim-tree',
+    'neo-tree',
     'oil',
     'quickfix',
-    'symbols-outline',
     'toggleterm',
     'trouble',
   },

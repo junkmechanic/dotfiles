@@ -110,7 +110,11 @@ vim.lsp.config('kotlin_language_server', {
   -- Give the JVM more heap; the default is too small for large multi-module projects.
   cmd_env = { KOTLIN_LANGUAGE_SERVER_OPTS = '-Xmx4g' },
   init_options = {
-    storagePath = vim.fn.expand '~/.cache/kotlin-language-server',
+    storagePath = (function()
+      local p = vim.fn.expand '~/.cache/kotlin-language-server'
+      vim.fn.mkdir(p, 'p')
+      return p
+    end)(),
   },
 })
 
@@ -122,7 +126,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     -- kotlin_language_server crashes (upstream bug) when documentHighlight is called on
     -- files containing local class definitions; skip to avoid JVM OOM cascade.
-    if client and client.name ~= 'kotlin_language_server' and client:supports_method 'textDocument/documentHighlight' then
+    if
+      client
+      and client.name ~= 'kotlin_language_server'
+      and client:supports_method 'textDocument/documentHighlight'
+    then
       vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
         buffer = args.buf,
         callback = vim.lsp.buf.document_highlight,
@@ -141,8 +149,12 @@ local function map(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
 end
 
-map('n', '[d', vim.diagnostic.goto_prev, 'Previous LSP Diagnostics Hunk')
-map('n', ']d', vim.diagnostic.goto_next, 'Next LSP Diagnostics Hunk')
+map('n', '[d', function()
+  vim.diagnostic.jump { count = -1 }
+end, 'Previous LSP Diagnostics Hunk')
+map('n', ']d', function()
+  vim.diagnostic.jump { count = 1 }
+end, 'Next LSP Diagnostics Hunk')
 map('n', 'gt', vim.diagnostic.open_float, 'Show LSP Diagnostics')
 map('n', 'gr', vim.lsp.buf.rename, 'LSP Rename')
 

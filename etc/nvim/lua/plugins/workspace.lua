@@ -2,14 +2,16 @@ local devicons = require 'nvim-web-devicons'
 
 return {
   {
-    'nvim-tree/nvim-tree.lua',
-    version = '*',
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
     lazy = false,
     dependencies = {
+      'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons',
+      'MunifTanjim/nui.nvim',
     },
     config = function()
-      require 'config.nvim-tree'
+      require 'config.neo-tree'
     end,
   },
   {
@@ -183,13 +185,6 @@ return {
     'folke/twilight.nvim',
     opts = {
       context = 20,
-    },
-  },
-  {
-    'simrat39/symbols-outline.nvim',
-    opts = {
-      width = 20,
-      winblend = 20,
     },
   },
 }
