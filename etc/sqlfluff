@@ -1,0 +1,5 @@
+# User-level fallback config, symlinked to ~/.sqlfluff.
+# Lowest precedence in sqlfluff's lookup, so a project's own .sqlfluff always
+# wins. Neovim therefore passes no --dialect, which would override both.
+[sqlfluff]
+dialect = postgres

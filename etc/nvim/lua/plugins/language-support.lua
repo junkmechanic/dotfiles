@@ -12,11 +12,25 @@ return {
       {
         'WhoIsSethDaniel/mason-tool-installer.nvim',
         opts = {
-          ensure_installed = {},
+          -- Formatters and linters wired up in config/conform.lua and config/lint.lua.
+          -- `terraform fmt` and `zsh -n` use the system binaries, so they are absent.
+          ensure_installed = {
+            'beautysh',
+            'cfn-lint',
+            'cmakelang',
+            'hadolint',
+            'ktlint',
+            'mypy',
+            'prettier',
+            'ruff',
+            'shellcheck',
+            'shfmt',
+            'sqlfluff',
+            'stylua',
+          },
         },
       },
       'williamboman/mason-lspconfig.nvim',
-      'jay-babu/mason-null-ls.nvim',
       {
         'jay-babu/mason-nvim-dap.nvim',
         opts = {
@@ -50,13 +64,29 @@ return {
     end,
   },
   {
-    'nvimtools/none-ls.nvim',
-    dependencies = {
-      'nvimtools/none-ls-extras.nvim',
-      'gbprod/none-ls-shellcheck.nvim',
+    'stevearc/conform.nvim',
+    event = { 'BufWritePre' },
+    cmd = { 'ConformInfo' },
+    keys = {
+      {
+        '<LocalLeader>df',
+        function()
+          -- conform runs the CLI formatters and falls back to the LSP server
+          -- when a filetype has none configured
+          require('conform').format { async = true, lsp_format = 'fallback' }
+        end,
+        desc = 'Format Buffer',
+      },
     },
     config = function()
-      require 'config.null-ls'
+      require 'config.conform'
+    end,
+  },
+  {
+    'mfussenegger/nvim-lint',
+    event = { 'BufReadPost', 'BufNewFile' },
+    config = function()
+      require 'config.lint'
     end,
   },
   {

@@ -1,0 +1,6 @@
+# User-level fallback config: ruff uses this only when a project has no
+# pyproject.toml / ruff.toml of its own, so per-project settings still win.
+#
+# single quotes replicate `blue`, the black fork this replaced.
+[format]
+quote-style = "single"

@@ -48,7 +48,7 @@ autocmd('FileType', {
 augroup('QuickFixSetup', { clear = true })
 autocmd('FileType', {
   group = 'QuickFixSetup',
-  pattern = { 'help', 'startuptime', 'qf', 'lspinfo', 'fugitive', 'null-ls-info' },
+  pattern = { 'help', 'startuptime', 'qf', 'lspinfo', 'fugitive', 'conform-info' },
   command = [[nnoremap <buffer><silent> q :close<CR>]],
 })
 autocmd('FileType', {
@@ -111,13 +111,17 @@ autocmd('Filetype', {
 })
 
 -- Dump messages to log file on exit
+-- the log path on osx is `~/.local/state/nvim/`
 augroup('DumpMessages', { clear = true })
 autocmd('VimLeave', {
   group = 'DumpMessages',
   callback = function()
     local msgs = vim.fn.execute 'messages'
     if msgs ~= '' then
-      vim.fn.writefile(vim.split(msgs, '\n'), vim.fn.stdpath 'log' .. '/nvim_messages.log')
+      vim.fn.writefile(
+        vim.split(msgs, '\n'),
+        vim.fn.stdpath 'log' .. '/nvim_messages.log'
+      )
     end
   end,
 })

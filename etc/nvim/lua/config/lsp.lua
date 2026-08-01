@@ -16,9 +16,13 @@ local servers = {
   'vimls',
 }
 
--- Set up mason-lspconfig before lsp itself
+-- Set up mason-lspconfig before lsp itself.
+-- automatic_enable defaults on and enables every mason-installed server it knows,
+-- regardless of the list above. Both of these ship an LSP mode but are installed
+-- here purely as conform formatters, so keep them out of it.
 require('mason-lspconfig').setup {
   ensure_installed = servers,
+  automatic_enable = { exclude = { 'ruff', 'stylua' } },
 }
 
 -- global diagnostics options
@@ -31,21 +35,27 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-local function get_python_path(config)
-  local Path = require 'plenary.path'
-  local venv = Path:new((config.root_dir:gsub('/', Path.path.sep)), '.venv')
+-- Neovim's own python provider. Unrelated to any language server, so it must not
+-- depend on one having started.
+vim.g.python3_host_prog = vim.fn.expand '~/.pyenv/versions/pyglobal/bin/python'
 
-  -- Set python provider virtualenv
-  vim.cmd [[
-    let g:python3_host_prog = '~/.pyenv/versions/pyglobal/bin/python'
-  ]]
+-- root_dir is nil for files with no .git ancestor, so it is checked rather than
+-- indexed, and the virtualenv is tried first since it does not need a root at all
+local function get_python_path(root_dir)
+  local Path = require 'plenary.path'
 
   -- Use activated virtualenv
   if vim.env.VIRTUAL_ENV then
     return tostring(Path:new(vim.env.VIRTUAL_ENV):joinpath('bin', 'python'))
-  elseif venv:joinpath('bin'):is_dir() then
-    return tostring(venv:joinpath('bin', 'python'))
   end
+
+  if root_dir then
+    local venv = Path:new((root_dir:gsub('/', Path.path.sep)), '.venv')
+    if venv:joinpath('bin'):is_dir() then
+      return tostring(venv:joinpath('bin', 'python'))
+    end
+  end
+
   -- Fallback to system Python.
   return vim.fn.exepath 'python3' or vim.fn.exepath 'python'
 end
@@ -65,7 +75,7 @@ vim.lsp.config('*', {
 -- pyright-specific config
 vim.lsp.config('pyright', {
   before_init = function(_, config)
-    config.settings.python.pythonPath = get_python_path(config)
+    config.settings.python.pythonPath = get_python_path(config.root_dir)
   end,
 })
 
@@ -189,9 +199,7 @@ map(
   '<Cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>',
   'Goto Type Definition (vsplit)'
 )
-map('n', '<LocalLeader>df', function()
-  vim.lsp.buf.format { async = true }
-end, 'Format Buffer')
+-- <LocalLeader>df mapping in conform config
 
 -- telescope specific mappings
 map('n', '<LocalLeader>dd', function()
