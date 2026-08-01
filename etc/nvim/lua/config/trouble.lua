@@ -38,7 +38,9 @@ vim.api.nvim_create_autocmd('TabEnter', {
     local mode = vim.g.trouble_active_mode
     if mode then
       vim.schedule(function()
-        if not trouble_open_in_tab() then
+        if trouble_open_in_tab() then return end
+        local diags = mode == 'document' and vim.diagnostic.get(0) or vim.diagnostic.get()
+        if #diags > 0 then
           close_trouble()
           open_trouble(mode)
         end
