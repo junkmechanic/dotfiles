@@ -33,6 +33,17 @@ require('neo-tree').setup {
     follow_current_file = { enabled = true },
     hijack_netrw_behavior = 'open_default',
   },
+  document_symbols = {
+    window = {
+      -- The document_symbols source has no filesystem commands, so unmap the
+      -- ones inherited from the global window mappings -- neo-tree warns about
+      -- each unresolved mapping when the source opens.
+      mappings = {
+        ['<M-c>'] = 'none', -- add
+        ['<C-r>'] = 'none', -- clear_clipboard
+      },
+    },
+  },
   event_handlers = {
     {
       event = 'neo_tree_window_after_open',
@@ -52,12 +63,35 @@ require('neo-tree').setup {
 -- Tab sync: reopen neo-tree in every tab when switching, if it's enabled
 vim.g.neo_tree_enabled = false
 
+-- Diffview tabs hold `diffview://` buffers; opening neo-tree there makes it
+-- `tcd` to that path, which fails with E344 and blocks on a "Press ENTER"
+-- prompt.
+local function in_diffview_tab()
+  local lib = package.loaded['diffview.lib']
+  if lib and lib.get_current_view() then
+    return true
+  end
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if
+      vim.bo[buf].filetype:match '^Diffview'
+      or vim.api.nvim_buf_get_name(buf):match '^diffview://'
+    then
+      return true
+    end
+  end
+  return false
+end
+
 vim.api.nvim_create_autocmd('TabEnter', {
   callback = function()
     if not vim.g.neo_tree_enabled then
       return
     end
     vim.schedule(function()
+      if in_diffview_tab() then
+        return
+      end
       for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
         if vim.bo[vim.api.nvim_win_get_buf(win)].filetype == 'neo-tree' then
           return
@@ -88,7 +122,9 @@ vim.keymap.set('n', '<LocalLeader>n', function()
     end
   else
     vim.g.neo_tree_enabled = true
-    vim.cmd 'Neotree show'
+    if not in_diffview_tab() then
+      vim.cmd 'Neotree show'
+    end
   end
 end, { noremap = true, silent = true, desc = 'File Tree' })
 
