@@ -80,9 +80,17 @@ cmp.setup {
   },
 }
 
+-- Accept the selected cmdline entry with <CR>; with `select = false` an
+-- unselected menu falls through so <CR> still submits the command.
+local cmdline_mapping = cmp.mapping.preset.cmdline {
+  ['<CR>'] = {
+    c = cmp.mapping.confirm { select = false },
+  },
+}
+
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
-  mapping = cmp.mapping.preset.cmdline(),
+  mapping = cmdline_mapping,
   sources = {
     { name = 'buffer' },
     { name = 'cmdline_history' },
@@ -91,7 +99,7 @@ cmp.setup.cmdline('/', {
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
+  mapping = cmdline_mapping,
   sources = cmp.config.sources({
     { name = 'path' },
   }, {
