@@ -4,9 +4,25 @@ local widgets = require 'dap.ui.widgets'
 
 -- python adapter setup
 
-require('dap-python').setup '~/.pyenv/versions/pyglobal/bin/python'
+-- The path given to setup() is the interpreter that runs debugpy.adapter, so it is
+-- deliberately the pyenv env that has debugpy installed rather than a project venv,
+-- which usually does not.
+local dap_python = require 'dap-python'
+dap_python.setup '~/.pyenv/versions/pyglobal/bin/python'
 
-local configurations = require('dap').configurations.python
+-- The debuggee is a separate interpreter (config.pythonPath) and should be the
+-- project's own. dap-python resolves it itself, but only knows VIRTUAL_ENV,
+-- CONDA_PREFIX and a fixed list of venv directory names -- it misses
+-- UV_PROJECT_ENVIRONMENT and a uv workspace's shared root venv. resolve_python is
+-- the documented hook for overriding that; returning nil leaves dap-python's own
+-- search in place.
+dap_python.resolve_python = function()
+  local python = require 'util.python'
+  local venv = python.venv(python.root())
+  return venv and vim.fs.joinpath(venv, 'bin', 'python') or nil
+end
+
+local configurations = dap.configurations.python
 -- `justMyCode` is valid for launch confgiurations only
 configurations[1].justMyCode = false
 configurations[2].justMyCode = false

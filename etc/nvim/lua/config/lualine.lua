@@ -1,5 +1,6 @@
 local local_config = require 'config.local-config'
 local noice = require 'noice'
+local python = require 'util.python'
 
 local function show_trailing_whitespace()
   local space = vim.fn.search([[\s\+$]], 'nwc')
@@ -41,22 +42,34 @@ local function show_persisted()
   end
 end
 
-local function split(input, delimiter)
-  local arr = {}
-  local _ = string.gsub(input, '[^' .. delimiter .. ']+', function(w)
-    table.insert(arr, w)
-  end)
-  return arr
-end
+-- Directory names that describe nothing: uv, venv and virtualenv all default to
+-- one of these, so every project's environment would render identically.
+local generic_venv_names = {
+  ['.venv'] = true,
+  ['.env'] = true,
+  venv = true,
+  env = true,
+}
 
+-- Runs on every statusline redraw -- at least once a second on lualine's timer --
+-- so it only reads the answer util.python already resolved. Resolving here would
+-- walk the filesystem at that same rate.
 local function get_python_venv()
-  local venv = vim.env.VIRTUAL_ENV
-  if venv then
-    local params = split(venv, '/')
-    return ' 󰌠 ' .. params[#params]
-  else
+  local venv = python.buf_venv()
+  if not venv then
     return ''
   end
+
+  -- Normalized first so a trailing slash on $VIRTUAL_ENV does not leave an empty
+  -- basename. Where the directory name says nothing, the project holding it is the
+  -- informative half; a named environment (pyenv, conda) keeps its own name.
+  venv = vim.fs.normalize(venv)
+  local name = vim.fs.basename(venv)
+  if generic_venv_names[name] then
+    name = vim.fs.basename(vim.fs.dirname(venv))
+  end
+
+  return ' 󰌠 ' .. name
 end
 
 local symbols = {

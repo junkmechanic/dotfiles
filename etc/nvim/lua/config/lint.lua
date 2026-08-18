@@ -1,29 +1,8 @@
 local lint = require 'lint'
+local python = require 'util.python'
 
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
-
--- Interpreter mypy typechecks against: active virtualenv, then `.venv` at the
--- repo root, then whatever python is on PATH.
-local function python_path()
-  local Path = require 'plenary.path'
-
-  if vim.env.VIRTUAL_ENV then
-    return tostring(Path:new(vim.env.VIRTUAL_ENV):joinpath('bin', 'python'))
-  end
-
-  local git = vim.fs.find('.git', { path = vim.fn.getcwd(), upward = true })[1]
-  if git then
-    local venv = Path:new(vim.fs.dirname(git), '.venv')
-    if venv:joinpath('bin'):is_dir() then
-      -- mypy plugins (pydantic.mypy and friends) must also be installed in
-      -- mason's mypy env; that is just how mypy works
-      return tostring(venv:joinpath('bin', 'python'))
-    end
-  end
-
-  return vim.fn.exepath 'python3' or vim.fn.exepath 'python'
-end
 
 lint.linters_by_ft = {
   dockerfile = { 'hadolint' },
@@ -36,17 +15,37 @@ lint.linters_by_ft = {
   zsh = { 'zsh' },
 }
 
--- Spelled out rather than appended to, so re-sourcing this file is idempotent
-lint.linters.mypy.args = {
-  '--show-column-numbers',
-  '--show-error-end',
-  '--hide-error-context',
-  '--no-color-output',
-  '--no-error-summary',
-  '--no-pretty',
-  '--python-executable',
-  python_path,
-}
+-- Args are spelled out rather than appended to, so re-sourcing this file is
+-- idempotent. nvim-lint evaluates this on every run, so it tracks the buffer.
+--
+-- Preferring the project's own mypy over mason's is what makes plugins declared in
+-- pyproject.toml (pydantic.mypy and friends) and the project's stub packages
+-- resolve at all -- installing them into mason's mypy env is the only alternative,
+-- because that is how mypy works. When only mason's copy is available
+-- --python-executable at least points it at the project's interpreter, so it sees
+-- the project's installed packages even though it cannot load its plugins.
+--
+-- cwd is the project root so mypy reads the project's own [tool.mypy] config; the
+-- buffer's absolute path is appended by nvim-lint, so the cwd change is safe.
+lint.linters.mypy = function()
+  local linter = vim.deepcopy(require 'lint.linters.mypy')
+  local root = python.root()
+
+  linter.cmd = python.bin('mypy', root) or 'mypy'
+  linter.cwd = root
+  linter.args = {
+    '--show-column-numbers',
+    '--show-error-end',
+    '--hide-error-context',
+    '--no-color-output',
+    '--no-error-summary',
+    '--no-pretty',
+    '--python-executable',
+    python.interpreter(root),
+  }
+
+  return linter
+end
 
 -- No --dialect: it outranks a project's own .sqlfluff. The default lives in
 -- ~/.sqlfluff instead. jinja is already sqlfluff's default templater, but pin it
@@ -59,6 +58,9 @@ lint.linters.sqlfluff = function()
   local linter = vim.deepcopy(require 'lint.linters.sqlfluff')
   local fname = vim.api.nvim_buf_get_name(0)
 
+  -- dbt projects pin sqlfluff and its dbt templater in the project venv; mason's
+  -- copy has neither, so use the project's whenever it is there.
+  linter.cmd = python.bin('sqlfluff', python.root(fname)) or 'sqlfluff'
   linter.args = { 'lint', '--format=json', '--templater', 'jinja', '-' }
   linter.cwd = fname ~= '' and vim.fs.dirname(fname) or nil
 

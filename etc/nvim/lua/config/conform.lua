@@ -1,4 +1,14 @@
 local conform = require 'conform'
+local python = require 'util.python'
+
+-- Prefer a python tool installed in the project's own virtualenv over mason's copy,
+-- so a version pinned in pyproject.toml is the one that formats the buffer and nvim
+-- agrees with what CI does. Falls back to mason's when the project has not pinned it.
+local function project_tool(name)
+  return function(_, ctx)
+    return python.bin(name, python.root(ctx.filename)) or name
+  end
+end
 
 local prettier = { 'prettier' }
 local terraform = { 'terraform_fmt' }
@@ -42,9 +52,13 @@ conform.setup {
     yaml = prettier,
   },
   formatters = {
+    ruff_format = { command = project_tool 'ruff' },
+    ruff_organize_imports = { command = project_tool 'ruff' },
+
     -- No --dialect: it outranks a project's own .sqlfluff. The default lives in
     -- ~/.sqlfluff instead. require_cwd would skip files with no .sqlfluff above them.
     sqlfluff = {
+      command = project_tool 'sqlfluff',
       require_cwd = false,
     },
   },

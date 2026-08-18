@@ -1,5 +1,6 @@
 local goto_preview = require 'goto-preview'
 local builtin = require 'telescope.builtin'
+local python = require 'util.python'
 
 local servers = {
   'bashls',
@@ -39,27 +40,6 @@ end
 -- depend on one having started.
 vim.g.python3_host_prog = vim.fn.expand '~/.pyenv/versions/pyglobal/bin/python'
 
--- root_dir is nil for files with no .git ancestor, so it is checked rather than
--- indexed, and the virtualenv is tried first since it does not need a root at all
-local function get_python_path(root_dir)
-  local Path = require 'plenary.path'
-
-  -- Use activated virtualenv
-  if vim.env.VIRTUAL_ENV then
-    return tostring(Path:new(vim.env.VIRTUAL_ENV):joinpath('bin', 'python'))
-  end
-
-  if root_dir then
-    local venv = Path:new((root_dir:gsub('/', Path.path.sep)), '.venv')
-    if venv:joinpath('bin'):is_dir() then
-      return tostring(venv:joinpath('bin', 'python'))
-    end
-  end
-
-  -- Fallback to system Python.
-  return vim.fn.exepath 'python3' or vim.fn.exepath 'python'
-end
-
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
@@ -74,8 +54,15 @@ vim.lsp.config('*', {
 
 -- pyright-specific config
 vim.lsp.config('pyright', {
+  -- The global root_dir only looks for .git, which is too coarse for a repo holding
+  -- several python projects and lands pyright above the venv it should be using.
+  root_dir = function(bufnr, on_dir)
+    on_dir(python.root(vim.api.nvim_buf_get_name(bufnr)))
+  end,
+  -- root_dir is nil for files with no project marker or .git ancestor; util.python
+  -- handles that and still returns an interpreter.
   before_init = function(_, config)
-    config.settings.python.pythonPath = get_python_path(config.root_dir)
+    config.settings.python.pythonPath = python.interpreter(config.root_dir)
   end,
 })
 
@@ -129,6 +116,30 @@ vim.lsp.config('kotlin_language_server', {
 })
 
 vim.lsp.enable(servers)
+
+-- pyright has already resolved the project's environment by the time it attaches,
+-- so publish it once here for anything that needs the answer cheaply -- the
+-- statusline redraws about once a second and must not walk the filesystem to find
+-- out. Resolved from root_dir rather than read back from settings.python.pythonPath
+-- because that value cannot be told apart from the system interpreter fallback.
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client.name == 'pyright' then
+      python.set_buf_venv(args.buf, python.venv(client.root_dir))
+    end
+  end,
+})
+
+-- Do not let a published answer outlive the client that produced it.
+vim.api.nvim_create_autocmd('LspDetach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client.name == 'pyright' then
+      python.invalidate(args.buf)
+    end
+  end,
+})
 
 -- Highlight symbol under cursor and clear on move
 vim.api.nvim_create_autocmd('LspAttach', {
