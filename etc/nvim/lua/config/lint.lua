@@ -67,6 +67,28 @@ lint.linters.sqlfluff = function()
   return linter
 end
 
+-- cfn-lint validates a buffer against the CloudFormation schema unconditionally, so
+-- every json and yaml file that is not a template gets reported as a broken one --
+-- "'Resources' is a required property", then "Additional properties are not allowed"
+-- for each of its actual keys. It is registered for whole filetypes because there is
+-- no cloudformation filetype to register for, so the buffer has to be sniffed here.
+local function is_cloudformation(buf)
+  for _, line in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
+    -- A top-level Resources key is what cfn-lint requires; the other two are the
+    -- optional headers, matched anywhere so a template still counts while its
+    -- Resources block is being written.
+    if
+      line:match '^Resources:'
+      or line:match '^%s*"Resources"%s*:'
+      or line:find 'AWSTemplateFormatVersion'
+      or line:find 'AWS::Serverless'
+    then
+      return true
+    end
+  end
+  return false
+end
+
 augroup('NvimLint', { clear = true })
 autocmd({ 'BufReadPost', 'BufWritePost' }, {
   group = 'NvimLint',
@@ -76,6 +98,10 @@ autocmd({ 'BufReadPost', 'BufWritePost' }, {
     if vim.bo[args.buf].buftype ~= '' or not vim.bo[args.buf].modifiable then
       return
     end
-    lint.try_lint()
+    lint.try_lint(nil, {
+      filter = function(linter)
+        return linter.name ~= 'cfn_lint' or is_cloudformation(args.buf)
+      end,
+    })
   end,
 })
