@@ -7,7 +7,7 @@
 [color]
     ui = true
 [push]
-    default = matching
+    default = simple
 [pull]
     rebase = false
 [alias]
@@ -15,3 +15,5 @@
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 [commit]
 	verbose = true
+[init]
+	defaultBranch = main
