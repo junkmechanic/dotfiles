@@ -105,17 +105,6 @@ return {
     },
   },
   {
-    'ellisonleao/glow.nvim',
-    cmd = 'Glow',
-    opts = {
-      width = 160,
-      height = 120,
-      width_ratio = 0.8,
-      height_ratio = 0.8,
-      border = 'solid',
-    },
-  },
-  {
     'folke/which-key.nvim',
     event = 'VeryLazy',
     opts = {

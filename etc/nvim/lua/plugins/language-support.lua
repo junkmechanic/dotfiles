@@ -115,6 +115,29 @@ return {
     end,
   },
   {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons',
+    },
+    ft = { 'markdown' },
+    keys = {
+      {
+        '<LocalLeader>m',
+        '<Cmd>RenderMarkdown toggle<CR>',
+        ft = 'markdown',
+        desc = 'Toggle Markdown Rendering',
+      },
+    },
+    opts = {
+      -- markdown/markdown_inline parsers ship with Neovim and highlighting is
+      -- started by the FileType autocmd in config/treesitter.lua
+      completions = { lsp = { enabled = true } },
+      -- needs the python latex2text binary, which is not installed
+      latex = { enabled = false },
+    },
+  },
+  {
     'mfussenegger/nvim-dap',
     dependencies = {
       'mfussenegger/nvim-dap-python',

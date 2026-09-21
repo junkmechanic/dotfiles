@@ -9,6 +9,7 @@ require('nvim-treesitter').install {
   'gitcommit',
   'gitignore',
   'hcl',
+  'html',
   'json',
   'kotlin',
   'make',
