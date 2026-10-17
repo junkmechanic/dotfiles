@@ -112,6 +112,9 @@ plugins=( \
     zsh-interactive-cd zsh-autosuggestions zsh-syntax-highlighting \
     )
 
+zstyle :omz:plugins:ssh-agent lazy yes
+zstyle :omz:plugins:ssh-agent ssh-add-args --apple-load-keychain
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -167,10 +170,10 @@ alias scp="noglob scp"
 alias ls="lsd"
 alias sl="ls"
 alias tmat="tmux attach"
+alias tmgn="tmux new-session -s SYS"
 alias tree="eza --long --tree"
 alias tree1="eza --long --tree --level=1"
 alias treed="eza --long --tree --only-dirs"
-alias tmgn="tmux new-session -s SYS"
 alias update-brew="brew update && brew upgrade && brew cleanup -s"
 alias vim="nvim"
 alias vimdiff="nvim -d"

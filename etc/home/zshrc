@@ -125,6 +125,9 @@ plugins=( \
         # git@github.com:zsh-users/zsh-syntax-highlighting.git
 zsh-syntax-highlighting )
 
+zstyle :omz:plugins:ssh-agent lazy yes
+zstyle :omz:plugins:ssh-agent ssh-add-args --apple-load-keychain
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -194,10 +197,10 @@ alias scp="noglob scp"
 alias ls="lsd"
 alias sl="ls"
 alias tmat="tmux attach"
+alias tmgn="tmux new-session -s JUNK"
 alias tree="eza --long --tree"
 alias tree1="eza --long --tree --level=1"
 alias treed="eza --long --tree --only-dirs"
-alias tmgn="tmux new-session -s JUNK"
 alias vim="nvim"
 alias vimdiff="nvim -d"
 alias vims="nvim -o"
