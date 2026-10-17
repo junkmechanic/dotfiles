@@ -1,111 +1,82 @@
-local cmp = require 'cmp'
-local lspkind = require 'lspkind'
 local luasnip = require 'luasnip'
-local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
 
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
+local source_icons = {
+  lsp = '',
+  snippets = '',
+  path = '󰝰',
+  buffer = '󰧮',
+  ripgrep = '󰈞',
+  spell = '󰓆',
+}
+
+require('blink.cmp').setup {
+  snippets = { preset = 'luasnip' },
+  keymap = {
+    preset = 'none',
+    ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
+    ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+    ['<C-p>'] = { 'select_prev', 'fallback' },
+    ['<C-n>'] = { 'select_next', 'fallback' },
+    ['<C-c>'] = { 'cancel', 'fallback' },
+    ['<CR>'] = { 'accept', 'fallback' },
+    ['<Tab>'] = {
+      'select_next',
+      function()
+        if luasnip.expandable() then
+          vim.schedule(luasnip.expand)
+          return true
+        end
+      end,
+      'snippet_forward',
+      'fallback',
+    },
+    ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
   },
-  formatting = {
-    format = lspkind.cmp_format {
-      maxwidth = 50,
-      mode = 'symbol',
-      menu = {
-        nvim_lsp = '',
-        nvim_lua = '',
-        treesitter = '',
-        path = '󰝰',
-        buffer = '󰧮',
-        rg = '󰈞',
-        spell = '󰓆',
-        calc = '󰃬',
-        luasnip = '',
+  completion = {
+    list = {
+      selection = { preselect = false, auto_insert = true },
+    },
+    menu = {
+      winblend = 10,
+      draw = {
+        columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1 }, { 'source_icon' } },
+        components = {
+          source_icon = {
+            text = function(ctx)
+              return source_icons[ctx.source_id] or ctx.source_name
+            end,
+            highlight = 'BlinkCmpSource',
+          },
+        },
+      },
+    },
+    documentation = {
+      auto_show = true,
+      window = { winblend = 15 },
+    },
+    ghost_text = { enabled = false },
+  },
+  signature = { enabled = true },
+  sources = {
+    default = { 'snippets', 'lsp', 'path', 'buffer', 'ripgrep', 'spell' },
+    providers = {
+      buffer = { min_keyword_length = 5 },
+      ripgrep = {
+        module = 'blink-ripgrep',
+        name = 'Ripgrep',
+        min_keyword_length = 5,
+      },
+      spell = {
+        module = 'blink-cmp-spell',
+        name = 'Spell',
+        min_keyword_length = 5,
       },
     },
   },
-  mapping = {
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-c>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = false,
+  cmdline = {
+    keymap = {
+      preset = 'cmdline',
+      ['<CR>'] = { 'accept', 'fallback' },
     },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  },
-  sources = {
-    { name = 'luasnip' },
-    { name = 'nvim_lsp' },
-    { name = 'treesitter' },
-    { name = 'nvim_lua' },
-    { name = 'nvim_lsp_signature_help' },
-    { name = 'buffer', keyword_length = 5 },
-    { name = 'rg', keyword_length = 5 },
-    { name = 'path' },
-    { name = 'spell', keyword_length = 5 },
-    { name = 'calc' },
-  },
-  window = {
-    completion = {
-      winblend = 10,
-    },
-    documentation = {
-      winblend = 15,
-    },
-  },
-  experimental = {
-    ghost_text = false,
   },
 }
-
--- Accept the selected cmdline entry with <CR>; with `select = false` an
--- unselected menu falls through so <CR> still submits the command.
-local cmdline_mapping = cmp.mapping.preset.cmdline {
-  ['<CR>'] = {
-    c = cmp.mapping.confirm { select = false },
-  },
-}
-
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
-  mapping = cmdline_mapping,
-  sources = {
-    { name = 'buffer' },
-    { name = 'cmdline_history' },
-  },
-})
-
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-  mapping = cmdline_mapping,
-  sources = cmp.config.sources({
-    { name = 'path' },
-  }, {
-    { name = 'cmdline' },
-    { name = 'cmdline_history' },
-  }),
-})
-
-cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())

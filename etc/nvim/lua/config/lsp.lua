@@ -40,12 +40,8 @@ end
 -- depend on one having started.
 vim.g.python3_host_prog = vim.fn.expand '~/.pyenv/versions/pyglobal/bin/python'
 
--- Add additional capabilities supported by nvim-cmp
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
 -- Global config for all servers
 vim.lsp.config('*', {
-  capabilities = capabilities,
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
     on_dir(vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1]))

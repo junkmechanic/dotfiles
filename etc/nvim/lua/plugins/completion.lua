@@ -1,21 +1,14 @@
 return {
   {
-    'hrsh7th/nvim-cmp',
-    event = { 'InsertEnter', 'CmdlineEnter' },
+    'saghen/blink.cmp',
+    -- A release tag pulls the prebuilt fuzzy matcher binary instead of building it
+    version = '1.*',
+    -- blink lazy-loads itself; loading it early lets it register its LSP capabilities
+    lazy = false,
     dependencies = {
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-calc',
-      'hrsh7th/cmp-cmdline',
-      'dmitmel/cmp-cmdline-history',
-      'saadparwaiz1/cmp_luasnip',
-      'hrsh7th/cmp-nvim-lua',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-nvim-lsp-signature-help',
-      'hrsh7th/cmp-path',
-      'lukas-reineke/cmp-rg',
-      'f3fora/cmp-spell',
-      'ray-x/cmp-treesitter',
-      'onsails/lspkind-nvim',
+      'L3MON4D3/LuaSnip',
+      'mikavilpas/blink-ripgrep.nvim',
+      'ribru17/blink-cmp-spell',
     },
     config = function()
       require 'config.completion'
