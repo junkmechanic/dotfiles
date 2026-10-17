@@ -9,6 +9,8 @@ return {
       'L3MON4D3/LuaSnip',
       'mikavilpas/blink-ripgrep.nvim',
       'ribru17/blink-cmp-spell',
+      'mgalliou/blink-cmp-tmux',
+      'yaocccc/blink-cmp-cmdlinehistory',
     },
     config = function()
       require 'config.completion'

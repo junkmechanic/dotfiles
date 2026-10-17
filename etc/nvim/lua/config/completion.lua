@@ -7,6 +7,8 @@ local source_icons = {
   buffer = '󰧮',
   ripgrep = '󰈞',
   spell = '󰓆',
+  tmux = '',
+  clhistory = '󰋚',
 }
 
 require('blink.cmp').setup {
@@ -58,9 +60,18 @@ require('blink.cmp').setup {
   },
   signature = { enabled = true },
   sources = {
-    default = { 'snippets', 'lsp', 'path', 'buffer', 'ripgrep', 'spell' },
+    default = { 'snippets', 'lsp', 'path', 'buffer', 'ripgrep', 'tmux', 'spell' },
     providers = {
       buffer = { min_keyword_length = 5 },
+      tmux = {
+        module = 'blink-cmp-tmux',
+        name = 'tmux',
+        min_keyword_length = 5,
+      },
+      clhistory = {
+        module = 'cmdlinehistory',
+        name = 'History',
+      },
       ripgrep = {
         module = 'blink-ripgrep',
         name = 'Ripgrep',
@@ -74,6 +85,15 @@ require('blink.cmp').setup {
     },
   },
   cmdline = {
+    sources = function()
+      local type = vim.fn.getcmdtype()
+      if type == '/' or type == '?' then
+        return { 'buffer', 'clhistory' }
+      elseif type == ':' or type == '@' then
+        return { 'cmdline', 'clhistory' }
+      end
+      return {}
+    end,
     keymap = {
       preset = 'cmdline',
       ['<CR>'] = { 'accept', 'fallback' },
