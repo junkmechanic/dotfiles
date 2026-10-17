@@ -4,3 +4,5 @@ macos-option-as-alt = true
 
 background-opacity = 0.96
 background-blur = 10
+
+command = /bin/zsh -lc "tmux attach || tmux"
