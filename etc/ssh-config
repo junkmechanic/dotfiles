@@ -1,10 +1,12 @@
 Host [host nickname]
-    Hostname [address]
-    User [username on the host]
-    IdentityFile ~/.ssh/[RSA/DSA private key]
+  Hostname [address]
+  User [username on the host]
+  IdentityFile ~/.ssh/[RSA/DSA private key]
+  AddKeysToAgent yes
+  UseKeychain yes
 
 -----Optional-----
 
 Host [host nickname]
-    ForwardAgent yes [to forward ssh agent]
-    ServerAliveInterval 180 [to preserve the connection]
+  ForwardAgent yes [to forward ssh agent]
+  ServerAliveInterval 180 [to preserve the connection]
