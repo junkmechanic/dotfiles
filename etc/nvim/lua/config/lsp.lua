@@ -40,11 +40,24 @@ end
 -- depend on one having started.
 vim.g.python3_host_prog = vim.fn.expand '~/.pyenv/versions/pyglobal/bin/python'
 
+-- Path of the file behind bufnr, or nil for virtual buffers such as diffview's
+-- `diffview:///repo/.git/<sha>/file`. vim.fs.find treats those names as relative
+-- paths, walks up to `.` and finds the cwd's .git, which hands the server a
+-- `file://.` root; marksman dies on that with exit code 1.
+local function buf_path(bufnr)
+  local fname = vim.api.nvim_buf_get_name(bufnr)
+  if not fname:match '^%a[%w+.-]*:' then
+    return fname
+  end
+end
+
 -- Global config for all servers
 vim.lsp.config('*', {
   root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
-    on_dir(vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1]))
+    local fname = buf_path(bufnr)
+    if fname then
+      on_dir(vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1]))
+    end
   end,
 })
 
@@ -53,7 +66,10 @@ vim.lsp.config('pyright', {
   -- The global root_dir only looks for .git, which is too coarse for a repo holding
   -- several python projects and lands pyright above the venv it should be using.
   root_dir = function(bufnr, on_dir)
-    on_dir(python.root(vim.api.nvim_buf_get_name(bufnr)))
+    local fname = buf_path(bufnr)
+    if fname then
+      on_dir(python.root(fname))
+    end
   end,
   -- root_dir is nil for files with no project marker or .git ancestor; util.python
   -- handles that and still returns an interpreter.
@@ -87,7 +103,10 @@ vim.lsp.config('lua_ls', {
 -- the global root_dir (which only looks for .git) is too coarse for multi-module repos.
 vim.lsp.config('kotlin_language_server', {
   root_dir = function(bufnr, on_dir)
-    local fname = vim.api.nvim_buf_get_name(bufnr)
+    local fname = buf_path(bufnr)
+    if not fname then
+      return
+    end
     local root = vim.fs.dirname(vim.fs.find({
       'settings.gradle.kts',
       'settings.gradle',
