@@ -30,13 +30,11 @@ return {
     end,
   },
   {
+    'petertriho/nvim-scrollbar',
+    opts = {},
+  },
+  {
     'kevinhwang91/nvim-hlslens',
-    dependencies = {
-      {
-        'petertriho/nvim-scrollbar',
-        opts = {},
-      },
-    },
     config = function()
       require 'config.hlslens'
     end,
@@ -84,7 +82,7 @@ return {
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
     ft = { 'markdown' },
     build = function()
-      require 'lazy'.load { plugins = { 'markdown-preview.nvim' } }
+      require('lazy').load { plugins = { 'markdown-preview.nvim' } }
       vim.fn['mkdp#util#install']()
     end,
   },
@@ -117,13 +115,13 @@ return {
       },
       replace = {
         key = {
-          { '`',        '<LocalLeader>' },
+          { '`', '<LocalLeader>' },
           { '<leader>', '<Leader>' },
-          { '<cr>',     '<CR>' },
-          { '<tab>',    '<Tab>' },
+          { '<cr>', '<CR>' },
+          { '<tab>', '<Tab>' },
         },
         desc = {
-          { '<[cC]md>',   '' },
+          { '<[cC]md>', '' },
           { '<[cC][rR]>', '' },
         },
       },
@@ -139,11 +137,11 @@ return {
         align = 'center',
       },
       spec = {
-        { '<LocalLeader>b',  group = ' DAP' },
-        { '<LocalLeader>f',  group = ' File Browser' },
-        { '<LocalLeader>t',  group = ' Telescope' },
-        { '<LocalLeader>p',  group = ' Swap AST Nodes' },
-        { '<LocalLeader>d',  group = ' LSP Diagnostics' },
+        { '<LocalLeader>b', group = ' DAP' },
+        { '<LocalLeader>f', group = ' File Browser' },
+        { '<LocalLeader>t', group = ' Telescope' },
+        { '<LocalLeader>p', group = ' Swap AST Nodes' },
+        { '<LocalLeader>d', group = ' LSP Diagnostics' },
         { '<LocalLeader>dp', group = ' Preview' },
         {
           '<LocalLeader>tg',
@@ -164,7 +162,7 @@ return {
       {
         '<LocalLeader>?',
         function()
-          require 'which-key'.show { global = true }
+          require('which-key').show { global = true }
         end,
         desc = 'All Keymaps',
       },
