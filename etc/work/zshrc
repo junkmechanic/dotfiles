@@ -157,6 +157,7 @@ unsetopt nomatch
 
 alias catn="cat -n"
 alias cd..="cd .."
+alias cladue="claude"
 alias duall="du -shc .[!.]* *"
 alias ga.="git add ."
 alias gitrpo="git remote prune origin"
