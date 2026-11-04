@@ -41,7 +41,11 @@ require('blink.cmp').setup {
     menu = {
       winblend = 10,
       draw = {
-        columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1 }, { 'source_icon' } },
+        columns = {
+          { 'kind_icon' },
+          { 'label', 'label_description', gap = 1 },
+          { 'source_icon' },
+        },
         components = {
           source_icon = {
             text = function(ctx)
@@ -98,5 +102,6 @@ require('blink.cmp').setup {
       preset = 'cmdline',
       ['<CR>'] = { 'accept', 'fallback' },
     },
+    completion = { menu = { auto_show = true } },
   },
 }
