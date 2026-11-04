@@ -4,6 +4,7 @@ local python = require 'util.python'
 
 local servers = {
   'bashls',
+  'buf_ls',
   'cmake',
   'dockerls',
   'jsonls',
@@ -97,6 +98,23 @@ vim.lsp.config('lua_ls', {
       },
     },
   },
+})
+
+-- buf_ls resolves imports relative to the Buf module, so root it at the nearest
+-- buf.yaml (or v1 buf.work.yaml). The global root_dir only looks for .git and, being
+-- a root_dir, would also override lspconfig's own root_markers for buf.
+vim.lsp.config('buf_ls', {
+  root_dir = function(bufnr, on_dir)
+    local fname = buf_path(bufnr)
+    if not fname then
+      return
+    end
+    local marker = vim.fs.find(
+      { 'buf.work.yaml', 'buf.yaml', '.git' },
+      { path = fname, upward = true }
+    )[1]
+    on_dir(marker and vim.fs.dirname(marker))
+  end,
 })
 
 -- kotlin_language_server needs to find Gradle/Maven build files to sync the classpath;
