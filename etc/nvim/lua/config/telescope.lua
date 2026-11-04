@@ -2,6 +2,42 @@ local telescope = require 'telescope'
 local actions = require 'telescope.actions'
 local builtin = require 'telescope.builtin'
 local utils = require 'telescope.utils'
+local layout_strategies = require 'telescope.pickers.layout_strategies'
+
+-- Kotlin-aware layouts: stack the preview above the results (telescope's
+-- 'vertical' strategy) when the picker is opened from a Kotlin buffer or from
+-- inside a Kotlin/Gradle-KTS project; otherwise fall back to the usual layout.
+-- The check runs every time a picker opens, so it follows the current buffer/cwd.
+local kotlin_markers = { 'settings.gradle.kts', 'build.gradle.kts' }
+
+local function in_kotlin_context(picker)
+  local win = picker.original_win_id
+  local buf = (win and vim.api.nvim_win_is_valid(win)) and vim.api.nvim_win_get_buf(win) or 0
+  if vim.bo[buf].filetype == 'kotlin' then
+    return true
+  end
+  return vim.fs.root(vim.fn.getcwd(), kotlin_markers) ~= nil
+end
+
+local function kotlin_aware(fallback, vertical_overrides)
+  return function(picker, max_columns, max_lines, override_layout)
+    if in_kotlin_context(picker) then
+      return layout_strategies.vertical(
+        picker,
+        max_columns,
+        max_lines,
+        -- nested under `vertical` because per-strategy keys win over top-level ones
+        vim.tbl_deep_extend('force', override_layout or {}, { vertical = vertical_overrides or {} })
+      )
+    end
+    return layout_strategies[fallback](picker, max_columns, max_lines, override_layout)
+  end
+end
+
+layout_strategies.kotlin_horizontal = kotlin_aware 'horizontal'
+-- The ivy theme pins height to 25 lines, which is too short once the preview
+-- is stacked, so give the vertical variant most of the screen.
+layout_strategies.kotlin_bottom_pane = kotlin_aware('bottom_pane', { height = 0.9 })
 
 telescope.setup {
   defaults = {
@@ -18,6 +54,7 @@ telescope.setup {
         ['<C-u>'] = false,
       },
     },
+    layout_strategy = 'kotlin_horizontal',
     layout_config = {
       prompt_position = 'top',
     },
@@ -67,6 +104,8 @@ telescope.setup {
     },
     file_browser = {
       theme = 'ivy',
+      -- overrides the ivy theme's 'bottom_pane' (theme opts are force-merged under these)
+      layout_strategy = 'kotlin_bottom_pane',
       hidden = true,
       respect_gitignore = false,
       mappings = {
