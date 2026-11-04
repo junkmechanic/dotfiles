@@ -1,11 +1,4 @@
-local M = {
-  persisted_allowed_dirs = {
-    '~/.files',
-    '~/.files/etc/home/nvim',
-    '~/devbench/personal/spotifz',
-    '~/devbench/personal/algotrading/freqtrade',
-  },
-}
+local M = {}
 
 local env_machine = os.getenv 'MACHINE'
 if env_machine == 'work' then

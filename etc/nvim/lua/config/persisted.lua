@@ -1,5 +1,3 @@
-local local_config = require 'config.local-config'
-
 vim.o.sessionoptions = 'buffers,curdir,folds,globals,tabpages,winpos,winsize'
 
 local function is_git_editor()
@@ -27,7 +25,6 @@ require('persisted').setup {
   autostart = not skip_session,
   autoload = not skip_session,
   use_git_branch = true,
-  allowed_dirs = local_config.persisted_allowed_dirs,
   should_autosave = function()
     local ft = vim.bo.filetype
     if ft == 'alpha' or ft == 'man' or ft == 'gitcommit' or ft == 'gitrebase' then
